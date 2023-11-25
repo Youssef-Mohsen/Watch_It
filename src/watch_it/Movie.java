@@ -177,6 +177,3 @@ public class Movie {
     }
 
 }
-
-
-
