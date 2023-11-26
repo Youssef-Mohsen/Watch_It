@@ -1,4 +1,3 @@
-import java.util.PriorityQueue;
 package watch_it;
 
 import java.time.LocalDateTime;
@@ -17,7 +16,9 @@ public class userwatchrecord {
 
     this.rating = rating;
   }
+
 // ********Get methods***********
+
  public int getRating()
  {
   return rating;
@@ -30,16 +31,24 @@ public class userwatchrecord {
  {
   return user_id;
  }
-//  set rating
+
+//  ******* Set methods ******** 
+
   public int setRating(int rating)
   {
    this.rating=rating;
    return rating;
   }
-  //update rating
-  public void updateRating(int rating )
-  {
-   this.rating =rating;
-  }
+    public int setuserid(int user_id)
+    {
+        this.user_id=user_id;
+        return user_id;
+    }
+    public movi setMovie(movi movie)
+    {
+        this.movie=movie;
+        return movie;
+    }
+  
 
 }
