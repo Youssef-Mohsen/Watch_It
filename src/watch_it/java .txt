@@ -1,5 +1,4 @@
 import java.util.PriorityQueue;
-    PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(); //and no auto allwoed so user while loop
 package watch_it;
 
 import java.time.LocalDateTime;
