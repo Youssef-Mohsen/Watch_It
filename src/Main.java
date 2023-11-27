@@ -1,7 +1,7 @@
 import watch_it.Subscription;
 public class Main {
     public static void main(String[] args) {
-        Subscription basicSubscription = new Subscription(Subscription.Plans.BASIC);
+        Subscription basicSubscription = new Subscription(1,Subscription.Plans.BASIC);
 
         basicSubscription.addMovie();
 

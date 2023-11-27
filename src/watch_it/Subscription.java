@@ -46,7 +46,7 @@ public class Subscription {
          this.moviesWatched =moviesWatched;
     }
     public int getUserID() {
-        return userID;
+        return user_id;
     }
     public Plans getPlan() {
         return plan;
