@@ -105,10 +105,10 @@ public class Subscription {
         System.out.println("Subscription updated successfully.");
     }
 
-    /*public void deleteSubscription() {
-        System.out.println("Subscription deleted for user: " + userID);
+    public void deleteSubscription() {
+        this.plan=null;
 
-    }*/
+    }
 
     private boolean isSubscriptionActive() {
         LocalDate currentDate = LocalDate.now();
