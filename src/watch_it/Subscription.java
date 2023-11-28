@@ -7,16 +7,14 @@ public class Subscription {
     public enum Plans {
         BASIC, STANDARD, PREMIUM
     }
-
-    private int userID;
-    private double userWallet;
+    private int user_id;
     private Plans plan;
     private double price;
     private LocalDate startDate;
     private int moviesWatched;
 
-    public Subscription(int userID, Plans plan) {
-        this.userID = userID;
+    public Subscription(int user_id,Plans plan) {
+        this.user_id=user_id;
         this.plan = plan;
         if(plan==Plans.BASIC) {
             this.price = 10;
@@ -30,10 +28,26 @@ public class Subscription {
         this.moviesWatched = 0;
     }
 
-    public int getUserID() {
-        return userID;
+    public void setUserID(int user_id) {
+        this.user_id=user_id;
+    }
+    public void setPlan(Plans plan) {this.plan=plan;
     }
 
+    public void setPrice(double price) {
+        this.price=price;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate=startDate;
+    }
+
+    public void setMoviesWatched(int moviesWatched) {
+         this.moviesWatched =moviesWatched;
+    }
+    public int getUserID() {
+        return user_id;
+    }
     public Plans getPlan() {
         return plan;
     }
@@ -92,7 +106,7 @@ public class Subscription {
     }
 
     public void deleteSubscription() {
-        System.out.println("Subscription deleted for user: " + userID);
+        this.plan=null;
 
     }
 
