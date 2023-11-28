@@ -139,7 +139,7 @@ public class User
         Watched_Movies.add(new UserWatchRecord(id , movi));
     }
     /***to set rate and Update it****/
-    public void Set_Rate_Record(int index ,int rate)
+    public void Set_Rate_Racord(int index ,int rate)
     {
         // make sure the exception handling is applied in the index.
         Watched_Movies.get(index).setRating(rate);
@@ -174,17 +174,19 @@ public class User
         for(UserWatchRecord movi : Watched_Movies)
         {
             System.out.println(movi.getUser_id());
-            System.out.println(movi.getMovie().getId());
-            System.out.println(movi.getMovie().getViews());
-            System.out.println(movi.getMovie().getTitle());
-            System.out.println(movi.getMovie().getRelease_date());
-            System.out.println(movi.getMovie().getRunning_time());
-            System.out.println(movi.getMovie().getGenre());
-            System.out.println(movi.getMovie().getLanguage());
-            System.out.println(movi.getMovie().getCountry());
-            System.out.println(movi.getMovie().getposter_path());
-            System.out.println(movi.getMovie().getBudget());
-            System.out.println(movi.getMovie().getImdb_score());
+            Movie mov = new Movie();
+            mov = movi.getMovie();
+            System.out.println(mov.getId());
+            System.out.println(mov.getViews());
+            System.out.println(mov.getTitle());
+            System.out.println(mov.getRelease_date());
+            System.out.println(mov.getRunning_time());
+            System.out.println(mov.getGenre());
+            System.out.println(mov.getLanguage());
+            System.out.println(mov.getCountry());
+            System.out.println(mov.getposter_path());
+            System.out.println(mov.getBudget());
+            System.out.println(mov.getImdb_score());
             System.out.println(movi.getDate_of_watching());
             System.out.println(movi.getRating());
         }
