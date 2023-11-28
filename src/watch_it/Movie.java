@@ -1,10 +1,13 @@
 package watch_it;
+import java.awt.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 public class Movie {
+
+    public static List<Movie> allmovies = new ArrayList<>();
     private static int counter = 0;
     private int id;
     private int views = 0;
@@ -18,15 +21,18 @@ public class Movie {
     private double budget;
     private double revenue;
     private float imdb_score;
+    private float avarage_rating = 0f;
+    private float total_rating = 0f;
+    private int users_rated = 0;
 
-    // private Director director;
-    // private List<Cast> cast;
+    private Director director;
+    private List<Cast> cast;
 
     public Movie(){
         counter++;
         this.id = counter;
-        //  this.director = new Director();
-        //  this.cast = new ArrayList<>();
+        this.director = new Director();
+        this.cast = new ArrayList<>();
     }
 
     public Movie (String title, LocalDate release_date, String running_time,String genre, String language, String country, String poster_path, double budget, double revenue, float imdb_score) {
@@ -42,8 +48,8 @@ public class Movie {
         this.budget = budget;
         this.revenue = revenue;
         this.imdb_score = imdb_score;
-        // this.director = new Director();
-        // this.cast = new ArrayList<>();
+        this.director = new Director();
+        this.cast = new ArrayList<>();
     }
     public int getId() {
         return id;
@@ -88,6 +94,9 @@ public class Movie {
     public float getImdb_score() {
         return imdb_score;
     }
+    public float getAvarage_rating() {
+        return avarage_rating;
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -117,7 +126,7 @@ public class Movie {
         this.country = country;
     }
 
-    public void setPoster_path(String poster_path) {
+    public void setposter_path(String poster_path) {
         this.poster_path = poster_path;
     }
 
@@ -137,7 +146,10 @@ public class Movie {
         this.views++;
     }
 
-    /*
+    public void addMovie (Movie movie){
+        allmovies.add(movie);
+    }
+
     public List<Cast> getCast() {
         return cast;
     }
@@ -153,8 +165,40 @@ public class Movie {
     public void setDirector(Director director) {
         this.director = director;
     }
-     */
 
+    @Override
+    public String toString() {
+        return title + '\n' + poster_path + '\n' + release_date + '\n' + running_time + '\n' + genre + '\n' + language + '\n' + country + '\n' + budget + '\n' + revenue + '\n' + imdb_score + '\n' + views + '\n' + avarage_rating;
+    }
+
+    public void UpdateRating(float rating){
+
+        total_rating += rating;
+
+        if (rating >= 0) {
+            users_rated++;
+            avarage_rating = total_rating / users_rated;
+        }
+        else {
+            users_rated --;
+            if (users_rated > 0) {
+                avarage_rating = total_rating / users_rated;
+            }
+            else
+                avarage_rating = 0.0f;
+        }
+
+    }
+
+    public static Movie getMovie (String movie_title) {
+        if (!(allmovies.isEmpty())) {
+            for (Movie movie : allmovies) {
+                if (movie.title.equals(movie_title))
+                    return movie;
+            }
+        }
+        return null;
+    }
     public static List<Movie> RecentMovies(List<Movie> movie) {
         List<Movie> recent_movies = new ArrayList<>();
         for (Movie m : movie) {
@@ -164,11 +208,14 @@ public class Movie {
                 recent_movies.add(m);
             }
         }
-        recent_movies.sort(Comparator.comparing(Movie::getRelease_date).reversed());
-        return recent_movies;
+        if (!(recent_movies.isEmpty())) {
+            recent_movies.sort(Comparator.comparing(Movie::getRelease_date).reversed());
+            return recent_movies;
+        }
+        return null;
     }
     public static List<Movie> TopRatedMovies(List<Movie> movie) {
-        movie.sort(Comparator.comparing(Movie::getImdb_score).reversed());
+        movie.sort(Comparator.comparing(Movie::getAvarage_rating).reversed());
         return movie;
     }
     public static List<Movie> MostViewedMovies(List<Movie> movie) {
@@ -177,3 +224,5 @@ public class Movie {
     }
 
 }
+
+
