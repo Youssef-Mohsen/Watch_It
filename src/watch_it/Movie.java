@@ -126,7 +126,7 @@ public class Movie {
         this.country = country;
     }
 
-    public void setposter_path(String poster_path) {
+    public void setPoster_path(String poster_path) {
         this.poster_path = poster_path;
     }
 
