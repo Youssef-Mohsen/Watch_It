@@ -14,6 +14,23 @@ public abstract class Artist {
     public String getFirst_Name() {
         return First_Name;
     }
+    public String getSecond_Name() {
+        return Second_Name;
+    }
+
+    public String getNationality() {
+        return Nationality;
+    }
+    public String getGender() {
+        return Gender;
+    }
+    public int getAge() {
+        return Age;
+    }
+    public ArrayList<Movie> getMovies() {
+        return Movies;
+    }
+
 
     public void setFirst_Name(String first_Name) {
         First_Name = first_Name;
@@ -23,35 +40,16 @@ public abstract class Artist {
         Second_Name = second_Name;
     }
 
-    public String getSecond_Name() {
-        return Second_Name;
-    }
-
-    public String getNationality() {
-        return Nationality;
-    }
-
     public void setNationality(String nationality) {
         Nationality = nationality;
-    }
-
-    public String getGender() {
-        return Gender;
     }
 
     public void setGender(String gender) {
         Gender = gender;
     }
 
-    public int getAge() {
-        return Age;
-    }
-
     public void setAge(int age) {
         Age = age;
-    }
-    public ArrayList<Movie> getMovies() {
-        return Movies;
     }
 
     public void setMovies(ArrayList<Movie> movies) {

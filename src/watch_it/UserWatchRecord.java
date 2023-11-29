@@ -36,7 +36,6 @@ public class UserWatchRecord {
  {
   return user_id;
  }
-
  public LocalDateTime getDate_of_watching(){ return date_of_watching;}
 
 //  ******* Set methods ******** 

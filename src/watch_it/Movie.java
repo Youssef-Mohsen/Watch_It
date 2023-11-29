@@ -94,7 +94,7 @@ public class Movie {
     public float getImdb_score() {
         return imdb_score;
     }
-    public float getAvarage_rating() {
+    public float getAverage_rating() {
         return avarage_rating;
     }
 
@@ -215,7 +215,7 @@ public class Movie {
         return null;
     }
     public static List<Movie> TopRatedMovies(List<Movie> movie) {
-        movie.sort(Comparator.comparing(Movie::getAvarage_rating).reversed());
+        movie.sort(Comparator.comparing(Movie::getAverage_rating).reversed());
         return movie;
     }
     public static List<Movie> MostViewedMovies(List<Movie> movie) {

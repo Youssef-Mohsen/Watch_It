@@ -122,24 +122,24 @@ public class User
      // take movie from method Choose movie Should be in main(return object of movie)
      //the Constraints of this part the amount of movies that allowed to user
      // add ********/
-    public void Choose_Movies_For_Later(Movie mov)
+    public void Choose_Movies_For_Later(Movie movie)
     {
-        Movies_For_Later.add(mov);
+        Movies_For_Later.add(movie);
     }
-    public void Update_Choosen_Movie_Change(Movie mov , int index)
+    public void Update_Choosen_Movie_Change(Movie movie , int index)
     {
         // make sure the exception handling is applied in the index.
-        Movies_For_Later.set(index , mov);
+        Movies_For_Later.set(index , movie);
     }
     /****delete movie from the list of watch later should handle in class system.*****/
-    public void Set_record(int id , Movie movi)
+    public void Set_record(int id , Movie movie)
     {
         // Handle the part of Date and rate
-        // the movi that user watch it.
-        Watched_Movies.add(new UserWatchRecord(id , movi));
+        // the movie that user watch it.
+        Watched_Movies.add(new UserWatchRecord(id , movie));
     }
     /***to set rate and Update it****/
-    public void Set_Rate_Racord(int index ,int rate)
+    public void Set_Rate_Record(int index ,int rate)
     {
         // make sure the exception handling is applied in the index.
         Watched_Movies.get(index).setRating(rate);
@@ -152,30 +152,30 @@ public class User
     /******this should be in User Class >>>> I ask T.A******/
     public void Display_Watch_Later_Movie()
     {
-        for(Movie movi : Movies_For_Later)
+        for(Movie movie : Movies_For_Later)
         {
-            System.out.println(movi.getId());
-            System.out.println(movi.getViews());
-            System.out.println(movi.getTitle());
-            System.out.println(movi.getRelease_date());
-            System.out.println(movi.getRunning_time());
-            System.out.println(movi.getGenre());
-            System.out.println(movi.getLanguage());
-            System.out.println(movi.getCountry());
-            System.out.println(movi.getposter_path());
-            System.out.println(movi.getBudget());
-            System.out.println(movi.getImdb_score());
+            System.out.println(movie.getId());
+            System.out.println(movie.getViews());
+            System.out.println(movie.getTitle());
+            System.out.println(movie.getRelease_date());
+            System.out.println(movie.getRunning_time());
+            System.out.println(movie.getGenre());
+            System.out.println(movie.getLanguage());
+            System.out.println(movie.getCountry());
+            System.out.println(movie.getposter_path());
+            System.out.println(movie.getBudget());
+            System.out.println(movie.getImdb_score());
             // its director.
             // its Casts.
         }
     }
     public void Display_Watched_Movie()
     {
-        for(UserWatchRecord movi : Watched_Movies)
+        for(UserWatchRecord movie : Watched_Movies)
         {
-            System.out.println(movi.getUser_id());
+            System.out.println(movie.getUser_id());
             Movie mov = new Movie();
-            mov = movi.getMovie();
+            mov = movie.getMovie();
             System.out.println(mov.getId());
             System.out.println(mov.getViews());
             System.out.println(mov.getTitle());
@@ -187,8 +187,8 @@ public class User
             System.out.println(mov.getposter_path());
             System.out.println(mov.getBudget());
             System.out.println(mov.getImdb_score());
-            System.out.println(movi.getDate_of_watching());
-            System.out.println(movi.getRating());
+            System.out.println(movie.getDate_of_watching());
+            System.out.println(movie.getRating());
         }
     }
     /****handle in System class*****/
