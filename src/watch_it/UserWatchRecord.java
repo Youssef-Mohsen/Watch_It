@@ -22,6 +22,10 @@ public class UserWatchRecord {
         this.movie=movie;
     }
 
+    public UserWatchRecord() {
+
+    }
+
 // ********Get methods***********
 
  public int getRating()
