@@ -75,7 +75,7 @@ public class HelloController {
         stage.show();
     }
     public void switchWindow1(ActionEvent event) throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("movie-view.fxml"));
         root = loader.load();
         HelloController controller = loader.getController();
         stage=(Stage) ((Node)event.getSource()).getScene().getWindow();
