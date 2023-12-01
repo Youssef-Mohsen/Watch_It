@@ -1,8 +1,6 @@
-package watch_it;
-import java.time.LocalDate;
-import java.util.Locale;
-import java.util.Scanner;
+package com.example.watch_it;
 import java.util.ArrayList;
+
 public class Cast extends Artist{
 
     public void Add_Cast( ArrayList<Cast>cast,String first_name,String second_name,int age,String gender,String Nationality,int num,ArrayList<Movie>movies){

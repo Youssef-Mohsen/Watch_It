@@ -1,7 +1,5 @@
-package watch_it;
-import java.time.LocalDate;
+package com.example.watch_it;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Director extends Artist {
 

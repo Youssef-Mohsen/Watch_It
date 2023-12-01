@@ -1,7 +1,6 @@
-package watch_it;
-import java.time.LocalDate;
+package com.example.watch_it;
+
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public abstract class Artist {
     private String First_Name;
@@ -9,11 +8,12 @@ public abstract class Artist {
     private String Gender;
     private String Nationality;
     private int Age;
-    ArrayList<Movie>Movies=new ArrayList<Movie>();
+    ArrayList<Movie> Movies = new ArrayList<Movie>();
 
     public String getFirst_Name() {
         return First_Name;
     }
+
     public String getSecond_Name() {
         return Second_Name;
     }
@@ -21,12 +21,15 @@ public abstract class Artist {
     public String getNationality() {
         return Nationality;
     }
+
     public String getGender() {
         return Gender;
     }
+
     public int getAge() {
         return Age;
     }
+
     public ArrayList<Movie> getMovies() {
         return Movies;
     }

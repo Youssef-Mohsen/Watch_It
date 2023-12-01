@@ -1,4 +1,4 @@
-package watch_it;
+package com.example.watch_it;
 
 import java.time.LocalDate;
 

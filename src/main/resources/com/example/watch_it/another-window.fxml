@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="410.0" prefWidth="600.0" style="-fx-background-color: #001F3F;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watch_it.HelloController">
+    <ImageView fx:id="imagePreview" fitHeight="306.0" fitWidth="210.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@assets/DefaultImage.jpg" />
+    </ImageView>
+    <Label fx:id="titleMovie" layoutX="217.0" layoutY="14.0" prefHeight="24.0" prefWidth="284.0" text=" " textFill="WHITE">
+        <font>
+            <Font name="Arial Black" size="16.0" />
+        </font>
+    </Label>
+    <Separator layoutX="217.0" layoutY="50.0" opacity="0.35" prefHeight="4.0" prefWidth="357.0" />
+    <Label layoutX="217.0" layoutY="64.0" text="Name: " textFill="GREY" />
+    <Label layoutX="217.0" layoutY="96.0" text="Film: " textFill="GREY" />
+    <Label layoutX="217.0" layoutY="128.0" text="Duration: " textFill="GREY" />
+    <Label layoutX="217.0" layoutY="157.0" text="Genre: " textFill="GREY" />
+    <Label layoutX="217.0" layoutY="192.0" text="Quality: " textFill="GREY" />
+    <Label layoutX="217.0" layoutY="225.0" text="Known with: " textFill="GREY" />
+    <Label fx:id="movieName" layoutX="261.0" layoutY="64.0" prefHeight="17.0" prefWidth="111.0" textFill="WHITE" />
+    <Label fx:id="Film" layoutX="246.0" layoutY="96.0" prefHeight="17.0" prefWidth="174.0" textFill="LIGHTSKYBLUE" />
+    <Label fx:id="duration" layoutX="271.0" layoutY="128.0" textFill="WHITE" />
+    <Label fx:id="Genre" layoutX="257.0" layoutY="157.0" textFill="LIGHTSKYBLUE" />
+    <Label layoutX="261.0" layoutY="192.0" prefHeight="17.0" prefWidth="74.0" text="1080p HDTV" textFill="LIGHTSKYBLUE" />
+    <Label layoutX="286.0" layoutY="225.0" text="n/a" textFill="WHITE" />
+    <Label layoutX="7.0" layoutY="315.0" text="Description" textFill="WHITE">
+        <font>
+            <Font name="System Bold" size="16.0" />
+        </font>
+    </Label>
+    <Label fx:id="description" layoutX="7.0" layoutY="340.0" prefHeight="70.0" prefWidth="591.0" textFill="GREY" wrapText="true" />
+   <Button layoutX="553.0" layoutY="375.0" mnemonicParsing="false" onAction="#switchWindow1" style="-fx-background-color: #005F3F;" text="Next" textFill="LIGHTSKYBLUE" />
+   <TextField fx:id="nameTextField" layoutX="396.0" layoutY="328.0" />
+   <Label layoutX="396.0" layoutY="307.0" text="DO you Like IT?" textFill="LIGHTSKYBLUE" />
+
+
+</Pane>

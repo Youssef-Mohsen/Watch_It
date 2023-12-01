@@ -1,5 +1,4 @@
-package watch_it;
-import java.awt.*;
+package com.example.watch_it;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -35,7 +34,7 @@ public class Movie {
         this.cast = new ArrayList<>();
     }
 
-    public Movie (String title, LocalDate release_date, String running_time,String genre, String language, String country, String poster_path, double budget, double revenue, float imdb_score) {
+    public Movie(String title, LocalDate release_date, String running_time, String genre, String language, String country, String poster_path, double budget, double revenue, float imdb_score) {
         counter++;
         this.id = counter;
         this.title = title;
@@ -83,7 +82,7 @@ public class Movie {
         return country;
     }
 
-    public String getposter_path() {
+    public String getPoster_path() {
         return poster_path;
     }
 

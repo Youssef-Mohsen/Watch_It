@@ -1,4 +1,4 @@
-package watch_it;
+package com.example.watch_it;
 
 import java.time.LocalDateTime;
 
@@ -20,10 +20,6 @@ public class UserWatchRecord {
     {
         this.user_id=user_id;
         this.movie=movie;
-    }
-
-    public UserWatchRecord() {
-
     }
 
 // ********Get methods***********
