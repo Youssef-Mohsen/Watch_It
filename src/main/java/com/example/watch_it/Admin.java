@@ -1,7 +1,9 @@
 package com.example.watch_it;
 import java.io.*;
 import java.time.Month;
+import java.time.Period;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.time.LocalDate;
 import java.util.Map;
@@ -16,6 +18,7 @@ public class Admin {
     public static int basicPlanCounter;
     public static int standardPlanCounter;
     public static int premiumPlanCounter;
+    private  static int MONTHSNUMBER = 12;
     private static short PLANINDEX = 7;
     private static final short USERNAMEINDEX = 1;
     private static final short TYPEINDEX = 0;
@@ -164,6 +167,82 @@ public class Admin {
 //        return month;
 //    }
     //all as strings
+
+    //assuming all dates are valid and users still subscribed.
+
+    public static int getMonth(Month month){
+        return switch (month) {
+            case JANUARY -> 1;
+            case FEBRUARY -> 2;
+            case MARCH -> 3;
+            case APRIL -> 4;
+            case MAY -> 5;
+            case JUNE -> 6;
+            case JULY -> 7;
+            case AUGUST -> 8;
+            case SEPTEMBER -> 9;
+            case OCTOBER -> 10;
+            case NOVEMBER -> 11;
+            case DECEMBER -> 12;
+        };
+    }
+    public static Month getMonth(int monthNumber){
+        return switch (monthNumber) {
+            case 1 -> Month.JANUARY;
+            case 2 -> Month.FEBRUARY;
+            case 3 -> Month.MARCH;
+            case 4 -> Month.APRIL;
+            case 5 -> Month.MAY;
+            case 6 -> Month.JUNE;
+            case 7 -> Month.JULY;
+            case 8 -> Month.AUGUST;
+            case 9 -> Month.SEPTEMBER;
+            case 10 -> Month.OCTOBER;
+            case 11 -> Month.NOVEMBER;
+            case 12 -> Month.DECEMBER;
+            default -> null;
+        };
+    }
+    static Month monthWithMostRevenue(){
+         Month month = null;
+         int [] monthsRevenue = new int[MONTHSNUMBER];
+         for(String user: users){
+             String[] data = user.split(",");
+             String plan = data[PLANINDEX];
+             LocalDate startDate = LocalDate.parse(data[STARTDATEINDEX]);
+             LocalDate todaysDate = LocalDate.now();
+             int startMonth = getMonth(startDate.getMonth());
+             int todaysmonth = getMonth(todaysDate.getMonth());
+             int differenceMonths = todaysmonth - startMonth;
+             if(startDate.getYear() != todaysDate.getYear())
+                 differenceMonths = (MONTHSNUMBER - startMonth) + todaysmonth;
+
+             while(differenceMonths >= 0){
+                 if(plan.equals("basic")){
+                     monthsRevenue[(startMonth + differenceMonths)] += 10;
+                 }
+                 else if (plan.equals("standard")) {
+                     monthsRevenue[(startMonth + differenceMonths)] += 20;
+                 }
+                 else{
+                     monthsRevenue[(startMonth + differenceMonths)] += 30;
+                 }
+                 differenceMonths--;
+             }
+         }
+         int []check = new int[MONTHSNUMBER];
+         System.arraycopy(monthsRevenue, 0, check, 0, MONTHSNUMBER);
+         Arrays.sort(check);
+         int recuiredMonth = 0;
+         for(int i=0; i<MONTHSNUMBER; i++){
+            if(monthsRevenue[i] == check[1])
+             {
+                 recuiredMonth = i + 1;
+                 break;
+             }
+         }
+         return getMonth(recuiredMonth);
+    }
     static void getUserMovieLists(String user, ArrayList<String> watched_movies, ArrayList<String> toBeWatched_movies){
         boolean toBeWatched = false;
         boolean watched = false;
