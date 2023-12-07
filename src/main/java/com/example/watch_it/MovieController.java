@@ -39,6 +39,12 @@ public class MovieController {
 
     // Method to update the text of the first label
 
+
+    @FXML
+    private void initialize(){
+        onMouseEntered();
+        onMouseExit();
+    }
     public void refreshLabels(String filmTitle, String newMovieName, String newFilm, String filmGenre,
                               String filmDescription, String filmDuration, Image image) {
         titleMovie.setText(filmTitle);
@@ -49,6 +55,15 @@ public class MovieController {
         duration.setText(filmDuration);
         imagePreview.setImage(image);
 
+    }
+    public void refreshLabels2(String filmTitle, String newMovieName, String newFilm, String filmGenre,
+                              String filmDescription, String filmDuration) {
+        titleMovie.setText(filmTitle);
+        movieName.setText(newMovieName);
+        Film.setText(newFilm);
+        Genre.setText(filmGenre);
+        description.setText(filmDescription);
+        duration.setText(filmDuration);
     }
 
     public void backScenes(ActionEvent event) throws IOException {

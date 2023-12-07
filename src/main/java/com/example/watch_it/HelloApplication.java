@@ -21,10 +21,6 @@ public class HelloApplication extends Application {
         stage.setX(-7);
         stage.setY(0);
         stage.show();
-        System.out.println(stage.getWidth());
-        System.out.println(stage.getHeight());
-
-
     }
 
 

@@ -11,8 +11,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
@@ -40,22 +38,27 @@ public class MainPageController {
     HBox allMovies2;
 
 
+    private void getObject(Movie movie,String titleMovie,String pathMovie){
+        movie.setTitle(titleMovie);
+        movie.setPoster_path(pathMovie);
+    }
     private void getData(){
-        Movie movie = new Movie(),movie2=new Movie(),movie3=new Movie();
-        movie.setTitle("Spider Man");
-        movie.setPoster_path("C:\\Users\\Youssef Mohsen\\IdeaProjects\\Watch_It\\src\\main\\resources\\com\\example\\watch_it\\assets\\Amazing_SpiderMan.png");
+        String pathSpider = "C:\\Users\\Youssef Mohsen\\IdeaProjects\\Watch_It\\src\\main\\resources\\com\\example\\watch_it\\assets\\Amazing_SpiderMan.png";
+        String pathGravity = "C:\\Users\\Youssef Mohsen\\IdeaProjects\\Watch_It\\src\\main\\resources\\com\\example\\watch_it\\assets\\DefaultImage.jpg";
+        Movie movie = new Movie(),
+                movie2=new Movie(),
+                movie3=new Movie();
 
-        movie2.setTitle("Spider Man2");
-        movie2.setPoster_path("C:\\Users\\Youssef Mohsen\\IdeaProjects\\Watch_It\\src\\main\\resources\\com\\example\\watch_it\\assets\\Amazing_SpiderMan.png");
+        getObject(movie,"Spider Man",pathSpider);
+        getObject(movie2,"Spider Man2",pathGravity);
+        getObject(movie3,"Gravity",pathSpider);
 
-        movie3.setTitle("Gravity");
-        movie3.setPoster_path("C:\\Users\\Youssef Mohsen\\IdeaProjects\\Watch_It\\src\\main\\resources\\com\\example\\watch_it\\assets\\DefaultImage.jpg");
         movies.add(movie);
         movies.add(movie2);
         movies.add(movie3);
+        movies.add(movie2);
         movies.add(movie);
-        movies.add(movie);
-        movies.add(movie);
+        movies.add(movie2);
 
     }
 
@@ -66,6 +69,8 @@ public class MainPageController {
             addToGUI(movie);
             addToGUI2(movie);
         }
+        onMouseEntered();
+        onMouseExit();
     }
 
     private void addToGUI(Movie movie){
@@ -79,6 +84,8 @@ public class MainPageController {
         imageView.setFitWidth(200);
         Label label = new Label(movie.getTitle());
         label.setStyle("-fx-text-size: 20; -fx-text-fill: white;");
+        label.setOnMouseEntered(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: #FFC107;"));
+        label.setOnMouseExited(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
         movieContainer.setAlignment(Pos.CENTER);
         movieContainer.getChildren().addAll(imageView, label);
         movieContainer.setOnMouseClicked(event -> onMouseClickedVBox(image));
@@ -96,6 +103,8 @@ public class MainPageController {
         imageView.setFitWidth(200);
         Label label = new Label(movie.getTitle());
         label.setStyle("-fx-text-size: 20; -fx-text-fill: white;");
+        label.setOnMouseEntered(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: #FFC107;"));
+        label.setOnMouseExited(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
         movieContainer.setAlignment(Pos.CENTER);
         movieContainer.getChildren().addAll(imageView, label);
         movieContainer.setOnMouseClicked(event -> onMouseClickedVBox(image));
@@ -118,10 +127,9 @@ public class MainPageController {
         stage.setResizable(false);
         stage.setX(-7);
         stage.setY(0);
-        Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("@assets/Amazing_SpiderMan.png")));
-        controller.refreshLabels("Watch Movie Amazing SpiderMan(2023)","Amazing SpiderMan",
-                "Amazing SpiderMan Translated","Action","Amazing SpiderMan film.",
-                "120 minutes",image);
+        controller.refreshLabels2("Watch Movie Amazing SpiderMan(2023)", "Amazing SpiderMan",
+                "Amazing SpiderMan Translated", "Action", "Amazing SpiderMan film.",
+                "120 minutes");
         stage.setScene(scene);
         stage.show();
 
