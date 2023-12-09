@@ -11,8 +11,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import java.io.IOException;
 
+import java.io.IOException;
 
 
 public class MovieController {
@@ -41,11 +41,12 @@ public class MovieController {
 
 
     @FXML
-    private void initialize(){
+    private void initialize() {
         onMouseEntered();
         onMouseExit();
     }
-    public void refreshLabels(String filmTitle, String newMovieName, String newFilm, String filmGenre,
+
+    public void refreshScreen(String filmTitle, String newMovieName, String newFilm, String filmGenre,
                               String filmDescription, String filmDuration, Image image) {
         titleMovie.setText(filmTitle);
         movieName.setText(newMovieName);
@@ -56,7 +57,8 @@ public class MovieController {
         imagePreview.setImage(image);
 
     }
-    public void refreshLabels2(String filmTitle, String newMovieName, String newFilm, String filmGenre,
+
+    public void refreshLabels(String filmTitle, String newMovieName, String newFilm, String filmGenre,
                               String filmDescription, String filmDuration) {
         titleMovie.setText(filmTitle);
         movieName.setText(newMovieName);
@@ -80,12 +82,17 @@ public class MovieController {
         stage.setScene(scene);
         stage.show();
     }
-    public  void onMouseEntered(){
+
+    public void onMouseEntered() {
         Back.setOnMouseEntered(event -> Back.setStyle("-fx-background-color: #FFC107; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
     }
-    public  void onMouseExit(){
+
+    public void onMouseExit() {
         Back.setOnMouseExited(event -> Back.setStyle("-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
     }
+    //////////////////////////
+
+    //////////////////////////
     public void setStage(Stage stage) {
         this.stage = stage;
     }

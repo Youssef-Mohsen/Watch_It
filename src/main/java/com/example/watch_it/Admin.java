@@ -18,8 +18,8 @@ public class Admin {
     public static int basicPlanCounter;
     public static int standardPlanCounter;
     public static int premiumPlanCounter;
-    private  static int MONTHSNUMBER = 12;
-    private static short PLANINDEX = 7;
+    private  static final int MONTHSNUMBER = 12;
+    private static final short PLANINDEX = 7;
     private static final short USERNAMEINDEX = 1;
     private static final short TYPEINDEX = 0;
     private static short STARTDATEINDEX;
