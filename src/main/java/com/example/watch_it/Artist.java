@@ -8,7 +8,7 @@ public abstract class Artist {
     private String Gender;
     private String Nationality;
     private int Age;
-    ArrayList<Movie> Movies = new ArrayList<Movie>();
+    ArrayList<String> Movies = new ArrayList<String>();
 
     public String getFirst_Name() {
         return First_Name;
@@ -30,7 +30,7 @@ public abstract class Artist {
         return Age;
     }
 
-    public ArrayList<Movie> getMovies() {
+    public ArrayList<String> getMovies() {
         return Movies;
     }
 
@@ -55,7 +55,7 @@ public abstract class Artist {
         Age = age;
     }
 
-    public void setMovies(ArrayList<Movie> movies) {
+    public void setMovies(ArrayList<String> movies) {
         Movies = movies;
     }
 }

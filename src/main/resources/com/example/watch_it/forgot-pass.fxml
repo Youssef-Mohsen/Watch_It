@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="930.0" prefWidth="614.0" style="-fx-background-color: black; -fx-border-color: FFC107; -fx-border-width: 3;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watch_it.ForgotPassword">
+    <Label alignment="CENTER" layoutX="14.0" layoutY="18.0" prefHeight="34.0" prefWidth="139.0" style="-fx-background-color: FFC107; -fx-background-radius: 50;" text="Watch" textFill="#f8f7f7">
+        <font>
+            <Font name="System Bold Italic" size="24.0" />
+        </font>
+    </Label>
+    <Label alignment="CENTER" layoutX="135.0" layoutY="21.0" prefHeight="29.0" prefWidth="37.0" style="-fx-background-color: black; -fx-background-radius: 50;" text="IT" textFill="#f8f7f7">
+        <font>
+            <Font name="System Bold Italic" size="24.0" />
+        </font>
+    </Label>
+    <Label layoutX="526.0" layoutY="62.0" text="back" textFill="#ffc107">
+        <font>
+            <Font name="Chalkboard Bold" size="20.0" />
+        </font>
+    </Label>
+    <Button layoutX="509.0" layoutY="-7.0" mnemonicParsing="false" onAction="#GoToSignIn" prefHeight="82.0" prefWidth="74.0" style="-fx-background-color: transparent;" text="&lt;" textFill="#ffc107">
+        <font>
+            <Font name="Chalkboard SE Bold" size="36.0" />
+        </font>
+    </Button>
+    <TextField fx:id="ForgotEmail" alignment="CENTER" layoutX="82.0" layoutY="389.0" prefHeight="63.0" prefWidth="442.0" promptText="Email" style="-fx-background-color: FFC107; -fx-background-radius: 50; -fx-border-color: #f8f7f7; -fx-border-radius: 50; -fx-border-width: 2;">
+        <font>
+            <Font name="Chalkboard Bold" size="24.0" />
+        </font>
+    </TextField>
+    <TextField fx:id="ForgotTextPassword" alignment="CENTER" layoutX="87.0" layoutY="476.0" prefHeight="57.0" prefWidth="436.0" promptText="New Password" style="-fx-background-color: FFC107; -fx-background-radius: 50; -fx-border-color: #f8f7f7; -fx-border-radius: 50; -fx-border-width: 2;">
+        <font>
+            <Font name="Chalkboard Bold" size="24.0" />
+        </font>
+    </TextField>
+    <PasswordField fx:id="ForgotPassword" alignment="CENTER" layoutX="82.0" layoutY="476.0" prefHeight="57.0" prefWidth="442.0" promptText="New Password" style="-fx-background-color: FFC107; -fx-background-radius: 50; -fx-border-radius: 50; -fx-border-color: #f8f7f7; -fx-border-width: 2;">
+        <font>
+            <Font name="Chalkboard Bold" size="24.0" />
+        </font>
+    </PasswordField>
+    <ImageView fitHeight="82.0" fitWidth="74.0" layoutX="266.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="@assets/lock.png" />
+        </image>
+    </ImageView>
+    <Label layoutX="162.0" layoutY="193.0" text="Forgot Password" textFill="#f8f7f7">
+        <font>
+            <Font name="Chalkboard Bold" size="36.0" />
+        </font>
+    </Label>
+    <Button layoutX="128.0" layoutY="854.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="358.0" style="-fx-background-color: FFC107; -fx-background-radius: 50; -fx-border-color: #f8f7f7; -fx-border-radius: 50; -fx-border-width: 2;" text="Reset Password" textFill="#f8f7f7">
+        <font>
+            <Font name="Chalkboard Bold" size="24.0" />
+        </font>
+    </Button>
+    <TextField fx:id="CTextPassword" alignment="CENTER" layoutX="95.0" layoutY="555.0" prefHeight="47.0" prefWidth="425.0" promptText="Confirm Password" style="-fx-background-color: FFC107; -fx-background-radius: 50; -fx-border-color: #f8f7f7; -fx-border-radius: 50; -fx-border-width: 2;">
+        <font>
+            <Font name="Chalkboard Bold" size="24.0" />
+        </font>
+    </TextField>
+    <PasswordField fx:id="ForgotConfirmPassword" alignment="CENTER" layoutX="86.0" layoutY="553.0" prefHeight="57.0" prefWidth="436.0" promptText="Confirm Password" style="-fx-background-color: FFC107; -fx-background-radius: 50; -fx-border-radius: 50; -fx-border-color: #f8f7f7; -fx-border-width: 2;">
+        <font>
+            <Font name="Chalkboard Bold" size="24.0" />
+        </font>
+    </PasswordField>
+    <CheckBox fx:id="CheckPassword" layoutX="95.0" layoutY="617.0" mnemonicParsing="false" onAction="#The_Password_Visibility" text="Show Password" textFill="#f8f7f7">
+        <font>
+            <Font name="Chalkboard Bold" size="20.0" />
+        </font>
+    </CheckBox>
+    <TextField fx:id="ForgotUserName" alignment="CENTER" layoutX="88.0" layoutY="308.0" prefHeight="63.0" prefWidth="434.0" promptText="UserName" style="-fx-background-color: FFC107; -fx-background-radius: 50; -fx-border-color: #f8f7f7; -fx-border-radius: 50; -fx-border-width: 2;">
+        <font>
+            <Font name="Chalkboard Bold" size="24.0" />
+        </font>
+    </TextField>
+</AnchorPane>

@@ -1,5 +1,8 @@
 package com.example.watch_it;
 
+import javafx.application.Platform;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.util.Duration;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -24,9 +27,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 public class MainPageController {
+
     private Stage stage;
     private Timeline autoScrollTimeline;
     private Timeline autoScrollTimeline2;
+    @FXML
+    private BorderPane mainPane;
     @FXML
     private Label Action;
     @FXML
@@ -66,22 +72,19 @@ public class MainPageController {
     }
 
     private void getData() {
-        String pathSpider = "C:\\Users\\Youssef Mohsen\\IdeaProjects\\Watch_It\\src\\main\\resources\\com\\example\\watch_it\\assets\\Amazing_SpiderMan.png";
-        String pathGravity = "C:\\Users\\Youssef Mohsen\\IdeaProjects\\Watch_It\\src\\main\\resources\\com\\example\\watch_it\\assets\\DefaultImage.jpg";
         Movie movie = new Movie(),
                 movie2 = new Movie(),
                 movie3 = new Movie();
 
-        setObject(movie, "Spider Man", pathSpider);
-        setObject(movie2, "Spider Man2", pathGravity);
-        setObject(movie3, "Gravity", pathSpider);
-
+        setObject(movie, "Spider Man", "assets/Amazing_SpiderMan.png");
+        setObject(movie2, "Gravity", "assets/DefaultImage.jpg");
+        setObject(movie3, "Spider Man2", "assets/Amazing_SpiderMan.png");
         moviesTop.add(movie);
         moviesTop.add(movie2);
         moviesTop.add(movie3);
-        moviesTop.add(movie2);
         moviesTop.add(movie);
         moviesTop.add(movie2);
+        moviesTop.add(movie3);
         /////////////////////
         moviesRecent.add(movie);
         moviesRecent.add(movie2);
@@ -100,18 +103,35 @@ public class MainPageController {
         for (Movie movie : moviesRecent) {
             addToGUI2(movie);
         }
-        watchRecords.setOnMouseClicked(mouseEvent -> onMouseClicked());
+        All.setStyle("-fx-background-color: #FFC107;" +
+                " -fx-background-radius: 25; " +
+                "-fx-border-color: white;" +
+                " -fx-border-radius: 25;");
+        Horror.setStyle("-fx-background-radius: 25;"+
+                " -fx-background-color:  #565661;");
+        Comedy.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;");
+        Drama.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;");
+        Action.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;");
+        Horror.setOnMouseExited(event1 -> Horror.setStyle("-fx-background-radius: 25;-fx-background-color:  #565661;"));
+        Comedy.setOnMouseExited(event1 -> Comedy.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;"));
+        Drama.setOnMouseExited(event1 -> Drama.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;"));
+        Action.setOnMouseExited(event1 -> Action.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;"));
+        All.setOnMouseExited(event1 -> All.setStyle("-fx-background-color: #FFC107;" +
+                " -fx-background-radius: 25;" +
+                " -fx-border-color: white;" +
+                " -fx-border-radius: 25;"));
         onMouseEntered();
         onMouseExit();
         setupAutoScroll();
         profile.setOnMouseClicked(event -> onMouseClicked());
+        labelsOnMouseClicked();
     }
 
     private void addToGUI(Movie movie) {
         VBox movieContainer = new VBox(10);
         movieContainer.setPrefWidth(300);
         movieContainer.setPrefHeight(200);
-        Image image = new Image(movie.getPoster_path());
+        Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));
         ImageView imageView = new ImageView(image);
         imageView.setFitHeight(237);
         imageView.setFitWidth(220);
@@ -131,7 +151,7 @@ public class MainPageController {
         VBox movieContainer = new VBox(10);
         movieContainer.setPrefWidth(300);
         movieContainer.setPrefHeight(200);
-        Image image = new Image(movie.getPoster_path());
+        Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));
         ImageView imageView = new ImageView(image);
         imageView.setFitHeight(237);
         imageView.setFitWidth(220);
@@ -168,7 +188,103 @@ public class MainPageController {
         stage.show();
 
     }
+    public void labelsOnMouseClicked(){
+        Action.setOnMouseClicked(event -> {
+            Action.setStyle("-fx-background-radius: 25;-fx-background-color:  #FFC107;");
+            Comedy.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;");
+            Drama.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;");
+            Horror.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;");
+            All.setStyle("-fx-background-color: black;" +
+                    " -fx-background-radius: 25; " +
+                    "-fx-border-color: white;" +
+                    " -fx-border-radius: 25;");
+            Action.setOnMouseExited(event1 -> Action.setStyle("-fx-background-radius: 25;-fx-background-color:  #FFC107;"));
+            Comedy.setOnMouseExited(event1 -> Comedy.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;"));
+            Drama.setOnMouseExited(event1 -> Drama.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;"));
+            Horror.setOnMouseExited(event1 -> Horror.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;"));
+            All.setOnMouseExited(event1 -> All.setStyle("-fx-background-color: black;" +
+                    " -fx-background-radius: 25;" +
+                    " -fx-border-color: white;" +
+                    " -fx-border-radius: 25;"));
+        });
+        Comedy.setOnMouseClicked(event -> {
+            Comedy.setStyle("-fx-background-radius: 25;"+
+                    " -fx-background-color:  #FFC107;");
+            Action.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;");
+            Drama.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;");
+            Horror.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;");
+            All.setStyle("-fx-background-color: black;" +
+                    " -fx-background-radius: 25; " +
+                    "-fx-border-color: white;" +
+                    " -fx-border-radius: 25;");
+            Comedy.setOnMouseExited(event1 -> Comedy.setStyle("-fx-background-radius: 25;-fx-background-color:  #FFC107;"));
+            Action.setOnMouseExited(event1 -> Action.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;"));
+            Drama.setOnMouseExited(event1 -> Drama.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;"));
+            Horror.setOnMouseExited(event1 -> Horror.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;"));
+            All.setOnMouseExited(event1 -> All.setStyle("-fx-background-color: black;" +
+                    " -fx-background-radius: 25;" +
+                    " -fx-border-color: white;" +
+                    " -fx-border-radius: 25;"));
+        });
+        Drama.setOnMouseClicked(event -> {
+            Drama.setStyle("-fx-background-radius: 25;"+
+                    " -fx-background-color:  #FFC107;");
+            Comedy.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;");
+            Action.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;");
+            Horror.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;");
+            All.setStyle("-fx-background-color: black;" +
+                    " -fx-background-radius: 25; " +
+                    "-fx-border-color: white;" +
+                    " -fx-border-radius: 25;");
+            Drama.setOnMouseExited(event1 -> Drama.setStyle("-fx-background-radius: 25;-fx-background-color:  #FFC107;"));
+            Comedy.setOnMouseExited(event1 -> Comedy.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;"));
+            Action.setOnMouseExited(event1 -> Action.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;"));
+            Horror.setOnMouseExited(event1 -> Horror.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;"));
+            All.setOnMouseExited(event1 -> All.setStyle("-fx-background-color: black;" +
+                    " -fx-background-radius: 25;" +
+                    " -fx-border-color: white;" +
+                    " -fx-border-radius: 25;"));
+        });
 
+        Horror.setOnMouseClicked(event -> {
+            Horror.setStyle("-fx-background-radius: 25;"+
+                    " -fx-background-color:  #FFC107;");
+            Comedy.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;");
+            Drama.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;");
+            Action.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;");
+            All.setStyle("-fx-background-color: black;" +
+                    " -fx-background-radius: 25; " +
+                    "-fx-border-color: white;" +
+                    " -fx-border-radius: 25;");
+            Horror.setOnMouseExited(event1 -> Horror.setStyle("-fx-background-radius: 25;-fx-background-color:  #FFC107;"));
+            Comedy.setOnMouseExited(event1 -> Comedy.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;"));
+            Drama.setOnMouseExited(event1 -> Drama.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;"));
+            Action.setOnMouseExited(event1 -> Action.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;"));
+            All.setOnMouseExited(event1 -> All.setStyle("-fx-background-color: black;" +
+                    " -fx-background-radius: 25;" +
+                    " -fx-border-color: white;" +
+                    " -fx-border-radius: 25;"));
+        });
+        All.setOnMouseClicked(event -> {
+            All.setStyle("-fx-background-color: #FFC107;" +
+                    " -fx-background-radius: 25; " +
+                    "-fx-border-color: white;" +
+                    " -fx-border-radius: 25;");
+        Horror.setStyle("-fx-background-radius: 25;"+
+                " -fx-background-color:  #565661;");
+        Comedy.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;");
+        Drama.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;");
+        Action.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;");
+        Horror.setOnMouseExited(event1 -> Horror.setStyle("-fx-background-radius: 25;-fx-background-color:  #565661;"));
+        Comedy.setOnMouseExited(event1 -> Comedy.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;"));
+        Drama.setOnMouseExited(event1 -> Drama.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;"));
+        Action.setOnMouseExited(event1 -> Action.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;"));
+        All.setOnMouseExited(event1 -> All.setStyle("-fx-background-color: #FFC107;" +
+                " -fx-background-radius: 25;" +
+                " -fx-border-color: white;" +
+                " -fx-border-radius: 25;"));
+        });
+    }
     public void onMouseClickedVBox(Image image) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("movie-view.fxml"));
         Parent root;
@@ -217,11 +333,11 @@ public class MainPageController {
 
     public void onMouseExit() {
         // Handle mouse exit event
-        onMouseExitLabels(Action);
-        onMouseExitLabels(Comedy);
-        onMouseExitLabels(Drama);
-        onMouseExitLabels(Horror);
-        All.setOnMouseExited(event -> All.setStyle("-fx-background-color: black;" +
+            onMouseExitLabels(Action);
+            onMouseExitLabels(Comedy);
+            onMouseExitLabels(Drama);
+            onMouseExitLabels(Horror);
+        All.setOnMouseExited(event -> All.setStyle("-fx-background-color: #FFC107;" +
                 " -fx-background-radius: 25;" +
                 " -fx-border-color: white;" +
                 " -fx-border-radius: 25;"));
@@ -300,7 +416,14 @@ public class MainPageController {
     }
     ///////////////////////////
 
-
+    public void handleKeyPressed(KeyEvent event) {
+        if (event.getCode().toString().equals("ESCAPE")) {
+            Platform.exit();
+        }
+    }
+    private void switchPane(ScrollPane scrollPane){
+        mainPane.setCenter(scrollPane);
+    }
     ///////////////////////////
 
     public void setStage(Stage stage) {
