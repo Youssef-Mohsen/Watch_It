@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane fx:id="plansPane" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="764.0" prefWidth="1318.0" styleClass="scrollPane" stylesheets="@style.css" fx:controller="com.example.watch_it.PlansController" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+    <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="761.0" prefWidth="1176.0">
+            <children>
+                <Pane layoutX="366.0" layoutY="217.0" prefHeight="200.0" prefWidth="200.0" styleClass="image" stylesheets="@style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <Label fx:id="basicPrice" layoutX="145.0" layoutY="226.0" textFill="#fffdfd">
+                            <font>
+                                <Font size="25.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="standardPrice" layoutX="540.0" layoutY="226.0" textFill="#fffdfd">
+                            <font>
+                                <Font size="25.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="premiumPrice" layoutX="940.0" layoutY="226.0" textFill="#fffdfd">
+                            <font>
+                                <Font size="25.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="basicTotalUser" layoutX="169.0" layoutY="335.0" />
+                        <Label fx:id="standardTotalUser" layoutX="575.0" layoutY="335.0" />
+                        <Label fx:id="premiumtotalUser" layoutX="991.0" layoutY="335.0" />
+                        <ImageView onMouseEntered="#standardPlanActive" onMouseExited="#standardPlanInactive" fx:id="standardImage"  layoutX="470.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView onMouseEntered="#premiumPlanActive" onMouseExited="#premiumPlanInactive"  fx:id="premiumImage" layoutX="881.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView onMouseEntered="#basicPlanActive" onMouseExited="#basicPlanInactive" fx:id="basicImage" layoutX="90.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="basicRevenue" layoutX="169.0" layoutY="450.0" prefHeight="17.0" prefWidth="4.0" />
+                        <Label fx:id="standardRevenue" layoutX="575.0" layoutY="450.0" />
+                        <Label fx:id="premiumRevenue" layoutX="991.0" layoutY="450.0" />
+                        <Label fx:id="basicMovieNo" layoutX="169.0" layoutY="570.0" prefHeight="17.0" prefWidth="6.0" />
+                        <Label fx:id="standardMovieNo" layoutX="575.0" layoutY="570.0" />
+                        <Label fx:id="premiumMovieNo" layoutX="991.0" layoutY="570.0" />
+                        <Label fx:id="basicResolution" layoutX="150.0" layoutY="680.0"  />
+                        <Label fx:id="standardResolution" layoutX="545.0" layoutY="680.0" />
+                        <Label fx:id="premiumResolution" layoutX="940.0" layoutY="680.0" />
+                    </children></Pane>
+            </children></AnchorPane>
+    </content>
+</ScrollPane>

@@ -1,5 +1,8 @@
 package com.example.watch_it;
 
+import javafx.application.Platform;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.util.Duration;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -27,6 +30,8 @@ public class MainPageController {
     private Stage stage;
     private Timeline autoScrollTimeline;
     private Timeline autoScrollTimeline2;
+    @FXML
+    private BorderPane mainPane;
     @FXML
     private Label Action;
     @FXML
@@ -66,25 +71,24 @@ public class MainPageController {
     }
 
     private void getData() {
-        String pathSpider = "C:\\Users\\Youssef Mohsen\\IdeaProjects\\Watch_It\\src\\main\\resources\\com\\example\\watch_it\\assets\\Amazing_SpiderMan.png";
-        String pathGravity = "C:\\Users\\Youssef Mohsen\\IdeaProjects\\Watch_It\\src\\main\\resources\\com\\example\\watch_it\\assets\\DefaultImage.jpg";
         Movie movie = new Movie(),
                 movie2 = new Movie(),
                 movie3 = new Movie();
 
-        setObject(movie, "Spider Man", pathSpider);
+        /*setObject(movie, "Spider Man", pathSpider);
         setObject(movie2, "Spider Man2", pathGravity);
-        setObject(movie3, "Gravity", pathSpider);
-
+        setObject(movie3, "Gravity", pathSpider);*/
+        movie.setTitle("Spider Man");
+        movie.setPoster_path("assets/Amazing_SpiderMan.png");
         moviesTop.add(movie);
-        moviesTop.add(movie2);
-        moviesTop.add(movie3);
-        moviesTop.add(movie2);
         moviesTop.add(movie);
-        moviesTop.add(movie2);
+        moviesTop.add(movie);
+        moviesTop.add(movie);
+        moviesTop.add(movie);
+        moviesTop.add(movie);
         /////////////////////
         moviesRecent.add(movie);
-        moviesRecent.add(movie2);
+        moviesRecent.add(movie);
         moviesRecent.add(movie);
         moviesRecent.add(movie);
         moviesRecent.add(movie);
@@ -111,7 +115,7 @@ public class MainPageController {
         VBox movieContainer = new VBox(10);
         movieContainer.setPrefWidth(300);
         movieContainer.setPrefHeight(200);
-        Image image = new Image(movie.getPoster_path());
+        Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));
         ImageView imageView = new ImageView(image);
         imageView.setFitHeight(237);
         imageView.setFitWidth(220);
@@ -131,7 +135,7 @@ public class MainPageController {
         VBox movieContainer = new VBox(10);
         movieContainer.setPrefWidth(300);
         movieContainer.setPrefHeight(200);
-        Image image = new Image(movie.getPoster_path());
+        Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));
         ImageView imageView = new ImageView(image);
         imageView.setFitHeight(237);
         imageView.setFitWidth(220);
@@ -300,7 +304,14 @@ public class MainPageController {
     }
     ///////////////////////////
 
-
+    public void handleKeyPressed(KeyEvent event) {
+        if (event.getCode().toString().equals("ESCAPE")) {
+            Platform.exit();
+        }
+    }
+    private void switchPane(ScrollPane scrollPane){
+        mainPane.setCenter(scrollPane);
+    }
     ///////////////////////////
 
     public void setStage(Stage stage) {

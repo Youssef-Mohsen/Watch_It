@@ -8,3 +8,21 @@
 .HBox{
      -fx-background-color: black;
 }
+
+.scrollPane > .viewport {
+   -fx-background-color: black;
+}
+.scrollPane{
+    -fx-background-color: black;
+}
+.image{
+    -fx-background-image: url("assets/design.png");
+    -fx-background-repeat: none;
+    -fx-background-size: 1318 764;
+    -fx-background-position: center center;
+}
+.firstImage{
+    -fx-background-size: 1536 864;
+    -fx-background-image: url("assets/signIn.png");
+    -fx-background-position: center center;
+}

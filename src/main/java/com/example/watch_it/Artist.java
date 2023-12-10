@@ -1,6 +1,7 @@
 package com.example.watch_it;
-
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public abstract class Artist {
     private String First_Name;
@@ -8,10 +9,18 @@ public abstract class Artist {
     private String Gender;
     private String Nationality;
     private int Age;
-    ArrayList<Movie> Movies = new ArrayList<Movie>();
+    ArrayList<String>Movies=new ArrayList<String>();
 
     public String getFirst_Name() {
         return First_Name;
+    }
+
+    public void setFirst_Name(String first_Name) {
+        First_Name = first_Name;
+    }
+
+    public void setSecond_Name(String second_Name) {
+        Second_Name = second_Name;
     }
 
     public String getSecond_Name() {
@@ -22,40 +31,30 @@ public abstract class Artist {
         return Nationality;
     }
 
-    public String getGender() {
-        return Gender;
-    }
-
-    public int getAge() {
-        return Age;
-    }
-
-    public ArrayList<Movie> getMovies() {
-        return Movies;
-    }
-
-
-    public void setFirst_Name(String first_Name) {
-        First_Name = first_Name;
-    }
-
-    public void setSecond_Name(String second_Name) {
-        Second_Name = second_Name;
-    }
-
     public void setNationality(String nationality) {
         Nationality = nationality;
+    }
+
+    public String getGender() {
+        return Gender;
     }
 
     public void setGender(String gender) {
         Gender = gender;
     }
 
+    public int getAge() {
+        return Age;
+    }
+
     public void setAge(int age) {
         Age = age;
     }
+    public ArrayList<String> getMovies() {
+        return Movies;
+    }
 
-    public void setMovies(ArrayList<Movie> movies) {
-        Movies = movies;
+    public void setMovies(String movies) {
+        Movies.add( movies);
     }
 }

@@ -1,4 +1,4 @@
-user,ahmad,123,456789,ahmad,hossam,basic,ahmad@gmail.com,to be watched,titanic,watched,red 3,null, red 2,3.2
-movie,titanic,description......,123,2004-12-05,2:30,romance,drama,hossam,english,4.3,america,2M,3M,titanic.png,ahmad salama,sara amen,hossam ismail
+user,ahmad,456789,123,ahmad,hossam,basic,ahmad@gmail.com,to be watched,titanic,watched,red 3,null, red 2,3.2
 director,hossam,ahmad,545,male,american,titanic,red 3,haha
 cast,ahmad,salama,45,male,american,titanic,haha 2
+admin,nada,123456

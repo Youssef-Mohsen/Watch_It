@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<ScrollPane fx:id="mainPane" hbarPolicy="NEVER" prefHeight="764.0" prefWidth="1336.0" style="-fx-background-color: black;" vbarPolicy="NEVER"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watch_it.AllUsersController" >
+    <content>
+        <VBox prefHeight="764.0" prefWidth="1290.0" style="-fx-background-color: black;">
+            <children>
+                <HBox fx:id="topHbox" alignment="CENTER" prefHeight="40.0" prefWidth="1290.0" spacing="20.0" style="-fx-background-color: black;">
+                    <children>
+                        <TextField fx:id="searchBar" layoutX="560.0" layoutY="0.0" onAction="#Search" prefHeight="30.0" prefWidth="459.0" promptText="Search users..." style="-fx-prompt-text-fill: #ffffff; -fx-background-radius: 30; -fx-background-color: black;">
+                            <effect>
+                                <DropShadow blurType="ONE_PASS_BOX" height="28.02" radius="12.34" width="23.34">
+                                    <color>
+                                        <Color red="0.9157894849777222" green="0.8852631449699402" blue="0.8852631449699402" />
+                                    </color>
+                                </DropShadow>
+                            </effect>
+                            <font>
+                                <Font name="Bodoni MT" size="11.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets bottom="5.0" top="5"/>
+                            </HBox.margin>
+                        </TextField>
+
+                        <Button fx:id="searchButton" layoutX="1047.0" layoutY="0.0" style="-fx-background-color: FFC107; -fx-background-radius: 20; -fx-text-fill: #ffffff;" text="Search">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets bottom="5.0" top="5"/>
+                            </HBox.margin>
+                        </Button>
+                    </children>
+
+                </HBox>
+                <HBox fx:id="MainVBox" prefHeight="764.0" prefWidth="1290.0" style="-fx-background-color: black;">
+                    <children>
+                        <VBox fx:id="userbox1" alignment="TOP_CENTER" prefHeight="661.0" prefWidth="332.5">
+                            <HBox.margin>
+                                <Insets bottom="100" />
+                            </HBox.margin>
+                            <children>
+
+                            </children>
+                        </VBox>
+                        <VBox fx:id="userbox2" alignment="TOP_CENTER" prefHeight="661.0" prefWidth="332.5">
+                            <HBox.margin>
+                                <Insets bottom="100" />
+                            </HBox.margin>
+                            <children>
+
+                            </children>
+                        </VBox>
+                        <VBox fx:id="userbox3" alignment="TOP_CENTER" prefHeight="661.0" prefWidth="332.5">
+                            <HBox.margin>
+                                <Insets bottom="100" />
+                            </HBox.margin>
+                            <children>
+
+                            </children>
+                        </VBox>
+                        <VBox fx:id="userbox4" alignment="TOP_CENTER" prefHeight="664.0" prefWidth="292.0">
+                            <HBox.margin>
+                                <Insets bottom="100" />
+                            </HBox.margin>
+                            <children>
+
+                            </children>
+                        </VBox>
+                    </children>
+                    <padding>
+                        <Insets top="70.0" />
+                    </padding>
+                </HBox>
+            </children>
+        </VBox>
+    </content>
+</ScrollPane>

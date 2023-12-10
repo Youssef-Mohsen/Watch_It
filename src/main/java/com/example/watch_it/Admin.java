@@ -14,21 +14,39 @@ public class Admin {
 
     private String username;
     private int password;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public int getPassword() {
+        return password;
+    }
+
+    public void setPassword(int password) {
+        this.password = password;
+    }
+
     //counters gonna be pairs ,key for the enum class value for repentance -- javafx???
     public static int basicPlanCounter;
     public static int standardPlanCounter;
     public static int premiumPlanCounter;
     private  static final int MONTHSNUMBER = 12;
-    private static final short PLANINDEX = 7;
-    private static final short USERNAMEINDEX = 1;
-    private static final short TYPEINDEX = 0;
+    static final short PLANINDEX = 7;
+    static final short USERNAMEINDEX = 1;
+    static final short TYPEINDEX = 0;
+    static final short PASSWORDINDEX = 3;
     private static short STARTDATEINDEX;
     public static ArrayList<String> movies;
     public static ArrayList<String> directors;
     public static ArrayList<String> casts;
     public static ArrayList<String> admins;
     public static ArrayList<String> users;
-
+    public static ArrayList<String> topRatedMovies;
 
     //    public static ArrayList<String> readFile(File file) {
 //        ArrayList<String> arrayList = new ArrayList<String>();
@@ -109,6 +127,16 @@ public class Admin {
         }
         return null;
     }
+    public static boolean existsInFile(String username){;
+        String[] eachLine;
+        for (String index: users){
+            eachLine = index.split(",");
+            if(eachLine[USERNAMEINDEX].equals(username)){
+                return  true;
+            }
+        }
+        return false;
+    }
 
     //record to be deleted is not splitted
     public static void deleteOneRecord(ArrayList<String> arrayList, String record){
@@ -134,10 +162,25 @@ public class Admin {
         String []row = wantedRecord.split(",");
         return row[index];
     }
+
     //working just fine ^^^
-    public static Subscription.Plans getMostSubscripedPlan(ArrayList<String> arrayList){
+    static Subscription.Plans getMostSubscripedPlan(){
         Subscription.Plans plan = null;
-        for (String index:arrayList){
+        HashMap<Integer,Subscription.Plans> map = new HashMap<>();
+        getUsersInEachPlan();
+
+        map.put(basicPlanCounter,Subscription.Plans.BASIC);
+        map.put(standardPlanCounter,Subscription.Plans.STANDARD);
+        map.put(premiumPlanCounter,Subscription.Plans.PREMIUM);
+
+        int max = Math.max(standardPlanCounter,Math.max(basicPlanCounter,premiumPlanCounter));
+
+        plan = map.get(max);
+
+        return plan;
+    }
+    static void getUsersInEachPlan(){
+        for (String index: users){
             String []line = index.split(",");
             HashMap<Integer,Subscription.Plans> map = new HashMap<>();
             if(line[PLANINDEX].equals("basic"))
@@ -146,16 +189,9 @@ public class Admin {
                 standardPlanCounter++;
             else
                 premiumPlanCounter++;
-            int max = Math.max(standardPlanCounter,Math.max(basicPlanCounter,premiumPlanCounter));
-
-            map.put(basicPlanCounter,Subscription.Plans.BASIC);
-            map.put(standardPlanCounter,Subscription.Plans.STANDARD);
-            map.put(premiumPlanCounter,Subscription.Plans.PREMIUM);
-
-            plan = map.get(max);
         }
-        return plan;
     }
+
     //    public static Month getMonthWithMostRevenue(ArrayList<String> arrayList){
 //        Month month = null;
 //        int[] months = new int [12];
@@ -296,7 +332,7 @@ public class Admin {
                     }
                 }
                 if (toBeWatched && toBeWatchedCounter == 1)
-                    toBeWatched_movies.add(getMovie(eachLine[i]));
+                    toBeWatched_movies.add(getOneMovie(eachLine[i]));
                 if (toBeWatched && toBeWatchedCounter == 0)
                     toBeWatchedCounter = 1;
             }
@@ -314,7 +350,7 @@ public class Admin {
                 movie.movie.setId(Integer.parseInt(arr[2]));
                 movie.movie.setRelease_date(LocalDate.parse(arr[3]));
                 // movie.setDuration(Integer.parseInt(arr[4]));
-                //director,case lazm hykono strings msh obj ,wel class bta3hom hykon el movie string msh obj.
+                //director,case lazm hykono strings msh obj.
                 //movie.setDirector(arr[7]);
                 movie.movie.setBudget(Double.parseDouble(arr[11]));
                 movie.movie.setCountry(arr[10]);
@@ -324,12 +360,11 @@ public class Admin {
         }
         return movie;
     }
-    static Movie getMovie (String title){
+    static Movie getOneMovie (String title){
         Movie movie = new Movie();
-        for (String oneMovie: movies){
-            String []arr = oneMovie.split(",");
-            if(arr[1].equals(title))
-            {
+        for (String oneMovie : movies) {
+            String[] arr = oneMovie.split(",");
+            if (arr[1].equals(title)) {
                 movie.setTitle(arr[1]);
                 movie.setId(Integer.parseInt(arr[2]));
                 movie.setRelease_date(LocalDate.parse(arr[3]));
@@ -345,6 +380,7 @@ public class Admin {
                 //movie.setDirector(getDirector());
             }
         }
+
         return movie;
     }
     static Director getDirector(String directorName){
