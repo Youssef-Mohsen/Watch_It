@@ -7,230 +7,178 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="840.0"
-      prefWidth="1536.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17.0.2-ea"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watch_it.MainPageController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="840.0" prefWidth="1536.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watch_it.MainPageController">
 
-    <TextField layoutX="308.0" layoutY="24.0" prefHeight="30.0" prefWidth="459.0" promptText="Search movies..."
-               style="-fx-prompt-text-fill: white; -fx-background-radius: 30; -fx-background-color: black; -fx-text-fill: white; -fx-text-size: 16;">
+    <TextField layoutX="308.0" layoutY="24.0" prefHeight="30.0" prefWidth="459.0" promptText="Search movies..." style="-fx-prompt-text-fill: white; -fx-background-radius: 30; -fx-background-color: black; -fx-text-fill: white; -fx-text-size: 16;">
         <effect>
             <DropShadow blurType="ONE_PASS_BOX" height="28.02" radius="12.34" width="23.34">
                 <color>
-                    <Color red="0.9157894849777222" green="0.8852631449699402" blue="0.8852631449699402"/>
+                    <Color red="0.9157894849777222" green="0.8852631449699402" blue="0.8852631449699402" />
                 </color>
             </DropShadow>
         </effect>
         <font>
-            <Font name="Bondon MT" size="11.0"/>
+            <Font name="Bondon MT" size="11.0" />
         </font>
     </TextField>
 
-    <Button fx:id="Search" layoutX="786.0" layoutY="24.0" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit"
-            prefHeight="31.0" prefWidth="68.0"
-            style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"
-            text="Search" textFill="WHITE">
+    <Button fx:id="Search" layoutX="786.0" layoutY="24.0" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="31.0" prefWidth="68.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;" text="Search" textFill="WHITE">
         <font>
-            <Font size="14.0"/>
+            <Font size="14.0" />
         </font>
     </Button>
-    <Pane layoutX="26.0" layoutY="80.0" prefHeight="611.0" prefWidth="244.0"
-          style="-fx-background-color: black; -fx-background-radius: 10;">
+    <Pane layoutX="26.0" layoutY="80.0" prefHeight="611.0" prefWidth="244.0" style="-fx-background-color: black; -fx-background-radius: 10;">
         <Label layoutX="8.0" prefHeight="43.0" prefWidth="160.0" text="Follow Watch it on" textFill="WHITE">
             <font>
-                <Font name="System Bold" size="16.0"/>
+                <Font name="System Bold" size="16.0" />
             </font>
         </Label>
-        <Label layoutX="10.0" layoutY="240.0" prefHeight="43.0" prefWidth="190.0"
-               style="-fx-background-color: #4764FF; -fx-background-radius: 10;" text=" Common in Watch it"
-               textFill="WHITE">
+        <Label layoutX="10.0" layoutY="240.0" prefHeight="43.0" prefWidth="190.0" style="-fx-background-color: #4764FF; -fx-background-radius: 10;" text=" Common in Watch it" textFill="WHITE">
             <font>
-                <Font name="System Bold" size="18.0"/>
+                <Font name="System Bold" size="18.0" />
             </font>
             <effect>
                 <Lighting diffuseConstant="1.66">
                     <light>
-                        <Light.Distant/>
+                        <Light.Distant />
                     </light>
                     <bumpInput>
-                        <Bloom/>
+                        <Bloom />
                     </bumpInput>
                 </Lighting>
             </effect>
         </Label>
-        <Label layoutX="14.0" layoutY="293.0" opacity="0.91" prefHeight="36.0" prefWidth="152.0" text="Watching movie"
-               textFill="WHITE" textOverrun="CLIP">
+        <Label layoutX="14.0" layoutY="293.0" opacity="0.91" prefHeight="36.0" prefWidth="152.0" text="Watching movie" textFill="WHITE" textOverrun="CLIP">
             <font>
-                <Font name="Bondon MT" size="14.0"/>
+                <Font name="Bondon MT" size="14.0" />
             </font>
         </Label>
-        <Label layoutX="14.0" layoutY="311.0" opacity="0.91" prefHeight="36.0" prefWidth="152.0" text="Spy 2018"
-               textFill="WHITE" textOverrun="CLIP">
+        <Label layoutX="14.0" layoutY="311.0" opacity="0.91" prefHeight="36.0" prefWidth="152.0" text="Spy 2018" textFill="WHITE" textOverrun="CLIP">
             <font>
-                <Font name="Bondon MT" size="13.0"/>
+                <Font name="Bondon MT" size="13.0" />
             </font>
         </Label>
-        <Label layoutX="14.0" layoutY="358.0" opacity="0.91" prefHeight="36.0" prefWidth="152.0" text="Watching movie"
-               textFill="WHITE" textOverrun="CLIP">
+        <Label layoutX="14.0" layoutY="358.0" opacity="0.91" prefHeight="36.0" prefWidth="152.0" text="Watching movie" textFill="WHITE" textOverrun="CLIP">
             <font>
-                <Font name="Bondon MT" size="14.0"/>
+                <Font name="Bondon MT" size="14.0" />
             </font>
         </Label>
-        <Label layoutX="14.0" layoutY="376.0" opacity="0.91" prefHeight="36.0" prefWidth="152.0" text="mechanic 2016"
-               textFill="WHITE" textOverrun="CLIP">
+        <Label layoutX="14.0" layoutY="376.0" opacity="0.91" prefHeight="36.0" prefWidth="152.0" text="mechanic 2016" textFill="WHITE" textOverrun="CLIP">
             <font>
-                <Font name="Bondon MT" size="13.0"/>
+                <Font name="Bondon MT" size="13.0" />
             </font>
         </Label>
-        <Label layoutX="14.0" layoutY="423.0" opacity="0.91" prefHeight="36.0" prefWidth="152.0" text="Watching movie"
-               textFill="WHITE" textOverrun="CLIP">
+        <Label layoutX="14.0" layoutY="423.0" opacity="0.91" prefHeight="36.0" prefWidth="152.0" text="Watching movie" textFill="WHITE" textOverrun="CLIP">
             <font>
-                <Font name="Bondon MT" size="14.0"/>
+                <Font name="Bondon MT" size="14.0" />
             </font>
         </Label>
-        <Label layoutX="14.0" layoutY="441.0" opacity="0.91" prefHeight="36.0" prefWidth="152.0" text="mechanic 2016"
-               textFill="WHITE" textOverrun="CLIP">
+        <Label layoutX="14.0" layoutY="441.0" opacity="0.91" prefHeight="36.0" prefWidth="152.0" text="mechanic 2016" textFill="WHITE" textOverrun="CLIP">
             <font>
-                <Font name="Bondon MT" size="13.0"/>
+                <Font name="Bondon MT" size="13.0" />
             </font>
         </Label>
-        <Label layoutX="14.0" layoutY="43.0" opacity="0.77" prefHeight="36.0" prefWidth="119.0" text="Twitter.com"
-               textFill="WHITE" textOverrun="CLIP">
+        <Label layoutX="14.0" layoutY="43.0" opacity="0.77" prefHeight="36.0" prefWidth="119.0" text="Twitter.com" textFill="WHITE" textOverrun="CLIP">
             <font>
-                <Font name="Bondon MT" size="16.0"/>
+                <Font name="Bondon MT" size="16.0" />
             </font>
         </Label>
-        <Pane layoutX="157.0" layoutY="43.0" prefHeight="36.0" prefWidth="35.0"
-              style="-fx-background-color: E2F7EB; -fx-background-radius: 50;"/>
-        <Label layoutX="14.0" layoutY="86.0" opacity="0.74" prefHeight="36.0" prefWidth="119.0" text="Facebook.com"
-               textFill="WHITE" textOverrun="CLIP">
+        <Pane layoutX="157.0" layoutY="43.0" prefHeight="36.0" prefWidth="35.0" style="-fx-background-color: E2F7EB; -fx-background-radius: 50;" />
+        <Label layoutX="14.0" layoutY="86.0" opacity="0.74" prefHeight="36.0" prefWidth="119.0" text="Facebook.com" textFill="WHITE" textOverrun="CLIP">
             <font>
-                <Font name="Bondon MT" size="16.0"/>
+                <Font name="Bondon MT" size="16.0" />
             </font>
         </Label>
-        <Pane layoutX="157.0" layoutY="86.0" prefHeight="36.0" prefWidth="35.0"
-              style="-fx-background-color: E2F7EB; -fx-background-radius: 50;"/>
-        <Label layoutX="14.0" layoutY="129.0" opacity="0.74" prefHeight="36.0" prefWidth="119.0" text="Telegram.com"
-               textFill="WHITE" textOverrun="CLIP">
+        <Pane layoutX="157.0" layoutY="86.0" prefHeight="36.0" prefWidth="35.0" style="-fx-background-color: E2F7EB; -fx-background-radius: 50;" />
+        <Label layoutX="14.0" layoutY="129.0" opacity="0.74" prefHeight="36.0" prefWidth="119.0" text="Telegram.com" textFill="WHITE" textOverrun="CLIP">
             <font>
-                <Font name="Bondon MT" size="16.0"/>
+                <Font name="Bondon MT" size="16.0" />
             </font>
         </Label>
-        <Pane layoutX="157.0" layoutY="129.0" prefHeight="36.0" prefWidth="35.0"
-              style="-fx-background-color: E2F7EB; -fx-background-radius: 50;"/>
-        <Label fx:id="watchRecords" layoutX="10.0" layoutY="187.0" onMouseClicked="#onMouseClicked"
-               onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="36.0" prefWidth="193.0"
-               style="-fx-background-color: #001f2f; -fx-background-radius: 10;" text=" Watching Record(0)" styleClass="watchRecords"
-               textFill="WHITE">
+        <Pane layoutX="157.0" layoutY="129.0" prefHeight="36.0" prefWidth="35.0" style="-fx-background-color: E2F7EB; -fx-background-radius: 50;" />
+        <Button fx:id="watchRecords" layoutX="10.0" layoutY="187.0" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="36.0" prefWidth="193.0" style="-fx-background-color: grey; -fx-background-radius: 10;" text="Watching Record(0)" textFill="WHITE">
             <font>
-                <Font name="System Bold" size="14.0"/>
+                <Font size="14.0" />
             </font>
-            <effect>
-                <Lighting diffuseConstant="1.66">
-                    <light>
-                        <Light.Distant/>
-                    </light>
-                    <bumpInput>
-                        <Bloom/>
-                    </bumpInput>
-                </Lighting>
-            </effect>
-        </Label>
-        <Separator layoutX="9.0" layoutY="174.0" opacity="0.4" prefWidth="200.0" style="-fx-background-color: FFC107;"/>
-        <Separator layoutX="9.0" layoutY="230.0" opacity="0.3" prefHeight="3.0" prefWidth="200.0"
-                   style="-fx-background-color: FFC107;">
+        </Button>
+        <Separator layoutX="9.0" layoutY="174.0" opacity="0.4" prefWidth="200.0" style="-fx-background-color: FFC107;" />
+        <Separator layoutX="9.0" layoutY="230.0" opacity="0.3" prefHeight="3.0" prefWidth="200.0" style="-fx-background-color: FFC107;">
             <effect>
                 <DropShadow radius="45.8375" width="164.35">
                     <color>
-                        <Color red="0.3069785535335541" green="0.6526315808296204" blue="0.6123054027557373"/>
+                        <Color red="0.3069785535335541" green="0.6526315808296204" blue="0.6123054027557373" />
                     </color>
                 </DropShadow>
             </effect>
         </Separator>
     </Pane>
-    <ImageView fitHeight="53.0" fitWidth="41.0" layoutX="165.0" layoutY="370.0" opacity="0.98" pickOnBounds="true"
-               preserveRatio="true">
-        <Image url="@assets/Amazing_SpiderMan.png"/>
+    <ImageView fitHeight="53.0" fitWidth="41.0" layoutX="165.0" layoutY="370.0" opacity="0.98" pickOnBounds="true" preserveRatio="true">
+        <Image url="@assets/Amazing_SpiderMan.png" />
     </ImageView>
-    <ImageView fitHeight="53.0" fitWidth="45.0" layoutX="165.0" layoutY="435.0" opacity="0.98" pickOnBounds="true"
-               preserveRatio="true">
-        <Image url="@assets/Amazing_SpiderMan.png"/>
+    <ImageView fitHeight="53.0" fitWidth="45.0" layoutX="165.0" layoutY="435.0" opacity="0.98" pickOnBounds="true" preserveRatio="true">
+        <Image url="@assets/Amazing_SpiderMan.png" />
     </ImageView>
-    <ImageView fitHeight="53.0" fitWidth="36.0" layoutX="165.0" layoutY="500.0" opacity="0.98" pickOnBounds="true"
-               preserveRatio="true">
-        <Image url="@assets/Amazing_SpiderMan.png"/>
+    <ImageView fitHeight="53.0" fitWidth="36.0" layoutX="165.0" layoutY="500.0" opacity="0.98" pickOnBounds="true" preserveRatio="true">
+        <Image url="@assets/Amazing_SpiderMan.png" />
     </ImageView>
-    <Label fx:id="topMovies" layoutX="308.0" layoutY="100.0" prefHeight="43.0" prefWidth="200.0"
-           text="Top Watched Movies" textFill="WHITE">
+    <Label fx:id="topMovies" layoutX="308.0" layoutY="100.0" prefHeight="43.0" prefWidth="200.0" text="Top Watched Movies" textFill="WHITE">
         <font>
-            <Font name="System Bold" size="20.0"/>
+            <Font name="System Bold" size="20.0" />
         </font>
     </Label>
-    <Label fx:id="All" alignment="CENTER" layoutX="308.0" layoutY="68.0" onMouseEntered="#onMouseEntered"
-           onMouseExited="#onMouseExit" prefHeight="24.0" prefWidth="68.0"
-           style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"
-           text="All" textFill="WHITE">
+    <Label fx:id="All" alignment="CENTER" layoutX="308.0" layoutY="68.0" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="24.0" prefWidth="68.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;" text="All" textFill="WHITE">
         <font>
-            <Font name="System Bold" size="11.0"/>
+            <Font name="System Bold" size="11.0" />
         </font>
     </Label>
-    <Label fx:id="Action" alignment="CENTER" layoutX="392.0" layoutY="68.0" onMouseClicked="#onMouseClicked"
-           onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="24.0" prefWidth="68.0"
-           style="-fx-background-color: #565661; -fx-background-radius: 25;" text="Action" textFill="WHITE">
+    <Label fx:id="Action" alignment="CENTER" layoutX="392.0" layoutY="68.0" onMouseClicked="#onMouseClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="24.0" prefWidth="68.0" style="-fx-background-color: #565661; -fx-background-radius: 25;" text="Action" textFill="#fafafa">
         <font>
-            <Font name="System Bold" size="11.0"/>
+            <Font name="System Bold" size="11.0" />
         </font>
     </Label>
-    <Label fx:id="Comedy" alignment="CENTER" layoutX="482.0" layoutY="68.0" onMouseEntered="#onMouseEntered"
-           onMouseExited="#onMouseExit" prefHeight="24.0" prefWidth="68.0"
-           style="-fx-background-color: #565661; -fx-background-radius: 25;" text="Comedy" textFill="WHITE">
+    <Label fx:id="Comedy" alignment="CENTER" layoutX="482.0" layoutY="68.0" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="24.0" prefWidth="68.0" style="-fx-background-color: #565661; -fx-background-radius: 25;" text="Comedy" textFill="WHITE">
         <font>
-            <Font name="System Bold" size="11.0"/>
+            <Font name="System Bold" size="11.0" />
         </font>
     </Label>
-    <Label alignment="CENTER" layoutX="46.0" layoutY="28.0" prefHeight="43.0" prefWidth="119.0"
-           style="-fx-background-color: #FFC107; -fx-background-radius: 20;" text="Watch" textFill="WHITE">
+    <Label alignment="CENTER" layoutX="46.0" layoutY="28.0" prefHeight="43.0" prefWidth="119.0" style="-fx-background-color: #FFC107; -fx-background-radius: 20;" text="Watch" textFill="WHITE">
         <font>
-            <Font name="Arial Narrow Bold" size="27.0"/>
+            <Font name="Arial Narrow Bold" size="27.0" />
         </font>
     </Label>
-    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="146.0" layoutY="28.0" prefHeight="43.0" prefWidth="68.0"
-           style="-fx-background-color: black; -fx-background-radius: 25;" text="IT" textFill="WHITE">
+    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="146.0" layoutY="28.0" prefHeight="43.0" prefWidth="68.0" style="-fx-background-color: black; -fx-background-radius: 25;" text="IT" textFill="WHITE">
         <font>
-            <Font name="Arial Narrow Bold" size="27.0"/>
+            <Font name="Arial Narrow Bold" size="27.0" />
         </font>
     </Label>
-    <Label fx:id="Drama" alignment="CENTER" layoutX="567.0" layoutY="68.0" onMouseEntered="#onMouseEntered"
-           onMouseExited="#onMouseExit" prefHeight="24.0" prefWidth="68.0"
-           style="-fx-background-color: #565661; -fx-background-radius: 25;" text="Drama" textFill="WHITE">
+    <Label fx:id="Drama" alignment="CENTER" layoutX="567.0" layoutY="68.0" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="24.0" prefWidth="68.0" style="-fx-background-color: #565661; -fx-background-radius: 25;" text="Drama" textFill="WHITE">
         <font>
-            <Font name="System Bold" size="11.0"/>
+            <Font name="System Bold" size="11.0" />
         </font>
     </Label>
-    <Pane layoutX="305.0" layoutY="425.0" style="-fx-background-color: black; -fx-background-radius: 15;"/>
-    <ScrollPane fx:id="Scroll1" vbarPolicy="NEVER" layoutX="312.0" layoutY="140.0" prefHeight="280.0" prefWidth="1100.0"
-                style="-fx-background-color: transparent; -fx-background-insets:0; " styleClass="scrollPane" stylesheets="@style.css">
-        <AnchorPane  minHeight="0.0" minWidth="0.0" prefHeight="182.0" prefWidth="915.0"/>
-        <HBox fx:id="allMovies" spacing="20" styleClass="HBox" stylesheets="@style.css"/>
+    <Pane layoutX="305.0" layoutY="425.0" style="-fx-background-color: black; -fx-background-radius: 15;" />
+    <ScrollPane fx:id="Scroll1" layoutX="312.0" layoutY="140.0" prefHeight="280.0" prefWidth="1100.0" style="-fx-background-color: transparent; -fx-background-insets:0;" styleClass="scrollPane" stylesheets="@style.css" vbarPolicy="NEVER">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="182.0" prefWidth="915.0" />
+        <HBox fx:id="allMovies" spacing="20" styleClass="HBox" stylesheets="@style.css" />
     </ScrollPane>
 
-    <Label fx:id="Recent" layoutX="307.0" layoutY="440.0" prefHeight="43.0" prefWidth="152.0" text="Recent movies"
-           textFill="WHITE">
+    <Label fx:id="Recent" layoutX="307.0" layoutY="440.0" prefHeight="43.0" prefWidth="152.0" text="Recent movies" textFill="WHITE">
         <font>
-            <Font name="System Bold" size="20.0"/>
+            <Font name="System Bold" size="20.0" />
         </font>
     </Label>
-    <ScrollPane fx:id="Scroll2" vbarPolicy="NEVER" layoutX="312.0" layoutY="490.0" prefHeight="280.0" prefWidth="1100.0"
-                style="-fx-background-color: transparent; -fx-background-insets:0;" styleClass="scrollPane" stylesheets="@style.css">
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="182.0" prefWidth="915.0"/>
-        <HBox fx:id="allMovies2" spacing="20" styleClass="HBox" stylesheets="@style.css"/>
+    <ScrollPane fx:id="Scroll2" layoutX="312.0" layoutY="490.0" prefHeight="280.0" prefWidth="1100.0" style="-fx-background-color: transparent; -fx-background-insets:0;" styleClass="scrollPane" stylesheets="@style.css" vbarPolicy="NEVER">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="182.0" prefWidth="915.0" />
+        <HBox fx:id="allMovies2" spacing="20" styleClass="HBox" stylesheets="@style.css" />
     </ScrollPane>
-    <Label fx:id="Horror" alignment="CENTER" layoutX="654.0" layoutY="68.0" onMouseEntered="#onMouseEntered"
-           onMouseExited="#onMouseExit" prefHeight="24.0" prefWidth="68.0"
-           style="-fx-background-color: #565661; -fx-background-radius: 25;" text="Horror" textFill="WHITE">
+    <Label fx:id="Horror" alignment="CENTER" layoutX="654.0" layoutY="68.0" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="24.0" prefWidth="68.0" style="-fx-background-color: #565661; -fx-background-radius: 25;" text="Horror" textFill="WHITE">
         <font>
-            <Font name="System Bold" size="11.0"/>
+            <Font name="System Bold" size="11.0" />
         </font>
     </Label>
-
+   <ImageView fx:id="profile" fitHeight="40.0" fitWidth="55.0" layoutX="1392.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@assets/profile.png" />
+   </ImageView>
+   <Label layoutX="1395.0" layoutY="63.0" text="Profile" textFill="WHITE" />
 
 </Pane>

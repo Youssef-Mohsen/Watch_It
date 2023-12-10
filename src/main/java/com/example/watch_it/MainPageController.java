@@ -38,18 +38,19 @@ public class MainPageController {
     @FXML
     private Label All;
     @FXML
+    private ImageView profile;
+    @FXML
     private Label Recent;
     @FXML
     private Label topMovies;
     @FXML
-    private Label watchRecords;
+    private Button watchRecords;
     @FXML
     private Button Search;
     @FXML
     private ScrollPane Scroll1;
     @FXML
     private ScrollPane Scroll2;
-
 
     private final ArrayList<Movie> moviesTop = new ArrayList<>();
     private final ArrayList<Movie> moviesRecent = new ArrayList<>();
@@ -103,7 +104,7 @@ public class MainPageController {
         onMouseEntered();
         onMouseExit();
         setupAutoScroll();
-
+        profile.setOnMouseClicked(event -> onMouseClicked());
     }
 
     private void addToGUI(Movie movie) {
@@ -207,9 +208,9 @@ public class MainPageController {
                 " -fx-border-radius: 25;"));
         Recent.setOnMouseEntered(event -> underlineLabel(Recent, true));
         topMovies.setOnMouseEntered(event -> underlineLabel(topMovies, true));
-        watchRecords.setOnMouseEntered(event -> { System.out.println("Mouse entered!");
-            watchRecords.setStyle("-fx-background-color: #FFC107; -fx-background-radius: 10;");
-            underlineLabel(watchRecords, true);
+        watchRecords.setOnMouseEntered(event -> {
+            System.out.println("Mouse entered!");
+            watchRecords.setStyle("-fx-background-color: #FFC107; -fx-background-radius: 10; -fx-text-fill: black;");
         });
 
     }
@@ -230,9 +231,8 @@ public class MainPageController {
                 " -fx-border-radius: 25;"));
         Recent.setOnMouseExited(event -> underlineLabel(Recent, false));
         topMovies.setOnMouseExited(event -> underlineLabel(topMovies, false));
-        watchRecords.setOnMouseExited(mouseEvent -> { System.out.println("Mouse exit!");
+        watchRecords.setOnMouseExited(event -> { System.out.println("Mouse exit!");
             watchRecords.setStyle("-fx-background-color: #001f2f; -fx-background-radius: 10;");
-            underlineLabel(watchRecords, false);
         });
 
     }
@@ -251,7 +251,7 @@ public class MainPageController {
                 " -fx-background-color:  #565661;"));
     }
     private void setupAutoScroll() {
-        double scrollDuration = 8; // Adjust the duration of the auto-scrolling
+        double scrollDuration = 14; // Adjust the duration of the auto-scrolling
 
         // Create a timeline for the auto-scrolling animation
         autoScrollTimeline = new Timeline(
