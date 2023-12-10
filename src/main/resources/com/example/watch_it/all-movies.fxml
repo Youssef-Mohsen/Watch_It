@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
+
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.*?>
+
+
+<BorderPane fx:id="mainPane" maxHeight="864.0" maxWidth="1536.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="864.0" prefWidth="1536.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watch_it.AllMoviesController">
+
+    <top>
+        <Pane prefHeight="80.0" prefWidth="1252.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+            <children>
+                <Label alignment="CENTER" layoutX="46.0" layoutY="21.0" prefHeight="43.0" prefWidth="119.0" style="-fx-background-color: FFC107; -fx-background-radius: 20; " text="Watch" textFill="WHITE">
+                    <font>
+                        <Font name="Arial Narrow Bold" size="27.0" />
+                    </font>
+                </Label>
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="148.0" layoutY="21.0" prefHeight="43.0" prefWidth="68.0" style="-fx-background-color: black; -fx-background-radius: 25;" text="IT" textFill="WHITE">
+                    <font>
+                        <Font name="Arial Narrow Bold" size="27.0" />
+                    </font>
+                </Label>
+            </children>
+        </Pane>
+    </top>
+
+    <left>
+        <VBox alignment="TOP_CENTER"  prefWidth="244.0" style="-fx-background-color: black;" spacing="15">
+
+            <children>
+                <Separator layoutX="40.0" layoutY="288.0" opacity="0.4" prefWidth="200.0" style="-fx-background-color: FFC107;">
+                    <VBox.margin>
+                        <Insets left="30.0" right="30.0" />
+                    </VBox.margin>
+                </Separator>
+                <Button prefWidth="193" onAction="#toMovies" prefHeight="36" style="-fx-background-color: #343434; -fx-background-radius: 10;" text="All Movies" textFill="#C2C2C2" >
+                    <Font size="30.0" />
+                    <effect>
+                        <Lighting diffuseConstant="1.66">
+                            <light>
+                                <Light.Distant />
+                            </light>
+                            <bumpInput>
+                                <Bloom />
+                            </bumpInput>
+                        </Lighting>
+                    </effect>
+                </Button>
+                <Separator layoutX="40.0" layoutY="288.0" opacity="0.4" prefWidth="200.0" style="-fx-background-color: FFC107;">
+                    <VBox.margin>
+                        <Insets left="30.0" right="30.0" />
+                    </VBox.margin>
+                </Separator>
+                <Button prefWidth="193" onAction="#toAddMovies" prefHeight="36" style="-fx-background-color: #343434; -fx-background-radius: 10;" text="Add Movies" textFill="#C2C2C2" >
+                    <Font size="30.0" />
+                    <effect>
+                        <Lighting diffuseConstant="1.66">
+                            <light>
+                                <Light.Distant />
+                            </light>
+                            <bumpInput>
+                                <Bloom />
+                            </bumpInput>
+                        </Lighting>
+                    </effect>
+                </Button>
+                <Separator layoutX="40.0" layoutY="288.0" opacity="0.4" prefWidth="200.0" style="-fx-background-color: FFC107;">
+                    <VBox.margin>
+                        <Insets left="30.0" right="30.0" />
+                    </VBox.margin>
+                </Separator>
+                <Button prefWidth="193" prefHeight="36" onAction="#toAllUsers" style="-fx-background-color: #343434; -fx-background-radius: 10;" text="All Users" textFill="#C2C2C2" >
+                    <Font size="30.0" />
+
+                    <effect>
+                        <Lighting diffuseConstant="1.66">
+                            <light>
+                                <Light.Distant />
+                            </light>
+                            <bumpInput>
+                                <Bloom />
+                            </bumpInput>
+                        </Lighting>
+                    </effect>
+
+                </Button>
+
+                <Separator layoutX="40.0" layoutY="288.0" opacity="0.4" prefWidth="200.0" style="-fx-background-color: FFC107;">
+                    <VBox.margin>
+                        <Insets left="30.0" right="30.0" />
+                    </VBox.margin>
+                </Separator>
+
+                <Button prefWidth="193" onAction="#toAddUser" prefHeight="36" style="-fx-background-color: #343434; -fx-background-radius: 10;" text="Add Users" textFill="#C2C2C2" >
+                    <Font size="30.0" />
+                    <effect>
+                        <Lighting diffuseConstant="1.66">
+                            <light>
+                                <Light.Distant />
+                            </light>
+
+                            <bumpInput>
+                                <Bloom />
+                            </bumpInput>
+                        </Lighting>
+                    </effect>
+                </Button>
+                <Separator layoutX="40.0" layoutY="288.0" opacity="0.4" prefWidth="200.0" style="-fx-background-color: FFC107;">
+                    <VBox.margin>
+                        <Insets left="30.0" right="30.0" />
+                    </VBox.margin>
+                </Separator>
+                <Button onAction="#toPlans" prefWidth="193"  prefHeight="36" style="-fx-background-color: #343434; -fx-background-radius: 10;" text="Plans" textFill="#C2C2C2" >
+                    <Font size="30.0" />
+                    <effect>
+                        <Lighting diffuseConstant="1.66">
+                            <light>
+                                <Light.Distant />
+                            </light>
+
+                            <bumpInput>
+                                <Bloom />
+                            </bumpInput>
+                        </Lighting>
+                    </effect>
+                </Button>
+                <Separator layoutX="40.0" layoutY="288.0" opacity="0.4" prefWidth="200.0" style="-fx-background-color: FFC107;">
+                    <VBox.margin>
+                        <Insets left="30.0" right="30.0" />
+                    </VBox.margin>
+                </Separator>
+            </children>
+        </VBox>
+    </left>
+
+    <center>
+
+        <ScrollPane hbarPolicy="NEVER" vbarPolicy="NEVER" fx:id="mainScroll"  prefWidth="200.0" styleClass="scrollPane"  stylesheets="@style.css" BorderPane.alignment="CENTER">
+            <content>
+                <VBox prefHeight="764.0" prefWidth="1290.0" style="-fx-background-color: black;">
+                    <children>
+                        <HBox fx:id="topHbox" alignment="CENTER" prefHeight="40.0" prefWidth="1290.0" spacing="20.0" style="-fx-background-color: black;">
+                            <children>
+                                <TextField fx:id="searchField" layoutX="560.0" layoutY="0.0" onAction="#Search" prefHeight="30.0" prefWidth="459.0" promptText="Search users..." style="-fx-prompt-text-fill: #ffffff; -fx-background-radius: 30; -fx-background-color: black;">
+                                    <effect>
+                                        <DropShadow blurType="ONE_PASS_BOX" height="28.02" radius="12.34" width="23.34">
+                                            <color>
+                                                <Color red="0.9157894849777222" green="0.8852631449699402" blue="0.8852631449699402" />
+                                            </color>
+                                        </DropShadow>
+                                    </effect>
+                                    <font>
+                                        <Font name="Bodoni MT" size="11.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets bottom="5.0" top="5"/>
+                                    </HBox.margin>
+                                </TextField>
+
+                                <Button fx:id="searchButton" layoutX="1047.0" layoutY="0.0" style="-fx-background-color: FFC107; -fx-background-radius: 20; -fx-text-fill: #ffffff;" text="Search">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets bottom="5.0" top="5"/>
+                                    </HBox.margin>
+                                </Button>
+                            </children>
+
+                        </HBox>
+                        <!--<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="0" prefWidth="0" />-->
+                        <HBox fx:id="Hbox" alignment="CENTER" prefWidth="200.0" spacing="40" >
+                            <children>
+                                <VBox fx:id="leftCol"  styleClass="box" stylesheets="@style.css">
+                                    <HBox.margin>
+                                        <Insets bottom="100" top="30" left="20"/>
+                                    </HBox.margin>
+                                    <children  >
+                                    </children>
+                                </VBox>
+                                <VBox fx:id="middleCol1"  styleClass="box" >
+                                    <HBox.margin>
+                                        <Insets top="30" bottom="100" />
+                                    </HBox.margin>
+                                    <children>
+                                    </children>
+                                </VBox>
+                                <VBox fx:id="middleCol2"  styleClass="box" >
+                                    <HBox.margin>
+                                        <Insets  bottom="100" top="30"/>
+                                    </HBox.margin>
+                                    <children></children>
+                                </VBox>
+                                <VBox fx:id="rightCol" styleClass="box">
+                                    <HBox.margin>
+                                        <Insets bottom="100" top="30"/>
+                                    </HBox.margin>
+                                    <children></children>
+                                </VBox>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </content>
+        </ScrollPane>
+
+    </center>
+</BorderPane>
