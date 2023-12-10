@@ -73,8 +73,7 @@
 
 
     <left>
-        <Pane>
-            <Pane prefHeight="773.0" prefWidth="244.0" style="-fx-background-color: black;">
+        <Pane style="-fx-background-color: black;">
                 <Label layoutX="8.0" prefHeight="43.0" prefWidth="160.0" text="Follow Watch it on" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="16.0" />
@@ -84,16 +83,6 @@
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font>
-                    <effect>
-                        <Lighting diffuseConstant="1.66">
-                            <light>
-                                <Light.Distant />
-                            </light>
-                            <bumpInput>
-                                <Bloom />
-                            </bumpInput>
-                        </Lighting>
-                    </effect>
                 </Label>
                 <Label layoutX="14.0" layoutY="293.0" opacity="0.91" prefHeight="36.0" prefWidth="152.0" text="Watching movie" textFill="WHITE" textOverrun="CLIP">
                     <font>
@@ -143,20 +132,14 @@
                     </font>
                 </Label>
                 <Pane layoutX="157.0" layoutY="129.0" prefHeight="36.0" prefWidth="35.0" style="-fx-background-color: E2F7EB; -fx-background-radius: 50;" />
-                <Button fx:id="watchRecords" layoutX="10.0" layoutY="187.0" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="36.0" prefWidth="193.0" style="-fx-background-color: grey; -fx-background-radius: 10;" text="Watching Record(0)" textFill="WHITE">
+                <Label fx:id="watchRecords" layoutX="10.0" layoutY="187.0" onMouseClicked="#onMouseClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="36.0" prefWidth="193.0" style="-fx-background-color: #001f2f; -fx-background-radius: 10;" text="Watching Record(0)" textFill="WHITE">
                     <font>
                         <Font size="14.0" />
                     </font>
-                </Button>
+                </Label>
                 <Separator layoutX="9.0" layoutY="174.0" opacity="0.4" prefWidth="200.0" style="-fx-background-color: FFC107;" />
                 <Separator layoutX="9.0" layoutY="230.0" opacity="0.3" prefHeight="3.0" prefWidth="200.0" style="-fx-background-color: FFC107;">
-                    <effect>
-                        <DropShadow radius="45.8375" width="164.35">
-                            <color>
-                                <Color red="0.3069785535335541" green="0.6526315808296204" blue="0.6123054027557373" />
-                            </color>
-                        </DropShadow>
-                    </effect>
+
                 </Separator>
                 <ImageView fitHeight="53.0" fitWidth="41.0" layoutX="156.0" layoutY="293.0" opacity="0.98" pickOnBounds="true" preserveRatio="true">
                     <Image url="@assets/Amazing_SpiderMan.png" />
@@ -168,7 +151,6 @@
                     <Image url="@assets/Amazing_SpiderMan.png" />
                 </ImageView>
             </Pane>
-        </Pane>
     </left>
 
     <center>
