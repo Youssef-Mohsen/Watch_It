@@ -74,9 +74,9 @@ public class PlansController {
     private final int STYLEDIMAGE = 5;
     private final int NORMALIMAGE = 6;
 
-    private String[] basic = {"10 EGP","0", "0","5","720p","file:/C:/programming/java/Watch_It/src/main/resources/com/example/watch_it/assets/basicPressed.png","file:/C:/programming/java/Watch_It/src/main/resources/com/example/watch_it/assets/basicNormal.png"};
-    private String[] standard = {"20 EGP","0", "0","10","1080p","file:/C:/programming/java/Watch_It/src/main/resources/com/example/watch_it/assets/standardPressed.png","file:/C:/programming/java/Watch_It/src/main/resources/com/example/watch_it/assets/standardNormal.png"};
-    private String[] premium = {"30 EGP","0", "0","30","4K+HDR","file:/C:/programming/java/Watch_It/src/main/resources/com/example/watch_it/assets/premiumPressed.png","file:/C:/programming/java/Watch_It/src/main/resources/com/example/watch_it/assets/premiumNormal.png"};
+    private String[] basic = {"10 EGP","0", "0","5","720p","assets/basicPressed.png","assets/basicNormal.png"};
+    private String[] standard = {"20 EGP","0", "0","10","1080p","assets/standardPressed.png","assets/standardNormal.png"};
+    private String[] premium = {"30 EGP","0", "0","30","4K+HDR","assets/premiumPressed.png","assets/premiumNormal.png"};
     @FXML
     private void initialize(){
         setNormalStyle(basicPrice,basicTotalUser,basicMovieNo,basicResolution,basicRevenue,basicImage,"basic");
@@ -145,13 +145,13 @@ public class PlansController {
         labelNormalStyle(revenue);
         if(plan.equals("basic"))
         {
-            Image image1 = new Image(basic[NORMALIMAGE]);
+            Image image1 = new Image(getClass().getResourceAsStream(basic[NORMALIMAGE]));
             image.setImage(image1);
         } else if (plan.equals("standard")) {
-            Image image1 = new Image(standard[NORMALIMAGE]);
+            Image image1 = new Image(getClass().getResourceAsStream(standard[NORMALIMAGE]));
             image.setImage(image1);
         }else{
-            Image image1 = new Image(premium[NORMALIMAGE]);
+            Image image1 = new Image(getClass().getResourceAsStream(premium[NORMALIMAGE]));
             image.setImage(image1);
         }
         setData();
@@ -164,13 +164,13 @@ public class PlansController {
         labelStyled(revenue);
         if(plan.equals("basic"))
         {
-            Image image1 = new Image(basic[STYLEDIMAGE]);
+            Image image1 = new Image(getClass().getResourceAsStream(basic[STYLEDIMAGE]));
             image.setImage(image1);
         } else if (plan.equals("standard")) {
-            Image image1 = new Image(standard[STYLEDIMAGE]);
+            Image image1 = new Image(getClass().getResourceAsStream(standard[STYLEDIMAGE]));
             image.setImage(image1);
         }else{
-            Image image1 = new Image(premium[STYLEDIMAGE]);
+            Image image1 = new Image(getClass().getResourceAsStream(premium[STYLEDIMAGE]));
             image.setImage(image1);
         }
         setData();

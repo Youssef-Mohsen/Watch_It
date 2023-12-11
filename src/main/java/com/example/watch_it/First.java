@@ -1,10 +1,12 @@
 package com.example.watch_it;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -15,6 +17,8 @@ public class First {
     private Scene scene;
 
     private Parent root;
+    @FXML
+    private Button exitButton;
     @FXML
     public void UserSignIn(ActionEvent event) throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("sign-in.fxml")));
@@ -32,7 +36,20 @@ public class First {
         stage.setScene(scene);
         stage.show();
 }
-public void setStage(Stage stage){
+    public void setStage(Stage stage){
         this.stage=stage;
 }
+    @FXML
+    private void onMouseEntered(){
+        exitButton.setOnMouseEntered(event -> exitButton.setStyle("-fx-background-color: #FFC107; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
+    }
+    @FXML
+    private void onMouseExit(){
+        exitButton.setOnMouseExited(event -> exitButton.setStyle("-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
+    }
+    @FXML
+    private void Exit(){
+        Platform.exit();
+    }
+
 }

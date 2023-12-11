@@ -15,13 +15,23 @@ public class User
     ArrayList<Movie> Movies_For_Later = new ArrayList<>();
     // This List Access By UserWatchRecord
     ArrayList<UserWatchRecord> Watched_Movies = new ArrayList<>();
+    public static ArrayList<User> allusers = new ArrayList<User>();
 
     /****use it as ID to be unique(static variable) and display it in message to each user*****/
 
     /*****as Sign Up method and the data will take in main(add)******/
-    public User(ArrayList<User> users,String user_name, String last_Name, String first_Name, String email, String password)
+    public User(String user_name, String last_Name, String first_Name, String email, String password)
     {
-        this.User_ID = users.size();
+        this.User_ID = Admin.users.size();
+        this.User_Name = user_name;
+        this.Last_Name = last_Name;
+        this.First_Name = first_Name;
+        this.Email = email;
+        this.Password = password;
+    }
+    public User(int id, String user_name, String last_Name, String first_Name, String email, String password)
+    {
+        this.User_ID =id;
         this.User_Name = user_name;
         this.Last_Name = last_Name;
         this.First_Name = first_Name;
@@ -61,6 +71,14 @@ public class User
             }
         }
         return index;
+    }
+    public static boolean Userexist(String user_name) {
+        for (User user : allusers) {
+            if (user.User_Name.equals(user_name)) {
+                return true;
+            }
+        }
+        return false;
     }
     /*****Setters*****/
     public void setLast_Name(String last_Name) {

@@ -1,7 +1,5 @@
-
 package com.example.watch_it;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -13,12 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
-import javafx.stage.Window;
-?
-
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
@@ -35,68 +28,18 @@ public class AllUsersController implements Initializable {
     @FXML
      private TextField searchBar;
 
-
-
     @FXML
-    private ScrollPane mainPane;
+    Image image1 = new Image(getClass().getResourceAsStream("assets/batbot-01.png"));
     @FXML
-    TextField searchBar = new TextField();
-
+    Image image2 = new Image(getClass().getResourceAsStream("assets/batbot-02.png"));
     @FXML
-    Image image1 = new Image("file:/C:/programming/java/test-7/src/assets/batbot-01.png");
+    Image image3 = new Image(getClass().getResourceAsStream("assets/batbot-03.png"));
     @FXML
-    Image image2 = new Image("file:/C:/programming/java/test-7/src/assets/batbot-02.png");
-    @FXML
-    Image image3 = new Image("file:/C:/programming/java/test-7/src/assets/batbot-03.png");
-    @FXML
-    Image image4 = new Image("file:/C:/programming/java/test-7/src/assets/batbot-04.png");
-    private Stage primaryStage;
-
-
-
-
-   @FXML
-       private void initialize() {
-           int i = 0;
-           // Add labels for users from the HelloApplication.users list
-           for (User user : User.allusers){
-               i++;
-               addUserDetails(i, user.getUser_Name(), user.getFirst_Name(), user.getLast_Name(), user.getEmail(),user.getPassword());
-           }
-
-       }
-
-
-
-
-
-
-
-    private void getUsers(){
-        User user1 = new User(1,"user1","lastname","firstname","email","password");
-        User user2 = new User(2,"user2","lastname","firstname","email","password");
-        User user3 = new User(3,"user3","lastname","firstname","email","password");
-        User user4 = new User(4,"user4","lastname","firstname","email","password");
-        User user5 = new User(5,"user5","lastname","firstname","email","password");
-        User user6 = new User(6,"user6","lastname","firstname","email","password");
-        User user7 = new User(7,"user7","lastname","firstname","email","password");
-        User.allusers.add(user1);
-        User.allusers.add(user2);
-        User.allusers.add(user3);
-        User.allusers.add(user4);
-        User.allusers.add(user5);
-        User.allusers.add(user6);
-
-    }
-
-
-
-
-
+    Image image4 = new Image(getClass().getResourceAsStream("assets/batbot-04.png"));
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        getUsers();
+        //getUsers();
         getAllUsers();
     }
     private void  getAllUsers(){
@@ -166,7 +109,6 @@ public class AllUsersController implements Initializable {
             VBox.setMargin(userbox4, new Insets(0, 0, 30, 0));
         }
 
-
     }
     @FXML
     void Search() {
@@ -185,6 +127,5 @@ public class AllUsersController implements Initializable {
             getAllUsers();
         }
     }
-
 }
 

@@ -22,6 +22,8 @@ public class SignIn
     @FXML
     private Parent root;
     @FXML
+    private Button Back;
+    @FXML
     private PasswordField Password;
 
     @FXML
@@ -37,6 +39,8 @@ public class SignIn
     @FXML
     private CheckBox checkbox;
     private AlertType alertType;
+    private int try_Password = 0;
+    private int counter = 0;
     @FXML
 
     private void showAlert(String message) {
@@ -57,17 +61,14 @@ public class SignIn
     }
     @FXML
     private void showAlert(String title, String message, AlertType alertType) {
-        Alert alert = new Alert(alertType);
+        Alert alert = new Alert(alertType,message,ButtonType.OK);
         alert.setTitle(title);
         alert.setHeaderText(null);
-        alert.setContentText(message);
         alert.showAndWait();
     }
     /****Sign IN****/
-    //@FXML
-    /*public void SignIN(ActionEvent act)
-    {
-        int counter = 0;
+    @FXML
+    public void SignIN(ActionEvent act) throws IOException {
         while (counter != 3)
         {
             String username = UserName.getText();
@@ -75,38 +76,42 @@ public class SignIn
             // To Check the username exist in data.
             if(Admin.existsInFile(username))
             {
-                int try_Password = 0;
                 while(try_Password != 3)
                 {
-                    //
-                    if(Admin.getSpecificCellForUser(username,Admin.PasswordIndex).equals(password))
+                    if(Admin.getSpecificCellForUser("user",username,Admin.PASSWORDINDEX).equals(password))
                     {
-                        showAlert("Login Successful!");
-                        break;
+                        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("main-page.fxml")));
+                        stage = (Stage)((Node)act.getSource()).getScene().getWindow();
+                        scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.show();
                     }
                     else
                     {
                         showErrorAlert("Sign IN Failed", "Please check your Password is correct");
                         Password.clear();
+                        try_Password++;
+                        SignIN(act);
                     }
-                    try_Password++;
                 }
                 if(try_Password == 3)
                 {
                     showErrorAlert("Invalid Password", "Password Is InCorrect , Change Password!");
                 }
+
             }
             else
             {
                 showErrorAlert("Incorrect UserName", "UserName Is InCorrect , Try again!");
                 UserName.clear();
+                counter++;
             }
         }
         if(counter == 3)
         {
             showErrorAlert("Invalid UserName", "UserName does not exist , Create account!");
         }
-    }*/
+    }
     @FXML
     public void gotoforgorpassword(ActionEvent event) throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("forgot-pass.fxml")));
@@ -145,6 +150,13 @@ public class SignIn
             Password.setText(TextPassword.getText());
             TextPassword.setVisible(false);
             Password.setVisible(true);
- }
-}
+        }
+    }
+    public void onMouseEntered() {
+        Back.setOnMouseEntered(event -> Back.setStyle("-fx-background-color: #FFC107; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
+    }
+
+    public void onMouseExit() {
+        Back.setOnMouseExited(event -> Back.setStyle("-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
+    }
 }
