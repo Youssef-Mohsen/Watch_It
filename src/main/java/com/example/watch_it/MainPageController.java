@@ -1,7 +1,9 @@
 package com.example.watch_it;
 
 import javafx.application.Platform;
+import javafx.scene.Node;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
@@ -22,13 +24,15 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 public class MainPageController {
-
+    private Parent root;
+    private Scene scene;
     private Stage stage;
     private Timeline autoScrollTimeline;
     private Timeline autoScrollTimeline2;
@@ -152,7 +156,13 @@ public class MainPageController {
         movieContainer.setAlignment(Pos.CENTER);
         movieContainer.getChildren().addAll(imageView, label);
 
-        movieContainer.setOnMouseClicked(event -> onMouseClickedVBox(image));
+        movieContainer.setOnMouseClicked(event -> {
+            try {
+                onMouseClickedVBox(event,image);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
         allMovies.getChildren().addAll(movieContainer);
 
     }
@@ -171,7 +181,13 @@ public class MainPageController {
         label.setOnMouseExited(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
         movieContainer.setAlignment(Pos.CENTER);
         movieContainer.getChildren().addAll(imageView, label);
-        movieContainer.setOnMouseClicked(event -> onMouseClickedVBox(image));
+        movieContainer.setOnMouseClicked(event -> {
+            try {
+                onMouseClickedVBox(event,image);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
         allMovies2.getChildren().addAll(movieContainer);
 
     }
@@ -295,21 +311,14 @@ public class MainPageController {
                 " -fx-border-radius: 25;"));
         });
     }
-    public void onMouseClickedVBox(Image image) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("movie-view.fxml"));
-        Parent root;
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        MovieController controller = loader.getController();
-        controller.setStage(stage);
-        Scene scene = new Scene(root);
-        stage.setTitle("Movie");
-        stage.setResizable(false);
-        stage.setX(-7);
-        stage.setY(0);
+    public void onMouseClickedVBox(MouseEvent act,Image image) throws IOException {
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("movie-view.fxml"));
+        root = loader.load();
+        stage = (Stage)((Node)act.getSource()).getScene().getWindow();
+        MovieController controller=loader.getController();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
 
         controller.refreshScreen("Watch Movie Amazing SpiderMan(2023)", "Amazing SpiderMan",
                 "Amazing SpiderMan Translated", "Action", "Amazing SpiderMan film.",

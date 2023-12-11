@@ -21,8 +21,11 @@ public class First {
     private Button exitButton;
     @FXML
     public void UserSignIn(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("sign-in.fxml")));
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("sign-in.fxml"));
+        root = loader.load();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        SignIn controller=loader.getController();
+        controller.setStage(stage);
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

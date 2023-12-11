@@ -159,4 +159,7 @@ public class SignIn
     public void onMouseExit() {
         Back.setOnMouseExited(event -> Back.setStyle("-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
     }
+    public void setStage(Stage stage){
+        this.stage=stage;
+    }
 }
