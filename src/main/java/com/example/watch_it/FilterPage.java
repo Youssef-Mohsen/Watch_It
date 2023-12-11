@@ -9,11 +9,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
 public class FilterPage {
-
+    private Stage stage;
     @FXML
     private HBox Hbox;
     @FXML
@@ -119,5 +120,7 @@ public class FilterPage {
         else
             rightColumn.getChildren().addAll(movieContainer);
     }
-
+    public void setStage(Stage stage){
+        this.stage=stage;
+    }
 }

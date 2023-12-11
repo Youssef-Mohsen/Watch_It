@@ -19,6 +19,12 @@ public class First {
     private Parent root;
     @FXML
     private Button exitButton;
+
+    @FXML
+    public void initialize(){
+        onMouseEntered();
+        onMouseExit();
+    }
     @FXML
     public void UserSignIn(ActionEvent event) throws IOException {
         FXMLLoader loader=new FXMLLoader(getClass().getResource("sign-in.fxml"));

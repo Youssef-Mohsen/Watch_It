@@ -93,6 +93,8 @@ public class MovieController {
                     stars[h].setOnMouseExited(event2 ->
                             stars[finalJ].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/emptyStar.png")))));
                 }
+                int Max_Rating=Math.max(rating2,rating2);
+                System.out.println(Max_Rating);
             });
 
         }

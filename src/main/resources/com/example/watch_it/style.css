@@ -10,8 +10,15 @@
 .starsRow{
     -fx-background-color:  #001f2f;
 }
+.filter{
+    -fx-background-color: black;
+}
 .scrollPane > .viewport {
    -fx-background-color: black;
+}
+.scrollPane > .scroll-bar: vertical{
+    -fx-opacity:0.0;
+    -fx-visibility:hidden;
 }
 .scrollPane{
     -fx-background-color: black;

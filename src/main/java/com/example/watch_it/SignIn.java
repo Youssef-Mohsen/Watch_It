@@ -80,9 +80,16 @@ public class SignIn
                 {
                     if(Admin.getSpecificCellForUser("user",username,Admin.PASSWORDINDEX).equals(password))
                     {
-                        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("main-page.fxml")));
-                        stage = (Stage)((Node)act.getSource()).getScene().getWindow();
-                        scene = new Scene(root);
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("main-page.fxml"));
+                        Parent root = loader.load();
+                        MainPageController controller = loader.getController();
+                        controller.setStage(stage);
+                        stage = (Stage) ((Node) act.getSource()).getScene().getWindow();
+                        Scene scene = new Scene(root);
+                        stage.setTitle("Movie");
+                        stage.setResizable(false);
+                        stage.setX(-7);
+                        stage.setY(0);
                         stage.setScene(scene);
                         stage.show();
                     }
