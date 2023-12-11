@@ -16,6 +16,9 @@ public class HelloApplication extends Application {
         Admin.readFile(file);
         User.allusers.addAll(Admin.getUsers());
 
+        File movieFile = new File("movies-data.txt");
+        Admin.readMovies(movieFile);
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("first-page.fxml"));
         Parent root;
         try {
@@ -33,7 +36,6 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
 
     public static void main(String[] args) {
 

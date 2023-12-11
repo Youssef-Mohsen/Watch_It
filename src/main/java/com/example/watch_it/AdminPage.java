@@ -71,6 +71,7 @@ public class AdminPage
         for(int i=0; i<Admin.admins.size(); i++){
             data = Admin.admins.get(i).split(",");
             if(data[Admin.USERNAMEINDEX].equals(username)){
+                System.out.println(data);
                 adminExists = true;
                 break;
             }

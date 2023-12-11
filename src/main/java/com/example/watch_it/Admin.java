@@ -9,9 +9,6 @@ import java.time.LocalDate;
 import java.util.Map;
 
 public class Admin {
-    //gonna fix the try/catch/finally later --------
-    //there's more work after the User class ------- maybe ?
-
     private String username;
     private int password;
 
@@ -47,26 +44,15 @@ public class Admin {
     private static short STARTDATEINDEX = 8;
 
     public static ArrayList<String> movies = new ArrayList<String>();
+    public static ArrayList<Movie> movies_obj = new ArrayList<Movie>();
     public static ArrayList<String> directors = new ArrayList<String>();
+    public static ArrayList<Director> directors_obj = new ArrayList<Director>();
+    public static ArrayList<Cast> casts_obj = new ArrayList<Cast>();
     public static ArrayList<String> casts = new ArrayList<String>();
     public static ArrayList<String> admins = new ArrayList<String>();
     public static ArrayList<String> users = new ArrayList<String>();
     public static ArrayList<String> topRatedMovies;
 
-    //    public static ArrayList<String> readFile(File file) {
-//        ArrayList<String> arrayList = new ArrayList<String>();
-//        try {
-//            String line = "";
-//            BufferedReader b = new BufferedReader(new FileReader(file));
-//            while ((line = b.readLine()) != null) {
-//                arrayList.add(line);
-//            }
-//            b.close();
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//        return arrayList;
-//    }
     public static void readFile(File file) {
         ArrayList<String> arrayList = new ArrayList<String>();
         try {
@@ -78,8 +64,6 @@ public class Admin {
                     users.add(line);
                 else if (row[TYPEINDEX].equals("cast"))
                     casts.add(line);
-                else if (row[TYPEINDEX].equals("movie"))
-                    movies.add(line);
                 else if(row[TYPEINDEX].equals("director"))
                     directors.add(line);
                 else
@@ -214,20 +198,7 @@ public class Admin {
         }
     }
 
-    //    public static Month getMonthWithMostRevenue(ArrayList<String> arrayList){
-//        Month month = null;
-//        int[] months = new int [12];
-//        for (String index: arrayList){
-//            String []line = index.split(",");
-//
-//            if(line[PLANINDEX].equals("basic"))
-//        }
-//        return month;
-//    }
-    //all as strings
-
     //assuming all dates are valid and users still subscribed.
-
     public static int getMonth(Month month){
         return switch (month) {
             case JANUARY -> 1;
@@ -344,7 +315,7 @@ public class Admin {
                 }
                 if (watched){
                     watchedCounter++;
-                    if(watchedCounter != 0 && watchedCounter % 2 != 0 )
+                    if(watchedCounter % 2 != 0 )
                     {
                         for (String oneMovie : movies) {
                             String[] arr = oneMovie.split(",");
@@ -382,28 +353,60 @@ public class Admin {
         }
         return movie;
     }
+
     static Movie getOneMovie (String title){
         Movie movie = new Movie();
         for (String oneMovie : movies) {
             String[] arr = oneMovie.split(",");
             if (arr[1].equals(title)) {
                 movie.setTitle(arr[1]);
-                movie.setId(Integer.parseInt(arr[2]));
-                movie.setRelease_date(LocalDate.parse(arr[3]));
+                movie.setId(Integer.parseInt(arr[0]));
+                movie.setRelease_date(LocalDate.parse(arr[4]));
+                movie.setDescription(arr[3]);
                 // movie.setDuration(Integer.parseInt(arr[4]));
                 //director,cast ykono strings msh obj ,wel class bta3hom hykon el movie string msh obj.
-                //movie.setDirector(arr[7]);
-                movie.setBudget(Double.parseDouble(arr[11]));
-                movie.setCountry(arr[10]);
-                movie.setLanguage(arr[8]);
-                movie.setImdb_score(Float.parseFloat(arr[9]));
-                movie.setRevenue(Double.parseDouble(arr[12]));
-                movie.setPoster_path(arr[13]);
+                movie.setBudget(Double.parseDouble(arr[10]));
+                movie.setCountry(arr[9]);
+                movie.setLanguage(arr[7]);
+                movie.setImdb_score(Float.parseFloat(arr[8]));
+                movie.setRevenue(Double.parseDouble(arr[11]));
+                movie.setPoster_path(arr[12]);
                 //movie.setDirector(getDirector());
+
+                ArrayList<String> cast = new ArrayList<String>();
+                ArrayList<String> genres = new ArrayList<String>();
+                castAndGenres(oneMovie,cast,genres);
+
             }
         }
 
         return movie;
+    }
+    public static void castAndGenres(String Movie, ArrayList<String> cast_, ArrayList<String> genres){
+        //cast first then genres
+        boolean cast = false;
+        boolean genre = false;
+        int castCounter = -1;
+        int genreCounter = -1;
+        String[] eachLine = Movie.split(",");
+        for (String data:eachLine) {
+            if(data.equals("cast"))
+                cast = true;
+            else if(data.equals("genres")) {
+                cast = false;
+                genre = true;
+            }
+            if(cast) {
+                castCounter++;
+                if(castCounter != 0)
+                    cast_.add(data);
+            }
+            else if(genre) {
+                genreCounter ++;
+                if(genreCounter != 0)
+                    genres.add(data);
+            }
+        }
     }
     static Director getDirector(String directorName){
         Director director = new Director();
@@ -460,4 +463,37 @@ public class Admin {
         }
         return userArrayList;
     }
+    public static void readMovies(File file)  {
+        String line = "";
+        String[] firstLine = new String[20];
+        String[] wholeLine = new String[20];
+        try{
+            int i = 0;
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+            while((line = bufferedReader.readLine()) != null){
+                if(i % 2 == 0){
+                    firstLine = line.split(",");
+                }
+                else {
+                    wholeLine = line.split(",");
+                    //System.arraycopy(wholeLine ,0 ,firstLine ,5,16);
+                    firstLine = Arrays.copyOf(firstLine, firstLine.length + wholeLine.length);
+                    int g = 0 , k = 6;
+                    while(k < firstLine.length && g< wholeLine.length){
+                        System.out.println(g);
+                        firstLine[k] = wholeLine[g];
+                        ++g;
+                        ++k;
+                    }
+                    String eachLine =String.join(",", firstLine);
+                    movies.add(eachLine);
+                }
+                i++;
+            }
+        }
+        catch (IOException ioException){
+            throw new RuntimeException(ioException);
+        }
+    }
+
 }

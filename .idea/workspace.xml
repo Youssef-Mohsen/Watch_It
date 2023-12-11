@@ -4,17 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="236de910-bb88-43c2-a220-e8030a7a2c95" name="Changes" comment="Update movie-view(Rate)">
+    <list default="true" id="236de910-bb88-43c2-a220-e8030a7a2c95" name="Changes" comment="add first page gui">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/searchViewController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_28_2023_8_11_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_28_2023_8_11_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_10_2023_6_20_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_10_2023_6_20_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_11_2023_1_25_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_11_2023_1_25_AM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_7_2023_3_45_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_7_2023_3_45_AM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_9_2023_8_50_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_9_2023_8_50_PM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/First.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/First.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies-data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/movies-data.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/AdminPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/AdminPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/Cast.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/Cast.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/Director.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/Director.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/HelloApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/MainPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/MainPageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/Movie.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/SignIn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/SignIn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/filter-page.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/filter-page.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/main-page.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/main-page.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/search-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/search-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/sign-up.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/sign-up.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,8 +204,7 @@
     <MESSAGE value="getting the month with most revenue" />
     <MESSAGE value="main class" />
     <MESSAGE value="add first page gui" />
-    <MESSAGE value="Update movie-view(Rate)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update movie-view(Rate)" />
+    <option name="LAST_COMMIT_MESSAGE" value="add first page gui" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

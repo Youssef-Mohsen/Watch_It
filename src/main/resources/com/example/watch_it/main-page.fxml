@@ -80,83 +80,83 @@
 
     <left>
         <Pane prefWidth="244" style="-fx-background-color: black;">
-                <Label layoutX="8.0" prefHeight="43.0" prefWidth="160.0" text="Follow Watch it on" textFill="WHITE">
-                    <font>
-                        <Font name="System Bold" size="16.0" />
-                    </font>
-                </Label>
-                <Label layoutX="10.0" layoutY="240.0" prefHeight="43.0" prefWidth="190.0" style="-fx-background-color: #4764FF; -fx-background-radius: 10;" text=" Common in Watch it" textFill="WHITE">
-                    <font>
-                        <Font name="System Bold" size="18.0" />
-                    </font>
-                </Label>
-                <Label layoutX="14.0" layoutY="293.0" opacity="0.91" prefHeight="36.0" prefWidth="152.0" text="Watching movie" textFill="WHITE" textOverrun="CLIP">
-                    <font>
-                        <Font name="Bondon MT" size="14.0" />
-                    </font>
-                </Label>
-                <Label layoutX="14.0" layoutY="311.0" opacity="0.91" prefHeight="36.0" prefWidth="152.0" text="Spy 2018" textFill="WHITE" textOverrun="CLIP">
-                    <font>
-                        <Font name="Bondon MT" size="13.0" />
-                    </font>
-                </Label>
-                <Label layoutX="14.0" layoutY="358.0" opacity="0.91" prefHeight="36.0" prefWidth="152.0" text="Watching movie" textFill="WHITE" textOverrun="CLIP">
-                    <font>
-                        <Font name="Bondon MT" size="14.0" />
-                    </font>
-                </Label>
-                <Label layoutX="14.0" layoutY="376.0" opacity="0.91" prefHeight="36.0" prefWidth="152.0" text="mechanic 2016" textFill="WHITE" textOverrun="CLIP">
-                    <font>
-                        <Font name="Bondon MT" size="13.0" />
-                    </font>
-                </Label>
-                <Label layoutX="14.0" layoutY="423.0" opacity="0.91" prefHeight="36.0" prefWidth="152.0" text="Watching movie" textFill="WHITE" textOverrun="CLIP">
-                    <font>
-                        <Font name="Bondon MT" size="14.0" />
-                    </font>
-                </Label>
-                <Label layoutX="14.0" layoutY="441.0" opacity="0.91" prefHeight="36.0" prefWidth="152.0" text="mechanic 2016" textFill="WHITE" textOverrun="CLIP">
-                    <font>
-                        <Font name="Bondon MT" size="13.0" />
-                    </font>
-                </Label>
-                <Label layoutX="14.0" layoutY="43.0" opacity="0.77" prefHeight="36.0" prefWidth="119.0" text="Twitter.com" textFill="WHITE" textOverrun="CLIP">
-                    <font>
-                        <Font name="Bondon MT" size="16.0" />
-                    </font>
-                </Label>
-                <Pane layoutX="157.0" layoutY="43.0" prefHeight="36.0" prefWidth="35.0" style="-fx-background-color: E2F7EB; -fx-background-radius: 50;" />
-                <Label layoutX="14.0" layoutY="86.0" opacity="0.74" prefHeight="36.0" prefWidth="119.0" text="Facebook.com" textFill="WHITE" textOverrun="CLIP">
-                    <font>
-                        <Font name="Bondon MT" size="16.0" />
-                    </font>
-                </Label>
-                <Pane layoutX="157.0" layoutY="86.0" prefHeight="36.0" prefWidth="35.0" style="-fx-background-color: E2F7EB; -fx-background-radius: 50;" />
-                <Label layoutX="14.0" layoutY="129.0" opacity="0.74" prefHeight="36.0" prefWidth="119.0" text="Telegram.com" textFill="WHITE" textOverrun="CLIP">
-                    <font>
-                        <Font name="Bondon MT" size="16.0" />
-                    </font>
-                </Label>
-                <Pane layoutX="157.0" layoutY="129.0" prefHeight="36.0" prefWidth="35.0" style="-fx-background-color: E2F7EB; -fx-background-radius: 50;" />
-                <Label fx:id="watchRecords" layoutX="10.0" layoutY="187.0" onMouseClicked="#onMouseClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="36.0" prefWidth="193.0" style="-fx-background-color: #001f2f; -fx-background-radius: 10;" text="Watching Record(0)" textFill="WHITE">
-                    <font>
-                        <Font size="14.0" />
-                    </font>
-                </Label>
-                <Separator layoutX="9.0" layoutY="174.0" opacity="0.4" prefWidth="200.0" style="-fx-background-color: FFC107;" />
-                <Separator layoutX="9.0" layoutY="230.0" opacity="0.3" prefHeight="3.0" prefWidth="200.0" style="-fx-background-color: FFC107;">
+            <Label layoutX="8.0" prefHeight="43.0" prefWidth="160.0" text="Follow Watch it on" textFill="WHITE">
+                <font>
+                    <Font name="System Bold" size="16.0" />
+                </font>
+            </Label>
+            <Label layoutX="10.0" layoutY="240.0" prefHeight="43.0" prefWidth="190.0" style="-fx-background-color: #4764FF; -fx-background-radius: 10;" text=" Common in Watch it" textFill="WHITE">
+                <font>
+                    <Font name="System Bold" size="18.0" />
+                </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="293.0" opacity="0.91" prefHeight="36.0" prefWidth="152.0" text="Watching movie" textFill="WHITE" textOverrun="CLIP">
+                <font>
+                    <Font name="Bondon MT" size="14.0" />
+                </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="311.0" opacity="0.91" prefHeight="36.0" prefWidth="152.0" text="Spy 2018" textFill="WHITE" textOverrun="CLIP">
+                <font>
+                    <Font name="Bondon MT" size="13.0" />
+                </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="358.0" opacity="0.91" prefHeight="36.0" prefWidth="152.0" text="Watching movie" textFill="WHITE" textOverrun="CLIP">
+                <font>
+                    <Font name="Bondon MT" size="14.0" />
+                </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="376.0" opacity="0.91" prefHeight="36.0" prefWidth="152.0" text="mechanic 2016" textFill="WHITE" textOverrun="CLIP">
+                <font>
+                    <Font name="Bondon MT" size="13.0" />
+                </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="423.0" opacity="0.91" prefHeight="36.0" prefWidth="152.0" text="Watching movie" textFill="WHITE" textOverrun="CLIP">
+                <font>
+                    <Font name="Bondon MT" size="14.0" />
+                </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="441.0" opacity="0.91" prefHeight="36.0" prefWidth="152.0" text="mechanic 2016" textFill="WHITE" textOverrun="CLIP">
+                <font>
+                    <Font name="Bondon MT" size="13.0" />
+                </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="43.0" opacity="0.77" prefHeight="36.0" prefWidth="119.0" text="Twitter.com" textFill="WHITE" textOverrun="CLIP">
+                <font>
+                    <Font name="Bondon MT" size="16.0" />
+                </font>
+            </Label>
+            <Pane layoutX="157.0" layoutY="43.0" prefHeight="36.0" prefWidth="35.0" style="-fx-background-color: E2F7EB; -fx-background-radius: 50;" />
+            <Label layoutX="14.0" layoutY="86.0" opacity="0.74" prefHeight="36.0" prefWidth="119.0" text="Facebook.com" textFill="WHITE" textOverrun="CLIP">
+                <font>
+                    <Font name="Bondon MT" size="16.0" />
+                </font>
+            </Label>
+            <Pane layoutX="157.0" layoutY="86.0" prefHeight="36.0" prefWidth="35.0" style="-fx-background-color: E2F7EB; -fx-background-radius: 50;" />
+            <Label layoutX="14.0" layoutY="129.0" opacity="0.74" prefHeight="36.0" prefWidth="119.0" text="Telegram.com" textFill="WHITE" textOverrun="CLIP">
+                <font>
+                    <Font name="Bondon MT" size="16.0" />
+                </font>
+            </Label>
+            <Pane layoutX="157.0" layoutY="129.0" prefHeight="36.0" prefWidth="35.0" style="-fx-background-color: E2F7EB; -fx-background-radius: 50;" />
+            <Label fx:id="watchRecords" layoutX="10.0" layoutY="187.0" onMouseClicked="#onMouseClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="36.0" prefWidth="193.0" style="-fx-background-color: #001f2f; -fx-background-radius: 10;" text="Watching Record(0)" textFill="WHITE">
+                <font>
+                    <Font size="14.0" />
+                </font>
+            </Label>
+            <Separator layoutX="9.0" layoutY="174.0" opacity="0.4" prefWidth="200.0" style="-fx-background-color: FFC107;" />
+            <Separator layoutX="9.0" layoutY="230.0" opacity="0.3" prefHeight="3.0" prefWidth="200.0" style="-fx-background-color: FFC107;">
 
-                </Separator>
-                <ImageView fitHeight="53.0" fitWidth="41.0" layoutX="156.0" layoutY="293.0" opacity="0.98" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@assets/Amazing_SpiderMan.png" />
-                </ImageView>
-                <ImageView fitHeight="53.0" fitWidth="45.0" layoutX="156.0" layoutY="360.0" opacity="0.98" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@assets/Amazing_SpiderMan.png" />
-                </ImageView>
-                <ImageView fitHeight="53.0" fitWidth="36.0" layoutX="153.0" layoutY="422.0" opacity="0.98" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@assets/Amazing_SpiderMan.png" />
-                </ImageView>
-            </Pane>
+            </Separator>
+            <ImageView fitHeight="53.0" fitWidth="41.0" layoutX="156.0" layoutY="293.0" opacity="0.98" pickOnBounds="true" preserveRatio="true">
+                <Image url="@assets/Amazing_SpiderMan.png" />
+            </ImageView>
+            <ImageView fitHeight="53.0" fitWidth="45.0" layoutX="156.0" layoutY="360.0" opacity="0.98" pickOnBounds="true" preserveRatio="true">
+                <Image url="@assets/Amazing_SpiderMan.png" />
+            </ImageView>
+            <ImageView fitHeight="53.0" fitWidth="36.0" layoutX="153.0" layoutY="422.0" opacity="0.98" pickOnBounds="true" preserveRatio="true">
+                <Image url="@assets/Amazing_SpiderMan.png" />
+            </ImageView>
+        </Pane>
     </left>
 
     <center>

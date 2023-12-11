@@ -1,40 +1,47 @@
-.scroll-pane > .scroll-bar: horizontal{
-    -fx-opacity:0.5;
+.scroll-pane> .scroll-bar: horizontal {
+  -fx-opacity: 0.5;
 }
 .scroll-pane {
-    -fx-background-color:#565661;
+  -fx-background-color: #565661;
 }
-.HBox{
-     -fx-background-color: black;
+.HBox {
+  -fx-background-color: black;
 }
-.starsRow{
-    -fx-background-color:  #001f2f;
+.starsRow {
+  -fx-background-color: #001f2f;
 }
 .filter{
     -fx-background-color: black;
 }
+.filter {
+  -fx-background-color: black;
+}
 .scrollPane > .viewport {
-   -fx-background-color: black;
+  -fx-background-color: black;
 }
 .scrollPane > .scroll-bar: vertical{
     -fx-opacity:0.0;
     -fx-visibility:hidden;
 }
-.scrollPane{
-    -fx-background-color: black;
+.scrollpane> .scroll-bar: vertical {
+  -fx-opacity: 0;
+  -fx-visibility: hidden;
 }
-.image{
-    -fx-background-image: url("assets/design.png");
-    -fx-background-repeat: none;
-    -fx-background-size: 1318 764;
-    -fx-background-position: center center;
+.scrollPane {
+  -fx-background-color: black;
 }
-.firstImage{
-    -fx-background-size: 1536 864;
-    -fx-background-image: url("assets/signIn.png");
-    -fx-background-position: center center;
+.image {
+  -fx-background-image: url("assets/design.png");
+  -fx-background-repeat: none;
+  -fx-background-size: 1318 764;
+  -fx-background-position: center center;
 }
-.text-box{
-    -fx-background-radius:50;
-    -fx-alignment: center;
+.firstImage {
+  -fx-background-size: 1536 864;
+  -fx-background-image: url("assets/signIn.png");
+  -fx-background-position: center center;
+}
+.text-box {
+  -fx-background-radius: 50;
+  -fx-alignment: center;
 }
