@@ -1,0 +1,112 @@
+Index: src/watch_it/Admin.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package watch_it;\r\nimport java.io.*;\r\nimport java.util.ArrayList;\r\nimport java.util.HashMap;\r\nimport java.util.Map;\r\n\r\npublic class Admin {\r\n    //gonna fix the try/catch/finally later --------\r\n    //there's more work after the User class ------- maybe ?\r\n\r\n    private String username;\r\n    private int password;\r\n    //counters gonna be pairs ,key for the enum class value for repentance -- javafx???\r\n    public static int basicPlanCounter;\r\n    public static int standardPlanCounter;\r\n    public static int premiumPlanCounter;\r\n    private static short planIndex;\r\n\r\n    public static ArrayList<String> readFile(File file) {\r\n        ArrayList<String> arrayList = new ArrayList<String>();\r\n        try {\r\n            String line = \"\";\r\n            BufferedReader b = new BufferedReader(new FileReader(file));\r\n            while ((line = b.readLine()) != null) {\r\n                arrayList.add(line);\r\n            }\r\n            b.close();\r\n        } catch (IOException e) {\r\n            throw new RuntimeException(e);\r\n        }\r\n        return arrayList;\r\n    }\r\n    public static void writeOnFile(ArrayList<String> arrayList, File file){\r\n        try {\r\n            BufferedWriter b = new BufferedWriter(new FileWriter(file));\r\n            for(String index:arrayList){\r\n                b.write(index);\r\n                b.newLine();\r\n            }\r\n            b.close();\r\n        }\r\n        catch (IOException e) {\r\n            throw new RuntimeException(e);\r\n        }\r\n    }\r\n    //if the record exists in database >> gonna return the whole record[don't forget to split it]\r\n    //otherwise gonna return null [make sure to check before dealing with return val].\r\n\r\n    //returned string isn't splitted\r\n    public static String existsInFile(ArrayList<String> arrayList, String username){\r\n        boolean exist = false;\r\n        String[] eachLine;\r\n        for (String index: arrayList){\r\n            eachLine = index.split(\",\");\r\n            if(eachLine[0].equals(username)){\r\n                return index;\r\n            }\r\n        }\r\n        return null;\r\n    }\r\n\r\n    //record to be deleted is not splitted\r\n    public static void deleteOneRecord(ArrayList<String> arrayList, String record){\r\n        arrayList.remove(record);\r\n    }\r\n    public static void changeCell(ArrayList<String> arrayList, String username, String oldCell, String newCell){\r\n        String recuiredLine = existsInFile(arrayList, username);\r\n        String []row = recuiredLine.split(\",\");\r\n        for (int index=0; index<row.length; index++){\r\n            if(row[index].equals(username))\r\n                row[index] = newCell;\r\n        }\r\n        arrayList.set(arrayList.indexOf(recuiredLine),String.join(\",\",row));\r\n    }\r\n    //enum ----------------\r\n    public static String getSpecificCell(ArrayList<String> arrayList, String username, int index){\r\n        String wantedRecord = existsInFile(arrayList, username);\r\n        String []row = wantedRecord.split(\",\");\r\n        return row[index];\r\n    }\r\n    //didnt test it yet\r\n    public static Subscription.Plans getMostSubscripedPlan(ArrayList<String> arrayList){\r\n        Subscription.Plans plan = null;\r\n        for (String index:arrayList){\r\n            String []line = index.split(\",\");\r\n            HashMap<Integer,Subscription.Plans> map = new HashMap<>();\r\n            if(line[planIndex].equals(\"basic\"))\r\n                basicPlanCounter++;\r\n            else if (line[planIndex].equals(\"standard\"))\r\n                standardPlanCounter++;\r\n            else\r\n                premiumPlanCounter++;\r\n            int max = Math.max(standardPlanCounter,Math.max(basicPlanCounter,premiumPlanCounter));\r\n\r\n            map.put(basicPlanCounter,Subscription.Plans.BASIC);\r\n            map.put(standardPlanCounter,Subscription.Plans.STANDARD);\r\n            map.put(premiumPlanCounter,Subscription.Plans.PREMIUM);\r\n\r\n            plan = map.get(max);\r\n        }\r\n        return plan;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/watch_it/Admin.java b/src/watch_it/Admin.java
+--- a/src/watch_it/Admin.java	(revision d03ab70d68036856276c2229159c380c87cee5cf)
++++ b/src/watch_it/Admin.java	(date 1701120210851)
+@@ -14,7 +14,10 @@
+     public static int basicPlanCounter;
+     public static int standardPlanCounter;
+     public static int premiumPlanCounter;
+-    private static short planIndex;
++    private static final short USERNAMEINDEX = 0;
++    //
++    private static final short PLANINDEX = 0;
++    private static final short STARMONTHTDATE = 0;
+ 
+     public static ArrayList<String> readFile(File file) {
+         ArrayList<String> arrayList = new ArrayList<String>();
+@@ -52,25 +55,26 @@
+         String[] eachLine;
+         for (String index: arrayList){
+             eachLine = index.split(",");
+-            if(eachLine[0].equals(username)){
++            if(eachLine[USERNAMEINDEX].equals(username)){
+                 return index;
+             }
+         }
+         return null;
+     }
+-
+     //record to be deleted is not splitted
+     public static void deleteOneRecord(ArrayList<String> arrayList, String record){
+         arrayList.remove(record);
+     }
+     public static void changeCell(ArrayList<String> arrayList, String username, String oldCell, String newCell){
+         String recuiredLine = existsInFile(arrayList, username);
+-        String []row = recuiredLine.split(",");
+-        for (int index=0; index<row.length; index++){
+-            if(row[index].equals(username))
+-                row[index] = newCell;
+-        }
+-        arrayList.set(arrayList.indexOf(recuiredLine),String.join(",",row));
++        if(recuiredLine != null){
++            String []row = recuiredLine.split(",");
++            for (int index=0; index<row.length; index++){
++                if(row[index].equals(oldCell))
++                    row[index] = newCell;
++            }
++            arrayList.set(arrayList.indexOf(recuiredLine),String.join(",",row));
++        }
+     }
+     //enum ----------------
+     public static String getSpecificCell(ArrayList<String> arrayList, String username, int index){
+@@ -78,15 +82,27 @@
+         String []row = wantedRecord.split(",");
+         return row[index];
+     }
++    //to check if the username already exists in database or not
++    public static boolean isValidUsername(ArrayList<String> arrayList, String username){
++        boolean isValid = true;
++        for (String index: arrayList){
++            String[] eachLLine = index.split(",");
++            if(eachLLine[USERNAMEINDEX].equals(username)) {
++                isValid = false;
++                break;
++            }
++        }
++        return isValid;
++    }
+     //didnt test it yet
+     public static Subscription.Plans getMostSubscripedPlan(ArrayList<String> arrayList){
+         Subscription.Plans plan = null;
+         for (String index:arrayList){
+             String []line = index.split(",");
+             HashMap<Integer,Subscription.Plans> map = new HashMap<>();
+-            if(line[planIndex].equals("basic"))
++            if(line[PLANINDEX].equals("basic"))
+                 basicPlanCounter++;
+-            else if (line[planIndex].equals("standard"))
++            else if (line[PLANINDEX].equals("standard"))
+                 standardPlanCounter++;
+             else
+                 premiumPlanCounter++;
+@@ -100,4 +116,6 @@
+         }
+         return plan;
+     }
++    // a method for checking each month revenue
++    //public static String
+ }
+Index: src/watch_it/Subscription.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package watch_it;\r\n\r\nimport java.time.LocalDate;\r\n\r\n\r\npublic class Subscription {\r\n    public enum Plans {\r\n        BASIC, STANDARD, PREMIUM\r\n    }\r\n\r\n    private int userID;\r\n    private double userWallet;\r\n    private Plans plan;\r\n    private double price;\r\n    private LocalDate startDate;\r\n    private int moviesWatched;\r\n\r\n    public Subscription(int userID, Plans plan) {\r\n        this.userID = userID;\r\n        this.plan = plan;\r\n        if(plan==Plans.BASIC) {\r\n            this.price = 10;\r\n        } else if (plan==Plans.STANDARD) {\r\n            this.price = 15;\r\n        }\r\n        else if (plan==Plans.PREMIUM) {\r\n            this.price = 20;\r\n        }\r\n        this.startDate = LocalDate.now();\r\n        this.moviesWatched = 0;\r\n    }\r\n\r\n    public int getUserID() {\r\n        return userID;\r\n    }\r\n\r\n    public Plans getPlan() {\r\n        return plan;\r\n    }\r\n\r\n    public double getPrice() {\r\n        return price;\r\n    }\r\n\r\n    public LocalDate getStartDate() {\r\n        return startDate;\r\n    }\r\n\r\n    public int getMoviesWatched() {\r\n        return moviesWatched;\r\n    }\r\n\r\n    public void addMovie() {\r\n        if (isSubscriptionActive()) {\r\n            moviesWatched++;\r\n            if(plan==Plans.BASIC && moviesWatched<=5)\r\n            {\r\n                System.out.println(\"Movie added. Total movies watched: \" + moviesWatched);\r\n            }\r\n            else if(plan==Plans.STANDARD && moviesWatched<=10)\r\n            {\r\n                System.out.println(\"Movie added. Total movies watched: \" + moviesWatched);\r\n\r\n            }\r\n            else if(plan==Plans.PREMIUM && moviesWatched<=30)\r\n            {\r\n                System.out.println(\"Movie added. Total movies watched: \" + moviesWatched);\r\n\r\n            }\r\n            else {\r\n                System.out.println(\"You reached the limit of the movies. Please renew to watch more movies.\");\r\n            }\r\n\r\n        } else {\r\n            System.out.println(\"Subscription expired. Please renew to watch more movies.\");\r\n        }\r\n    }\r\n\r\n    public void updateSubscription(Plans newPlan) {\r\n        this.plan = newPlan;\r\n        if(newPlan==Plans.BASIC) {\r\n            this.price = 10;\r\n        } else if (newPlan==Plans.STANDARD) {\r\n            this.price = 15;\r\n        }\r\n        else if (newPlan==Plans.PREMIUM) {\r\n            this.price = 20;\r\n        }\r\n        this.startDate =LocalDate.now();\r\n        this.moviesWatched = 0;\r\n        System.out.println(\"Subscription updated successfully.\");\r\n    }\r\n\r\n    public void deleteSubscription() {\r\n        System.out.println(\"Subscription deleted for user: \" + userID);\r\n\r\n    }\r\n\r\n    private boolean isSubscriptionActive() {\r\n        LocalDate currentDate = LocalDate.now();\r\n        LocalDate endDate = startDate.plusDays(30);\r\n\r\n        return currentDate.isBefore(endDate);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/watch_it/Subscription.java b/src/watch_it/Subscription.java
+--- a/src/watch_it/Subscription.java	(revision d03ab70d68036856276c2229159c380c87cee5cf)
++++ b/src/watch_it/Subscription.java	(date 1701118167191)
+@@ -7,7 +7,6 @@
+     public enum Plans {
+         BASIC, STANDARD, PREMIUM
+     }
+-
+     private int userID;
+     private double userWallet;
+     private Plans plan;

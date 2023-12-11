@@ -17,7 +17,11 @@
                 <Font name="Arial Narrow Bold" size="27.0" />
             </font>
         </Label>
-        <Button alignment="CENTER" layoutX="430.0" layoutY="630.0" mnemonicParsing="false" onAction="#AdminSignIn" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: FFC107; -fx-background-radius: 50; -fx-border-radius: 50; -fx-border-color: #f8f7f7; -fx-border-width: 2;" text="User" textFill="#f8f7f7">
+        <Button fx:id="exitButton" layoutX="1448.0" layoutY="15.0" mnemonicParsing="false" onAction="#Exit"
+                onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="27.0" prefWidth="56.0"
+                style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"
+                text="EXIT" textFill="WHITE"/>
+        <Button alignment="CENTER" layoutX="430.0" layoutY="630.0" mnemonicParsing="false" onAction="#UserSignIn" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: FFC107; -fx-background-radius: 50; -fx-border-radius: 50; -fx-border-color: #f8f7f7; -fx-border-width: 2;" text="User" textFill="#f8f7f7">
             <font>
                 <Font name="Chalkboard" size="40.0" />
             </font>

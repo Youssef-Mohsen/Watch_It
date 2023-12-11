@@ -36,16 +36,21 @@ public class Admin {
     public static int standardPlanCounter;
     public static int premiumPlanCounter;
     private  static final int MONTHSNUMBER = 12;
-    static final short PLANINDEX = 7;
+    static final short PLANINDEX = 6;
     static final short USERNAMEINDEX = 1;
     static final short TYPEINDEX = 0;
-    static final short PASSWORDINDEX = 3;
-    private static short STARTDATEINDEX;
-    public static ArrayList<String> movies;
-    public static ArrayList<String> directors;
-    public static ArrayList<String> casts;
-    public static ArrayList<String> admins;
-    public static ArrayList<String> users;
+    static final short PASSWORDINDEX = 2;
+    static final short FIRSTNAMEINDEX = 4;
+    static final short LASTNAMEINDEX = 5;
+    static final short EMAILINDEX = 7;
+    static final short IDINDEX = 3;
+    private static short STARTDATEINDEX = 8;
+
+    public static ArrayList<String> movies = new ArrayList<String>();
+    public static ArrayList<String> directors = new ArrayList<String>();
+    public static ArrayList<String> casts = new ArrayList<String>();
+    public static ArrayList<String> admins = new ArrayList<String>();
+    public static ArrayList<String> users = new ArrayList<String>();
     public static ArrayList<String> topRatedMovies;
 
     //    public static ArrayList<String> readFile(File file) {
@@ -77,6 +82,8 @@ public class Admin {
                     movies.add(line);
                 else if(row[TYPEINDEX].equals("director"))
                     directors.add(line);
+                else
+                    admins.add(line);
             }
             b.close();
         } catch (IOException e) {
@@ -157,10 +164,25 @@ public class Admin {
         }
     }
     //enum ----------------
-    public static String getSpecificCellForUser(ArrayList<String> arrayList, String username, int index){
-        String wantedRecord = existsInFile(arrayList, username);
-        String []row = wantedRecord.split(",");
-        return row[index];
+    public static String getSpecificCellForUser(String type, String username, int index){
+        if(type.equals("user")){
+            String wantedRecord = existsInFile(users, username);
+            String []row = wantedRecord.split(",");
+            return row[index];
+        }
+        else if(type.equals("admin")){
+
+        }
+        else if(type.equals("cast")){
+
+        }
+        else if (type.equals("director")) {
+
+        }
+        else if (type.equals("movie")) {
+
+        }
+        return null;
     }
 
     //working just fine ^^^
@@ -419,14 +441,23 @@ public class Admin {
     }
     //name on getMovies is full name >> first and last combined.
     static ArrayList<String> getMovies(String name, ArrayList<String> allMovies){
-        ArrayList<String> requiredMovies = new ArrayList<String>();
-        for (String data: allMovies){
-            String []arr = data.split(",");
-            for(String index: arr)
-                //if cast/director is on this specific movie, then i'm gonna add name of the movie to the list.
-                if(index.equals(name))
-                    requiredMovies.add(arr[1]);
+    ArrayList<String> requiredMovies = new ArrayList<String>();
+    for (String data: allMovies){
+        String []arr = data.split(",");
+        for(String index: arr)
+            //if cast/director is on this specific movie, then i'm gonna add name of the movie to the list.
+            if(index.equals(name))
+                requiredMovies.add(arr[1]);
+    }
+    return requiredMovies;
+}
+    static ArrayList<User> getUsers(){
+        ArrayList<User> userArrayList = new ArrayList<User>();
+        for(int i=0; i<users.size(); i++){
+            String[] data =users.get(i).split(",");
+            User user = new User(data[USERNAMEINDEX], data[LASTNAMEINDEX],data[FIRSTNAMEINDEX],data[EMAILINDEX],data[PASSWORDINDEX] );
+            userArrayList.add(user);
         }
-        return requiredMovies;
+        return userArrayList;
     }
 }

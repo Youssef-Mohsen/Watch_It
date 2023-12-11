@@ -10,7 +10,7 @@
 <BorderPane fx:id="mainPane" maxHeight="864.0" maxWidth="1536.0" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleKeyPressed" prefHeight="864.0" prefWidth="1536.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watch_it.MainPageController">
 
     <top>
-        <Pane style="-fx-background-color: black;">
+        <Pane style="-fx-background-color: black;" prefHeight="100">
             <TextField layoutX="308.0" layoutY="24.0" prefHeight="30.0" prefWidth="459.0" promptText="Search movies..." style="-fx-prompt-text-fill: white; -fx-background-radius: 30; -fx-background-color: black; -fx-text-fill: white; -fx-text-size: 16;">
                 <effect>
                     <DropShadow blurType="ONE_PASS_BOX" height="28.02" radius="12.34" width="23.34">
@@ -29,17 +29,17 @@
                     <Font size="14.0" />
                 </font>
             </Button>
-            <Label fx:id="All" alignment="CENTER" layoutX="308.0" layoutY="68.0" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="24.0" prefWidth="68.0" style="-fx-background-color: #FFC107; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;" text="All" textFill="WHITE">
+            <Label fx:id="All" onKeyPressed="#toAllMovies" alignment="CENTER" layoutX="308.0" layoutY="68.0" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="24.0" prefWidth="68.0" style="-fx-background-color: #FFC107; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;" text="All" textFill="WHITE">
                 <font>
                     <Font name="System Bold" size="11.0" />
                 </font>
             </Label>
-            <Label fx:id="Action" alignment="CENTER" layoutX="392.0" layoutY="68.0" onMouseClicked="#labelsOnMouseClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="24.0" prefWidth="68.0" style="-fx-background-color: #565661; -fx-background-radius: 25;" text="Action" textFill="#fafafa">
+            <Label onKeyPressed="#toActionMovies" fx:id="Action" alignment="CENTER" layoutX="392.0" layoutY="68.0" onMouseClicked="#labelsOnMouseClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="24.0" prefWidth="68.0" style="-fx-background-color: #565661; -fx-background-radius: 25;" text="Action" textFill="#fafafa">
                 <font>
                     <Font name="System Bold" size="11.0" />
                 </font>
             </Label>
-            <Label fx:id="Comedy" alignment="CENTER" layoutX="482.0" layoutY="68.0" onMouseClicked="#labelsOnMouseClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="24.0" prefWidth="68.0" style="-fx-background-color: #565661; -fx-background-radius: 25;" text="Comedy" textFill="WHITE">
+            <Label onKeyPressed="#toComedyMovies" fx:id="Comedy" alignment="CENTER" layoutX="482.0" layoutY="68.0" onMouseClicked="#labelsOnMouseClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="24.0" prefWidth="68.0" style="-fx-background-color: #565661; -fx-background-radius: 25;" text="Comedy" textFill="WHITE">
                 <font>
                     <Font name="System Bold" size="11.0" />
                 </font>
@@ -54,12 +54,12 @@
                     <Font name="Arial Narrow Bold" size="27.0" />
                 </font>
             </Label>
-            <Label fx:id="Drama" alignment="CENTER" layoutX="567.0" layoutY="68.0" onMouseClicked="#labelsOnMouseClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="24.0" prefWidth="68.0" style="-fx-background-color: #565661; -fx-background-radius: 25;" text="Drama" textFill="WHITE">
+            <Label onKeyPressed="#toDramaMovies" fx:id="Drama" alignment="CENTER" layoutX="567.0" layoutY="68.0" onMouseClicked="#labelsOnMouseClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="24.0" prefWidth="68.0" style="-fx-background-color: #565661; -fx-background-radius: 25;" text="Drama" textFill="WHITE">
                 <font>
                     <Font name="System Bold" size="11.0" />
                 </font>
             </Label>
-            <Label fx:id="Horror" alignment="CENTER" layoutX="654.0" layoutY="68.0" onMouseClicked="#labelsOnMouseClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="24.0" prefWidth="68.0" style="-fx-background-color: #565661; -fx-background-radius: 25;" text="Horror" textFill="WHITE">
+            <Label onKeyPressed="#toHorrorMovies" fx:id="Horror" alignment="CENTER" layoutX="654.0" layoutY="68.0" onMouseClicked="#labelsOnMouseClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="24.0" prefWidth="68.0" style="-fx-background-color: #565661; -fx-background-radius: 25;" text="Horror" textFill="WHITE">
                 <font>
                     <Font name="System Bold" size="11.0" />
                 </font>
@@ -73,7 +73,7 @@
 
 
     <left>
-        <Pane style="-fx-background-color: black;">
+        <Pane fx:id="allMoviesPane" style="-fx-background-color: black;" prefWidth="244" >
                 <Label layoutX="8.0" prefHeight="43.0" prefWidth="160.0" text="Follow Watch it on" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="16.0" />

@@ -22,10 +22,10 @@ import javafx.fxml.FXML;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class AllMoviesController {
-
 
     @FXML
     private VBox leftCol;
@@ -36,18 +36,19 @@ public class AllMoviesController {
     @FXML
     private  VBox middleCol2;
     @FXML
-    private HBox Hbox;
-    @FXML
     private BorderPane mainPane;
     @FXML
     private ScrollPane mainScroll;
     @FXML
     TextField searchField;
     @FXML
-    private Button searchButton;
-    @FXML
     private Button Back;
-    private int page = 0;
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
+
+
+
 
     private ArrayList<Movie> Movies = new ArrayList<Movie>();
 
@@ -86,40 +87,42 @@ public class AllMoviesController {
     @FXML
     public void toAddMovies(ActionEvent event) throws IOException {
 
-        Parent fxml = FXMLLoader.load(getClass().getResource("add.fxml"));
+        Parent fxml = FXMLLoader.load(getClass().getResource("add-movies.fxml"));
         mainPane.setCenter(fxml);
     }
 
     @FXML void toMovies(ActionEvent event){
-        page = 0;
         switchPane(mainScroll);
     }
 
     @FXML void toAllUsers(ActionEvent event) throws IOException {
-        page = 1;
-        Parent fxml = FXMLLoader.load(getClass().getResource("allUsers.fxml"));
+        Parent fxml = FXMLLoader.load(getClass().getResource("all-users.fxml"));
         switchPane((ScrollPane) fxml);
 
     }
     @FXML void toAddUser(ActionEvent event) throws IOException {
-        Parent fxml = FXMLLoader.load(getClass().getResource("addUser.fxml"));
+        Parent fxml = FXMLLoader.load(getClass().getResource("add-users.fxml"));
         switchPane((ScrollPane) fxml);
     }
     @FXML
     void toPlans(ActionEvent event)throws IOException{
-        Parent fxml = FXMLLoader.load(getClass().getResource("plans.fxml"));
+        Parent fxml = FXMLLoader.load(getClass().getResource("Plans.fxml"));
         switchPane((ScrollPane) fxml);
     }
     @FXML
     public void backScenes(ActionEvent event) throws IOException {
-
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("first-page.fxml")));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
     @FXML
-    public  void onMouseEntered(){
+    private void onMouseEntered(){
         Back.setOnMouseEntered(event -> Back.setStyle("-fx-background-color: #FFC107; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
     }
     @FXML
-    public  void onMouseExit(){
+    private void onMouseExit(){
         Back.setOnMouseExited(event -> Back.setStyle("-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
     }
 
@@ -131,7 +134,7 @@ public class AllMoviesController {
         movieName.setStyle("-fx-background-color: transparent; -fx-color:white; -fx-font-color:white; -fx-text-fill: #C2C2C2; -fx-background-radius:50;-fx-font-size: 20;\n" +
                 "    -fx-text-fill: #C2C2C2;");
 
-        Image image = new Image(movie.getPoster_path());
+        Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(260);
         imageView.setFitHeight(320);
@@ -177,11 +180,6 @@ public class AllMoviesController {
         }
     }
 
-
-/*  @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-    }*/
 
 }
 

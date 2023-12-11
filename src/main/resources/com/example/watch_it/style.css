@@ -25,3 +25,7 @@
     -fx-background-image: url("assets/signIn.png");
     -fx-background-position: center center;
 }
+.text-box{
+    -fx-background-radius:50;
+    -fx-alignment: center;
+}

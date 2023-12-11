@@ -3,6 +3,7 @@ package com.example.watch_it;
 import javafx.application.Platform;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -50,13 +51,17 @@ public class MainPageController {
     @FXML
     private Label topMovies;
     @FXML
-    private Button watchRecords;
+    private Label watchRecords;
     @FXML
     private Button Search;
     @FXML
     private ScrollPane Scroll1;
     @FXML
     private ScrollPane Scroll2;
+    @FXML
+    private Pane allMoviesPane;
+    static int moviePage = 0;
+
 
     private final ArrayList<Movie> moviesTop = new ArrayList<>();
     private final ArrayList<Movie> moviesRecent = new ArrayList<>();
@@ -64,6 +69,11 @@ public class MainPageController {
     HBox allMovies;
     @FXML
     HBox allMovies2;
+    static ArrayList<Movie> action = new ArrayList<Movie>();
+    static ArrayList<Movie> comedy = new ArrayList<Movie>();
+    static ArrayList<Movie> horror = new ArrayList<Movie>();
+    static ArrayList<Movie> drama = new ArrayList<Movie>();
+
 
 
     private void setObject(Movie movie, String titleMovie, String pathMovie) {
@@ -421,10 +431,39 @@ public class MainPageController {
             Platform.exit();
         }
     }
-    private void switchPane(ScrollPane scrollPane){
-        mainPane.setCenter(scrollPane);
+    private void switchPane(Pane pane){
+        mainPane.setCenter(pane);
     }
     ///////////////////////////
+    @FXML
+    private void toAllMovies(){
+        switchPane(this.allMoviesPane);
+    }
+
+    @FXML
+    private void toActionMovies() throws IOException {
+        moviePage = 1;
+        Parent fxml = FXMLLoader.load(getClass().getResource("filter-page.fxml"));
+        switchPane((Pane)fxml);
+    }
+    @FXML
+    private void toComedyMovies() throws IOException{
+        moviePage = 2;
+        Parent fxml = FXMLLoader.load(getClass().getResource("filter-pagefxml"));
+        switchPane((Pane)fxml);
+    }
+    @FXML
+    private void toDramaMovies() throws IOException{
+        moviePage = 3;
+        Parent fxml = FXMLLoader.load(getClass().getResource("filter-page.fxml"));
+        switchPane((Pane)fxml);
+    }
+    @FXML
+    private void toHorrorMovies() throws IOException{
+        moviePage = 4;
+        Parent fxml = FXMLLoader.load(getClass().getResource("filter-page.fxml"));
+        switchPane((Pane)fxml);
+    }
 
     public void setStage(Stage stage) {
         this.stage = stage;
