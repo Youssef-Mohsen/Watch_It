@@ -4,23 +4,23 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Director extends Artist {
-    public void Read_File(ArrayList<String>s,ArrayList<Cast> cast){
+    public void Read_File(ArrayList<String>s,ArrayList<Director> directors){
         for (String i:s) {
             String[]row=i.split(",");
-            Cast c=new Cast();
-            c.setFirst_Name(row[0]);
-            c.setSecond_Name(row[1]);
-            c.setAge(Integer.parseInt(row[2]));
-            c.setGender(row[3]);
-            c.setNationality(row[4]);
+            Director d=new Director();
+            d.setFirst_Name(row[0]);
+            d.setSecond_Name(row[1]);
+            d.setAge(Integer.parseInt(row[2]));
+            d.setGender(row[3]);
+            d.setNationality(row[4]);
             for(int j=5;j<row.length;j++){
-                c.Movies.add(row[j]);
+                d.Movies.add(row[j]);
             }
-            cast.add(c);
+            directors.add(d);
         }
     }
 
-    public void Add_Director( ArrayList<Director>directors,String first_name,String second_name,int age,String gender,String Nationality,int num,ArrayList<String> movie){
+    public void Add_Director( String first_name,String second_name,int age,String gender,String Nationality,int num,ArrayList<String> movie){
         Director d=new Director();
         d.setFirst_Name(first_name);
         d.setSecond_Name(second_name);
@@ -28,14 +28,15 @@ public class Director extends Artist {
         d.setGender(gender);
         d.setNationality(Nationality);
         d.setMovies(movie);
-        directors.add(d);
+       // Admin.directors.add(d);
     }
-    public void Update_Director(int index, ArrayList<Director>directors,String movie){
+    public void Update_Director(int index,String movie){
 
-        directors.get(index).Movies.add(movie);
+        Admin.directors_obj.get(index).Movies.add(movie);
     }
-    public static Director  Search_director(String first_name, String second_name, ArrayList<Director> directors) {
-        for (Director m : directors) {
+
+    public static Director  Search_director(String first_name,String second_name) {
+        for (Director m : Admin.directors_obj) {
 
             if (m.getFirst_Name().equals(first_name) && m.getSecond_Name().equals(second_name)) {
 
@@ -45,27 +46,27 @@ public class Director extends Artist {
         }
         return null;
     }
-    public boolean  Check(String first_name,String second_name,ArrayList<Director> directors) {
-        for (Director m : directors) {
+    public int  Check(String first_name,String second_name) {
+        for (int i=0;i<Admin.directors_obj.size();i++) {
 
-            if (m.getFirst_Name().equals(first_name) && m.getSecond_Name().equals(second_name)) {
-                return true;
+            if (Admin.directors_obj.get(i).getFirst_Name().equals(first_name) && Admin.directors_obj.get(i).getSecond_Name().equals(second_name)) {
+                return i;
             }
         }
-        return false;
+        return -1;
     }
-    public void Delete(ArrayList<Director> directors,String first_name,String second_name)
+    public void Delete(String first_name,String second_name)
     {
-        for (Director d:directors) {
+        for (Director d:Admin.directors_obj) {
             if(d.getFirst_Name().equals(first_name)&&d.getSecond_Name().equals(second_name))
-                directors.remove(d);
+                Admin.directors_obj.remove(d);
             break;
         }
     }
-    public void change_arraydirectr(ArrayList<Director>directors,ArrayList<String>movies,ArrayList<String>arrayList)
+    public void change_arraydirectr(ArrayList<String>movies,ArrayList<String>arrayList)
     {
         String line=null;
-        for(Director d:directors)
+        for(Director d:Admin.directors_obj)
         {
             String []row=new String[5+movies.size()];
             String s=String.valueOf(d.getAge());
@@ -82,7 +83,7 @@ public class Director extends Artist {
             }
             line=String.join(",",row);
             arrayList.add(line);
-            System.out.println(line);
+
         }
 
     }

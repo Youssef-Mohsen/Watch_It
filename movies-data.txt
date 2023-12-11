@@ -1,2 +1,2 @@
-1,movie,The Dark Knight,When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.,2008-07-23,153,
+1,movie,The Dark Knight,When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.,2008-07-23,153
 Christopher Nolan,English,9.0,United States,565.000.000 M,2.437.724.184 B,@assets/the dark knight.jpeg,cast,Christian Bale,Morgan Freeman,Cillian MurphyAaron Eckhart,genres,action,crime,drama,thriller

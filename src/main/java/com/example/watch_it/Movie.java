@@ -20,6 +20,7 @@ public class Movie {
     private double budget;
     private double revenue;
     private float imdb_score;
+    private String description;
     private float avarage_rating = 0f;
     private float total_rating = 0f;
     private int users_rated = 0;
@@ -139,6 +140,13 @@ public class Movie {
 
     public void setImdb_score(float imdb_score) {
         this.imdb_score = imdb_score;
+    }
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void inc_views(){
