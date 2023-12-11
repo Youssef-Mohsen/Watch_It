@@ -7,7 +7,9 @@
 .HBox{
      -fx-background-color: black;
 }
-
+.starsRow{
+    -fx-background-color:  #001f2f;
+}
 .scrollPane > .viewport {
    -fx-background-color: black;
 }
