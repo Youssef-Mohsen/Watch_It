@@ -90,24 +90,35 @@ public class MainPageController {
     private void getData() {
         Movie movie = new Movie(),
                 movie2 = new Movie(),
-                movie3 = new Movie();
+                movie3 = new Movie(),
+                movie4=new Movie(),
+                movie5=new Movie(),
+                movie6=new Movie(),
+                movie7=new Movie();
 
-        setObject(movie, "Spider Man", "assets/Amazing_SpiderMan.png");
-        setObject(movie2, "Gravity", "assets/DefaultImage.jpg");
-        setObject(movie3, "Spider Man2", "assets/Amazing_SpiderMan.png");
+        setObject(movie, "Spider Man", "movies/Amazing_SpiderMan.png");
+        setObject(movie2, "Gravity", "movies/Gravity.jpg");
+        setObject(movie3, "Black Widow", "movies/black widow.jpeg");
+        setObject(movie4,"Home Alone","movies/home alone.jpeg");
+        setObject(movie5,"Joker","movies/joker.jpeg");
+        setObject(movie6,"Ready or Not","movies/ready or not.jpeg");
+        setObject(movie7,"The Dark Knight","movies/the dark knight.jpeg");
+
         moviesTop.add(movie);
         moviesTop.add(movie2);
         moviesTop.add(movie3);
-        moviesTop.add(movie);
-        moviesTop.add(movie2);
-        moviesTop.add(movie3);
+        moviesTop.add(movie4);
+        moviesTop.add(movie5);
+        moviesTop.add(movie6);
+        moviesTop.add(movie7);
         /////////////////////
         moviesRecent.add(movie);
         moviesRecent.add(movie2);
-        moviesRecent.add(movie);
-        moviesRecent.add(movie);
-        moviesRecent.add(movie);
-        moviesRecent.add(movie);
+        moviesRecent.add(movie3);
+        moviesRecent.add(movie4);
+        moviesRecent.add(movie5);
+        moviesRecent.add(movie6);
+        moviesRecent.add(movie7);
     }
 
     @FXML
@@ -123,7 +134,7 @@ public class MainPageController {
         onMouseEntered();
         onMouseExit();
         setupAutoScroll();
-        profile.setOnMouseClicked(event -> onMouseClicked());
+        profile.setOnMouseClicked(event -> profileOnMouseClicked());
         labelsOnMouseClicked();
     }
 
@@ -215,6 +226,24 @@ public class MainPageController {
         stage.setScene(scene);
         stage.show();
 
+    }
+    public void profileOnMouseClicked(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("watch-record.fxml"));
+        Parent root;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        /*WatchRecord controller = loader.getController();
+        controller.setStage(stage);*/
+        Scene scene = new Scene(root);
+        stage.setTitle("Movie");
+        stage.setResizable(false);
+        stage.setX(-7);
+        stage.setY(0);
+        stage.setScene(scene);
+        stage.show();
     }
     public void labelsOnMouseClicked(){
         Action.setOnMouseClicked(event -> {
@@ -339,6 +368,7 @@ public class MainPageController {
         root = loader.load();
         stage = (Stage)((Node)act.getSource()).getScene().getWindow();
         MovieController controller=loader.getController();
+        controller.setStage(stage);
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

@@ -38,7 +38,8 @@ public class MovieController {
     private Button Back;
     @FXML
     private Button Watch;
-
+    @FXML
+    private Button watchLater;
     @FXML
     private ImageView star1;
 
@@ -93,7 +94,7 @@ public class MovieController {
                     stars[h].setOnMouseExited(event2 ->
                             stars[finalJ].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/emptyStar.png")))));
                 }
-                int Max_Rating=Math.max(rating2,rating2);
+                int Max_Rating=Math.max(rating2,rating);
                 System.out.println(Max_Rating);
             });
 
@@ -162,13 +163,13 @@ public class MovieController {
     public void onMouseEntered() {
         Back.setOnMouseEntered(event -> Back.setStyle("-fx-background-color: #FFC107; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
         Watch.setOnMouseEntered(event -> Watch.setStyle("-fx-background-color: #FFC107; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
-
-
+        watchLater.setOnMouseEntered(event -> watchLater.setStyle("-fx-background-color: #FFC107; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
     }
 
     public void onMouseExit() {
         Back.setOnMouseExited(event -> Back.setStyle("-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
         Watch.setOnMouseExited(event -> Watch.setStyle("-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
+        watchLater.setOnMouseExited(event -> watchLater.setStyle("-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
     }
     //////////////////////////
 

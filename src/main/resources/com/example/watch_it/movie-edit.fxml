@@ -8,7 +8,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="835.0" prefWidth="1536.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watch_it.MoveEdit">
     <ImageView fx:id="ImageEdit" fitHeight="631.0" fitWidth="425.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
-        <Image url="@assets/Amazing_SpiderMan.png" />
+        <Image url="@movies/Amazing_SpiderMan.png" />
         <viewport>
             <Rectangle2D width="1000.0" />
         </viewport>
