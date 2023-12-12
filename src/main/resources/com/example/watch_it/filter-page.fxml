@@ -7,13 +7,13 @@
 
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="762.0" prefWidth="1292.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="762.0" prefWidth="1292.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watch_it.FilterPage" styleClass="scrollPane" stylesheets="@style.css">
    <children>
-      <ScrollPane prefHeight="762.0" prefWidth="1292.0">
+      <ScrollPane prefHeight="762.0" prefWidth="1292.0" styleClass="scrollPane" stylesheets="@style.css">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="762.0" prefWidth="1274.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="762.0" prefWidth="1274.0" styleClass="scrollPane" stylesheets="@style.css" />
 
-            <HBox fx:id="Hbox">
+            <HBox fx:id="Hbox" styleClass="scrollPane" stylesheets="@style.css">
                 <children>
                     <VBox fx:id="leftColumn">
                         <children></children>

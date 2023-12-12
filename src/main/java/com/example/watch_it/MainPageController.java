@@ -25,6 +25,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -66,9 +67,9 @@ public class MainPageController {
     private Pane AllMovies;
     @FXML
     private MenuButton menuButton;
+    @FXML
+    private  Label counter;
     static int moviePage = 0;
-
-
     private final ArrayList<Movie> moviesTop = new ArrayList<>();
     private final ArrayList<Movie> moviesRecent = new ArrayList<>();
     @FXML
@@ -136,6 +137,12 @@ public class MainPageController {
         setupAutoScroll();
         profile.setOnMouseClicked(event -> profileOnMouseClicked());
         labelsOnMouseClicked();
+        if(!WatchRecord.watchedMovies.isEmpty()) {
+            counter.setText(WatchRecord.watchedMovies.size() + ")");
+        }
+        else {
+            counter.setText("0"+")");
+        }
     }
 
     private void addToGUI(Movie movie) {
@@ -155,13 +162,13 @@ public class MainPageController {
 
         movieContainer.setOnMouseClicked(event -> {
             try {
-                onMouseClickedVBox(event,image);
+                onMouseClickedVBox(event,movie);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
         TopMovies.getChildren().addAll(movieContainer);
-
+        watchRecords.setOnMouseClicked(event -> onMouseClicked(movie));
     }
 
     private void addToGUI2(Movie movie) {
@@ -180,7 +187,7 @@ public class MainPageController {
         movieContainer.getChildren().addAll(imageView, label);
         movieContainer.setOnMouseClicked(event -> {
             try {
-                onMouseClickedVBox(event,image);
+                onMouseClickedVBox(event,movie);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -207,7 +214,7 @@ public class MainPageController {
                 " -fx-border-color: white;" +
                 " -fx-border-radius: 25;"));
     }
-    public void onMouseClicked() {
+    public void onMouseClicked(Movie movie) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("watch-record.fxml"));
         Parent root;
         try {
@@ -217,6 +224,8 @@ public class MainPageController {
         }
         WatchRecord controller = loader.getController();
         controller.setStage(stage);
+        controller.setMovieDetails(movie);
+        controller.initializeItems();
         Scene scene = new Scene(root);
         stage.setTitle("Movie");
         stage.setResizable(false);
@@ -363,17 +372,21 @@ public class MainPageController {
             toAllMovies();
         });
     }
-    public void onMouseClickedVBox(MouseEvent act,Image image) throws IOException {
+    public void onMouseClickedVBox(MouseEvent act,Movie movie) throws IOException {
         FXMLLoader loader=new FXMLLoader(getClass().getResource("movie-view.fxml"));
         root = loader.load();
         stage = (Stage)((Node)act.getSource()).getScene().getWindow();
         MovieController controller=loader.getController();
+        Movie movie2=new Movie(movie.getTitle(),movie.getRelease_date(),movie.getRunning_time(),movie.getGenre(),movie.getLanguage(),movie.getCountry(),movie.getPoster_path(),movie.getBudget(),50,movie.getImdb_score());
         controller.setStage(stage);
+        controller.setMovie(movie2);
+        controller.watchMovie(movie2);
+        controller.initialize();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-
-        controller.refreshScreen("Watch Movie Amazing SpiderMan(2023)", "Amazing SpiderMan",
+        Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));
+        controller.refreshScreen("Watch Movie Amazing SpiderMan(2023)", movie.getTitle(),
                 "Amazing SpiderMan Translated", "Action", "Amazing SpiderMan film.",
                 "120 minutes", image);
         stage.setScene(scene);
@@ -397,8 +410,8 @@ public class MainPageController {
         Recent.setOnMouseEntered(event -> underlineLabel(Recent, true));
         topMovies.setOnMouseEntered(event -> underlineLabel(topMovies, true));
         watchRecords.setOnMouseEntered(event -> {
-            System.out.println("Mouse entered!");
             watchRecords.setStyle("-fx-background-color: #FFC107; -fx-background-radius: 10; -fx-text-fill: black;");
+            counter.setStyle("-fx-background-color: #FFC107; -fx-background-radius: 10; -fx-text-fill: black;");
         });
 
     }
@@ -419,8 +432,9 @@ public class MainPageController {
                 " -fx-border-radius: 25;"));
         Recent.setOnMouseExited(event -> underlineLabel(Recent, false));
         topMovies.setOnMouseExited(event -> underlineLabel(topMovies, false));
-        watchRecords.setOnMouseExited(event -> { System.out.println("Mouse exit!");
+        watchRecords.setOnMouseExited(event -> {
             watchRecords.setStyle("-fx-background-color: #001f2f; -fx-background-radius: 10;");
+            counter.setStyle("-fx-background-color: #001f2f; -fx-background-radius: 10;");
         });
 
     }
@@ -497,7 +511,7 @@ public class MainPageController {
         mainPane.setCenter(pane);
     }
     ///////////////////////////
-    @FXML
+
     private void toAllMovies(){
         switchPane(this.AllMovies);
     }
@@ -507,19 +521,19 @@ public class MainPageController {
         Parent fxml = FXMLLoader.load(getClass().getResource("filter-page.fxml"));
         switchPane((Pane)fxml);
     }
-    @FXML
+
     private void toComedyMovies() throws IOException{
         moviePage = 2;
         Parent fxml = FXMLLoader.load(getClass().getResource("filter-page.fxml"));
         switchPane((Pane)fxml);
     }
-    @FXML
+
     private void toDramaMovies() throws IOException{
         moviePage = 3;
         Parent fxml = FXMLLoader.load(getClass().getResource("filter-page.fxml"));
         switchPane((Pane)fxml);
     }
-    @FXML
+
     private void toHorrorMovies() throws IOException{
         moviePage = 4;
         Parent fxml = FXMLLoader.load(getClass().getResource("filter-page.fxml"));

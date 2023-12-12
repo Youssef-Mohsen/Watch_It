@@ -14,6 +14,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 
@@ -57,19 +58,20 @@ public class MovieController {
 
     private ImageView[] stars;
 
-
+    private Movie movie;
+    private  boolean clicked =true;
     // Other fields and methods...
 
     // Method to update the text of the first label
 
 
-    @FXML
-    private void initialize() {
+    public void initialize() {
         stars = new ImageView[]{star1, star2, star3, star4, star5};
         // Set empty star images
         for (ImageView star : stars) {
             star.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/emptyStar.png"))));
         }
+        watchMovie(movie);
         onMouseEntered();
         onMouseExit();
     }
@@ -145,6 +147,13 @@ public class MovieController {
         duration.setText(filmDuration);
     }
 
+    public void watchMovie(Movie movie){
+
+            Watch.setOnMouseClicked(event -> {
+                WatchRecord.watchedMovies.add(movie);
+            });
+
+    }
     public void backScenes(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("main-page.fxml"));
         Parent root = loader.load();
@@ -176,6 +185,9 @@ public class MovieController {
     //////////////////////////
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+    public void setMovie(Movie movie){
+        this.movie=movie;
     }
 
 }

@@ -68,11 +68,11 @@
                 <Image url="@assets/profile.png" />
             </ImageView>
             <Label layoutX="1395.0" layoutY="63.0" text="Profile" textFill="WHITE" />
-            <MenuButton  fx:id="menuButton" layoutX="775.0" layoutY="27.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="108.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;" text="Search By" textFill="WHITE">
+            <MenuButton fx:id="menuButton" layoutX="775.0" layoutY="27.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="108.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;" text="Search By" textFill="WHITE">
                 <items>
-                    <MenuItem mnemonicParsing="false" text="Movie" onAction="#handleMenuItemClick" />
-                    <MenuItem mnemonicParsing="false" text="Director" onAction="#handleMenuItemClick" />
-                    <MenuItem mnemonicParsing="false" text="Cast" onAction="#handleMenuItemClick" />
+                    <MenuItem mnemonicParsing="false" onAction="#handleMenuItemClick" text="Movie" />
+                    <MenuItem mnemonicParsing="false" onAction="#handleMenuItemClick" text="Director" />
+                    <MenuItem mnemonicParsing="false" onAction="#handleMenuItemClick" text="Cast" />
                 </items>
             </MenuButton>
         </Pane>
@@ -138,7 +138,7 @@
                     </font>
                 </Label>
                 <Pane layoutX="157.0" layoutY="129.0" prefHeight="36.0" prefWidth="35.0" style="-fx-background-color: E2F7EB; -fx-background-radius: 50;" />
-                <Label fx:id="watchRecords" layoutX="10.0" layoutY="187.0" onMouseClicked="#onMouseClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="36.0" prefWidth="193.0" style="-fx-background-color: #001f2f; -fx-background-radius: 10;" text="Watching Record(0)" textFill="WHITE">
+                <Label fx:id="watchRecords" layoutX="10.0" layoutY="187.0" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="36.0" prefWidth="193.0" style="-fx-background-color: #001f2f; -fx-background-radius: 10;" text=" Watching Record(" textFill="WHITE">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -156,6 +156,11 @@
                 <ImageView fitHeight="53.0" fitWidth="36.0" layoutX="153.0" layoutY="422.0" opacity="0.98" pickOnBounds="true" preserveRatio="true">
                     <Image url="@movies/Amazing_SpiderMan.png" />
                 </ImageView>
+         <Label fx:id="counter" layoutX="125.0" layoutY="195.0" prefHeight="20.0" prefWidth="17.0" text="0)" textFill="WHITE">
+            <font>
+               <Font size="14.0" />
+            </font>
+         </Label>
             </Pane>
     </left>
 

@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="793.0" prefWidth="1353.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watch_it.WatchRecord">
-    <Label layoutX="46.0" layoutY="96.0" prefHeight="43.0" prefWidth="147.0" text=" Watched Movies" textFill="WHITE">
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="864.0" prefWidth="1536.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watch_it.WatchRecord">
+    <Label layoutX="32.0" layoutY="96.0" prefHeight="43.0" prefWidth="170.0" text=" Watched Movies" textFill="WHITE">
         <font>
-            <Font name="Arial Narrow" size="17.0" />
+            <Font name="Arial Narrow" size="25.0" />
         </font>
     </Label>
     <Label alignment="CENTER" layoutX="46.0" layoutY="28.0" prefHeight="43.0" prefWidth="119.0" style="-fx-background-color: FFC107; -fx-background-radius: 20;" text="Watch" textFill="WHITE">
@@ -21,6 +25,11 @@
         </font>
     </Label>
     <Pane layoutX="305.0" layoutY="425.0" style="-fx-background-color: black; -fx-background-radius: 15;" />
+    <ScrollPane fx:id="Scroll" layoutX="46.0" layoutY="145.0" prefHeight="280.0" prefWidth="1441.0" style="-fx-background-color: transparent; -fx-background-insets:0;" styleClass="scrollPane" stylesheets="@style.css" vbarPolicy="NEVER">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="182.0" prefWidth="915.0" />
+        <HBox fx:id="WatchedMovies" spacing="20" styleClass="HBox" stylesheets="@style.css" >
+        </HBox>
+    </ScrollPane>
 
 
 </Pane>
