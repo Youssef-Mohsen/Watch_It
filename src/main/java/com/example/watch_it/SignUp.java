@@ -78,7 +78,7 @@ public class SignUp {
         stage.setScene(scene);
         stage.show();
     }
-    /*@FXML
+    @FXML
     public void SignUP()
     {
         String username = CreateUserName.getText();
@@ -98,7 +98,7 @@ public class SignUp {
             CreateConfirmPassword.clear();
         }
         showAlert("Sign Up is completed Successful!");
-    }*/
+    }
     @FXML
     public void The_Password_Visibility(ActionEvent act)
     {

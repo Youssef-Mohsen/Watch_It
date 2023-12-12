@@ -29,15 +29,15 @@ public class Director extends Artist {
         d.setGender(gender);
         d.setNationality(Nationality);
         d.setMovies(movie);
-       // Admin.directors.add(d);
+        // Admin.directors.add(d);
     }
     public void Update_Director(int index,String movie){
 
-        Admin.directors_obj.get(index).Movies.add(movie);
+        allDirectors.get(index).Movies.add(movie);
     }
 
     public static Director  Search_director(String first_name,String second_name) {
-        for (Director m : Admin.directors_obj) {
+        for (Director m : allDirectors) {
 
             if (m.getFirst_Name().equals(first_name) && m.getSecond_Name().equals(second_name)) {
 
@@ -48,9 +48,9 @@ public class Director extends Artist {
         return null;
     }
     public int  Check(String first_name,String second_name) {
-        for (int i=0;i<Admin.directors_obj.size();i++) {
+        for (int i=0;i<allDirectors.size();i++) {
 
-            if (Admin.directors_obj.get(i).getFirst_Name().equals(first_name) && Admin.directors_obj.get(i).getSecond_Name().equals(second_name)) {
+            if (allDirectors.get(i).getFirst_Name().equals(first_name) && allDirectors.get(i).getSecond_Name().equals(second_name)) {
                 return i;
             }
         }
@@ -58,16 +58,16 @@ public class Director extends Artist {
     }
     public void Delete(String first_name,String second_name)
     {
-        for (Director d:Admin.directors_obj) {
+        for (Director d:allDirectors) {
             if(d.getFirst_Name().equals(first_name)&&d.getSecond_Name().equals(second_name))
-                Admin.directors_obj.remove(d);
+                allDirectors.remove(d);
             break;
         }
     }
     public void change_arraydirectr(ArrayList<String>movies,ArrayList<String>arrayList)
     {
         String line=null;
-        for(Director d:Admin.directors_obj)
+        for(Director d:allDirectors)
         {
             String []row=new String[5+movies.size()];
             String s=String.valueOf(d.getAge());

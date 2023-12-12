@@ -11,6 +11,8 @@ public class Movie {
     public static ArrayList<Movie> drama = new ArrayList<>();
     public static ArrayList<Movie> horror = new ArrayList<>();
     public static ArrayList<Movie> comedy = new ArrayList<>();
+    private String directorName;
+    private ArrayList<String> castNames;
     private static int counter = 0;
     private int id;
     private int views = 0;
@@ -39,7 +41,7 @@ public class Movie {
         this.cast = new ArrayList<>();
     }
 
-    public Movie(String title, LocalDate release_date, String running_time, ArrayList<String> genre, String language, String country, String poster_path, String budget, String revenue, int imdb_score) {
+    public Movie(String title, LocalDate release_date, String running_time, ArrayList<String> genre, String language, String country, String poster_path, String budget, String revenue, int imdb_score,String description) {
         counter++;
         this.id = counter;
         this.title = title;
@@ -52,6 +54,7 @@ public class Movie {
         this.budget = budget;
         this.revenue = revenue;
         this.imdb_score = imdb_score;
+        this.description=description;
         this.director = new Director();
         this.cast = new ArrayList<>();
     }
@@ -243,6 +246,33 @@ public class Movie {
                 }
             }
         }
+    }
+    public String getDirectorName() {
+        return directorName;
+    }
+
+    public void setDirectorName(String directorName) {
+        this.directorName = directorName;
+    }
+
+    public ArrayList<String> getCastNames() {
+        return castNames;
+    }
+
+    public void setCastNames(ArrayList<String> castNames) {
+        this.castNames = castNames;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Movie otherMovie = (Movie) obj;
+        return title.equals(otherMovie.title);
     }
 
 }

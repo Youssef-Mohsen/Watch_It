@@ -62,7 +62,7 @@
             </VBox>
             <VBox alignment="CENTER_LEFT" prefHeight="242.0" prefWidth="259.0" spacing="20.0">
                <children>
-                    <Label text="Bsmala _Bagoury" textFill="WHITE">
+                    <Label fx:id="usename" text="Bsmala _Bagoury" textFill="WHITE">
                         <font>
                             <Font name="System Bold" size="16.0" />
                         </font>

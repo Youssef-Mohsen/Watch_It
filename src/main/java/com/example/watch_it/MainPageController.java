@@ -84,44 +84,12 @@ public class MainPageController {
     static ArrayList<Movie> drama = new ArrayList<Movie>();
 
 
-
-    private void setObject(Movie movie, String titleMovie, String pathMovie) {
-        movie.setTitle(titleMovie);
-        movie.setPoster_path(pathMovie);
-    }
-
     private void getData() {
-        Movie movie = new Movie(),
-                movie2 = new Movie(),
-                movie3 = new Movie(),
-                movie4=new Movie(),
-                movie5=new Movie(),
-                movie6=new Movie(),
-                movie7=new Movie();
+       for(Movie movie : Movie.allmovies){
+           moviesTop.add(movie);
+           moviesRecent.add(movie);
+       }
 
-        setObject(movie, "Spider Man", "movies/Amazing_SpiderMan.png");
-        setObject(movie2, "Gravity", "movies/Gravity.jpg");
-        setObject(movie3, "Black Widow", "movies/black widow.jpeg");
-        setObject(movie4,"Home Alone","movies/home alone.jpeg");
-        setObject(movie5,"Joker","movies/joker.jpeg");
-        setObject(movie6,"Ready or Not","movies/ready or not.jpeg");
-        setObject(movie7,"The Dark Knight","movies/the dark knight.jpeg");
-
-        moviesTop.add(movie);
-        moviesTop.add(movie2);
-        moviesTop.add(movie3);
-        moviesTop.add(movie4);
-        moviesTop.add(movie5);
-        moviesTop.add(movie6);
-        moviesTop.add(movie7);
-        /////////////////////
-        moviesRecent.add(movie);
-        moviesRecent.add(movie2);
-        moviesRecent.add(movie3);
-        moviesRecent.add(movie4);
-        moviesRecent.add(movie5);
-        moviesRecent.add(movie6);
-        moviesRecent.add(movie7);
     }
 
     @FXML
@@ -228,6 +196,7 @@ public class MainPageController {
         controller.setStage(stage);
         controller.setMovieDetails(movie);
         controller.initializeItems();
+        controller.aBoolean=true;
         Scene scene = new Scene(root);
         stage.setTitle("Movie");
         stage.setResizable(false);
@@ -239,15 +208,15 @@ public class MainPageController {
 
     }
     public void profileOnMouseClicked(){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("watch-record.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("profile-page.fxml"));
         Parent root;
         try {
             root = loader.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        /*WatchRecord controller = loader.getController();
-        controller.setStage(stage);*/
+        profilePageController controller = loader.getController();
+        controller.setStage(stage);
         Scene scene = new Scene(root);
         stage.setTitle("Movie");
         stage.setResizable(false);
@@ -379,7 +348,7 @@ public class MainPageController {
         root = loader.load();
         stage = (Stage)((Node)act.getSource()).getScene().getWindow();
         MovieController controller=loader.getController();
-        Movie movie2=new Movie(movie.getTitle(),movie.getRelease_date(),movie.getRunning_time(),movie.getGenres(),movie.getLanguage(),movie.getCountry(),movie.getPoster_path(),movie.getBudget(),"50",movie.getImdb_score());
+        Movie movie2=new Movie(movie.getTitle(),movie.getRelease_date(),movie.getRunning_time(),movie.getGenres(),movie.getLanguage(),movie.getCountry(),movie.getPoster_path(),movie.getBudget(),"50",movie.getImdb_score(),movie.getDescription());
         controller.setStage(stage);
         controller.setMovie(movie2);
         controller.watchMovie(movie2);
@@ -387,10 +356,12 @@ public class MainPageController {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        //movie.getRelease_date().getYear()
+        //movie.getGenres().toString()
         Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));
-        controller.refreshScreen("Watch Movie Amazing SpiderMan(2023)", movie.getTitle(),
-                "Amazing SpiderMan Translated", "Action", "Amazing SpiderMan film.",
-                "120 minutes", image);
+        controller.refreshScreen("Watch Movie "+ movie.getTitle() + "("+movie.getRelease_date().getYear()+")", movie.getTitle(),
+                movie.getTitle()+" Translated",movie.getGenres().toString(), movie.getDescription(),
+                movie.getRunning_time(), image,movie.getDirectorName(),movie.getCast().toString());
         stage.setScene(scene);
         stage.show();
 

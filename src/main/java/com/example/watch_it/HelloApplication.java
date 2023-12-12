@@ -15,13 +15,14 @@ public class HelloApplication extends Application {
         File file = new File("data.txt");
         Admin.readFile(file);
         User.allusers.addAll(Admin.getUsers());
-        Cast.allCast.addAll(Admin.getAllCast());
-        Director.allDirectors.addAll(Admin.getAllDirectors());
-
         File movieFile = new File("movies-data.txt");
         Admin.readMovieOneLine(movieFile);
-        Admin.getAllMovies();
+        Movie.allmovies.addAll(Admin.getMoviesObjs());
 
+       /* File movieFile = new File("movies-data.txt");
+        Admin.readMovieOneLine(movieFile);
+        Admin.getAllMovies();
+*/
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("first-page.fxml"));
         Parent root;

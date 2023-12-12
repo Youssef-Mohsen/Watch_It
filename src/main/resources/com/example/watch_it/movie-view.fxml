@@ -8,7 +8,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="835.0" prefWidth="1536.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watch_it.MovieController">
     <ImageView fx:id="imagePreview" fitHeight="631.0" fitWidth="425.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
-        <Image url="@movies/Amazing_SpiderMan.png" />
+
         <viewport>
             <Rectangle2D width="1000.0" />
         </viewport>
@@ -54,7 +54,7 @@
             <Font size="20.0" />
         </font>
     </Label>
-    <Label fx:id="Film" layoutX="511.0" layoutY="294.0" prefHeight="30.0" prefWidth="555.0" textFill="#87cefa">
+    <Label fx:id="Film" layoutX="498.0" layoutY="294.0" prefHeight="30.0" prefWidth="555.0" textFill="#87cefa">
         <font>
             <Font size="20.0" />
         </font>
@@ -64,7 +64,7 @@
             <Font size="20.0" />
         </font>
     </Label>
-    <Label fx:id="Genre" layoutX="510.0" layoutY="418.0" prefHeight="27.0" prefWidth="257.0" textFill="#87cefa">
+    <Label fx:id="Genre" layoutX="510.0" layoutY="412.0" prefHeight="36.0" prefWidth="568.0" textFill="#87cefa">
         <font>
             <Font size="20.0" />
         </font>
@@ -84,7 +84,7 @@
             <Font name="System Bold" size="25.0" />
         </font>
     </Label>
-    <Label fx:id="description" layoutX="7.0" layoutY="755.0" prefHeight="70.0" prefWidth="591.0" textFill="GREY" wrapText="true">
+    <Label fx:id="description" layoutX="7.0" layoutY="755.0" prefHeight="70.0" prefWidth="829.0" textFill="GREY" wrapText="true">
         <font>
             <Font size="16.0" />
         </font>
@@ -100,7 +100,7 @@
             <Font name="Arial Narrow Bold" size="27.0" />
         </font>
     </Label>
-   <Button fx:id="Watch" layoutX="1369.0" layoutY="631.0" mnemonicParsing="false"  onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="27.0" prefWidth="87.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;" text="Watch" textFill="WHITE">
+   <Button fx:id="Watch" layoutX="1369.0" layoutY="631.0" mnemonicParsing="false" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="27.0" prefWidth="87.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;" text="Watch" textFill="WHITE">
       <font>
          <Font size="14.0" />
       </font>
@@ -118,6 +118,26 @@
          <Font size="14.0" />
       </font>
    </Button>
+   <Label layoutX="1126.0" layoutY="200.0" prefHeight="36.0" prefWidth="95.0" text="Director:" textFill="GREY">
+      <font>
+         <Font size="20.0" />
+      </font>
+   </Label>
+   <Label fx:id="Director" layoutX="1229.0" layoutY="200.0" prefHeight="36.0" prefWidth="283.0" textFill="WHITE">
+      <font>
+         <Font size="20.0" />
+      </font>
+   </Label>
+   <Label layoutX="1126.0" layoutY="266.0" text="Cast:" textFill="GREY">
+      <font>
+         <Font size="20.0" />
+      </font>
+   </Label>
+   <Label fx:id="Cast" layoutX="1174.0" layoutY="255.0" prefHeight="52.0" prefWidth="335.0" textFill="WHITE">
+      <font>
+         <Font size="20.0" />
+      </font>
+   </Label>
 
 
 </Pane>

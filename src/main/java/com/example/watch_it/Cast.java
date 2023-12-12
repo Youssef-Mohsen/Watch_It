@@ -37,7 +37,7 @@ public class Cast extends Artist{
 //        Admin.cast.get(index).Movies.add(movie);
     }
     public static Cast  Search_Cast(String first_name,String second_name) {
-        for (Cast m : Admin.casts_obj) {
+        for (Cast m : allCast) {
 
             if (m.getFirst_Name().equals(first_name) && m.getSecond_Name().equals(second_name)) {
                 return m;
@@ -46,9 +46,9 @@ public class Cast extends Artist{
         return null;
     }
     public int  Check(String first_name,String second_name) {
-        for (int i=0;i<Admin.casts_obj.size();i++) {
+        for (int i=0;i<allCast.size();i++) {
 
-            if (Admin.casts_obj.get(i).getFirst_Name().equals(first_name) && Admin.casts_obj.get(i).getSecond_Name().equals(second_name)) {
+            if (allCast.get(i).getFirst_Name().equals(first_name) && allCast.get(i).getSecond_Name().equals(second_name)) {
                 return i;
             }
         }
@@ -56,16 +56,16 @@ public class Cast extends Artist{
     }
     public void Delete(String first_name,String second_name)
     {
-        for (Cast c:Admin.casts_obj) {
+        for (Cast c:allCast) {
             if(c.getFirst_Name().equals(first_name)&&c.getSecond_Name().equals(second_name))
-                Admin.casts_obj.remove(c);
+                allCast.remove(c);
             break;
         }
     }
     public void change_arraycast(ArrayList<String>movies,ArrayList<String>arrayList)
     {
         String line=null;
-        for(Cast c:Admin.casts_obj)
+        for(Cast c:allCast)
         {
             String []row=new String[5+movies.size()];
             String s=String.valueOf(c.getAge());

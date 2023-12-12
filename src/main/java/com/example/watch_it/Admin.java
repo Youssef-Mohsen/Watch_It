@@ -245,44 +245,44 @@ public class Admin {
         };
     }
     static Month monthWithMostRevenue(){
-         Month month = null;
-         int [] monthsRevenue = new int[MONTHSNUMBER];
-         for(String user: users){
-             String[] data = user.split(",");
-             String plan = data[PLANINDEX];
-             LocalDate startDate = LocalDate.parse(data[STARTDATEINDEX]);
-             LocalDate todaysDate = LocalDate.now();
-             int startMonth = getMonth(startDate.getMonth());
-             int todaysmonth = getMonth(todaysDate.getMonth());
-             int differenceMonths = todaysmonth - startMonth;
-             if(startDate.getYear() != todaysDate.getYear())
-                 differenceMonths = (MONTHSNUMBER - startMonth) + todaysmonth;
+        Month month = null;
+        int [] monthsRevenue = new int[MONTHSNUMBER];
+        for(String user: users){
+            String[] data = user.split(",");
+            String plan = data[PLANINDEX];
+            LocalDate startDate = LocalDate.parse(data[STARTDATEINDEX]);
+            LocalDate todaysDate = LocalDate.now();
+            int startMonth = getMonth(startDate.getMonth());
+            int todaysmonth = getMonth(todaysDate.getMonth());
+            int differenceMonths = todaysmonth - startMonth;
+            if(startDate.getYear() != todaysDate.getYear())
+                differenceMonths = (MONTHSNUMBER - startMonth) + todaysmonth;
 
-             while(differenceMonths >= 0){
-                 if(plan.equals("basic")){
-                     monthsRevenue[(startMonth + differenceMonths)] += 10;
-                 }
-                 else if (plan.equals("standard")) {
-                     monthsRevenue[(startMonth + differenceMonths)] += 20;
-                 }
-                 else{
-                     monthsRevenue[(startMonth + differenceMonths)] += 30;
-                 }
-                 differenceMonths--;
-             }
-         }
-         int []check = new int[MONTHSNUMBER];
-         System.arraycopy(monthsRevenue, 0, check, 0, MONTHSNUMBER);
-         Arrays.sort(check);
-         int recuiredMonth = 0;
-         for(int i=0; i<MONTHSNUMBER; i++){
+            while(differenceMonths >= 0){
+                if(plan.equals("basic")){
+                    monthsRevenue[(startMonth + differenceMonths)] += 10;
+                }
+                else if (plan.equals("standard")) {
+                    monthsRevenue[(startMonth + differenceMonths)] += 20;
+                }
+                else{
+                    monthsRevenue[(startMonth + differenceMonths)] += 30;
+                }
+                differenceMonths--;
+            }
+        }
+        int []check = new int[MONTHSNUMBER];
+        System.arraycopy(monthsRevenue, 0, check, 0, MONTHSNUMBER);
+        Arrays.sort(check);
+        int recuiredMonth = 0;
+        for(int i=0; i<MONTHSNUMBER; i++){
             if(monthsRevenue[i] == check[1])
-             {
-                 recuiredMonth = i + 1;
-                 break;
-             }
-         }
-         return getMonth(recuiredMonth);
+            {
+                recuiredMonth = i + 1;
+                break;
+            }
+        }
+        return getMonth(recuiredMonth);
     }
     static void getUserMovieLists(String user, ArrayList<String> watched_movies, ArrayList<String> toBeWatched_movies){
         boolean toBeWatched = false;
@@ -369,11 +369,43 @@ public class Admin {
         ArrayList<Movie> arrayList = new ArrayList<Movie>();
         for(String oneMovie: movies){
             String[] arr = oneMovie.split(",");
-            String name = arr[1] + " " + arr[2];
+            System.out.println(arr[1]);
+            String name = arr[1];
             arrayList.add(getOneMovie(name));
         }
         Movie.allmovies.addAll(arrayList);
-        Movie.getDiffGenres();
+        //Movie.getDiffGenres();
+    }
+    static ArrayList<Movie> getMoviesObjs(){
+        ArrayList<Movie> arrayList = new ArrayList<Movie>();
+        Movie movie = new Movie();
+        for(String s: movies){
+            arrayList.add(getOneMovie_(s));
+        }
+        return arrayList;
+    }
+    static Movie getOneMovie_(String movieString){
+        Movie movie = new Movie();
+        String[] arr = movieString.split(",");
+        movie.setTitle(arr[1]);
+        movie.setId(Integer.parseInt(arr[0]));
+        movie.setRelease_date(LocalDate.parse(arr[3]));
+        movie.setDescription(arr[2]);
+        movie.setRunning_time(arr[4]);
+        movie.setBudget(arr[9]);
+        movie.setCountry(arr[8]);
+        movie.setLanguage(arr[6]);
+        movie.setImdb_score(Integer.parseInt(arr[7]));
+        movie.setRevenue(arr[10]);
+        movie.setPoster_path(arr[11]);
+        movie.setDirector(getDirector(arr[5]));
+        movie.setDirectorName(arr[5]);
+        ArrayList<String> cast = new ArrayList<String>();
+        ArrayList<String> genres = new ArrayList<String>();
+        castAndGenres(movieString,cast,genres);
+        movie.setCastNames(cast);
+        movie.setGenre(genres);
+        return movie;
     }
     static Movie getOneMovie (String title){
         Movie movie = new Movie();
@@ -385,8 +417,7 @@ public class Admin {
                 movie.setRelease_date(LocalDate.parse(arr[3]));
                 movie.setDescription(arr[2]);
                 movie.setRunning_time(arr[4]);
-                //director,cast ykono strings msh obj ,wel class bta3hom hykon el movie string msh obj.
-                movie.setBudget(arr[11]);
+                movie.setBudget(arr[9]);
                 movie.setCountry(arr[8]);
                 movie.setLanguage(arr[6]);
                 movie.setImdb_score(Integer.parseInt(arr[7]));
@@ -473,7 +504,7 @@ public class Admin {
         String[] castName = name.split(" ");
         for (String oneCast: casts){
             String[] data = oneCast.split(",");
-            if(data[1].equals(castName[0]) && data[2].equals(castName[1])){
+            if(data[1].equals(castName[1]) && data[2].equals(castName[2])){
                 eachCast.setFirst_Name(data[1]);
                 eachCast.setSecond_Name(data[2]);
                 eachCast.setGender(data[4]);
@@ -506,16 +537,16 @@ public class Admin {
     }
     //name on getMovies is full name >> first and last combined.
     static ArrayList<String> getMovies(String name, ArrayList<String> allMovies){
-    ArrayList<String> requiredMovies = new ArrayList<String>();
-    for (String data: allMovies){
-        String []arr = data.split(",");
-        for(String index: arr)
-            //if cast/director is on this specific movie, then i'm gonna add name of the movie to the list.
-            if(index.equals(name))
-                requiredMovies.add(arr[1]);
+        ArrayList<String> requiredMovies = new ArrayList<String>();
+        for (String data: allMovies){
+            String []arr = data.split(",");
+            for(String index: arr)
+                //if cast/director is on this specific movie, then i'm gonna add name of the movie to the list.
+                if(index.equals(name))
+                    requiredMovies.add(arr[1]);
+        }
+        return requiredMovies;
     }
-    return requiredMovies;
-}
     static ArrayList<User> getUsers(){
         ArrayList<User> userArrayList = new ArrayList<User>();
         for(int i=0; i<users.size(); i++){

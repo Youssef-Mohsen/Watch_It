@@ -27,8 +27,7 @@ public class profilePageController implements Initializable {
     @FXML
     private Label firstname;
 
-    @FXML
-    private Label id;
+
 
     @FXML
     private Label plan;
@@ -39,7 +38,7 @@ public class profilePageController implements Initializable {
     private Button Back;
     @FXML
     private ImageView profilePictue;
-    String UserName = usename.getText();
+    String UserName ;
     ButtonType buttonTypeYes = new ButtonType("Yes");
     ButtonType buttonTypeNo = new ButtonType("No");
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -140,6 +139,7 @@ public class profilePageController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         Select_List.getItems().addAll("Edit_Profile" , "Log_Out" , "Delete_Account" , "Delete_Subscription" , "Delete_Recorded_Movies");
+
     }
     @FXML
     private void onMouseEntered(){
@@ -151,12 +151,16 @@ public class profilePageController implements Initializable {
     }
     @FXML
     private void  backScenes(ActionEvent event) throws IOException {
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("main-page.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("main-page.fxml"));
         root = loader.load();
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        profilePageController controller=loader.getController();
+        MainPageController controller = loader.getController();
         controller.setStage(stage);
-        scene = new Scene(root);
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setTitle("Movie");
+        stage.setResizable(false);
+        stage.setX(-7);
+        stage.setY(0);
         stage.setScene(scene);
         stage.show();
     }

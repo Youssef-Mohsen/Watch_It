@@ -19,7 +19,7 @@ import java.util.Objects;
 
 
 public class MovieController {
-
+    private Parent root;
     private Stage stage;
     @FXML
     private Label titleMovie;
@@ -34,13 +34,17 @@ public class MovieController {
     @FXML
     private Label description;
     @FXML
+    private Label Director;
+    @FXML
+    private Label Cast;
+    @FXML
     private ImageView imagePreview;
     @FXML
     private Button Back;
     @FXML
-    private Button Watch;
+    public Button Watch;
     @FXML
-    private Button watchLater;
+    public Button watchLater;
     @FXML
     private ImageView star1;
 
@@ -59,7 +63,8 @@ public class MovieController {
     private ImageView[] stars;
 
     private Movie movie;
-    private  boolean clicked =true;
+    public boolean aBoolean=false;
+
     // Other fields and methods...
 
     // Method to update the text of the first label
@@ -74,6 +79,9 @@ public class MovieController {
         watchMovie(movie);
         onMouseEntered();
         onMouseExit();
+    }
+    public void disableButtons(){
+        watchLater.setDisable(true);
     }
     @FXML
     private boolean handleStarClick(MouseEvent event) {
@@ -98,7 +106,7 @@ public class MovieController {
                 }
                 int Max_Rating=Math.max(rating2,rating);
                 System.out.println(Max_Rating);
-            });
+                });
 
         }
         // You can perform additional actions here, such as saving the rating to a database.
@@ -126,7 +134,7 @@ public class MovieController {
         }
     }
     public void refreshScreen(String filmTitle, String newMovieName, String newFilm, String filmGenre,
-                              String filmDescription, String filmDuration, Image image) {
+                              String filmDescription, String filmDuration, Image image,String director,String cast) {
         titleMovie.setText(filmTitle);
         movieName.setText(newMovieName);
         Film.setText(newFilm);
@@ -134,31 +142,41 @@ public class MovieController {
         description.setText(filmDescription);
         duration.setText(filmDuration);
         imagePreview.setImage(image);
-
+        Director.setText(director);
+        Cast.setText(cast);
     }
 
-    public void refreshLabels(String filmTitle, String newMovieName, String newFilm, String filmGenre,
-                              String filmDescription, String filmDuration) {
-        titleMovie.setText(filmTitle);
-        movieName.setText(newMovieName);
-        Film.setText(newFilm);
-        Genre.setText(filmGenre);
-        description.setText(filmDescription);
-        duration.setText(filmDuration);
+    public void disableWatch(){
+        Watch.setOnMouseClicked(event -> Watch.setDisable(true));
     }
-
     public void watchMovie(Movie movie){
 
             Watch.setOnMouseClicked(event -> {
-                WatchRecord.watchedMovies.add(movie);
+                if(WatchRecord.watchedMovies.contains(movie)) {
+                    System.out.println("That Movie here");
+                }
+                else {
+                    WatchRecord.watchedMovies.add(movie);
+                }
+                Watch.setDisable(true);
             });
 
     }
     public void backScenes(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("main-page.fxml"));
-        Parent root = loader.load();
-        MainPageController controller = loader.getController();
-        controller.setStage(stage);
+        if(!aBoolean) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("main-page.fxml"));
+             root = loader.load();
+            MainPageController controller = loader.getController();
+            controller.setStage(stage);
+        }
+        else{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("watch-record.fxml"));
+            root = loader.load();
+            WatchRecord controller = loader.getController();
+            controller.setStage(stage);
+            controller.setMovieDetails(movie);
+            controller.initializeItems();
+        }
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("Movie");
