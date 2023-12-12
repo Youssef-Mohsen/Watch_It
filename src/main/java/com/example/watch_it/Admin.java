@@ -44,10 +44,7 @@ public class Admin {
     private static short STARTDATEINDEX = 8;
 
     public static ArrayList<String> movies = new ArrayList<String>();
-    public static ArrayList<Movie> movies_obj = new ArrayList<Movie>();
     public static ArrayList<String> directors = new ArrayList<String>();
-    public static ArrayList<Director> directors_obj = new ArrayList<Director>();
-    public static ArrayList<Cast> casts_obj = new ArrayList<Cast>();
     public static ArrayList<String> casts = new ArrayList<String>();
     public static ArrayList<String> admins = new ArrayList<String>();
     public static ArrayList<String> users = new ArrayList<String>();
@@ -68,6 +65,19 @@ public class Admin {
                     directors.add(line);
                 else
                     admins.add(line);
+            }
+            b.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public static void readMovieOneLine(File file) {
+        ArrayList<String> arrayList = new ArrayList<String>();
+        try {
+            String line = "";
+            BufferedReader b = new BufferedReader(new FileReader(file));
+            while ((line = b.readLine()) != null) {
+                movies.add(line);
             }
             b.close();
         } catch (IOException e) {
@@ -173,7 +183,6 @@ public class Admin {
     static Subscription.Plans getMostSubscripedPlan(){
         Subscription.Plans plan = null;
         HashMap<Integer,Subscription.Plans> map = new HashMap<>();
-        getUsersInEachPlan();
 
         map.put(basicPlanCounter,Subscription.Plans.BASIC);
         map.put(standardPlanCounter,Subscription.Plans.STANDARD);
@@ -186,6 +195,9 @@ public class Admin {
         return plan;
     }
     static void getUsersInEachPlan(){
+        basicPlanCounter = 0;
+        standardPlanCounter = 0;
+        premiumPlanCounter = 0;
         for (String index: users){
             String []line = index.split(",");
             HashMap<Integer,Subscription.Plans> map = new HashMap<>();
@@ -345,7 +357,7 @@ public class Admin {
                 // movie.setDuration(Integer.parseInt(arr[4]));
                 //director,case lazm hykono strings msh obj.
                 //movie.setDirector(arr[7]);
-                movie.movie.setBudget(Double.parseDouble(arr[11]));
+                movie.movie.setBudget(arr[11]);
                 movie.movie.setCountry(arr[10]);
                 movie.setRating(rate);
                 //movie.setDirector(getDirector());
@@ -353,7 +365,16 @@ public class Admin {
         }
         return movie;
     }
-
+    static void getAllMovies(){
+        ArrayList<Movie> arrayList = new ArrayList<Movie>();
+        for(String oneMovie: movies){
+            String[] arr = oneMovie.split(",");
+            String name = arr[1] + " " + arr[2];
+            arrayList.add(getOneMovie(name));
+        }
+        Movie.allmovies.addAll(arrayList);
+        Movie.getDiffGenres();
+    }
     static Movie getOneMovie (String title){
         Movie movie = new Movie();
         for (String oneMovie : movies) {
@@ -361,25 +382,27 @@ public class Admin {
             if (arr[1].equals(title)) {
                 movie.setTitle(arr[1]);
                 movie.setId(Integer.parseInt(arr[0]));
-                movie.setRelease_date(LocalDate.parse(arr[4]));
-                movie.setDescription(arr[3]);
-                // movie.setDuration(Integer.parseInt(arr[4]));
+                movie.setRelease_date(LocalDate.parse(arr[3]));
+                movie.setDescription(arr[2]);
+                movie.setRunning_time(arr[4]);
                 //director,cast ykono strings msh obj ,wel class bta3hom hykon el movie string msh obj.
-                movie.setBudget(Double.parseDouble(arr[10]));
-                movie.setCountry(arr[9]);
-                movie.setLanguage(arr[7]);
-                movie.setImdb_score(Float.parseFloat(arr[8]));
-                movie.setRevenue(Double.parseDouble(arr[11]));
-                movie.setPoster_path(arr[12]);
-                //movie.setDirector(getDirector());
-
+                movie.setBudget(arr[11]);
+                movie.setCountry(arr[8]);
+                movie.setLanguage(arr[6]);
+                movie.setImdb_score(Integer.parseInt(arr[7]));
+                movie.setRevenue(arr[10]);
+                movie.setPoster_path(arr[11]);
+                movie.setDirector(getDirector(arr[5]));
                 ArrayList<String> cast = new ArrayList<String>();
                 ArrayList<String> genres = new ArrayList<String>();
+                movie.setGenre(genres);
                 castAndGenres(oneMovie,cast,genres);
-
+                ArrayList<Cast> cast_obj = new ArrayList<Cast>();
+                for(String casts: cast){
+                    cast_obj.add(getCast(casts));
+                }
             }
         }
-
         return movie;
     }
     public static void castAndGenres(String Movie, ArrayList<String> cast_, ArrayList<String> genres){
@@ -419,10 +442,30 @@ public class Admin {
                 director.setAge(Integer.parseInt(data[3]));
                 director.setGender(data[4]);
                 director.setNationality(data[5]);
-                //movies
+                int i = 0;
+                boolean foundMovies = false;
+                ArrayList<String> arrayList = new ArrayList<String>();
+                for (String cell: data){
+                    if(cell.equals("movies")){
+                        i++;
+                        foundMovies = true;
+                    }
+                    if( i != 0 && foundMovies){
+                        arrayList.add(cell);
+                    }
+                }
+                director.setMovies(arrayList);
             }
         }
         return director;
+    }
+    static ArrayList<Director> getAllDirectors(){
+        ArrayList<Director> arrayList = new ArrayList<Director>();
+        for(String oneDirector: directors){
+            String[] arr = oneDirector.split(",");
+            arrayList.add(getDirector(arr[USERNAMEINDEX]));
+        }
+        return arrayList;
     }
     static Cast getCast(String name){
         //ArrayList<Cast> cast = new ArrayList<Cast>();
@@ -436,11 +479,30 @@ public class Admin {
                 eachCast.setGender(data[4]);
                 eachCast.setAge(Integer.parseInt(data[3]));
                 eachCast.setNationality(data[5]);
-                //movies
-                //cast.add(eachCast);
+                int i = 0;
+                boolean foundMovies = false;
+                ArrayList<String> arrayList = new ArrayList<String>();
+                for (String cell: data){
+                    if(cell.equals("movies")){
+                        i++;
+                        foundMovies = true;
+                    }
+                    if( i != 0 && foundMovies){
+                        arrayList.add(cell);
+                    }
+                }
+                eachCast.setMovies(arrayList);
             }
         }
         return eachCast;
+    }
+    static ArrayList<Cast> getAllCast(){
+        ArrayList<Cast> allcast = new ArrayList<Cast>();
+        for(String oneCast: casts){
+            String[] arr = oneCast.split(",");
+            allcast.add(getCast(arr[USERNAMEINDEX]));
+        }
+        return allcast;
     }
     //name on getMovies is full name >> first and last combined.
     static ArrayList<String> getMovies(String name, ArrayList<String> allMovies){
@@ -461,6 +523,7 @@ public class Admin {
             User user = new User(data[USERNAMEINDEX], data[LASTNAMEINDEX],data[FIRSTNAMEINDEX],data[EMAILINDEX],data[PASSWORDINDEX] );
             userArrayList.add(user);
         }
+        getUsersInEachPlan();
         return userArrayList;
     }
     public static void readMovies(File file)  {
@@ -495,5 +558,4 @@ public class Admin {
             throw new RuntimeException(ioException);
         }
     }
-
 }

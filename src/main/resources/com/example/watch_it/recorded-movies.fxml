@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="864.0" prefWidth="1536.0" style="-fx-background-color: black; -fx-border-width: 3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watch_it.RecordedMoviesController">
+    <children>
+        <Label alignment="CENTER" layoutX="46.0" layoutY="28.0" prefHeight="43.0" prefWidth="119.0" style="-fx-background-color: #FFC107; -fx-background-radius: 20;" text="Watch" textFill="WHITE">
+            <font>
+                <Font name="Arial Narrow Bold" size="27.0" />
+            </font>
+        </Label>
+        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="146.0" layoutY="28.0" prefHeight="43.0" prefWidth="68.0" style="-fx-background-color: black; -fx-background-radius: 25;" text="IT" textFill="WHITE">
+            <font>
+                <Font name="Arial Narrow Bold" size="27.0" />
+            </font>
+        </Label>
+        <Text fill="#ffc107" layoutX="1498.0" layoutY="346.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recorded Movies" wrappingWidth="1.0" AnchorPane.rightAnchor="37.0">
+            <font>
+                <Font name="System Bold Italic" size="12.0" />
+            </font></Text>
+        <Label layoutX="33.0" layoutY="156.0" prefHeight="20.0" prefWidth="148.0" style="-fx-background-color: #ffc107; -fx-background-radius: 50; -fx-border-radius: 50;" text="    Movies Watched :" textFill="WHITE">
+            <font>
+                <Font name="System Bold Italic" size="14.0" />
+            </font>
+        </Label>
+        <Label layoutX="33.0" layoutY="523.0" prefHeight="20.0" prefWidth="148.0" style="-fx-background-color: #ffc107; -fx-background-radius: 50; -fx-border-radius: 50;" text="   Movies will watch :" textFill="WHITE">
+            <font>
+                <Font name="System Bold Italic" size="14.0" />
+            </font>
+        </Label>
+      <ScrollPane layoutX="46.0" layoutY="205.0" prefHeight="226.0" prefWidth="1383.0" style="-fx-background-color: transparent; -fx-background-insets:0;" styleClass="scrollPane" stylesheets="@style.css" vbarPolicy="NEVER">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="226.0" prefWidth="1374.0" />
+        </content>
+      </ScrollPane>
+      <ScrollPane layoutX="46.0" layoutY="572.0" prefHeight="226.0" prefWidth="1383.0" style="-fx-background-color: transparent; -fx-background-insets:0;" styleClass="scrollPane" stylesheets="@style.css" vbarPolicy="NEVER">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="221.0" prefWidth="1382.0" />
+         </content>
+      </ScrollPane>
+    </children>
+</AnchorPane>

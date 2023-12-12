@@ -31,7 +31,7 @@ public class searchViewController {
     private Stage stage;
     @FXML
     public void initialize(String movie_name){
-        for (Movie m:Admin.movies_obj) {
+        for (Movie m: Movie.allmovies) {
             if(m.getTitle().equals(movie_name)){
                 add_movie(m);
             }

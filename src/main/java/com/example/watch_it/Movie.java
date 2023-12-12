@@ -6,20 +6,24 @@ import java.util.List;
 
 public class Movie {
 
-    public static List<Movie> allmovies = new ArrayList<>();
+    public static ArrayList<Movie> allmovies = new ArrayList<>();
+    public static ArrayList<Movie> action = new ArrayList<>();
+    public static ArrayList<Movie> drama = new ArrayList<>();
+    public static ArrayList<Movie> horror = new ArrayList<>();
+    public static ArrayList<Movie> comedy = new ArrayList<>();
     private static int counter = 0;
     private int id;
     private int views = 0;
     private String title;
     private LocalDate release_date;
     private String running_time;
-    private String genre;
+    private ArrayList<String> genres;
     private String language;
     private String country;
     private String poster_path;
-    private double budget;
-    private double revenue;
-    private float imdb_score;
+    private String budget;
+    private String revenue;
+    private int imdb_score;
     private String description;
     private float avarage_rating = 0f;
     private float total_rating = 0f;
@@ -35,13 +39,13 @@ public class Movie {
         this.cast = new ArrayList<>();
     }
 
-    public Movie(String title, LocalDate release_date, String running_time, String genre, String language, String country, String poster_path, double budget, double revenue, float imdb_score) {
+    public Movie(String title, LocalDate release_date, String running_time, ArrayList<String> genre, String language, String country, String poster_path, String budget, String revenue, int imdb_score) {
         counter++;
         this.id = counter;
         this.title = title;
         this.release_date = release_date;
         this.running_time = running_time;
-        this.genre = genre;
+        this.genres = genre;
         this.language = language;
         this.country = country;
         this.poster_path = poster_path;
@@ -71,8 +75,8 @@ public class Movie {
         return running_time;
     }
 
-    public String getGenre() {
-        return genre;
+    public ArrayList<String> getGenres() {
+        return genres;
     }
 
     public String getLanguage() {
@@ -87,11 +91,11 @@ public class Movie {
         return poster_path;
     }
 
-    public double getBudget() {
+    public String getBudget() {
         return budget;
     }
 
-    public float getImdb_score() {
+    public int getImdb_score() {
         return imdb_score;
     }
     public float getAverage_rating() {
@@ -114,8 +118,8 @@ public class Movie {
         this.running_time = running_time;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
+    public void setGenre(ArrayList<String> genres) {
+        this.genres = genres;
     }
 
     public void setLanguage(String language) {
@@ -130,15 +134,15 @@ public class Movie {
         this.poster_path = poster_path;
     }
 
-    public void setBudget(double budget) {
+    public void setBudget(String budget) {
         this.budget = budget;
     }
 
-    public void setRevenue(double revenue) {
+    public void setRevenue(String revenue) {
         this.revenue = revenue;
     }
 
-    public void setImdb_score(float imdb_score) {
+    public void setImdb_score(int imdb_score) {
         this.imdb_score = imdb_score;
     }
     public String getDescription() {
@@ -172,12 +176,6 @@ public class Movie {
     public void setDirector(Director director) {
         this.director = director;
     }
-
-    @Override
-    public String toString() {
-        return title + '\n' + poster_path + '\n' + release_date + '\n' + running_time + '\n' + genre + '\n' + language + '\n' + country + '\n' + budget + '\n' + revenue + '\n' + imdb_score + '\n' + views + '\n' + avarage_rating;
-    }
-
     public void UpdateRating(float rating){
 
         total_rating += rating;
@@ -228,6 +226,23 @@ public class Movie {
     public static List<Movie> MostViewedMovies(List<Movie> movie) {
         movie.sort(Comparator.comparing(Movie::getViews).reversed());
         return movie;
+    }
+    public static void getDiffGenres(){
+
+        for(Movie eachMovie: allmovies){
+            for(int i=0; i<eachMovie.getGenres().size(); i++){
+                for(String eachGenre:eachMovie.getGenres()){
+                    if(eachGenre.equals("action"))
+                        action.add(eachMovie);
+                    else if (eachGenre.equals("comedy"))
+                        comedy.add(eachMovie);
+                    else if (eachGenre.equals("drama"))
+                        drama.add(eachMovie);
+                    else if (eachGenre.equals("horror"))
+                        horror.add(eachMovie);
+                }
+            }
+        }
     }
 
 }
