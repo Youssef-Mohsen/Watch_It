@@ -4,6 +4,7 @@ import java.util.Locale;
 import java.util.Scanner;
 import java.util.ArrayList;
 public class Cast extends Artist{
+    static ArrayList<Cast> allCast = new ArrayList<Cast>();
 
     public void Add_Cast(String first_name,String second_name,int age,String gender,String Nationality,ArrayList<String> movie){
         Cast c=new Cast();

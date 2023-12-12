@@ -58,10 +58,10 @@ public class AllMoviesController {
 
         Movie movie3 = new Movie();
         movie3.setTitle("Joker");
-        movie3.setPoster_path("assets/joker.jpeg");
+        movie3.setPoster_path("movies/joker.jpeg");
         Movie movie4 = new Movie();
         movie4.setTitle("Ready Or Not");
-        movie4.setPoster_path("assets/ready or not.jpeg");
+        movie4.setPoster_path("movies/ready or not.jpeg");
         mov.add(movie3);
         mov.add(movie4);
         mov.add(movie3);

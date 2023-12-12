@@ -76,6 +76,8 @@ public class MainPageController {
     HBox TopMovies;
     @FXML
     HBox RecentMovies;
+    @FXML
+    private Button Back;
     static ArrayList<Movie> action = new ArrayList<Movie>();
     static ArrayList<Movie> comedy = new ArrayList<Movie>();
     static ArrayList<Movie> horror = new ArrayList<Movie>();
@@ -377,7 +379,7 @@ public class MainPageController {
         root = loader.load();
         stage = (Stage)((Node)act.getSource()).getScene().getWindow();
         MovieController controller=loader.getController();
-        Movie movie2=new Movie(movie.getTitle(),movie.getRelease_date(),movie.getRunning_time(),movie.getGenre(),movie.getLanguage(),movie.getCountry(),movie.getPoster_path(),movie.getBudget(),50,movie.getImdb_score());
+        Movie movie2=new Movie(movie.getTitle(),movie.getRelease_date(),movie.getRunning_time(),movie.getGenres(),movie.getLanguage(),movie.getCountry(),movie.getPoster_path(),movie.getBudget(),"50",movie.getImdb_score());
         controller.setStage(stage);
         controller.setMovie(movie2);
         controller.watchMovie(movie2);
@@ -399,6 +401,10 @@ public class MainPageController {
         onMouseEnteredLabels(Comedy);
         onMouseEnteredLabels(Drama);
         onMouseEnteredLabels(Horror);
+        Back.setOnMouseEntered(event -> Back.setStyle("-fx-background-color: #FFC107;" +
+                " -fx-background-radius: 25; " +
+                "-fx-border-color: white;" +
+                " -fx-border-radius: 25;"));
         All.setOnMouseEntered(event -> All.setStyle("-fx-background-color: #FFC107;" +
                 " -fx-background-radius: 25; " +
                 "-fx-border-color: white;" +
@@ -422,6 +428,10 @@ public class MainPageController {
         onMouseExitLabels(Comedy);
         onMouseExitLabels(Drama);
         onMouseExitLabels(Horror);
+        Back.setOnMouseExited(event -> Back.setStyle("-fx-background-color: black;" +
+                " -fx-background-radius: 25;" +
+                " -fx-border-color: white;" +
+                " -fx-border-radius: 25;"));
         All.setOnMouseExited(event -> All.setStyle("-fx-background-color: #FFC107;" +
                 " -fx-background-radius: 25;" +
                 " -fx-border-color: white;" +
@@ -553,6 +563,28 @@ public class MainPageController {
 
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+    @FXML
+    private void goToProgilePage (ActionEvent event) throws IOException {
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("profile-page.fxml"));
+        root = loader.load();
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        profilePageController controller=loader.getController();
+        controller.setStage(stage);
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    @FXML
+    private void backScenes(ActionEvent event) throws IOException {
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("sign-in.fxml"));
+        root = loader.load();
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        SignIn controller=loader.getController();
+        controller.setStage(stage);
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
 }

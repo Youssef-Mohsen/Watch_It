@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Director extends Artist {
+    static ArrayList<Director> allDirectors = new ArrayList<Director>();
     public void Read_File(ArrayList<String>s,ArrayList<Director> directors){
         for (String i:s) {
             String[]row=i.split(",");

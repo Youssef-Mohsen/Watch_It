@@ -23,7 +23,10 @@
                     <Font name="Bondon MT" size="11.0" />
                 </font>
             </TextField>
-
+            <Button fx:id="Back" layoutX="1448.0" layoutY="15.0" mnemonicParsing="false" onAction="#backScenes"
+                    onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="27.0" prefWidth="56.0"
+                    style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"
+                    text="EXIT" textFill="WHITE"/>
             <Button fx:id="Search" layoutX="893.0" layoutY="23.0" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="31.0" prefWidth="68.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;" text="Search" textFill="WHITE">
                 <font>
                     <Font size="14.0" />
@@ -64,10 +67,10 @@
                     <Font name="System Bold" size="11.0" />
                 </font>
             </Label>
-            <ImageView fx:id="profile" fitHeight="40.0" fitWidth="55.0" layoutX="1392.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView onMousePressed="#goToProgilePage" fx:id="profile" fitHeight="40.0" fitWidth="55.0" layoutX="1382.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@assets/profile.png" />
             </ImageView>
-            <Label layoutX="1395.0" layoutY="63.0" text="Profile" textFill="WHITE" />
+            <Label layoutX="1385.0" layoutY="63.0" text="Profile" textFill="WHITE" />
             <MenuButton fx:id="menuButton" layoutX="775.0" layoutY="27.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="108.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;" text="Search By" textFill="WHITE">
                 <items>
                     <MenuItem mnemonicParsing="false" onAction="#handleMenuItemClick" text="Movie" />

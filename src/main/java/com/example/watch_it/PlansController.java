@@ -73,12 +73,9 @@ public class PlansController {
     private final int RESOLUTION = 4;
     private final int STYLEDIMAGE = 5;
     private final int NORMALIMAGE = 6;
-
-    private String[] basic = {"10 EGP","0", "0","5","720p","assets/basicPressed.png","assets/basicNormal.png"};
-    private String[] standard = {"20 EGP","0", "0","10","1080p","assets/standardPressed.png","assets/standardNormal.png"};
-    private String[] premium = {"30 EGP","0", "0","30","4K+HDR","assets/premiumPressed.png","assets/premiumNormal.png"};
     @FXML
     private void initialize(){
+        System.out.println(Integer.toString(Admin.basicPlanCounter));
         setNormalStyle(basicPrice,basicTotalUser,basicMovieNo,basicResolution,basicRevenue,basicImage,"basic");
         setNormalStyle(standardPrice,standardTotalUser,standardMovieNo,standardResolution,standardRevenue,standardImage,"standard");
         setNormalStyle(premiumPrice,premiumtotalUser,premiumMovieNo,premiumResolution,premiumRevenue,premiumImage,"premium");
@@ -89,6 +86,11 @@ public class PlansController {
         standardImage.setFitHeight(170);
         premiumImage.setFitHeight(170);
     }
+
+    private String[] basic = {"100 EGP",String.valueOf(Admin.basicPlanCounter), String.valueOf(Admin.basicPlanCounter * 100),"5","720p","assets/basicPressed.png","assets/basicNormal.png"};
+    private String[] standard = {"200 EGP",String.valueOf(Admin.standardPlanCounter), String.valueOf(Admin.standardPlanCounter * 200),"10","1080p","assets/standardPressed.png","assets/standardNormal.png"};
+    private String[] premium = {"300 EGP",String.valueOf(Admin.premiumPlanCounter), String.valueOf(Admin.premiumPlanCounter * 300),"30","4K+HDR","assets/premiumPressed.png","assets/premiumNormal.png"};
+
     @FXML
     private void basicPlanActive(){
         setStyle("basic");

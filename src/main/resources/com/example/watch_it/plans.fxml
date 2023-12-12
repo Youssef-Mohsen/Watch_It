@@ -34,9 +34,9 @@
                         <ImageView onMouseEntered="#standardPlanActive" onMouseExited="#standardPlanInactive" fx:id="standardImage"  layoutX="470.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView onMouseEntered="#premiumPlanActive" onMouseExited="#premiumPlanInactive"  fx:id="premiumImage" layoutX="881.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView onMouseEntered="#basicPlanActive" onMouseExited="#basicPlanInactive" fx:id="basicImage" layoutX="90.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
-                        <Label fx:id="basicRevenue" layoutX="169.0" layoutY="450.0" prefHeight="17.0" prefWidth="4.0" />
-                        <Label fx:id="standardRevenue" layoutX="575.0" layoutY="450.0" />
-                        <Label fx:id="premiumRevenue" layoutX="991.0" layoutY="450.0" />
+                        <Label fx:id="basicRevenue" layoutX="169.0" layoutY="450.0" />
+                        <Label fx:id="standardRevenue" layoutX="565.0" layoutY="450.0" />
+                        <Label fx:id="premiumRevenue" layoutX="985.0" layoutY="450.0" />
                         <Label fx:id="basicMovieNo" layoutX="169.0" layoutY="570.0" prefHeight="17.0" prefWidth="6.0" />
                         <Label fx:id="standardMovieNo" layoutX="575.0" layoutY="570.0" />
                         <Label fx:id="premiumMovieNo" layoutX="991.0" layoutY="570.0" />
