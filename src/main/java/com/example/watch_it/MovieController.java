@@ -62,14 +62,14 @@ public class MovieController {
     private ImageView[] stars;
 
     private Movie movie;
-    public boolean aBoolean=false;
+    public int page5=0;
 
     // Other fields and methods...
 
     // Method to update the text of the first label
 
-
-    public void initialize() {
+    @FXML
+    private void initialize() {
         stars = new ImageView[]{star1, star2, star3, star4, star5};
         // Set empty star images
         for (ImageView star : stars) {
@@ -139,8 +139,8 @@ public class MovieController {
             genres = genres.concat(genre+ " ");
         }
         String casts = "";
-        for(String cast1: cast){
-            casts = casts.concat(cast1+ ",");
+        for (String cast1 : cast) {
+            casts = casts.concat(cast1 + ",");
         }
         titleMovie.setText(filmTitle);
         movieName.setText(newMovieName);
@@ -157,33 +157,59 @@ public class MovieController {
         Watch.setOnMouseClicked(event -> Watch.setDisable(true));
     }
     public void watchMovie(Movie movie){
-
             Watch.setOnMouseClicked(event -> {
-                if(WatchRecord.watchedMovies.contains(movie)) {
-                    System.out.println("That Movie here");
+                watchLater.setDisable(true);
+                for(int c=0;c<Movie.allmovies.size();c++)
+                {
+                    if(movie.getTitle()==Movie.allmovies.get(c).getTitle())
+                    {
+                        Movie.allmovies.get(c).inc_views();
+                    }
+                }
+                if(!WatchRecord.watchedMovies.contains(movie)) {
+                    WatchRecord.watchedMovies.add(movie);
+                    if(RecordedMoviesController.toWatchMovies.contains(movie)) {
+                        RecordedMoviesController.toWatchMovies.remove(movie);
+                    }
                 }
                 else {
-                    WatchRecord.watchedMovies.add(movie);
+                    System.out.println("Not Found!");
                 }
+
                 Watch.setDisable(true);
             });
+        watchLater.setOnMouseClicked(event -> {
+            if(RecordedMoviesController.toWatchMovies.contains(movie)) {
+                System.out.println("That Movie here");
+            }
+            else {
+                RecordedMoviesController.toWatchMovies.add(movie);
+            }
+            watchLater.setDisable(true);
+        });
 
     }
     public void backScenes(ActionEvent event) throws IOException {
-        Parent root;
-        if(!aBoolean) {
+        Parent root = null;
+        if(page5==0) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("main-page.fxml"));
              root = loader.load();
             MainPageController controller = loader.getController();
             controller.setStage(stage);
         }
-        else{
+        else if(page5==1){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("watch-record.fxml"));
             root = loader.load();
             WatchRecord controller = loader.getController();
             controller.setStage(stage);
-            controller.setMovieDetails(movie);
             controller.initializeItems();
+        }
+        else {
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("recorded-movies.fxml"));
+            root = loader.load();
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            RecordedMoviesController controller=loader.getController();
+            controller.setStage(stage);
         }
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);

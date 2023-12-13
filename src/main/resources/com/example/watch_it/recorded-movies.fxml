@@ -21,17 +21,17 @@
             <font>
                 <Font name="System Bold Italic" size="12.0" />
             </font></Text>
-        <Label layoutX="33.0" layoutY="156.0" prefHeight="20.0" prefWidth="148.0" style="-fx-background-color: #ffc107; -fx-background-radius: 50; -fx-border-radius: 50;" styleClass="text-box" stylesheets="@style.css" text="watched movies" textAlignment="CENTER" textFill="WHITE">
+        <Label layoutX="33.0" layoutY="142.0" prefHeight="34.0" prefWidth="148.0" style="-fx-background-color: #ffc107; -fx-background-radius: 50; -fx-border-radius: 50;" styleClass="text-box" stylesheets="@style.css" text="watched movies" textAlignment="CENTER" textFill="WHITE">
             <font>
-                <Font name="System Bold Italic" size="14.0" />
+                <Font name="System Bold Italic" size="16.0" />
             </font>
         </Label>
-        <Label layoutX="33.0" layoutY="523.0" prefHeight="20.0" prefWidth="148.0" style="-fx-background-color: #ffc107; -fx-background-radius: 50; -fx-border-radius: 50;" styleClass="text-box" stylesheets="@style.css" text="to watch list" textAlignment="CENTER" textFill="WHITE">
+        <Label layoutX="33.0" layoutY="509.0" prefHeight="34.0" prefWidth="148.0" style="-fx-background-color: #ffc107; -fx-background-radius: 50; -fx-border-radius: 50;" styleClass="text-box" stylesheets="@style.css" text="to watch list" textAlignment="CENTER" textFill="WHITE">
             <font>
-                <Font name="System Bold Italic" size="14.0" />
+                <Font name="System Bold Italic" size="16.0" />
             </font>
         </Label>
-      <ScrollPane layoutX="46.0" layoutY="205.0" prefHeight="226.0" prefWidth="1383.0" style="-fx-background-color: transparent; -fx-background-insets:0;" styleClass="scrollPane" stylesheets="@style.css" vbarPolicy="NEVER">
+      <ScrollPane layoutX="46.0" layoutY="193.0" prefHeight="274.0" prefWidth="1383.0" style="-fx-background-color: transparent; -fx-background-insets:0;" styleClass="scrollPane" stylesheets="@style.css" vbarPolicy="NEVER">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="224.0" prefWidth="1384.0" />
             <HBox fx:id="watchedHbox">
@@ -41,7 +41,7 @@
             </HBox>
         </content>
       </ScrollPane>
-      <ScrollPane layoutX="46.0" layoutY="572.0" prefHeight="226.0" prefWidth="1383.0" style="-fx-background-color: transparent; -fx-background-insets:0;" styleClass="scrollPane" stylesheets="@style.css" vbarPolicy="NEVER">
+      <ScrollPane layoutX="46.0" layoutY="566.0" prefHeight="273.0" prefWidth="1383.0" style="-fx-background-color: transparent; -fx-background-insets:0;" styleClass="scrollPane" stylesheets="@style.css" vbarPolicy="NEVER">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="221.0" prefWidth="1382.0" />
              <HBox fx:id="toWatchHbox">

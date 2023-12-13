@@ -41,6 +41,7 @@ public class SignIn
     private AlertType alertType;
     private int try_Password = 1;
     private int try_Username = 1;
+    public static User user5;
     @FXML
 
     private void showAlert(String message) {
@@ -145,6 +146,7 @@ public class SignIn
         stage.setResizable(false);
         stage.setX(-7);
         stage.setY(0);
+        user5=user;
         stage.setScene(scene);
         stage.show();
     }

@@ -72,6 +72,7 @@ public class MainPageController {
     @FXML
     private  Label counter;
     private User user;
+    public static Movie movie5;
     static int moviePage = 0;
     private final ArrayList<Movie> moviesTop = new ArrayList<>();
     private final ArrayList<Movie> moviesRecent = new ArrayList<>();
@@ -83,14 +84,17 @@ public class MainPageController {
     private Button Back;
 
     private void getData() {
-       for(Movie movie : Movie.allmovies){
-           moviesTop.add(movie);
-           moviesRecent.add(movie);
-       }
+        for(Movie movie : Movie.MostViewedMovies(Movie.allmovies)){
+            moviesTop.add(movie);
+        }
+        for(Movie movie:Movie.allmovies)
+        {
+            moviesRecent.add(movie);
+        }
     }
 
     @FXML
-    private void initialize() {
+    public void initialize() {
         getData();
         for (Movie movie : moviesTop) {
             addToGUI(movie);
@@ -102,7 +106,7 @@ public class MainPageController {
         onMouseEntered();
         onMouseExit();
         setupAutoScroll();
-        profile.setOnMouseClicked(event -> profileOnMouseClicked());
+       /* profile.setOnMouseClicked(event -> profileOnMouseClicked());*/
         labelsOnMouseClicked();
         if(!WatchRecord.watchedMovies.isEmpty()) {
             counter.setText(WatchRecord.watchedMovies.size() + ")");
@@ -193,7 +197,6 @@ public class MainPageController {
         }
         WatchRecord controller = loader.getController();
         controller.setStage(stage);
-        controller.setMovieDetails(movie);
         controller.initializeItems();
         controller.aBoolean=true;
         Scene scene = new Scene(root);
@@ -206,7 +209,7 @@ public class MainPageController {
         stage.show();
 
     }
-    public void profileOnMouseClicked(){
+   /* public void profileOnMouseClicked(){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("profile-page.fxml"));
         Parent root;
         try {
@@ -216,7 +219,6 @@ public class MainPageController {
         }
         profilePageController controller = loader.getController();
         controller.setStage(stage);
-        controller.setUser(this.user);
         Scene scene = new Scene(root);
         stage.setTitle("Movie");
         stage.setResizable(false);
@@ -224,7 +226,7 @@ public class MainPageController {
         stage.setY(0);
         stage.setScene(scene);
         stage.show();
-    }
+    }*/
     public void labelsOnMouseClicked(){
         Action.setOnMouseClicked(event -> {
             Action.setStyle("-fx-background-radius: 25;-fx-background-color:  #FFC107;");
@@ -387,12 +389,11 @@ public class MainPageController {
         controller.setStage(stage);
         controller.setMovie(movie2);
         controller.watchMovie(movie2);
-        controller.initialize();
+        controller.page5=0;
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        //movie.getRelease_date().getYear()
-        //movie.getGenres().toString()
+        movie5=movie;
         Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));
         controller.refreshScreen("Watch Movie "+ movie.getTitle() + "("+movie.getRelease_date().getYear()+")", movie.getTitle(),
                 movie.getTitle()+" Translated",movie.getGenres(), movie.getDescription(),
@@ -578,13 +579,13 @@ public class MainPageController {
         this.stage = stage;
     }
     @FXML
-    private void goToProgilePage (ActionEvent event) throws IOException {
+    private void goToProgilePage (MouseEvent event) throws IOException {
         FXMLLoader loader=new FXMLLoader(getClass().getResource("profile-page.fxml"));
         root = loader.load();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         profilePageController controller=loader.getController();
         controller.setStage(stage);
-        controller.setUser(user);
+        controller.setdata();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

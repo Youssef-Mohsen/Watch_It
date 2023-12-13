@@ -109,12 +109,10 @@ public class FilterPage {
         controller.setStage(stage);
         controller.setMovie(movie);
         controller.watchMovie(movie);
-        controller.initialize();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        //movie.getRelease_date().getYear()
-        //movie.getGenres().toString()
+
         Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));
         controller.refreshScreen("Watch Movie "+ movie.getTitle() + "("+movie.getRelease_date().getYear()+")", movie.getTitle(),
                 movie.getTitle()+" Translated",movie.getGenres(), movie.getDescription(),

@@ -3,7 +3,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-
+import java.util.PriorityQueue;
 public class Movie {
 
     public static ArrayList<Movie> allmovies = new ArrayList<>();
@@ -229,10 +229,16 @@ public class Movie {
         movie.sort(Comparator.comparing(Movie::getAverage_rating).reversed());
         return movie;
     }
-    public static List<Movie> MostViewedMovies(List<Movie> movie) {
-        movie.sort(Comparator.comparing(Movie::getViews).reversed());
-        return movie;
+    public static PriorityQueue<Movie> MostViewedMovies(List<Movie> movieList) {
+        // Create a PriorityQueue with a custom comparator
+        PriorityQueue<Movie> priorityQueue = new PriorityQueue<>(Comparator.comparing(Movie::getViews).reversed());
+
+        // Add all movies to the PriorityQueue
+        priorityQueue.addAll(movieList);
+
+        return priorityQueue;
     }
+
     public static void getDiffGenres(){
 
         for(Movie eachMovie: allmovies){

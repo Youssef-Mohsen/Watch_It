@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class WatchRecord {
     private Parent root;
     private Stage stage;
-    private Movie movie;
+
     public boolean aBoolean;
     public static final ArrayList<Movie> watchedMovies = new ArrayList<>();
     @FXML
@@ -36,17 +36,12 @@ public class WatchRecord {
 
 
     public void initializeItems() {
-        getData();
         for (Movie movie : watchedMovies) {
             addToGUI(movie);
         }
     }
 
-    private void getData() {
-        if(movie!=null) {
-            watchedMovies.add(movie);
-        }
-    }
+
     private void addToGUI(Movie movie) {
         VBox movieContainer = new VBox(10);
         movieContainer.setPrefWidth(300);
@@ -79,14 +74,15 @@ public class WatchRecord {
         controller.setStage(stage);
         controller.disableButtons();
         controller.disableWatch();
-        controller.aBoolean=true;
+        controller.watchMovie(movie);
+        controller.page5=1;
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
         Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));
         controller.refreshScreen("Watch Movie "+ movie.getTitle() + "("+movie.getRelease_date().getYear()+")", movie.getTitle(),
                 movie.getTitle()+" Translated",movie.getGenres(), movie.getDescription(),
-                movie.getRunning_time(), image,movie.getDirectorName(),movie.getCastNames());
+                movie.getRunning_time(), image,MainPageController.movie5.getDirectorName(),MainPageController.movie5.getCastNames());
         stage.setScene(scene);
         stage.show();
 
@@ -119,13 +115,13 @@ public class WatchRecord {
                 " -fx-border-color: white;" +
                 " -fx-border-radius: 25;"));
     }
-    public void setMovieDetails(Movie movie){
+  /*  public void setMovieDetails(Movie movie){
         if(this.movie!=null) {
             this.movie = movie;
             System.out.println(this.movie.getTitle());
             System.out.println(this.movie.getPoster_path());
         }
-    }
+    }*/
     public void setStage(Stage stage) {
         this.stage = stage;
     }

@@ -17,8 +17,11 @@
                 <Font name="Arial Narrow Bold" size="27.0" />
             </font>
         </Label>
-        <Button  fx:id="Back" layoutX="1448.0" layoutY="15.0" mnemonicParsing="false" onAction="#backScenes" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="27.0" prefWidth="56.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;" text="Back" textFill="WHITE" />
-        <Button   layoutX="1240.0" layoutY="731.0" mnemonicParsing="false" onAction="#goToMovieList" prefHeight="47.0" prefWidth="178.0" style="-fx-background-color: #ffc107;" styleClass="text-box" stylesheets="@style.css" text="Movie Lists" textFill="#f8f7f7" />
+        <Button fx:id="Back" layoutX="1448.0" layoutY="15.0" mnemonicParsing="false" onAction="#backScenes" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="27.0" prefWidth="56.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;" text="Back" textFill="WHITE" />
+        <Button layoutX="1240.0" layoutY="731.0" mnemonicParsing="false" onAction="#goToMovieList" prefHeight="47.0" prefWidth="178.0" style="-fx-background-color: #ffc107;" styleClass="text-box" stylesheets="@style.css" text="Movie Lists" textFill="#f8f7f7">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
 
       <HBox alignment="CENTER" layoutX="561.0" layoutY="357.0" prefHeight="242.0" prefWidth="477.0">
          <children>
@@ -63,12 +66,12 @@
                             <Font name="System Bold" size="20.0" />
                         </font>
                   </Label>
-                    <Label fx:id="secondname"  textFill="WHITE">
+                    <Label fx:id="secondname" textFill="WHITE">
                         <font>
                             <Font name="System Bold" size="20.0" />
                         </font>
                   </Label>
-                    <Label fx:id="email"  textFill="WHITE">
+                    <Label fx:id="email" textFill="WHITE">
                         <font>
                             <Font name="System Bold" size="20.0" />
                         </font>

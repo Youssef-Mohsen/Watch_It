@@ -28,7 +28,7 @@ public class profilePageController implements Initializable {
     @FXML
     private Label firstname;
 
-    private User user;
+
 
     @FXML
     private Label plan;
@@ -126,6 +126,7 @@ public class profilePageController implements Initializable {
             users.get(i).setUser_ID(i++);
         }
     }*/
+
     @FXML
     public void move(ActionEvent act)throws IOException
     {
@@ -172,7 +173,6 @@ public class profilePageController implements Initializable {
         root = loader.load();
         RecordedMoviesController controller = loader.getController();
         controller.setStage(stage);
-        controller.setUser(user);
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setResizable(false);
@@ -184,19 +184,16 @@ public class profilePageController implements Initializable {
     public void setStage(Stage stage){
         this.stage = stage;
     }
-    public void setUser(User user){
-         this.user = user;
-         setdata();
-    }
-    private void setdata(){
-        Image image = new Image(getClass().getResourceAsStream(user.getProfilePath()));
+
+    public void setdata(){
+        Image image = new Image(getClass().getResourceAsStream(SignIn.user5.getProfilePath()));
         profilePictue.setImage(image);
         profilePictue.setFitHeight(200);
         profilePictue.setFitWidth(200);
-        username.setText(user.getUser_Name());
-        email.setText(user.getEmail());
-        plan.setText(user.getPlan());
-        secondname.setText(user.getLast_Name());
-        firstname.setText(user.getFirst_Name());
+        username.setText(SignIn.user5.getUser_Name());
+        email.setText(SignIn.user5.getEmail());
+        plan.setText(SignIn.user5.getPlan());
+        secondname.setText(SignIn.user5.getLast_Name());
+        firstname.setText(SignIn.user5.getFirst_Name());
     }
 }
