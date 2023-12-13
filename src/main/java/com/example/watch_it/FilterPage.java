@@ -1,16 +1,22 @@
 package com.example.watch_it;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class FilterPage {
@@ -69,6 +75,13 @@ public class FilterPage {
         movieContainer.setAlignment(Pos.CENTER);
         movieContainer.getChildren().addAll(imageView, movieName);
         movieContainer.setPadding(new Insets(10 ,0 , 10 , 5));
+        movieContainer.setOnMouseClicked(event -> {
+            try {
+                onMouseClickedVBox(event,movie);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
 
         //VBox.setMargin(movieContainer,new Insets(20 ,5 , 0 , 5));
         int check = i %4;
@@ -82,6 +95,28 @@ public class FilterPage {
         }
         else
             rightColumn.getChildren().addAll(movieContainer);
+    }
+    public void onMouseClickedVBox(MouseEvent act, Movie movie) throws IOException {
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("movie-view.fxml"));
+        Parent root = loader.load();
+        stage = (Stage)((Node)act.getSource()).getScene().getWindow();
+        MovieController controller=loader.getController();
+        controller.setStage(stage);
+        controller.setMovie(movie);
+        controller.watchMovie(movie);
+        controller.initialize();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        //movie.getRelease_date().getYear()
+        //movie.getGenres().toString()
+        Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));
+        controller.refreshScreen("Watch Movie "+ movie.getTitle() + "("+movie.getRelease_date().getYear()+")", movie.getTitle(),
+                movie.getTitle()+" Translated",movie.getGenres(), movie.getDescription(),
+                movie.getRunning_time(), image,movie.getDirectorName(),movie.getCast().toString());
+        stage.setScene(scene);
+        stage.show();
+
     }
     public void setStage(Stage stage){
         this.stage=stage;

@@ -133,12 +133,16 @@ public class MovieController {
             }
         }
     }
-    public void refreshScreen(String filmTitle, String newMovieName, String newFilm, String filmGenre,
+    public void refreshScreen(String filmTitle, String newMovieName, String newFilm, ArrayList<String> filmGenre,
                               String filmDescription, String filmDuration, Image image,String director,String cast) {
+        String genres = "";
+        for(String genre: filmGenre){
+            genres = genres.concat(genre+ " ");
+        }
         titleMovie.setText(filmTitle);
         movieName.setText(newMovieName);
         Film.setText(newFilm);
-        Genre.setText(filmGenre);
+        Genre.setText(genres);
         description.setText(filmDescription);
         duration.setText(filmDuration);
         imagePreview.setImage(image);
