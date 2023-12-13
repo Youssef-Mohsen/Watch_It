@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -20,14 +21,14 @@ public class profilePageController implements Initializable {
     private Scene scene;
     private Parent root;
     @FXML
-    private Label usename;
+    private Label username;
     @FXML
     private Label email;
 
     @FXML
     private Label firstname;
 
-
+    private User user;
 
     @FXML
     private Label plan;
@@ -138,6 +139,7 @@ public class profilePageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
+
         Select_List.getItems().addAll("Edit_Profile" , "Log_Out" , "Delete_Account" , "Delete_Subscription" , "Delete_Recorded_Movies");
 
     }
@@ -164,7 +166,37 @@ public class profilePageController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+    @FXML
+    private void goToMovieList (ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("recorded-movies.fxml"));
+        root = loader.load();
+        RecordedMoviesController controller = loader.getController();
+        controller.setStage(stage);
+        controller.setUser(user);
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setResizable(false);
+        stage.setX(-7);
+        stage.setY(0);
+        stage.setScene(scene);
+        stage.show();
+    }
     public void setStage(Stage stage){
         this.stage = stage;
+    }
+    public void setUser(User user){
+         this.user = user;
+         setdata();
+    }
+    private void setdata(){
+        Image image = new Image(getClass().getResourceAsStream(user.getProfilePath()));
+        profilePictue.setImage(image);
+        profilePictue.setFitHeight(200);
+        profilePictue.setFitWidth(200);
+        username.setText(user.getUser_Name());
+        email.setText(user.getEmail());
+        plan.setText(user.getPlan());
+        secondname.setText(user.getLast_Name());
+        firstname.setText(user.getFirst_Name());
     }
 }

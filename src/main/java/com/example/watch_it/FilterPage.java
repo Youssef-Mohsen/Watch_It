@@ -54,6 +54,11 @@ public class FilterPage {
                     addMovies(Movie.horror.get(i),i);
                 }
                 break;
+            case 5:
+            for (int i = 0; i < Movie.allmovies.size(); i++) {
+                addMovies(Movie.allmovies.get(i),i);
+            }
+            break;
             default:
         }
     }

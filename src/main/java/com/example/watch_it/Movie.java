@@ -104,6 +104,10 @@ public class Movie {
     public float getAverage_rating() {
         return avarage_rating;
     }
+    public Director getDirector() {
+        return director;
+    }
+
 
     public void setId(int id) {
         this.id = id;
@@ -132,7 +136,6 @@ public class Movie {
     public void setCountry(String country) {
         this.country = country;
     }
-
     public void setPoster_path(String poster_path) {
         this.poster_path = poster_path;
     }

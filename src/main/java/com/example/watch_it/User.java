@@ -10,18 +10,22 @@ public class User
     private String Email;
     private String Password;
     private Subscription subscription;
+    private String profilePath;
+    private String plan;
     String AllData;
     // This List Access By User
-    ArrayList<Movie> Movies_For_Later = new ArrayList<>();
+    static ArrayList<Movie> Movies_For_Later = new ArrayList<>();
     // This List Access By UserWatchRecord
-    ArrayList<UserWatchRecord> Watched_Movies = new ArrayList<>();
+    static ArrayList<UserWatchRecord> Watched_Movies = new ArrayList<>();
     public static ArrayList<User> allusers = new ArrayList<User>();
 
     /****use it as ID to be unique(static variable) and display it in message to each user*****/
 
     /*****as Sign Up method and the data will take in main(add)******/
-    public User(String user_name, String last_Name, String first_Name, String email, String password)
+    public User(String user_name, String last_Name, String first_Name, String email, String password, String profilePath, String plan)
     {
+        this.plan = plan;
+        this.profilePath = profilePath;
         this.User_ID = Admin.users.size();
         this.User_Name = user_name;
         this.Last_Name = last_Name;
@@ -87,8 +91,14 @@ public class User
     public void setFirst_Name(String first_Name) {
         First_Name = first_Name;
     }
+    public void setPlan(String plan){
+        this.plan = plan;
+    }
     public void setEmail(String email) {
         Email = email;
+    }
+    public void setProfilePath(String profilePath){
+        this.profilePath = profilePath;
     }
     public void Set_Password(String password) {
         Password = password;
@@ -111,6 +121,12 @@ public class User
     }
     public String getPassword() {
         return Password;
+    }
+    public String getProfilePath(){
+        return profilePath;
+    }
+    public String getPlan(){
+        return plan;
     }
     /****Set the data of Subscription****/
     public void Subscribe(int id , Subscription.Plans plan)
@@ -149,6 +165,13 @@ public class User
     {
         // make sure the exception handling is applied in the index.
         Watched_Movies.get(index).setRating(rate);
+    }
+    public static User GetUser(String user_name) {
+        for (User user : allusers) {
+            if (user.User_Name.equals(user_name))
+                return user;
+        }
+        return null;
     }
     /****handle in System class*****/
     //search about Cast.(by name)

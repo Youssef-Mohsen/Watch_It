@@ -44,8 +44,6 @@ public class ChoosePlanController {
         standard.setStyle("-fx-border-color: #090909; -fx-background-color: #090909; -fx-background-radius: 30; -fx-border-radius: 30;");
         premium.setStyle("-fx-border-color: #090909; -fx-background-color: #090909; -fx-background-radius: 30; -fx-border-radius: 30;");
     }
-
-
     @FXML
     private void Basic() {
         basic.setStyle("-fx-background-color: #090909; -fx-background-radius: 30; -fx-border-radius: 30; -fx-border-color: #FFC107;");

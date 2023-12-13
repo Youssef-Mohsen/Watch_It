@@ -23,30 +23,6 @@
                     <Font name="Bondon MT" size="11.0" />
                 </font>
             </TextField>
-            <Button fx:id="Back" layoutX="1448.0" layoutY="15.0" mnemonicParsing="false" onAction="#backScenes"
-                    onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="27.0" prefWidth="56.0"
-                    style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"
-                    text="EXIT" textFill="WHITE"/>
-            <Button fx:id="Search" layoutX="893.0" layoutY="23.0" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="31.0" prefWidth="68.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;" text="Search" textFill="WHITE">
-                <font>
-                    <Font size="14.0" />
-                </font>
-            </Button>
-            <Label fx:id="All" alignment="CENTER" layoutX="308.0" layoutY="68.0" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="24.0" prefWidth="68.0" style="-fx-background-color: #FFC107; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;" text="All" textFill="WHITE">
-                <font>
-                    <Font name="System Bold" size="11.0" />
-                </font>
-            </Label>
-            <Label fx:id="Action" alignment="CENTER" layoutX="392.0" layoutY="68.0" onMouseClicked="#labelsOnMouseClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="24.0" prefWidth="68.0" style="-fx-background-color: #565661; -fx-background-radius: 25;" text="Action" textFill="#fafafa">
-                <font>
-                    <Font name="System Bold" size="11.0" />
-                </font>
-            </Label>
-            <Label fx:id="Comedy" alignment="CENTER" layoutX="482.0" layoutY="68.0" onMouseClicked="#labelsOnMouseClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="24.0" prefWidth="68.0" style="-fx-background-color: #565661; -fx-background-radius: 25;" text="Comedy" textFill="WHITE">
-                <font>
-                    <Font name="System Bold" size="11.0" />
-                </font>
-            </Label>
             <Label alignment="CENTER" layoutX="46.0" layoutY="28.0" prefHeight="43.0" prefWidth="119.0" style="-fx-background-color: #FFC107; -fx-background-radius: 20;" text="Watch" textFill="WHITE">
                 <font>
                     <Font name="Arial Narrow Bold" size="27.0" />
@@ -57,12 +33,43 @@
                     <Font name="Arial Narrow Bold" size="27.0" />
                 </font>
             </Label>
-            <Label fx:id="Drama" alignment="CENTER" layoutX="567.0" layoutY="68.0" onMouseClicked="#labelsOnMouseClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="24.0" prefWidth="68.0" style="-fx-background-color: #565661; -fx-background-radius: 25;" text="Drama" textFill="WHITE">
+
+            <Button fx:id="Back" layoutX="1448.0" layoutY="15.0" mnemonicParsing="false" onAction="#backScenes"
+                    onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="27.0" prefWidth="56.0"
+                    style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"
+                    text="EXIT" textFill="WHITE"/>
+            <Button fx:id="Search" layoutX="893.0" layoutY="23.0" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="31.0" prefWidth="68.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;" text="Search" textFill="WHITE">
+                <font>
+                    <Font size="14.0" />
+                </font>
+            </Button>
+            <Label fx:id="Main" alignment="CENTER" layoutX="308.0" layoutY="68.0" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="24.0" prefWidth="68.0" style="-fx-background-color: #FFC107; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;" text="Main" textFill="WHITE">
                 <font>
                     <Font name="System Bold" size="11.0" />
                 </font>
             </Label>
-            <Label fx:id="Horror" alignment="CENTER" layoutX="654.0" layoutY="68.0" onMouseClicked="#labelsOnMouseClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="24.0" prefWidth="68.0" style="-fx-background-color: #565661; -fx-background-radius: 25;" text="Horror" textFill="WHITE">
+            <Label fx:id="All" alignment="CENTER" layoutX="392.0" layoutY="68.0" onMouseClicked="#labelsOnMouseClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="24.0" prefWidth="68.0" style="-fx-background-color: #565661; -fx-background-radius: 25;" text="All" textFill="#fafafa">
+                <font>
+                    <Font name="System Bold" size="11.0" />
+                </font>
+            </Label>
+            <Label fx:id="Action" alignment="CENTER" layoutX="482.0" layoutY="68.0" onMouseClicked="#labelsOnMouseClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="24.0" prefWidth="68.0" style="-fx-background-color: #565661; -fx-background-radius: 25;" text="Action" textFill="#fafafa">
+                <font>
+                    <Font name="System Bold" size="11.0" />
+                </font>
+            </Label>
+            <Label fx:id="Comedy" alignment="CENTER" layoutX="567.0" layoutY="68.0" onMouseClicked="#labelsOnMouseClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="24.0" prefWidth="68.0" style="-fx-background-color: #565661; -fx-background-radius: 25;" text="Comedy" textFill="WHITE">
+                <font>
+                    <Font name="System Bold" size="11.0" />
+                </font>
+            </Label>
+
+            <Label fx:id="Drama" alignment="CENTER" layoutX="654.0" layoutY="68.0" onMouseClicked="#labelsOnMouseClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="24.0" prefWidth="68.0" style="-fx-background-color: #565661; -fx-background-radius: 25;" text="Drama" textFill="WHITE">
+                <font>
+                    <Font name="System Bold" size="11.0" />
+                </font>
+            </Label>
+            <Label fx:id="Horror" alignment="CENTER" layoutX="746.0" layoutY="68.0" onMouseClicked="#labelsOnMouseClicked" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="24.0" prefWidth="68.0" style="-fx-background-color: #565661; -fx-background-radius: 25;" text="Horror" textFill="WHITE">
                 <font>
                     <Font name="System Bold" size="11.0" />
                 </font>

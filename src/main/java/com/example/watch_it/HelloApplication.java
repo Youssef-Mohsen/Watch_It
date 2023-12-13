@@ -13,17 +13,14 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         File file = new File("data.txt");
-        Admin.readFile(file);
-        User.allusers.addAll(Admin.getUsers());
         File movieFile = new File("movies-data.txt");
-        Admin.readMovieOneLine(movieFile);
+        Admin.readFile(file);;
+        Admin.readMovies(movieFile);
         Movie.allmovies.addAll(Admin.getMoviesObjs());
         Movie.getDiffGenres();
-
-       /* File movieFile = new File("movies-data.txt");
-        Admin.readMovieOneLine(movieFile);
-        Admin.getAllMovies();
-*/
+        Director.allDirectors.addAll(Admin.getAllDirectors());
+        User.allusers.addAll(Admin.getAllUsers());
+        Cast.allCast.addAll(Admin.getAllCast());
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("first-page.fxml"));
         Parent root;

@@ -1,12 +1,16 @@
-user,nada,123456,1,nada,ayman,basic,ahmad@gmail.com,2023-12-06,to be watched,titanic,watched,red 3,null, red 2,3.2
+user,nada,123456,1,nada,ayman,basic,nadaAyman@gmail.com,2023-12-06,assets/batbot-01.png,to be watched,Oppenheimer,watched,Avengers: Endgame,null,Joker,3
+user,youssef,456789,3,youssef,mohsen,premium,youssefMohsen@gmail.com,2023-10-09,assets/batbot-02.png,to be watched,nsidious: The Red Door,watched,Oppenheimer,null,The Dark Knight,3
 user,mai,456789,2,mai,ezz,standard,salama@gmail.com,2023-11-15,to be watched,titanic,watched,red 3,null, red 2,3.2
-user,youssef,456789,3,youssef,mohsen,premium,hossam@gmail.com,2023-10-09,to be watched,titanic,watched,red 3,null, red 2,3.2
 user,basmala,456789,4,basmala,tarek,basic,ismail@gmail.com,2023-09-3,to be watched,titanic,watched,red 3,null, red 2,3.2
 user,tasneem,456789,545,tasneem,mohamed,premium,hossam@gmail.com,2023-10-09,to be watched,titanic,watched,red 3,null, red 2,3.2
-user,youssef_,456789,4,yossef,ahmad,basic,ismail@gmail.com,2023-09-3,to be watched,titanic,watched,red 3,null, red 2,3.2
-user,toka,456789,4,toka,karam,standard,ismail@gmail.com,2023-09-3,to be watched,titanic,watched,red 3,null, red 2,3.2
+user,youssef_,456789,4,youssef,ahmad,basic,ismail@gmail.com,2023-09-3,to be watched,titanic,watched,red 3,null, red 2,3.2
+user,toka,456789,4,toka,karam,standard,ismail@gmail.com,2023-09-3,to be watched,titanic,watched,red 3,null,red 2,3.2
 cast,ahmad,salama,45,male,american,titanic,haha 2
 admin,nada,123456
 admin,mai,123456
-director,Christopher,Nolan,53,male,british,movies,The Dark Knight
-
+director,Christopher,Nolan,53,male,british,The Dark Knight,Oppenheimer
+director,Guy,Ritchie,55,male,british,Sherlock Holmes
+director,Anthony,Russo,53,male,American,Avengers: Endgame
+director,Chris,Columbus,65,male,Italian,Home Alone
+director,Todd,Phillips,52,male,American,Columbus,Joker
+director,Patrick,Wilson,50,male,American,Columbus,Insidious: The Red Door

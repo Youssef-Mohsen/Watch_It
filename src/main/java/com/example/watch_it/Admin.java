@@ -39,6 +39,7 @@ public class Admin {
     static final short PASSWORDINDEX = 2;
     static final short FIRSTNAMEINDEX = 4;
     static final short LASTNAMEINDEX = 5;
+    static final short PROFILEPICINDEX = 9;
     static final short EMAILINDEX = 7;
     static final short IDINDEX = 3;
     private static short STARTDATEINDEX = 8;
@@ -71,7 +72,7 @@ public class Admin {
             throw new RuntimeException(e);
         }
     }
-    public static void readMovieOneLine(File file) {
+    public static void readMovies(File file) {
         ArrayList<String> arrayList = new ArrayList<String>();
         try {
             String line = "";
@@ -299,7 +300,7 @@ public class Admin {
             }
             if(watched) {
                 watchedCounter++;
-                if(watchedCounter != 0 && watchedCounter%2!=0)
+                if(watchedCounter %2 != 0)
                     watched_movies.add(data);
             }
             if(toBeWatched && toBeWatchedCounter == 1)
@@ -309,20 +310,24 @@ public class Admin {
         }
     }
     //as objects
-    static void getUserMovieLists(String userData,User user,ArrayList<UserWatchRecord> watched_movies, ArrayList<Movie> toBeWatched_movies){
+    static void getUserMovieLists(User user){
+        //to be watched elawel b3den elwatched
+        String userData = existsInFile(users,user.getUser_Name());
+        ArrayList<UserWatchRecord> watched_movies = new ArrayList<UserWatchRecord>();
+        ArrayList<Movie> toBeWatched_movies = new ArrayList<Movie>();
         if(userData != null)
         {
             boolean toBeWatched = false;
             boolean watched = false;
             int watchedCounter = -1;
             int toBeWatchedCounter = 0;
-            Movie movie_to_watch = new Movie();
             String[] eachLine = userData.split(",");
             for (int i=0; i<eachLine.length; i++) {
-                if (eachLine[i].equals("watched"))
+                if (eachLine[i].equals("watched")) {
                     watched = true;
+                    toBeWatched = false;
+                }
                 if (eachLine[i].equals("to be watched")) {
-                    watched = false;
                     toBeWatched = true;
                 }
                 if (watched){
@@ -331,8 +336,14 @@ public class Admin {
                     {
                         for (String oneMovie : movies) {
                             String[] arr = oneMovie.split(",");
-                            if (arr[1].equals(eachLine[i]))
-                                watched_movies.add(getWatchedMovie(arr[i], Integer.parseInt(arr[i+1])));
+                            if (arr[1].equals(eachLine[i])) {
+                                if(arr[i+1].equals("null"))
+                                    watched_movies.add(getWatchedMovie(arr[i], -1));
+                                else {
+                                    System.out.println(arr[i] + "    " + arr[i+1]);
+                                    watched_movies.add(getWatchedMovie(arr[i], Integer.parseInt(arr[i + 1])));
+                                }
+                            }
                         }
                     }
                 }
@@ -342,8 +353,8 @@ public class Admin {
                     toBeWatchedCounter = 1;
             }
         }
-        user.Watched_Movies.addAll(watched_movies);
-        user.Movies_For_Later.addAll(toBeWatched_movies);
+        User.Watched_Movies.addAll(watched_movies);
+        User.Movies_For_Later.addAll(toBeWatched_movies);
     }
     static UserWatchRecord getWatchedMovie(String title, int rate){
         UserWatchRecord movie = new UserWatchRecord();
@@ -351,12 +362,10 @@ public class Admin {
             String []arr = oneMovie.split(",");
             if(arr[1].equals(title))
             {
+                movie.setMovie(getOneMovie_(oneMovie));
                 movie.movie.setTitle(arr[1]);
                 movie.movie.setId(Integer.parseInt(arr[2]));
                 movie.movie.setRelease_date(LocalDate.parse(arr[3]));
-                // movie.setDuration(Integer.parseInt(arr[4]));
-                //director,case lazm hykono strings msh obj.
-                //movie.setDirector(arr[7]);
                 movie.movie.setBudget(arr[11]);
                 movie.movie.setCountry(arr[10]);
                 movie.setRating(rate);
@@ -432,6 +441,7 @@ public class Admin {
                 for(String casts: cast){
                     cast_obj.add(getCast(casts));
                 }
+                movie.setCast(cast_obj);
             }
         }
         return movie;
@@ -462,6 +472,16 @@ public class Admin {
             }
         }
     }
+    static ArrayList<Director> getAllDirectors(){
+        ArrayList<Director> arrayList = new ArrayList<Director>();
+        for(String oneDirector: directors){
+            String[] arr = oneDirector.split(",");
+            String name ="";
+            name = name.concat(arr[1]).concat(" ").concat(arr[2]);
+            arrayList.add(getDirector(name));
+        }
+        return arrayList;
+    }
     static Director getDirector(String directorName){
         Director director = new Director();
         String[] name = directorName.split(" ");
@@ -473,30 +493,24 @@ public class Admin {
                 director.setAge(Integer.parseInt(data[3]));
                 director.setGender(data[4]);
                 director.setNationality(data[5]);
-                int i = 0;
-                boolean foundMovies = false;
                 ArrayList<String> arrayList = new ArrayList<String>();
-                for (String cell: data){
-                    if(cell.equals("movies")){
-                        i++;
-                        foundMovies = true;
-                    }
-                    if( i != 0 && foundMovies){
-                        arrayList.add(cell);
-                    }
+                for(int i=data.length - 1; i>5; i--){
+                    arrayList.add(data[i]);
                 }
                 director.setMovies(arrayList);
             }
         }
         return director;
     }
-    static ArrayList<Director> getAllDirectors(){
-        ArrayList<Director> arrayList = new ArrayList<Director>();
-        for(String oneDirector: directors){
-            String[] arr = oneDirector.split(",");
-            arrayList.add(getDirector(arr[USERNAMEINDEX]));
+    static ArrayList<Cast> getAllCast(){
+        ArrayList<Cast> allcast = new ArrayList<Cast>();
+        for(String oneCast: casts){
+            String[] arr = oneCast.split(",");
+            String name ="";
+            name = name.concat(arr[1]).concat(" ").concat(arr[2]);
+            allcast.add(getCast(name));
         }
-        return arrayList;
+        return allcast;
     }
     static Cast getCast(String name){
         //ArrayList<Cast> cast = new ArrayList<Cast>();
@@ -504,89 +518,30 @@ public class Admin {
         String[] castName = name.split(" ");
         for (String oneCast: casts){
             String[] data = oneCast.split(",");
-            if(data[1].equals(castName[1]) && data[2].equals(castName[2])){
+            if(data[1].equals(castName[0]) && data[2].equals(castName[1])){
                 eachCast.setFirst_Name(data[1]);
                 eachCast.setSecond_Name(data[2]);
                 eachCast.setGender(data[4]);
                 eachCast.setAge(Integer.parseInt(data[3]));
                 eachCast.setNationality(data[5]);
-                int i = 0;
-                boolean foundMovies = false;
                 ArrayList<String> arrayList = new ArrayList<String>();
-                for (String cell: data){
-                    if(cell.equals("movies")){
-                        i++;
-                        foundMovies = true;
-                    }
-                    if( i != 0 && foundMovies){
-                        arrayList.add(cell);
-                    }
+                for(int i=data.length - 1; i>5; i--){
+                    arrayList.add(data[i]);
                 }
                 eachCast.setMovies(arrayList);
             }
         }
         return eachCast;
     }
-    static ArrayList<Cast> getAllCast(){
-        ArrayList<Cast> allcast = new ArrayList<Cast>();
-        for(String oneCast: casts){
-            String[] arr = oneCast.split(",");
-            allcast.add(getCast(arr[USERNAMEINDEX]));
-        }
-        return allcast;
-    }
     //name on getMovies is full name >> first and last combined.
-    static ArrayList<String> getMovies(String name, ArrayList<String> allMovies){
-        ArrayList<String> requiredMovies = new ArrayList<String>();
-        for (String data: allMovies){
-            String []arr = data.split(",");
-            for(String index: arr)
-                //if cast/director is on this specific movie, then i'm gonna add name of the movie to the list.
-                if(index.equals(name))
-                    requiredMovies.add(arr[1]);
-        }
-        return requiredMovies;
-    }
-    static ArrayList<User> getUsers(){
+    static ArrayList<User> getAllUsers(){
         ArrayList<User> userArrayList = new ArrayList<User>();
         for(int i=0; i<users.size(); i++){
             String[] data =users.get(i).split(",");
-            User user = new User(data[USERNAMEINDEX], data[LASTNAMEINDEX],data[FIRSTNAMEINDEX],data[EMAILINDEX],data[PASSWORDINDEX] );
+            User user = new User(data[USERNAMEINDEX], data[LASTNAMEINDEX],data[FIRSTNAMEINDEX],data[EMAILINDEX],data[PASSWORDINDEX],data[PROFILEPICINDEX], data[PLANINDEX]);
             userArrayList.add(user);
         }
         getUsersInEachPlan();
         return userArrayList;
-    }
-    public static void readMovies(File file)  {
-        String line = "";
-        String[] firstLine = new String[20];
-        String[] wholeLine = new String[20];
-        try{
-            int i = 0;
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-            while((line = bufferedReader.readLine()) != null){
-                if(i % 2 == 0){
-                    firstLine = line.split(",");
-                }
-                else {
-                    wholeLine = line.split(",");
-                    //System.arraycopy(wholeLine ,0 ,firstLine ,5,16);
-                    firstLine = Arrays.copyOf(firstLine, firstLine.length + wholeLine.length);
-                    int g = 0 , k = 6;
-                    while(k < firstLine.length && g< wholeLine.length){
-                        System.out.println(g);
-                        firstLine[k] = wholeLine[g];
-                        ++g;
-                        ++k;
-                    }
-                    String eachLine =String.join(",", firstLine);
-                    movies.add(eachLine);
-                }
-                i++;
-            }
-        }
-        catch (IOException ioException){
-            throw new RuntimeException(ioException);
-        }
     }
 }

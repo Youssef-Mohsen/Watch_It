@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.scene.control.Button?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="864.0" prefWidth="1536.0" style="-fx-background-color: black; -fx-border-width: 3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watch_it.profilePageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="864.0" prefWidth="1536.0" style="-fx-background-color: black; -fx-border-width: 3;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watch_it.profilePageController">
     <children>
         <Label alignment="CENTER" layoutX="46.0" layoutY="28.0" prefHeight="43.0" prefWidth="119.0" style="-fx-background-color: #FFC107; -fx-background-radius: 20;" text="Watch" textFill="WHITE">
             <font>
@@ -21,77 +17,72 @@
                 <Font name="Arial Narrow Bold" size="27.0" />
             </font>
         </Label>
-        <Button fx:id="Back" layoutX="1448.0" layoutY="15.0" mnemonicParsing="false" onAction="#backScenes"
-                onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="27.0" prefWidth="56.0"
-                style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"
-                text="Back" textFill="WHITE"/>
-        <Label alignment="CENTER" layoutX="1240.0" layoutY="731.0" prefHeight="47.0" prefWidth="178.0" style="-fx-background-color: #ffc107;" styleClass="text-box" stylesheets="@style.css" text="Movie Lists" textFill="#f8f7f7">
-         <font>
-            <Font size="20.0" />
-         </font></Label>
-      <HBox alignment="CENTER" layoutX="570.0" layoutY="336.0" prefHeight="242.0" prefWidth="390.0">
+        <Button  fx:id="Back" layoutX="1448.0" layoutY="15.0" mnemonicParsing="false" onAction="#backScenes" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="27.0" prefWidth="56.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;" text="Back" textFill="WHITE" />
+        <Button   layoutX="1240.0" layoutY="731.0" mnemonicParsing="false" onAction="#goToMovieList" prefHeight="47.0" prefWidth="178.0" style="-fx-background-color: #ffc107;" styleClass="text-box" stylesheets="@style.css" text="Movie Lists" textFill="#f8f7f7" />
+
+      <HBox alignment="CENTER" layoutX="561.0" layoutY="357.0" prefHeight="242.0" prefWidth="477.0">
          <children>
             <VBox alignment="CENTER_LEFT" prefHeight="323.0" prefWidth="156.0" spacing="20.0">
                <children>
                   <Label text="Username:" textFill="WHITE">
                      <font>
-                        <Font name="System Bold Italic" size="16.0" />
+                        <Font name="System Bold Italic" size="20.0" />
                      </font>
                   </Label>
                   <Label text="First Name:" textFill="WHITE">
                      <font>
-                        <Font name="System Bold Italic" size="16.0" />
+                        <Font name="System Bold Italic" size="20.0" />
                      </font>
                   </Label>
                   <Label text="Second Name:" textFill="WHITE">
                      <font>
-                        <Font name="System Bold Italic" size="16.0" />
+                        <Font name="System Bold Italic" size="20.0" />
                      </font>
                   </Label>
                   <Label text="Email:" textFill="WHITE">
                      <font>
-                        <Font name="System Bold Italic" size="16.0" />
+                        <Font name="System Bold Italic" size="20.0" />
                      </font>
                   </Label>
                   <Label text="Plan:" textFill="WHITE">
                      <font>
-                        <Font name="System Bold Italic" size="16.0" />
+                        <Font name="System Bold Italic" size="20.0" />
                      </font>
                   </Label>
                </children>
             </VBox>
-            <VBox alignment="CENTER_LEFT" prefHeight="242.0" prefWidth="259.0" spacing="20.0">
+            <VBox alignment="CENTER_LEFT" prefHeight="242.0" prefWidth="269.0" spacing="20.0">
                <children>
-                    <Label fx:id="usename" text="Bsmala _Bagoury" textFill="WHITE">
+                    <Label fx:id="username" textFill="WHITE">
                         <font>
-                            <Font name="System Bold" size="16.0" />
+                            <Font name="System Bold" size="20.0" />
                         </font>
                   </Label>
-                    <Label fx:id="firstname" text="Bsmala" textFill="WHITE">
+                    <Label fx:id="firstname" textFill="WHITE">
                         <font>
-                            <Font name="System Bold" size="16.0" />
+                            <Font name="System Bold" size="20.0" />
                         </font>
                   </Label>
-                    <Label fx:id="secondname" text="Tarek" textFill="WHITE">
+                    <Label fx:id="secondname"  textFill="WHITE">
                         <font>
-                            <Font name="System Bold" size="16.0" />
+                            <Font name="System Bold" size="20.0" />
                         </font>
                   </Label>
-                    <Label fx:id="email" text="Bsmala El-bagoury@gmail.com" textFill="WHITE">
+                    <Label fx:id="email"  textFill="WHITE">
                         <font>
-                            <Font name="System Bold" size="16.0" />
+                            <Font name="System Bold" size="20.0" />
                         </font>
                   </Label>
-                    <Label fx:id="plan" text="Standard" textFill="WHITE">
+                    <Label fx:id="plan" textFill="WHITE">
                         <font>
-                            <Font name="System Bold" size="16.0" />
+                            <Font name="System Bold" size="20.0" />
                         </font>
                   </Label>
                </children>
             </VBox>
          </children>
       </HBox>
-        <ChoiceBox fx:id="Select_List" layoutX="497.0" layoutY="574.0" prefHeight="35.0" prefWidth="167.0" style="-fx-background-color: #ffc107;" styleClass="text-box" stylesheets="@style.css" />
+        <ChoiceBox fx:id="Select_List" layoutX="498.0" layoutY="617.0" prefHeight="35.0" prefWidth="167.0" style="-fx-background-color: #ffc107;" styleClass="text-box" stylesheets="@style.css" />
       <ImageView fx:id="profilePictue" fitHeight="150.0" fitWidth="200.0" layoutX="658.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true" />
     </children>
 </AnchorPane>
