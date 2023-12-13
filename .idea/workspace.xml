@@ -4,13 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="236de910-bb88-43c2-a220-e8030a7a2c95" name="Changes" comment="added choose plan">
+    <list default="true" id="236de910-bb88-43c2-a220-e8030a7a2c95" name="Changes" comment="reading movies">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/movies/red_door.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movies-data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/movies-data.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/FilterPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/FilterPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/MainPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/MainPageController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/MovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/MovieController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/WatchLater.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/WatchLater.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/WatchRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/WatchRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/movie-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/movie-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,15 +183,7 @@
       <option name="project" value="LOCAL" />
       <updated>1702329606254</updated>
     </task>
-    <task id="LOCAL-00009" summary="added choose plan">
-      <option name="closed" value="true" />
-      <created>1702426550817</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1702426550818</updated>
-    </task>
-    <option name="localTasksCounter" value="10" />
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -210,8 +206,7 @@
     <MESSAGE value="main class" />
     <MESSAGE value="add first page gui" />
     <MESSAGE value="reading movies" />
-    <MESSAGE value="added choose plan" />
-    <option name="LAST_COMMIT_MESSAGE" value="added choose plan" />
+    <option name="LAST_COMMIT_MESSAGE" value="reading movies" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

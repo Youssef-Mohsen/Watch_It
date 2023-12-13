@@ -74,7 +74,7 @@ public class WatchLater {
         Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));
         controller.refreshScreen("Watch Movie "+ movie.getTitle() + "("+movie.getRelease_date().getYear()+")", movie.getTitle(),
                 movie.getTitle()+" Translated",movie.getGenres(), movie.getDescription(),
-                movie.getRunning_time(), image,movie.getDirectorName(),movie.getCast().toString());
+                movie.getRunning_time(), image,movie.getDirectorName(),movie.getCastNames());
         stage.setScene(scene);
         stage.show();
 

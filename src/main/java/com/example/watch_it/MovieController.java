@@ -19,7 +19,6 @@ import java.util.Objects;
 
 
 public class MovieController {
-    private Parent root;
     private Stage stage;
     @FXML
     private Label titleMovie;
@@ -134,10 +133,14 @@ public class MovieController {
         }
     }
     public void refreshScreen(String filmTitle, String newMovieName, String newFilm, ArrayList<String> filmGenre,
-                              String filmDescription, String filmDuration, Image image,String director,String cast) {
+                              String filmDescription, String filmDuration, Image image,String director,ArrayList<String> cast) {
         String genres = "";
         for(String genre: filmGenre){
             genres = genres.concat(genre+ " ");
+        }
+        String casts = "";
+        for(String cast1: cast){
+            casts = casts.concat(cast1+ ",");
         }
         titleMovie.setText(filmTitle);
         movieName.setText(newMovieName);
@@ -147,7 +150,7 @@ public class MovieController {
         duration.setText(filmDuration);
         imagePreview.setImage(image);
         Director.setText(director);
-        Cast.setText(cast);
+        Cast.setText(casts);
     }
 
     public void disableWatch(){
@@ -167,6 +170,7 @@ public class MovieController {
 
     }
     public void backScenes(ActionEvent event) throws IOException {
+        Parent root;
         if(!aBoolean) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("main-page.fxml"));
              root = loader.load();
