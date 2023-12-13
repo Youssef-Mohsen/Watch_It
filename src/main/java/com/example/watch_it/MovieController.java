@@ -158,7 +158,17 @@ public class MovieController {
     }
     public void watchMovie(Movie movie){
 
+
+
             Watch.setOnMouseClicked(event -> {
+                for(int c=0;c<Movie.allmovies.size();c++)
+                {
+                    if(movie.getTitle()==Movie.allmovies.get(c).getTitle())
+                    {
+                        Movie.allmovies.get(c).inc_views();
+                        System.out.println("hellow");
+                    }
+                }
                 if(WatchRecord.watchedMovies.contains(movie)) {
                     System.out.println("That Movie here");
                 }
@@ -167,14 +177,7 @@ public class MovieController {
                     WatchRecord.watchedMovies.add(movie);
 
 
-                    for(int c=0;c<Movie.allmovies.size();c++)
-                    {
-                        if(movie.getTitle()==Movie.allmovies.get(c).getTitle())
-                        {
-                            Movie.allmovies.get(c).inc_views();
-                            System.out.println("hellow");
-                        }
-                    }
+
 
 
                 }
