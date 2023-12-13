@@ -233,7 +233,6 @@ public class Movie {
     public static void getDiffGenres(){
 
         for(Movie eachMovie: allmovies){
-            for(int i=0; i<eachMovie.getGenres().size(); i++){
                 for(String eachGenre:eachMovie.getGenres()){
                     if(eachGenre.equals("action"))
                         action.add(eachMovie);
@@ -244,7 +243,6 @@ public class Movie {
                     else if (eachGenre.equals("horror"))
                         horror.add(eachMovie);
                 }
-            }
         }
     }
     public String getDirectorName() {

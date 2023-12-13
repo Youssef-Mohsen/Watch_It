@@ -45,6 +45,28 @@ public class SignUp {
     @FXML
     private Button Back;
     @FXML
+    RadioButton button1;
+    @FXML
+    RadioButton button2;
+    @FXML
+    RadioButton button3;
+    @FXML
+    RadioButton button4;
+    @FXML
+    RadioButton button5;
+    @FXML
+    RadioButton button6;
+    ToggleGroup group = new ToggleGroup();
+    @FXML
+    private void initialize(){
+        button1.setToggleGroup(group);
+        button2.setToggleGroup(group);
+        button3.setToggleGroup(group);
+        button4.setToggleGroup(group);
+        button5.setToggleGroup(group);
+        button6.setToggleGroup(group);
+    }
+    @FXML
     private void showAlert(String message) {
         showAlert(message, Alert.AlertType.INFORMATION);
     }
@@ -78,26 +100,52 @@ public class SignUp {
         stage.setScene(scene);
         stage.show();
     }
-    @FXML
-    public void SignUP()
-    {
-        String username = CreateUserName.getText();
-        while(Admin.existsInFile(username))
-        {
-            showErrorAlert("Invalid", "UserName Is already exist , Try again!");
-            CreateUserName.clear();
+    public void GoToChoosePlan(ActionEvent event, User user) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("choose-plan.fxml"));
+        Parent root;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+        ChoosePlanController controller = loader.getController();
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        controller.setStage(stage);
+        controller.setUser(user);
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        stage.setX(-7);
+        stage.setY(0);
+
+    }
+    @FXML
+    public void SignUP(ActionEvent event) throws IOException {
+        String username = CreateUserName.getText();
         String firstname = FisrtName.getText();
         String lastname = LastName.getText();
         String email = Email.getText();
         String password = CreatePassword.getText();
         String confirmpassword = CreateConfirmPassword.getText();
-        while(!password.equals(confirmpassword))
+        RadioButton selectedbutton = (RadioButton) group.getSelectedToggle();
+
+        if (username.isEmpty() || firstname.isEmpty() || lastname.isEmpty() || password.isEmpty() || email.isEmpty() || confirmpassword.isEmpty() || selectedbutton == null){
+            showErrorAlert("Invalid", "Enter All Data");
+        }
+        else if (!password.equals(confirmpassword))
         {
             showErrorAlert("Invalid", "Confirm Password Does not match, Try again!");
             CreateConfirmPassword.clear();
         }
-        showAlert("Sign Up is completed Successful!");
+        else if (User.Userexist(username))
+        {
+            showErrorAlert("Invalid", "UserName Is already exist , Try again!");
+            CreateUserName.clear();
+        }
+        else {
+            User user = new User(User.allusers.size(),username, lastname, firstname, email, password);
+            GoToChoosePlan(event, user);
+        }
     }
     @FXML
     public void The_Password_Visibility(ActionEvent act)
@@ -126,6 +174,10 @@ public class SignUp {
     }
 
     public void onMouseExit() {
-        Back.setOnMouseExited(event -> Back.setStyle("-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
+        Back.setOnMouseExited(event -> Back.setStyle("-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 }

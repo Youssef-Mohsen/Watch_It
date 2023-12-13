@@ -147,7 +147,7 @@
                                 <Font size="20.0" />
                             </font>
                         </CheckBox>
-                        <Button alignment="CENTER" layoutX="610.0" layoutY="663.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="319.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;" text="Create " textAlignment="CENTER" textFill="#f8f7f7">
+                        <Button onAction="#SignUP" alignment="CENTER" layoutX="610.0" layoutY="663.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="319.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;" text="Create " textAlignment="CENTER" textFill="#f8f7f7">
                             <font>
                                 <Font name="Chalkboard Bold" size="20.0" />
                             </font>

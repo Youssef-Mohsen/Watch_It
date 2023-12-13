@@ -25,64 +25,27 @@ public class FilterPage {
     private VBox middleColumn2;
     @FXML
     private VBox rightColumn;
-
-    private  void get_data(){
-        ArrayList<Movie> movies = new ArrayList<Movie>();
-        Movie movie3 = new Movie();
-        movie3.setTitle("Joker");
-        movie3.setPoster_path("movies/joker.jpeg");
-        Movie movie4 = new Movie();
-        movie4.setTitle("Ready Or Not");
-        movie4.setPoster_path("movies/ready or not.jpeg");
-        movies.add(movie3);
-        movies.add(movie3);
-        movies.add(movie4);
-        switch (MainPageController.moviePage){
-            case 1:
-                MainPageController.action.addAll(movies);
-                break;
-            case 2:
-                MainPageController.comedy.addAll(movies);
-                MainPageController.comedy.addAll(movies);
-                break;
-            case 3:
-                MainPageController.drama.addAll(movies);
-                MainPageController.drama.addAll(movies);
-                MainPageController.drama.addAll(movies);
-                break;
-            case 4:
-                MainPageController.horror.addAll(movies);
-                MainPageController.horror.addAll(movies);
-                MainPageController.horror.addAll(movies);
-                MainPageController.horror.addAll(movies);
-                break;
-            default:
-
-        }
-    }
-
     @FXML
     public void initialize (){
-        get_data();
         switch (MainPageController.moviePage) {
             case 1:
-                for (int i = 0; i < MainPageController.action.size(); i++) {
-                    addMovies(MainPageController.action.get(i),i);
+                for (int i = 0; i < Movie.action.size(); i++) {
+                    addMovies(Movie.action.get(i),i);
                 }
                 break;
             case 2:
-                for (int i = 0; i < MainPageController.comedy.size(); i++) {
-                    addMovies(MainPageController.comedy.get(i),i);
+                for (int i = 0; i < Movie.comedy.size(); i++) {
+                    addMovies(Movie.comedy.get(i),i);
                 }
                 break;
             case 3:
-                for (int i = 0; i < MainPageController.drama.size(); i++) {
-                    addMovies(MainPageController.drama.get(i),i);
+                for (int i = 0; i < Movie.drama.size(); i++) {
+                    addMovies(Movie.drama.get(i),i);
                 }
                 break;
             case 4:
-                for (int i = 0; i < MainPageController.horror.size(); i++) {
-                    addMovies(MainPageController.horror.get(i),i);
+                for (int i = 0; i < Movie.horror.size(); i++) {
+                    addMovies(Movie.horror.get(i),i);
                 }
                 break;
             default:

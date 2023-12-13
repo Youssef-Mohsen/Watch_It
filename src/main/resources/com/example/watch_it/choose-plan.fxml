@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="864.0" maxWidth="1536.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="864.0" prefWidth="1536.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watch_it.ChoosePlanController">
+    <children>
+        <Pane prefHeight="100.0" prefWidth="1536.0" style="-fx-background-color: black;">
+            <children>
+                <Label alignment="CENTER" layoutX="42.0" layoutY="23.0" prefHeight="43.0" prefWidth="143.0" style="-fx-background-color: FFC107; -fx-background-radius: 20; " text="Watch" textFill="WHITE">
+                    <font>
+                        <Font name="Arial Narrow Bold" size="27.0" />
+                    </font>
+                </Label>
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="158.0" layoutY="23.0" prefHeight="43.0" prefWidth="68.0" style="-fx-background-color: black; -fx-background-radius: 25;" text="IT" textFill="WHITE">
+                    <font>
+                        <Font name="Arial Narrow Bold" size="27.0" />
+                    </font>
+                </Label>
+                <Button onAction="#goBack" fx:id="Back" layoutX="1448.0" layoutY="15.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="56.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;" text="Back" textFill="WHITE" />
+                <!--onAction="#GoToSignIn" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit"-->
+            </children>
+        </Pane>
+        <Pane layoutY="100.0" prefHeight="764.0" prefWidth="1536.0">
+            <children>
+                <Label alignment="CENTER" prefHeight="134.0" prefWidth="1536.0" text="Pick Your Favourite Plan" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="48.0" />
+                    </font>
+                </Label>
+                <Button fx:id="basic" layoutX="229.0" layoutY="150.0" mnemonicParsing="false" onMouseClicked="#Basic" prefHeight="202.0" prefWidth="263.0" />
+                <Label layoutX="304.0" layoutY="165.0" text="BASIC" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="40.0" />
+                    </font>
+                </Label>
+                <Label layoutX="270.0" layoutY="350.0">
+                    <font>
+                        <Font size="64.0" />
+                    </font>
+                </Label>
+                <Label layoutX="266.0" layoutY="240.0" text="5 Movies/Month" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                </Label>
+                <Label layoutX="314.0" layoutY="285.0" text="100 EGP" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                </Label>
+                <Button fx:id="standard" layoutX="630.0" layoutY="147.0" mnemonicParsing="false" onMouseClicked="#Standard" prefHeight="202.0" prefWidth="263.0" />
+                <Label layoutX="659.0" layoutY="165.0" text="STANDARD" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="40.0" />
+                    </font>
+                </Label>
+                <Label layoutX="652.0" layoutY="240.0" text="10 Movies/Month" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                </Label>
+                <Label layoutX="722.0" layoutY="285.0" text="200 EGP" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                </Label>
+                <Button fx:id="premium" layoutX="995.0" layoutY="147.0" mnemonicParsing="false" onMouseClicked="#Premium" prefHeight="202.0" prefWidth="263.0" />
+                <Label layoutX="1031.0" layoutY="165.0" text="PREMIUM" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="40.0" />
+                    </font>
+                </Label>
+                <Label layoutX="1025.0" layoutY="240.0" text="30 Movies/Month" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                </Label>
+                <Label layoutX="1080.0" layoutY="285.0" text="400 EGP" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="cardNumber" layoutX="537.0" layoutY="419.0" prefHeight="49.0" prefWidth="450.0" promptText="Card Number" style="-fx-background-color: black; -fx-border-color: grey; -fx-border-radius: 30;">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font></TextField>
+                <TextField fx:id="cardHolderName" layoutX="537.0" layoutY="479.0" prefHeight="49.0" prefWidth="450.0" promptText="Card Holder Name" style="-fx-background-color: black; -fx-border-color: grey; -fx-border-radius: 30;">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </TextField>
+                <TextField fx:id="MMyy" layoutX="537.0" layoutY="538.0" prefHeight="49.0" prefWidth="216.0" promptText="MM / YY" style="-fx-background-color: black; -fx-border-color: grey; -fx-border-radius: 30;">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </TextField>
+                <TextField fx:id="Cvv" layoutX="771.0" layoutY="538.0" prefHeight="49.0" prefWidth="216.0" promptText="CVV" style="-fx-background-color: black; -fx-border-color: grey; -fx-border-radius: 30;">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </TextField>
+                <Button layoutX="537.0" layoutY="604.0" mnemonicParsing="false" onAction="#Pay" prefHeight="49.0" prefWidth="450.0" style="-fx-background-color: FFC107; -fx-background-radius: 30;" text="Pay">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Button>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>

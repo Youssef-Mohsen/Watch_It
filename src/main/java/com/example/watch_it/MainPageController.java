@@ -78,18 +78,12 @@ public class MainPageController {
     HBox RecentMovies;
     @FXML
     private Button Back;
-    static ArrayList<Movie> action = new ArrayList<Movie>();
-    static ArrayList<Movie> comedy = new ArrayList<Movie>();
-    static ArrayList<Movie> horror = new ArrayList<Movie>();
-    static ArrayList<Movie> drama = new ArrayList<Movie>();
-
 
     private void getData() {
        for(Movie movie : Movie.allmovies){
            moviesTop.add(movie);
            moviesRecent.add(movie);
        }
-
     }
 
     @FXML

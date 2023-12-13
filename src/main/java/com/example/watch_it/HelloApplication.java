@@ -18,6 +18,7 @@ public class HelloApplication extends Application {
         File movieFile = new File("movies-data.txt");
         Admin.readMovieOneLine(movieFile);
         Movie.allmovies.addAll(Admin.getMoviesObjs());
+        Movie.getDiffGenres();
 
        /* File movieFile = new File("movies-data.txt");
         Admin.readMovieOneLine(movieFile);
