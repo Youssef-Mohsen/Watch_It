@@ -245,6 +245,7 @@ public class Admin {
             default -> null;
         };
     }
+
     static Month monthWithMostRevenue(){
         Month month = null;
         int [] monthsRevenue = new int[MONTHSNUMBER];
@@ -285,6 +286,7 @@ public class Admin {
         }
         return getMonth(recuiredMonth);
     }
+    //******************************************************************
     static void getUserMovieLists(String user, ArrayList<String> watched_movies, ArrayList<String> toBeWatched_movies){
         boolean toBeWatched = false;
         boolean watched = false;
