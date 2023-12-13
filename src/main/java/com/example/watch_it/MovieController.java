@@ -163,7 +163,20 @@ public class MovieController {
                     System.out.println("That Movie here");
                 }
                 else {
+
                     WatchRecord.watchedMovies.add(movie);
+
+
+                    for(int c=0;c<Movie.allmovies.size();c++)
+                    {
+                        if(movie.getTitle()==Movie.allmovies.get(c).getTitle())
+                        {
+                            Movie.allmovies.get(c).inc_views();
+                            System.out.println("hellow");
+                        }
+                    }
+
+
                 }
                 Watch.setDisable(true);
             });

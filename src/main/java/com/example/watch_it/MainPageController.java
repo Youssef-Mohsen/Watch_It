@@ -31,7 +31,7 @@ import java.util.Objects;
 
 import javafx.fxml.FXML;
 
-public class MainPageController {
+public  class MainPageController {
     private Parent root;
     private Scene scene;
     private Stage stage;
@@ -82,15 +82,21 @@ public class MainPageController {
     @FXML
     private Button Back;
 
+
+
     private void getData() {
-       for(Movie movie : Movie.allmovies){
+     //Movie.allmovies.get(2).inc_views();
+       for(Movie movie : Movie.MostViewedMovies(Movie.allmovies)){
            moviesTop.add(movie);
+       }
+       for(Movie movie:Movie.allmovies)
+       {
            moviesRecent.add(movie);
        }
     }
 
     @FXML
-    private void initialize() {
+    public  void initialize() {
         getData();
         for (Movie movie : moviesTop) {
             addToGUI(movie);
