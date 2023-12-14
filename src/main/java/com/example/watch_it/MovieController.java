@@ -64,6 +64,7 @@ public class MovieController {
     private Movie movie;
     public int page5=0;
 
+    int Max_Rating;
     // Other fields and methods...
 
     // Method to update the text of the first label
@@ -103,8 +104,7 @@ public class MovieController {
                     stars[h].setOnMouseExited(event2 ->
                             stars[finalJ].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/emptyStar.png")))));
                 }
-                int Max_Rating=Math.max(rating2,rating);
-                System.out.println(Max_Rating);
+                 Max_Rating=rating2;
                 });
 
         }
@@ -157,8 +157,15 @@ public class MovieController {
         Watch.setOnMouseClicked(event -> Watch.setDisable(true));
     }
     public void watchMovie(Movie movie){
+        if(WatchRecord.watchedMovies.contains(movie)){
+            watchLater.setDisable(true);
+        }
+        if(RecordedMoviesController.toWatchMovies.contains(movie)){
+            watchLater.setDisable(true);
+        }
             Watch.setOnMouseClicked(event -> {
                 watchLater.setDisable(true);
+                movie.userRate=Max_Rating;
                 for(int c=0;c<Movie.allmovies.size();c++)
                 {
                     if(movie.getTitle()==Movie.allmovies.get(c).getTitle())
@@ -176,6 +183,7 @@ public class MovieController {
                     System.out.println("Not Found!");
                 }
 
+
                 Watch.setDisable(true);
             });
         watchLater.setOnMouseClicked(event -> {
@@ -189,6 +197,7 @@ public class MovieController {
         });
 
     }
+
     public void backScenes(ActionEvent event) throws IOException {
         Parent root = null;
         if(page5==0) {

@@ -37,6 +37,7 @@ public  class MainPageController {
     private Stage stage;
     private Timeline autoScrollTimeline;
     private Timeline autoScrollTimeline2;
+    private Timeline autoScrollTimeline3;
     @FXML
     private BorderPane mainPane;
     @FXML
@@ -58,6 +59,8 @@ public  class MainPageController {
     @FXML
     private Label topMovies;
     @FXML
+    private Label TopRated;
+    @FXML
     private Label watchRecords;
     @FXML
     private Button Search;
@@ -66,9 +69,13 @@ public  class MainPageController {
     @FXML
     private ScrollPane Scroll2;
     @FXML
+    private ScrollPane Scroll3;
+    @FXML
     private Pane AllMovies;
     @FXML
     private MenuButton menuButton;
+    public static String menuValue;
+
     @FXML
     private  Label counter;
     private User user;
@@ -76,10 +83,14 @@ public  class MainPageController {
     static int moviePage = 0;
     private final ArrayList<Movie> moviesTop = new ArrayList<>();
     private final ArrayList<Movie> moviesRecent = new ArrayList<>();
+    private final ArrayList<Movie> moviesTopRated = new ArrayList<>();
+    UserWatchRecord userWatchRecord;
     @FXML
     HBox TopMovies;
     @FXML
     HBox RecentMovies;
+    @FXML
+    HBox TopRatedMovies;
     @FXML
     private Button Back;
 
@@ -93,6 +104,11 @@ public  class MainPageController {
         {
             moviesRecent.add(movie);
         }
+        for(Movie movie:Movie.allmovies)
+        {
+            moviesTopRated.add(movie);
+        }
+
     }
 
     @FXML
@@ -103,6 +119,9 @@ public  class MainPageController {
         }
         for (Movie movie : moviesRecent) {
             addToGUI2(movie);
+        }
+        for (Movie movie : moviesTopRated) {
+            addToGUI3(movie);
         }
         setUpFilter();
         onMouseEntered();
@@ -168,6 +187,30 @@ public  class MainPageController {
         RecentMovies.getChildren().addAll(movieContainer);
 
     }
+    private void addToGUI3(Movie movie) {
+        VBox movieContainer = new VBox(10);
+        movieContainer.setPrefWidth(300);
+        movieContainer.setPrefHeight(200);
+        Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(237);
+        imageView.setFitWidth(220);
+        Label label = new Label(movie.getTitle());
+        label.setStyle("-fx-text-size: 20; -fx-text-fill: white;");
+        label.setOnMouseEntered(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: #FFC107;"));
+        label.setOnMouseExited(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
+        movieContainer.setAlignment(Pos.CENTER);
+        movieContainer.getChildren().addAll(imageView, label);
+
+        movieContainer.setOnMouseClicked(event -> {
+            try {
+                onMouseClickedVBox(event,movie);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        TopRatedMovies.getChildren().addAll(movieContainer);
+    }
     public void setUpFilter(){
         Main.setStyle("-fx-background-color: #FFC107;" +
                 " -fx-background-radius: 25; " +
@@ -206,29 +249,9 @@ public  class MainPageController {
         stage.setResizable(false);
         stage.setX(-7);
         stage.setY(0);
-
         stage.setScene(scene);
         stage.show();
-
     }
-   /* public void profileOnMouseClicked(){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("profile-page.fxml"));
-        Parent root;
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        profilePageController controller = loader.getController();
-        controller.setStage(stage);
-        Scene scene = new Scene(root);
-        stage.setTitle("Movie");
-        stage.setResizable(false);
-        stage.setX(-7);
-        stage.setY(0);
-        stage.setScene(scene);
-        stage.show();
-    }*/
     public void labelsOnMouseClicked(){
         Action.setOnMouseClicked(event -> {
             Action.setStyle("-fx-background-radius: 25;-fx-background-color:  #FFC107;");
@@ -425,6 +448,7 @@ public  class MainPageController {
                 " -fx-border-radius: 25;"));
         Recent.setOnMouseEntered(event -> underlineLabel(Recent, true));
         topMovies.setOnMouseEntered(event -> underlineLabel(topMovies, true));
+        TopRated.setOnMouseEntered(event -> underlineLabel(TopRated, true));
         watchRecords.setOnMouseEntered(event -> {
             watchRecords.setStyle("-fx-background-color: #FFC107; -fx-background-radius: 10; -fx-text-fill: black;");
             counter.setStyle("-fx-background-color: #FFC107; -fx-background-radius: 10; -fx-text-fill: black;");
@@ -453,6 +477,7 @@ public  class MainPageController {
                 " -fx-border-radius: 25;"));
         Recent.setOnMouseExited(event -> underlineLabel(Recent, false));
         topMovies.setOnMouseExited(event -> underlineLabel(topMovies, false));
+        TopRated.setOnMouseExited(event -> underlineLabel(TopRated, false));
         watchRecords.setOnMouseExited(event -> {
             watchRecords.setStyle("-fx-background-color: #001f2f; -fx-background-radius: 10;");
             counter.setStyle("-fx-background-color: #001f2f; -fx-background-radius: 10;");
@@ -485,6 +510,10 @@ public  class MainPageController {
                 new KeyFrame(Duration.ZERO, new KeyValue(Scroll2.hvalueProperty(), 0)),
                 new KeyFrame(Duration.seconds(scrollDuration), new KeyValue(Scroll2.hvalueProperty(), 1))
         );
+        autoScrollTimeline3 = new Timeline(
+                new KeyFrame(Duration.ZERO, new KeyValue(Scroll3.hvalueProperty(), 0)),
+                new KeyFrame(Duration.seconds(scrollDuration), new KeyValue(Scroll3.hvalueProperty(), 1))
+        );
 
         // Set the cycle count to indefinite for continuous scrolling
         autoScrollTimeline.setCycleCount(Timeline.INDEFINITE);
@@ -497,6 +526,11 @@ public  class MainPageController {
         startAutoScroll2();
         Scroll2.setOnMouseEntered(event ->  stopAutoScroll2());
         Scroll2.setOnMouseExited(event -> startAutoScroll2());
+        //////////////////////////////////////////////////////
+        autoScrollTimeline3.setCycleCount(Timeline.INDEFINITE);
+        startAutoScroll3();
+        Scroll3.setOnMouseEntered(event ->  stopAutoScroll3());
+        Scroll3.setOnMouseExited(event -> startAutoScroll3());
     }
     @FXML
     private void startAutoScroll() {
@@ -523,6 +557,19 @@ public  class MainPageController {
     }
     ///////////////////////////
 
+    ///////////////////////////
+    @FXML
+    private void startAutoScroll3() {
+        autoScrollTimeline3.play();
+    }
+
+    @FXML
+    private void stopAutoScroll3() {
+        // Stop auto-scrolling when user interacts with the ScrollPane
+        autoScrollTimeline3.pause();
+    }
+
+    /////////////////////////////
     public void handleKeyPressed(KeyEvent event) {
         if (event.getCode().toString().equals("ESCAPE")) {
             Platform.exit();
@@ -572,7 +619,7 @@ public  class MainPageController {
 
         // Do something with the selected value, e.g., set it as the text of the MenuButton
         menuButton.setText(selectedValue);
-
+        menuValue=menuButton.getText();
         // You can also perform other actions based on the selected value
         // For example, show/hide different UI elements or update other parts of your application
     }

@@ -45,3 +45,9 @@
   -fx-background-radius: 50;
   -fx-alignment: center;
 }
+.scrollPane2 {
+    -fx-background-color:transparent;
+}
+.scrollPane2 > .viewport {
+    -fx-background-color: transparent;
+}

@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class WatchRecord {
     private Parent root;
     private Stage stage;
-
+    UserWatchRecord userWatchRecord;
     public boolean aBoolean;
     public static final ArrayList<Movie> watchedMovies = new ArrayList<>();
     @FXML
@@ -34,7 +34,7 @@ public class WatchRecord {
     private Button Back;
 
 
-
+    MovieController movieController;
     public void initializeItems() {
         for (Movie movie : watchedMovies) {
             addToGUI(movie);
@@ -54,8 +54,19 @@ public class WatchRecord {
         label.setStyle("-fx-text-size: 20; -fx-text-fill: white;");
         label.setOnMouseEntered(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: #FFC107;"));
         label.setOnMouseExited(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
+        Label label1 =new Label("Rate: "+movie.userRate);
+        label1.setStyle("-fx-text-size: 20; -fx-text-fill: white;");
+        label1.setOnMouseEntered(event -> label1.setStyle("-fx-text-size: 20; -fx-text-fill: #FFC107;"));
+        label1.setOnMouseExited(event -> label1.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
+        Image image1 = new Image(getClass().getResourceAsStream("assets/fullStar.png"));
+        ImageView imageView1 = new ImageView(image1);
+        imageView1.setFitHeight(18);
+        imageView1.setFitWidth(20);
+        HBox box =new HBox(label1,imageView1,label);
+        box.setAlignment(Pos.CENTER);
+        box.setSpacing(6);
         movieContainer.setAlignment(Pos.CENTER);
-        movieContainer.getChildren().addAll(imageView, label);
+        movieContainer.getChildren().addAll(imageView,box);
         movieContainer.setOnMouseClicked(event -> {
             try {
                 onMouseClickedVBox(event,movie);
@@ -70,22 +81,25 @@ public class WatchRecord {
         FXMLLoader loader=new FXMLLoader(getClass().getResource("movie-view.fxml"));
         Parent root = loader.load();
         stage = (Stage)((Node)act.getSource()).getScene().getWindow();
-        MovieController controller=loader.getController();
-        controller.setStage(stage);
-        controller.disableButtons();
-        controller.disableWatch();
-        controller.watchMovie(movie);
-        controller.page5=1;
+        movieController=loader.getController();
+        movieController.setStage(stage);
+        movieController.disableButtons();
+        movieController.disableWatch();
+        movieController.watchMovie(movie);
+        movieController.page5=1;
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
         Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));
-        controller.refreshScreen("Watch Movie "+ movie.getTitle() + "("+movie.getRelease_date().getYear()+")", movie.getTitle(),
+        movieController.refreshScreen("Watch Movie "+ movie.getTitle() + "("+movie.getRelease_date().getYear()+")", movie.getTitle(),
                 movie.getTitle()+" Translated",movie.getGenres(), movie.getDescription(),
                 movie.getRunning_time(), image,MainPageController.movie5.getDirectorName(),MainPageController.movie5.getCastNames());
         stage.setScene(scene);
         stage.show();
 
+    }
+    public void setUserWatchRecord(UserWatchRecord userWatchRecord){
+        this.userWatchRecord=userWatchRecord;
     }
     public void backScenes(ActionEvent event) throws IOException {
 

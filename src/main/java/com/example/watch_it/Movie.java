@@ -33,7 +33,7 @@ public class Movie {
 
     private Director director;
     private List<Cast> cast;
-
+    public int userRate;
     public Movie(){
         counter++;
         this.id = counter;
