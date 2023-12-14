@@ -187,6 +187,7 @@ public class MovieController {
                 Watch.setDisable(true);
             });
         watchLater.setOnMouseClicked(event -> {
+            MainPageController.movie5=movie;
             if(RecordedMoviesController.toWatchMovies.contains(movie)) {
                 System.out.println("That Movie here");
             }

@@ -81,8 +81,19 @@ public class RecordedMoviesController {
         label.setStyle("-fx-text-size: 20; -fx-text-fill: white;");
         label.setOnMouseEntered(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: #FFC107;"));
         label.setOnMouseExited(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
+        Label label1 =new Label("Rate: "+movie1.userRate);
+        label1.setStyle("-fx-text-size: 20; -fx-text-fill: white;");
+        label1.setOnMouseEntered(event -> label1.setStyle("-fx-text-size: 20; -fx-text-fill: #FFC107;"));
+        label1.setOnMouseExited(event -> label1.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
+        Image image1 = new Image(getClass().getResourceAsStream("assets/fullStar.png"));
+        ImageView imageView1 = new ImageView(image1);
+        imageView1.setFitHeight(18);
+        imageView1.setFitWidth(20);
+        HBox box =new HBox(label1,imageView1,label);
+        box.setAlignment(Pos.CENTER);
+        box.setSpacing(6);
         movieContainer.setAlignment(Pos.CENTER);
-        movieContainer.getChildren().addAll(imageView, label);
+        movieContainer.getChildren().addAll(imageView,box);
         movieContainer.setOnMouseClicked(event -> {
             try {
                 onMouseClickedVBox(event,movie1);

@@ -5,12 +5,27 @@ user,basmala,456789,4,basmala,tarek,basic,ismail@gmail.com,2023-09-3,to be watch
 user,tasneem,456789,545,tasneem,mohamed,premium,hossam@gmail.com,2023-10-09,to be watched,titanic,watched,red 3,null, red 2,3.2
 user,youssef_,456789,4,youssef,ahmad,basic,ismail@gmail.com,2023-09-3,to be watched,titanic,watched,red 3,null, red 2,3.2
 user,toka,456789,4,toka,karam,standard,ismail@gmail.com,2023-09-3,to be watched,titanic,watched,red 3,null,red 2,3.2
-cast,ahmad,salama,45,male,american,titanic,haha 2
 admin,nada,123456
 admin,mai,123456
+cast,Patrick,Wilson,50,male,American,Columbus,Insidious: The Red Door
+cast,Rose,Byrne,44,female,Australian,Insidious: The Red Door
+cast,Joaquin,Phoenix,49,male,American,Joker
+cast,Robert,DeNiro,80,male,American,Joker
+cast,Joe,Pesci,80,male,American,Home Alone
+cast,Macaulay,Culkin,43,male,American,Home Alone
+cast,Daniel,Stern,66,male,American,Home Alone
+cast,Robert,DowneyJr,58,male,American,Avengers: Endgame,Sherlock Holmes,Oppenheimer
+cast,Benedict,Cumberbatch,40,male,English,Avengers: Endgame
+cast,Chris,Hemsworth,40,male,English,Avengers: Endgame
+cast,Mark,Strong,60,male,British,Sherlock Holmes
+cast,Jude,Law,50,male,English,Sherlock Holmes
+cast,Cillian,Murphy,50,male,Irish,Oppenheimer,The Dark Knight
+cast,Matt,Damon,53,male,American,The Dark Knight
+cast,Christian,Bale,49,male,American,The Dark Knight
+cast,Morgan,Freeman,86,male,American,The Dark Knight
 director,Christopher,Nolan,53,male,british,The Dark Knight,Oppenheimer
 director,Guy,Ritchie,55,male,british,Sherlock Holmes
 director,Anthony,Russo,53,male,American,Avengers: Endgame
 director,Chris,Columbus,65,male,Italian,Home Alone
-director,Todd,Phillips,52,male,American,Columbus,Joker
-director,Patrick,Wilson,50,male,American,Columbus,Insidious: The Red Door
+director,Todd,Phillips,52,male,American,Joker
+director,Patrick,Wilson,50,male,American,Insidious: The Red Door
