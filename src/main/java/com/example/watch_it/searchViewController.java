@@ -29,7 +29,6 @@ public class searchViewController {
     private Label Gender_Label;
     @FXML
     private Label Nation_Label;
-    private Label Movies_Label;
     @FXML
     private Label Not_Found_Label;
     @FXML
@@ -42,6 +41,7 @@ public class searchViewController {
         for (Movie movie:searchMovies) {
             add_movie(movie);
         }
+        Movies.setSpacing(20);
     }
 
     private void add_movie(Movie movie){

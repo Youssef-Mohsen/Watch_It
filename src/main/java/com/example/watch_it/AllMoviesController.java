@@ -179,7 +179,9 @@ public class AllMoviesController {
             initialize();
         }
     }
-
+public void setStage(Stage stage){
+        this.stage=stage;
+}
 
 }
 

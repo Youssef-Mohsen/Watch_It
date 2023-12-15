@@ -27,6 +27,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Objects;
 
 import javafx.fxml.FXML;
@@ -103,15 +105,16 @@ public  class MainPageController {
         for(Movie movie : Movie.MostViewedMovies(Movie.allmovies)){
             moviesTop.add(movie);
         }
+        Collections.sort(Movie.allmovies, Comparator.comparingInt(Movie::getYear).reversed());
         for(Movie movie:Movie.allmovies)
         {
             moviesRecent.add(movie);
         }
+        Collections.sort(Movie.allmovies, Comparator.comparingDouble(Movie::getUserRate).reversed());
         for(Movie movie:Movie.allmovies)
         {
             moviesTopRated.add(movie);
         }
-
     }
 
     @FXML
@@ -414,11 +417,11 @@ public  class MainPageController {
         root = loader.load();
         stage = (Stage)((Node)act.getSource()).getScene().getWindow();
         MovieController controller=loader.getController();
-        Movie movie2=new Movie(movie.getTitle(),movie.getRelease_date(),movie.getRunning_time(),movie.getGenres(),movie.getLanguage(),movie.getCountry(),movie.getPoster_path(),movie.getBudget(),"50",movie.getImdb_score(),movie.getDescription());
         controller.setStage(stage);
-        controller.setMovie(movie2);
-        controller.watchMovie(movie2);
+        controller.setMovie(movie);
+        controller.watchMovie(movie);
         controller.page5=0;
+        controller.setStars();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -658,6 +661,7 @@ public  class MainPageController {
         Search.setOnMouseClicked(event -> {
             int found=0;
             String cast = "";
+            String director="";
             for(Movie movie1:Movie.allmovies){
                 if(menuValue!=null) {
                     if (movie1.getTitle().equals(searchItem.getText()) && menuValue.equals("Movie")) {
@@ -665,6 +669,7 @@ public  class MainPageController {
                         found = 1;
                     }
                     else if(movie1.getDirectorName().equals(searchItem.getText()) && menuValue.equals("Director")){
+                        director=movie1.getDirectorName();
                         searchViewController.searchMovies.add(movie1);
                         found=2;
                     }
@@ -710,7 +715,7 @@ public  class MainPageController {
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 searchViewController controller = loader.getController();
                 controller.setStage(stage);
-                controller.Search(movie.getDirectorName(),menuValue);
+                controller.Search(director,menuValue);
                 scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();

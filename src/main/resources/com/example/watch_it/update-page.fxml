@@ -1,109 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.InnerShadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="847.0" prefWidth="600.0" style="-fx-background-color: black; -fx-border-color: #ffc107; -fx-border-width: 3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watch_it.UpdatePageController">
+<AnchorPane prefHeight="864.0" prefWidth="1536.0" style="-fx-background-color: black; -fx-border-color: #ffc107; -fx-border-width: 3;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watch_it.UpdatePageController">
     <children>
-        <Label alignment="CENTER" layoutX="46.0" layoutY="28.0" prefHeight="43.0" prefWidth="119.0" style="-fx-background-color: #FFC107; -fx-background-radius: 20;" text="Watch" textFill="WHITE">
-            <font>
-                <Font name="Arial Narrow Bold" size="27.0" />
-            </font>
-        </Label>
-        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="146.0" layoutY="28.0" prefHeight="43.0" prefWidth="68.0" style="-fx-background-color: black; -fx-background-radius: 25;" text="IT" textFill="WHITE">
-            <font>
-                <Font name="Arial Narrow Bold" size="27.0" />
-            </font>
-        </Label>
-        <ImageView fitHeight="88.0" fitWidth="98.0" layoutX="258.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="88.0" fitWidth="98.0" layoutX="780.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@assets/registration.png" />
             </image>
         </ImageView>
-        <Text fill="WHITE" layoutX="60.0" layoutY="507.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password :" AnchorPane.leftAnchor="60.0">
+        <Text fill="WHITE" layoutX="641.0" layoutY="573.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password :" AnchorPane.leftAnchor="641.0">
             <font>
-                <Font name="System Bold Italic" size="17.0" />
+                <Font name="System Bold Italic" size="20.0" />
             </font>
         </Text>
-        <Text fill="#ffc107" layoutX="240.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit_Profile" wrappingWidth="129.5361328125">
+        <Text fill="#ffc107" layoutX="759.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit_Profile" wrappingWidth="129.5361328125">
             <font>
                 <Font size="25.0" />
             </font>
         </Text>
-        <TextField fx:id="TextPassword" layoutX="158.0" layoutY="481.0" prefHeight="39.0" prefWidth="274.0" style="-fx-background-color: #ffc107;">
+        <PasswordField fx:id="Password" layoutX="774.0" layoutY="543.0" prefHeight="39.0" prefWidth="341.0" style="-fx-background-color: #ffc107;">
             <effect>
                 <InnerShadow />
             </effect>
-        </TextField>
-        <PasswordField fx:id="Password" layoutX="159.0" layoutY="482.0" prefHeight="39.0" prefWidth="341.0" style="-fx-background-color: #ffc107;">
-            <effect>
-                <InnerShadow />
-            </effect></PasswordField>
-        <Text fill="WHITE" layoutX="54.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First_Name :" wrappingWidth="123.3322531054514" AnchorPane.bottomAnchor="615.435546875" AnchorPane.leftAnchor="54.0" AnchorPane.topAnchor="217.564453125">
+         <font>
+            <Font size="16.0" />
+         </font></PasswordField>
+        <Text fill="WHITE" layoutX="645.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First_Name :" wrappingWidth="123.3322531054514" AnchorPane.bottomAnchor="652.970703125" AnchorPane.leftAnchor="645.0" AnchorPane.topAnchor="212.41796875">
             <font>
-                <Font name="System Bold Italic" size="17.0" />
+                <Font name="System Bold Italic" size="20.0" />
             </font>
         </Text>
-        <Text fill="WHITE" layoutX="41.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Second_Name :" wrappingWidth="150.34016799926758" AnchorPane.leftAnchor="41.0">
+        <Text fill="WHITE" layoutX="632.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Second_Name :" wrappingWidth="150.34016799926758" AnchorPane.leftAnchor="632.0">
             <font>
-                <Font name="System Bold Italic" size="17.0" />
+                <Font name="System Bold Italic" size="20.0" />
             </font>
         </Text>
-        <TextField fx:id="FirstName" layoutX="158.0" layoutY="208.0" prefHeight="39.0" prefWidth="339.0" style="-fx-background-color: #ffc107;">
+        <TextField fx:id="FirstName" layoutX="785.0" layoutY="203.0" prefHeight="39.0" prefWidth="339.0" style="-fx-background-color: #ffc107;">
             <effect>
                 <InnerShadow />
             </effect>
+         <font>
+            <Font size="16.0" />
+         </font>
         </TextField>
-        <TextField fx:id="SecondName" layoutX="158.0" layoutY="277.0" prefHeight="39.0" prefWidth="342.0" style="-fx-background-color: #ffc107;">
+        <TextField fx:id="SecondName" layoutX="783.0" layoutY="288.0" prefHeight="39.0" prefWidth="342.0" style="-fx-background-color: #ffc107;">
             <effect>
                 <InnerShadow />
             </effect>
+         <font>
+            <Font size="16.0" />
+         </font>
         </TextField>
-        <TextField fx:id="Plan" layoutX="157.0" layoutY="342.0" prefHeight="39.0" prefWidth="342.0" style="-fx-background-color: #ffc107;">
+        <TextField fx:id="Plan" layoutX="774.0" layoutY="384.0" prefHeight="39.0" prefWidth="342.0" style="-fx-background-color: #ffc107;">
             <effect>
                 <InnerShadow />
             </effect>
+         <font>
+            <Font size="16.0" />
+         </font>
         </TextField>
-        <Text fill="WHITE" layoutX="86.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Plan :">
+        <Text fill="WHITE" layoutX="685.0" layoutY="414.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Plan :">
             <font>
-                <Font name="System Bold Italic" size="17.0" />
+                <Font name="System Bold Italic" size="20.0" />
             </font>
         </Text>
-        <ImageView fitHeight="19.0" fitWidth="18.0" layoutX="48.0" layoutY="353.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="19.0" fitWidth="18.0" layoutX="652.0" layoutY="398.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@assets/edit.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="19.0" fitWidth="30.0" layoutX="25.0" layoutY="221.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="19.0" fitWidth="30.0" layoutX="606.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@assets/edit.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="93.0" fitWidth="19.0" layoutX="15.0" layoutY="286.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="93.0" fitWidth="19.0" layoutX="594.0" layoutY="301.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@assets/edit.png" />
             </image>
         </ImageView>
-        <Text fill="WHITE" layoutX="71.0" layoutY="437.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E_mail :" wrappingWidth="59.89555358886719">
+        <Text fill="WHITE" layoutX="663.0" layoutY="491.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E_mail :" wrappingWidth="73.59999999999991">
             <font>
-                <Font name="System Bold Italic" size="17.0" />
+                <Font name="System Bold Italic" size="20.0" />
             </font>
         </Text>
-        <TextField fx:id="Email" layoutX="158.0" layoutY="412.0" prefHeight="39.0" prefWidth="342.0" style="-fx-background-color: #ffc107;">
+        <TextField fx:id="Email" layoutX="773.0" layoutY="463.0" prefHeight="39.0" prefWidth="342.0" style="-fx-background-color: #ffc107;">
             <effect>
                 <InnerShadow />
             </effect>
+         <font>
+            <Font size="16.0" />
+         </font>
         </TextField>
-        <ImageView fitHeight="25.0" fitWidth="30.0" layoutX="34.0" layoutY="416.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="25.0" fitWidth="30.0" layoutX="624.0" layoutY="471.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@assets/clapperboard.png" />
             </image>
@@ -117,44 +111,42 @@
             <font>
                 <Font name="System Bold Italic" size="20.0" />
             </font></Label>
-        <ImageView fitHeight="31.0" fitWidth="33.0" layoutX="25.0" layoutY="486.0" pickOnBounds="true" preserveRatio="true" rotate="-33.7">
+        <ImageView fitHeight="31.0" fitWidth="33.0" layoutX="600.0" layoutY="549.0" pickOnBounds="true" preserveRatio="true" rotate="-33.7">
             <image>
                 <Image url="@assets/admin.png" />
             </image>
         </ImageView>
-        <Button layoutX="515.0" layoutY="10.0" mnemonicParsing="false" onAction="#Back_To_Profile" prefHeight="71.0" prefWidth="73.0" style="-fx-background-color: transparent;" text="&lt;" textFill="#ffc107">
+        <Button layoutX="1396.0" layoutY="7.0" mnemonicParsing="false" onAction="#Back_To_Profile" prefHeight="71.0" prefWidth="73.0" style="-fx-background-color: transparent;" text="&lt;" textFill="#ffc107">
             <font>
                 <Font name="Chalkboard Bold" size="36.0" />
             </font>
         </Button>
-        <Button layoutX="206.0" layoutY="783.0" mnemonicParsing="false" onAction="#Update_Profile" prefHeight="39.0" prefWidth="176.0" style="-fx-background-color: #ffc107;" text="Reset Profile" textFill="#f8f7f7">
+        <Button layoutX="712.0" layoutY="780.0" mnemonicParsing="false" onAction="#Update_Profile" prefHeight="39.0" prefWidth="176.0" style="-fx-background-color: #ffc107;" text="Reset Profile" textFill="#f8f7f7">
             <font>
                 <Font name="System Bold" size="20.0" />
             </font>
         </Button>
-        <TextField fx:id="ConfirmTextPassword" layoutX="158.0" layoutY="556.0" prefHeight="39.0" prefWidth="274.0" style="-fx-background-color: #ffc107;">
+        <PasswordField fx:id="Confirmpassword" layoutX="780.0" layoutY="629.0" prefHeight="39.0" prefWidth="346.0" style="-fx-background-color: #ffc107;">
             <effect>
                 <InnerShadow />
             </effect>
-        </TextField>
-        <PasswordField fx:id="Confirmpassword" layoutX="156.0" layoutY="556.0" prefHeight="39.0" prefWidth="346.0" style="-fx-background-color: #ffc107;">
-            <effect>
-                <InnerShadow />
-            </effect>
+         <font>
+            <Font size="16.0" />
+         </font>
         </PasswordField>
-        <Label layoutX="531.0" layoutY="68.0" text="back" textFill="#ffc107">
+        <Label layoutX="1411.0" layoutY="69.0" text="Back" textFill="#ffc107">
             <font>
                 <Font name="System Bold" size="20.0" />
             </font>
         </Label>
-        <Text fill="WHITE" layoutX="13.0" layoutY="582.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirm Password :">
+        <Text fill="WHITE" layoutX="585.0" layoutY="658.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirm Password :">
             <font>
-                <Font name="System Bold Italic" size="17.0" />
+                <Font name="System Bold Italic" size="20.0" />
             </font>
         </Text>
-        <CheckBox fx:id="Checkbox" layoutX="155.0" layoutY="604.0" mnemonicParsing="false" onAction="#The_Password_Visibility" text="Show Password" textFill="#f8f7f7">
+        <CheckBox fx:id="Checkbox" layoutX="723.0" layoutY="706.0" mnemonicParsing="false" onAction="#The_Password_Visibility" text="Show Password" textFill="#f8f7f7">
             <font>
-                <Font name="System Bold Italic" size="17.0" />
+                <Font name="System Bold Italic" size="20.0" />
             </font>
         </CheckBox>
     </children>

@@ -170,7 +170,12 @@ public class Movie {
     public List<Cast> getCast() {
         return cast;
     }
-
+    public int getUserRate(){
+        return userRate;
+    }
+    public int getYear(){
+        return release_date.getYear();
+    }
     public void addActor(Cast actor) {
         cast.add(actor);
     }

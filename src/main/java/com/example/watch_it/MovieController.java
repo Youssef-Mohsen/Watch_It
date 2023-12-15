@@ -76,6 +76,7 @@ public class MovieController {
         for (ImageView star : stars) {
             star.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/emptyStar.png"))));
         }
+
         watchMovie(movie);
         onMouseEntered();
         onMouseExit();
@@ -92,19 +93,30 @@ public class MovieController {
             stars[i].setOnMouseClicked(event1 -> {
                 ImageView clickedStar2 = (ImageView) event1.getSource();
                 int rating2 = Integer.parseInt(clickedStar2.getId().substring(4)); // Extract the rating from the star's ID
-                System.out.println("Rated: " + rating2 + " stars");
                 stars[finalI1].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/fullStar.png"))));
-                for (int j = 0; j < rating2+(5-rating2); j++){
+                    for (int j = 0; j < rating2 + (4 - rating2); j++) {
+                        int finalJ = j;
+                        stars[j].setOnMouseExited(event2 ->
+                                stars[finalJ].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/fullStar.png")))));
+                    }
+                    for (int h = rating2 + (4 - rating2); h > rating2; h--) {
+                        int finalJ = h;
+                        stars[h].setOnMouseExited(event2 ->
+                                stars[finalJ].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/emptyStar.png")))));
+                    }
+                 Max_Rating=rating2;
+                movie.userRate=rating2;
+                for (int p = movie.userRate+(4-movie.userRate); p >= movie.userRate; p--){
+                    int finalJ = p;
+                    stars[finalJ].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/emptyStar.png"))));
+                    stars[p].setOnMouseExited(event2 ->
+                            stars[finalJ].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/emptyStar.png")))));
+                }
+                for (int j = 0; j <  movie.userRate; j++) {
                     int finalJ = j;
                     stars[j].setOnMouseExited(event2 ->
                             stars[finalJ].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/fullStar.png")))));
-                    }
-                for (int h = rating2+(4-rating2); h >= rating2; h--){
-                    int finalJ = h;
-                    stars[h].setOnMouseExited(event2 ->
-                            stars[finalJ].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/emptyStar.png")))));
                 }
-                 Max_Rating=rating2;
                 });
 
         }
@@ -125,12 +137,11 @@ public class MovieController {
     }
 
     @FXML
-    private void resetStars(MouseEvent event) {
-        if(!handleStarClick(event)) {
+    private void resetStars() {
             for (ImageView star : stars) {
                 star.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/emptyStar.png"))));
             }
-        }
+
     }
     public void refreshScreen(String filmTitle, String newMovieName, String newFilm, ArrayList<String> filmGenre,
                               String filmDescription, String filmDuration, Image image,String director,ArrayList<String> cast) {
@@ -179,9 +190,7 @@ public class MovieController {
                         RecordedMoviesController.toWatchMovies.remove(movie);
                     }
                 }
-                else {
-                    System.out.println("Not Found!");
-                }
+
 
 
                 Watch.setDisable(true);
@@ -230,7 +239,25 @@ public class MovieController {
         stage.setScene(scene);
         stage.show();
     }
+    public void setStars(){
 
+        if(movie!=null || WatchRecord.watchedMovies.contains(movie)) {
+            for (int i = 0; i < movie.userRate; i++) {
+                stars[i].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/fullStar.png"))));
+            }
+            for (int j = 0; j < movie.userRate; j++){
+                int finalJ = j;
+                stars[j].setOnMouseExited(event2 ->
+                        stars[finalJ].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/fullStar.png")))));
+            }
+            for (int h = movie.userRate; h > movie.userRate+(5-movie.userRate); h++){
+                int finalJ = h;
+                stars[h].setOnMouseExited(event2 ->
+                        stars[finalJ].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/emptyStar.png")))));
+            }
+
+        }
+    }
     public void onMouseEntered() {
         Back.setOnMouseEntered(event -> Back.setStyle("-fx-background-color: #FFC107; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
         Watch.setOnMouseEntered(event -> Watch.setStyle("-fx-background-color: #FFC107; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
