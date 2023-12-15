@@ -16,6 +16,11 @@ public class UserWatchRecord {
 
         this.rating = rating;
     }
+    public UserWatchRecord( Movie movie, int rating)
+    {
+        this.movie=movie;
+        this.rating = rating;
+    }
     public UserWatchRecord(int user_id, Movie movie)
     {
         this.user_id=user_id;

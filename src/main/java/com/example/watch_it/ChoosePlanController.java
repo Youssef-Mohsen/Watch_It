@@ -83,15 +83,19 @@ public class ChoosePlanController {
             if (selectedButton.equals(basic)) {
                 user.Subscribe(user.getUser_ID(),  Subscription.Plans.BASIC);
                 user.Updata_Subscription_Plan(Subscription.Plans.BASIC);
+                user.setPlan("basic");
             }
             else if (selectedButton.equals(standard)){
                 user.Subscribe(user.getUser_ID(),  Subscription.Plans.STANDARD);
                 user.Updata_Subscription_Plan(Subscription.Plans.STANDARD);
+                user.setPlan("standard");
             }
             else if (selectedButton.equals(premium)){
                 user.Subscribe(user.getUser_ID(),  Subscription.Plans.PREMIUM);
                 user.Updata_Subscription_Plan(Subscription.Plans.PREMIUM);
+                user.setPlan("premium");
             }
+            Admin.users.add(user.toString());
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("");
             alert.setHeaderText(null);

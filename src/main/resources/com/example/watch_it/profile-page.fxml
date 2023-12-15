@@ -85,7 +85,7 @@
             </VBox>
          </children>
       </HBox>
-        <ChoiceBox fx:id="Select_List" layoutX="498.0" layoutY="617.0" prefHeight="35.0" prefWidth="167.0" style="-fx-background-color: #ffc107;" styleClass="text-box" stylesheets="@style.css" />
+        <ChoiceBox onMouseClicked="#choose" fx:id="Select_List" layoutX="498.0" layoutY="617.0" prefHeight="35.0" prefWidth="167.0" style="-fx-background-color: #ffc107;" styleClass="text-box" stylesheets="@style.css" />
       <ImageView fx:id="profilePictue" fitHeight="150.0" fitWidth="200.0" layoutX="658.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true" />
     </children>
 </AnchorPane>

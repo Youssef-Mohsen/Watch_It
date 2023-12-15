@@ -49,8 +49,6 @@ public class Admin {
     public static ArrayList<String> casts = new ArrayList<String>();
     public static ArrayList<String> admins = new ArrayList<String>();
     public static ArrayList<String> users = new ArrayList<String>();
-    public static ArrayList<String> topRatedMovies;
-
     public static void readFile(File file) {
         ArrayList<String> arrayList = new ArrayList<String>();
         try {
@@ -92,10 +90,11 @@ public class Admin {
                 b.write(index);
                 b.newLine();
             }
-            for(String index:movies){
-                b.write(index);
+            //userwatchrecord wel to watch list tt handle fe l to string func 3nd el user
+            /*for (User user : User.allusers){
+                b.write(user.toString());
                 b.newLine();
-            }
+            }*/
             for(String index:casts){
                 b.write(index);
                 b.newLine();
@@ -118,10 +117,10 @@ public class Admin {
     //otherwise gonna return null [make sure to check before dealing with return val].
 
     //returned string isn't splitted
-    public static String existsInFile(ArrayList<String> arrayList, String username){
+    public static String existsInFile(String username){
         boolean exist = false;
         String[] eachLine;
-        for (String index: arrayList){
+        for (String index: users){
             eachLine = index.split(",");
             if(eachLine[USERNAMEINDEX].equals(username)){
                 return index;
@@ -129,55 +128,9 @@ public class Admin {
         }
         return null;
     }
-    public static boolean existsInFile(String username){;
-        String[] eachLine;
-        for (String index: users){
-            eachLine = index.split(",");
-            if(eachLine[USERNAMEINDEX].equals(username)){
-                return  true;
-            }
-        }
-        return false;
-    }
-
     //record to be deleted is not splitted
     public static void deleteOneRecord(ArrayList<String> arrayList, String record){
         arrayList.remove(record);
-    }
-    public static void changeCell(ArrayList<String> arrayList, String username, String oldCell, String newCell){
-        String recuiredLine = existsInFile(arrayList, username);
-        if(recuiredLine != null) {
-            String[] row = recuiredLine.split(",");
-            try {
-                for (int index = 0; index < row.length; index++) {
-                    if (row[index].equals(username))
-                        row[index] = newCell;
-                }
-            }catch (ArrayIndexOutOfBoundsException e){
-            }
-            arrayList.set(arrayList.indexOf(recuiredLine), String.join(",", row));
-        }
-    }
-    //enum ----------------
-    public static String getSpecificCellForUser(String type, String username, int index){
-        if(type.equals("user")){
-            String wantedRecord = existsInFile(users, username);
-            String []row = wantedRecord.split(",");
-            return row[index];
-        }
-        else if(type.equals("admin")){
-
-        }
-        else if(type.equals("cast")){
-
-        }
-        else if (type.equals("director")) {
-
-        }
-        else if (type.equals("movie")) {
-
-        }
-        return null;
     }
 
     //working just fine ^^^
@@ -301,62 +254,43 @@ public class Admin {
                 toBeWatched = true;
             }
             if(watched) {
-                watchedCounter++;
-                if(watchedCounter %2 != 0)
+                if(watchedCounter != -1)
                     watched_movies.add(data);
+                watchedCounter++;
             }
-            if(toBeWatched && toBeWatchedCounter == 1)
+            if(toBeWatchedCounter == 1 && !watched)
                 toBeWatched_movies.add(data);
-            if (toBeWatched && toBeWatchedCounter == 0)
+            if (toBeWatched)
                 toBeWatchedCounter = 1;
+            User.toWatchMovies.addAll(toBeWatched_movies);
+            User.watchedMovies.addAll(watched_movies);
         }
     }
-    //as objects
+    //as objects-------------------
     static void getUserMovieLists(User user){
-        //to be watched elawel b3den elwatched
-        String userData = existsInFile(users,user.getUser_Name());
+
+        String userData = existsInFile(user.getUser_Name());
+        ArrayList<String> watched = new ArrayList<String>();
+        ArrayList<String> toWatch = new ArrayList<String>();
+
+        getUserMovieLists(userData,watched,toWatch);
+        ArrayList<Movie> toWatchList = new ArrayList<Movie>();
+        for(String movie: toWatch){
+            toWatchList.add(getOneMovie(movie));
+        }
         ArrayList<UserWatchRecord> watched_movies = new ArrayList<UserWatchRecord>();
-        ArrayList<Movie> toBeWatched_movies = new ArrayList<Movie>();
-        if(userData != null)
-        {
-            boolean toBeWatched = false;
-            boolean watched = false;
-            int watchedCounter = -1;
-            int toBeWatchedCounter = 0;
-            String[] eachLine = userData.split(",");
-            for (int i=0; i<eachLine.length; i++) {
-                if (eachLine[i].equals("watched")) {
-                    watched = true;
-                    toBeWatched = false;
-                }
-                if (eachLine[i].equals("to be watched")) {
-                    toBeWatched = true;
-                }
-                if (watched){
-                    watchedCounter++;
-                    if(watchedCounter % 2 != 0 )
-                    {
-                        for (String oneMovie : movies) {
-                            String[] arr = oneMovie.split(",");
-                            if (arr[1].equals(eachLine[i])) {
-                                if(arr[i+1].equals("null"))
-                                    watched_movies.add(getWatchedMovie(arr[i], -1));
-                                else {
-                                    System.out.println(arr[i] + "    " + arr[i+1]);
-                                    watched_movies.add(getWatchedMovie(arr[i], Integer.parseInt(arr[i + 1])));
-                                }
-                            }
-                        }
-                    }
-                }
-                if (toBeWatched && toBeWatchedCounter == 1)
-                    toBeWatched_movies.add(getOneMovie(eachLine[i]));
-                if (toBeWatched && toBeWatchedCounter == 0)
-                    toBeWatchedCounter = 1;
+        Movie movie = new Movie();
+        int rate = -1;
+        for(int i=0; i<watched.size(); i++){
+            if(i%2 == 0){
+                movie  = getOneMovie(watched.get(i));
+                rate = Integer.parseInt(watched.get(i+1));
+                UserWatchRecord u = new UserWatchRecord(movie,rate);
+                watched_movies.add(u);
             }
         }
+        User.Movies_For_Later.addAll(toWatchList);
         User.Watched_Movies.addAll(watched_movies);
-        User.Movies_For_Later.addAll(toBeWatched_movies);
     }
     static UserWatchRecord getWatchedMovie(String title, int rate){
         UserWatchRecord movie = new UserWatchRecord();
@@ -365,31 +299,13 @@ public class Admin {
             if(arr[1].equals(title))
             {
                 movie.setMovie(getOneMovie_(oneMovie));
-                movie.movie.setTitle(arr[1]);
-                movie.movie.setId(Integer.parseInt(arr[2]));
-                movie.movie.setRelease_date(LocalDate.parse(arr[3]));
-                movie.movie.setBudget(arr[11]);
-                movie.movie.setCountry(arr[10]);
                 movie.setRating(rate);
-                //movie.setDirector(getDirector());
             }
         }
         return movie;
     }
-    static void getAllMovies(){
-        ArrayList<Movie> arrayList = new ArrayList<Movie>();
-        for(String oneMovie: movies){
-            String[] arr = oneMovie.split(",");
-            System.out.println(arr[1]);
-            String name = arr[1];
-            arrayList.add(getOneMovie(name));
-        }
-        Movie.allmovies.addAll(arrayList);
-        //Movie.getDiffGenres();
-    }
     static ArrayList<Movie> getMoviesObjs(){
         ArrayList<Movie> arrayList = new ArrayList<Movie>();
-        Movie movie = new Movie();
         for(String s: movies){
             arrayList.add(getOneMovie_(s));
         }
@@ -416,6 +332,15 @@ public class Admin {
         castAndGenres(movieString,cast,genres);
         movie.setCastNames(cast);
         movie.setGenre(genres);
+      /*  ArrayList<Cast> movieCast = new ArrayList<Cast>();
+        System.out.println(cast);*/
+        /*for (String castString: cast){
+            String[] data = castString.split(",");
+            String name= "";
+            name = name.concat(data[1].concat(" ").concat(data[2]));
+            movieCast.add(getCast(name));
+        }
+        movie.setCast(movieCast);*/
         return movie;
     }
     static Movie getOneMovie (String title){

@@ -1,9 +1,10 @@
 package com.example.watch_it;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class User
 {
-    private final int User_ID;
+    private int User_ID;
     private final String User_Name;
     private String Last_Name;
     private String First_Name;
@@ -13,10 +14,13 @@ public class User
     private String profilePath;
     private String plan;
     String AllData;
+    
     // This List Access By User
     static ArrayList<Movie> Movies_For_Later = new ArrayList<>();
+    static ArrayList<String> toWatchMovies = new ArrayList<>();
     // This List Access By UserWatchRecord
     static ArrayList<UserWatchRecord> Watched_Movies = new ArrayList<>();
+    static ArrayList<String> watchedMovies = new ArrayList<>();
     public static ArrayList<User> allusers = new ArrayList<User>();
 
     /****use it as ID to be unique(static variable) and display it in message to each user*****/
@@ -33,7 +37,7 @@ public class User
         this.Email = email;
         this.Password = password;
     }
-    public User(int id, String user_name, String last_Name, String first_Name, String email, String password)
+    public User(int id, String user_name, String last_Name, String first_Name, String email, String password, String profilePath, String plan)
     {
         this.User_ID =id;
         this.User_Name = user_name;
@@ -42,6 +46,7 @@ public class User
         this.Email = email;
         this.Password = password;
     }
+
     // handle by GUI Answer the button that user click on it.
     public void UpDate_Data_User(String Answer , String info)
     {
@@ -63,18 +68,20 @@ public class User
         }
     }
     // return the index of the user who deleted to handle the Id of the reminder users.
-    public int Delete_User(ArrayList<User> users , String user_name)
+    public static void Delete_User(String user_name)
     {
         int index = 0 ;
-        for(User user : users)
+        for(User user : allusers)
         {
             if(user.User_Name.equals(user_name))
             {
-                index = users.indexOf(user);
-                users.remove(user);
+                index = allusers.indexOf(user);
+                allusers.remove(user);
             }
         }
-        return index;
+        for (int i=index; i<allusers.size(); i++){
+            allusers.get(i).setUser_ID( allusers.get(i).getUser_ID() - 1);
+        }
     }
     public static boolean Userexist(String user_name) {
         for (User user : allusers) {
@@ -96,6 +103,9 @@ public class User
     }
     public void setEmail(String email) {
         Email = email;
+    }
+    public void setUser_ID(int user_ID){
+        this.User_ID = user_ID;
     }
     public void setProfilePath(String profilePath){
         this.profilePath = profilePath;
@@ -173,8 +183,34 @@ public class User
         }
         return null;
     }
-    /****handle in System class*****/
-    //search about Cast.(by name)
-    //search about director.(by name)
-    //search about movie(by name)
+    @Override
+    public String toString(){
+        String data ="";
+        data = data.concat("user").concat(",").concat(this.User_Name).concat(",").concat(String.valueOf(getPassword())).concat(",").concat(String.valueOf(allusers.size()).concat(",").concat(getFirst_Name()).concat(",").concat(getLast_Name()).concat(",").concat(plan).concat(",").concat(getEmail()).concat(",").concat(LocalDate.now().toString()).concat(",").concat(profilePath));
+        String watched="";
+        String toWatch="";
+        for(int i=0; i<watchedMovies.size(); i++){
+            watched=watched.concat("watched").concat(",");
+            if(i<watchedMovies.size()-1){
+                watched = watched.concat(watchedMovies.get(i).concat(","));
+            }
+            else
+                watched = watched.concat(watchedMovies.get(i));
+        }
+        for(int i=0; i<toWatchMovies.size(); i++){
+            watched=watched.concat("to be watched").concat(",");
+            if(i<toWatchMovies.size()-1){
+                toWatch = toWatch.concat(toWatchMovies.get(i).concat(","));
+            }
+            else
+                toWatch = toWatch.concat(toWatchMovies.get(i));
+        }
+        if(watchedMovies.isEmpty() && toWatchMovies.isEmpty())
+            return data;
+        if((watchedMovies.isEmpty()))
+          data = data.concat(",").concat(watched);
+        else if((toWatchMovies.isEmpty()))
+           data = data.concat(",").concat(toWatch);
+        return data;
+    }
 }

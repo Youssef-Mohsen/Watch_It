@@ -191,27 +191,27 @@
                         <!--<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="0" prefWidth="0" />-->
                         <HBox fx:id="Hbox" alignment="CENTER" prefWidth="200.0" spacing="40" >
                             <children>
-                                <VBox fx:id="leftCol">
+                                <VBox fx:id="leftCol" prefWidth="287.2">
                                     <HBox.margin>
                                         <Insets bottom="100" top="30" left="20"/>
                                     </HBox.margin>
                                     <children  >
                                     </children>
                                 </VBox>
-                                <VBox fx:id="middleCol1"  >
+                                <VBox fx:id="middleCol1" prefWidth="287.2" >
                                     <HBox.margin>
                                         <Insets top="30" bottom="100" />
                                     </HBox.margin>
                                     <children>
                                     </children>
                                 </VBox>
-                                <VBox fx:id="middleCol2"  >
+                                <VBox fx:id="middleCol2" prefWidth="287.2"  >
                                     <HBox.margin>
                                         <Insets  bottom="100" top="30"/>
                                     </HBox.margin>
                                     <children></children>
                                 </VBox>
-                                <VBox fx:id="rightCol">
+                                <VBox fx:id="rightCol" prefWidth="287.2">
                                     <HBox.margin>
                                         <Insets bottom="100" top="30"/>
                                     </HBox.margin>

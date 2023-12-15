@@ -48,39 +48,10 @@ public class AllMoviesController {
     private Parent root;
 
 
-
-
-    private ArrayList<Movie> Movies = new ArrayList<Movie>();
-
-    private void getData() {
-        Movies.clear();
-        ArrayList<Movie> mov = new ArrayList<Movie>();
-
-        Movie movie3 = new Movie();
-        movie3.setTitle("Joker");
-        movie3.setPoster_path("movies/joker.jpeg");
-        Movie movie4 = new Movie();
-        movie4.setTitle("Ready Or Not");
-        movie4.setPoster_path("movies/ready or not.jpeg");
-        mov.add(movie3);
-        mov.add(movie4);
-        mov.add(movie3);
-        mov.add(movie4);
-        mov.add(movie3);
-        mov.add(movie4);
-        mov.add(movie3);
-        mov.add(movie4);
-        mov.add(movie3);
-        mov.add(movie4);
-
-        Movies.addAll(mov);
-    }
-
     @FXML
     public void initialize() {
-        getData();
-        for (int i=0 ; i<Movies.size(); i++){
-            addMovies(Movies.get(i), i);
+        for (int i=0 ; i<Movie.allmovies.size(); i++){
+            addMovies(Movie.allmovies.get(i), i);
         }
     }
 
@@ -164,13 +135,13 @@ public class AllMoviesController {
     }
     @FXML
     private void Search(){
-
+        System.out.println(leftCol.getWidth());
         String name = searchField.getText();
         leftCol.getChildren().clear();
         middleCol1.getChildren().clear();
         middleCol2.getChildren().clear();
         rightCol.getChildren().clear();
-        for (Movie movie : Movies) {
+        for (Movie movie : Movie.allmovies) {
             if (name.equalsIgnoreCase(movie.getTitle())) {
                 addMovies(movie, 0);
             }
@@ -179,7 +150,8 @@ public class AllMoviesController {
             initialize();
         }
     }
-
-
+    public void setStage(Stage stage){
+        this.stage = stage;
+    }
 }
 

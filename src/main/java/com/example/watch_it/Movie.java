@@ -214,7 +214,6 @@ public class Movie {
         List<Movie> recent_movies = new ArrayList<>();
         for (Movie m : movie) {
             LocalDate release_date = m.getRelease_date();
-
             if (release_date.isAfter(LocalDate.now().minusMonths(1))) {
                 recent_movies.add(m);
             }
