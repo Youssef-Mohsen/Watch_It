@@ -13,14 +13,15 @@ public class User
     private Subscription subscription;
     private String profilePath;
     private String plan;
+    private LocalDate startDate;
     String AllData;
-    
+
     // This List Access By User
-    static ArrayList<Movie> Movies_For_Later = new ArrayList<>();
-    static ArrayList<String> toWatchMovies = new ArrayList<>();
+    ArrayList<Movie> Movies_For_Later = new ArrayList<>();
+    ArrayList<String> toWatchMovies = new ArrayList<>();
     // This List Access By UserWatchRecord
-    static ArrayList<UserWatchRecord> Watched_Movies = new ArrayList<>();
-    static ArrayList<String> watchedMovies = new ArrayList<>();
+    ArrayList<UserWatchRecord> Watched_Movies = new ArrayList<>();
+    ArrayList<String> watchedMovies = new ArrayList<>();
     public static ArrayList<User> allusers = new ArrayList<User>();
 
     /****use it as ID to be unique(static variable) and display it in message to each user*****/
@@ -45,6 +46,16 @@ public class User
         this.First_Name = first_Name;
         this.Email = email;
         this.Password = password;
+    }
+    public User(int id, String user_name, String last_Name, String first_Name, String email, String password, String profilePath, String plan, String stardDate)
+    {
+        this.User_ID =id;
+        this.User_Name = user_name;
+        this.Last_Name = last_Name;
+        this.First_Name = first_Name;
+        this.Email = email;
+        this.Password = password;
+        this.startDate = LocalDate.parse(stardDate);
     }
 
     // handle by GUI Answer the button that user click on it.
@@ -186,16 +197,21 @@ public class User
     @Override
     public String toString(){
         String data ="";
-        data = data.concat("user").concat(",").concat(this.User_Name).concat(",").concat(String.valueOf(getPassword())).concat(",").concat(String.valueOf(allusers.size()).concat(",").concat(getFirst_Name()).concat(",").concat(getLast_Name()).concat(",").concat(plan).concat(",").concat(getEmail()).concat(",").concat(LocalDate.now().toString()).concat(",").concat(profilePath));
+//        data = data.concat("user").concat(",").concat(this.User_Name).concat(",").concat(String.valueOf(getPassword())).concat(",").concat(String.valueOf(allusers.size()).concat(",").concat(getFirst_Name()).concat(",").concat(getLast_Name()).concat(",").concat(plan).concat(",").concat(getEmail()).concat(",").concat(LocalDate.now().toString()).concat(",").concat(profilePath));
         String watched="";
         String toWatch="";
+   /*     ArrayList<String> watched = new ArrayList<String>();
+        ArrayList<String> toWatch = new ArrayList<String>();*/
+     //   Admin.getUserMovieLists();
         for(int i=0; i<watchedMovies.size(); i++){
             watched=watched.concat("watched").concat(",");
             if(i<watchedMovies.size()-1){
                 watched = watched.concat(watchedMovies.get(i).concat(","));
+                System.out.println("there's watched");
             }
-            else
+            else {
                 watched = watched.concat(watchedMovies.get(i));
+            }
         }
         for(int i=0; i<toWatchMovies.size(); i++){
             watched=watched.concat("to be watched").concat(",");
@@ -205,6 +221,8 @@ public class User
             else
                 toWatch = toWatch.concat(toWatchMovies.get(i));
         }
+        System.out.println(watched);
+        System.out.println(toWatch);
         if(watchedMovies.isEmpty() && toWatchMovies.isEmpty())
             return data;
         if((watchedMovies.isEmpty()))

@@ -46,17 +46,20 @@ public class AddMovieController {
             e.printStackTrace();
 
         }
-
-
     }
     private void addCastName(int i){
-        for(int no = 0; no<i; no++){
+        castNames.getChildren().removeAll();
+        for(int no = 0; no < i; no++){
+
+            HBox hBox = new HBox();
             TextField textField = new TextField();
+            TextField textField1 = new TextField();
             textField.setPromptText("name of cast " + (no+1));
             textField.setAlignment(Pos.CENTER);
             textField.setStyle("-fx-background-radius: 50;");
-            castNames.getChildren().addAll(textField);
 
+            hBox.getChildren().addAll(textField,textField1);
+            castNames.getChildren().addAll(hBox);
         }
     }
     public void setStage(Stage stage){

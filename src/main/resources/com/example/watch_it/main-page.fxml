@@ -11,7 +11,7 @@
 
     <top>
         <Pane prefHeight="100" style="-fx-background-color: black;">
-            <TextField fx:id="searchItem" layoutX="308.0" layoutY="24.0"  prefHeight="30.0" prefWidth="459.0" promptText="Search movies..." style="-fx-prompt-text-fill: white; -fx-background-radius: 30; -fx-background-color: black; -fx-text-fill: white; -fx-text-size: 16;">
+            <TextField fx:id="searchItem" layoutX="308.0" layoutY="24.0" prefHeight="30.0" prefWidth="459.0" promptText="Search movies..." style="-fx-prompt-text-fill: white; -fx-background-radius: 30; -fx-background-color: black; -fx-text-fill: white; -fx-text-size: 16;">
                 <effect>
                     <DropShadow blurType="ONE_PASS_BOX" height="28.02" radius="12.34" width="23.34">
                         <color>

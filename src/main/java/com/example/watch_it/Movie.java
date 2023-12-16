@@ -69,6 +69,9 @@ public class Movie {
     public String getTitle() {
         return title;
     }
+    public String getRevenue(){
+        return revenue;
+    }
 
     public LocalDate getRelease_date() {
         return release_date;
@@ -170,7 +173,12 @@ public class Movie {
     public List<Cast> getCast() {
         return cast;
     }
-
+    public int getUserRate(){
+        return userRate;
+    }
+    public int getYear(){
+        return release_date.getYear();
+    }
     public void addActor(Cast actor) {
         cast.add(actor);
     }
@@ -214,6 +222,7 @@ public class Movie {
         List<Movie> recent_movies = new ArrayList<>();
         for (Movie m : movie) {
             LocalDate release_date = m.getRelease_date();
+
             if (release_date.isAfter(LocalDate.now().minusMonths(1))) {
                 recent_movies.add(m);
             }
@@ -241,16 +250,16 @@ public class Movie {
     public static void getDiffGenres(){
 
         for(Movie eachMovie: allmovies){
-                for(String eachGenre:eachMovie.getGenres()){
-                    if(eachGenre.equals("action"))
-                        action.add(eachMovie);
-                    else if (eachGenre.equals("comedy"))
-                        comedy.add(eachMovie);
-                    else if (eachGenre.equals("drama"))
-                        drama.add(eachMovie);
-                    else if (eachGenre.equals("horror"))
-                        horror.add(eachMovie);
-                }
+            for(String eachGenre:eachMovie.getGenres()){
+                if(eachGenre.equals("action"))
+                    action.add(eachMovie);
+                else if (eachGenre.equals("comedy"))
+                    comedy.add(eachMovie);
+                else if (eachGenre.equals("drama"))
+                    drama.add(eachMovie);
+                else if (eachGenre.equals("horror"))
+                    horror.add(eachMovie);
+            }
         }
     }
     public String getDirectorName() {

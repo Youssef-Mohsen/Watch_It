@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="835.0" prefWidth="1536.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watch_it.MovieController">
+<Pane  fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="835.0" prefWidth="1536.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watch_it.MovieController">
     <ImageView fx:id="imagePreview" fitHeight="631.0" fitWidth="425.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
 
         <viewport>
@@ -100,44 +100,44 @@
             <Font name="Arial Narrow Bold" size="27.0" />
         </font>
     </Label>
-   <Button fx:id="Watch" layoutX="1369.0" layoutY="631.0" mnemonicParsing="false" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="27.0" prefWidth="87.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;" text="Watch" textFill="WHITE">
-      <font>
-         <Font size="14.0" />
-      </font>
-   </Button>
-   <HBox fx:id="starsRow" layoutX="1315.0" layoutY="675.0" prefHeight="44.0" prefWidth="174.0" spacing="5" styleClass="starsRow" stylesheets="@style.css">
-      <children>
-          <ImageView fx:id="star1" fitHeight="44.0" fitWidth="35.0" onMouseClicked="#handleStarClick" onMouseEntered="#handleStarHover" onMouseExited="#resetStars" pickOnBounds="true" preserveRatio="true" />
-          <ImageView fx:id="star2" fitHeight="44.0" fitWidth="35.0" onMouseClicked="#handleStarClick" onMouseEntered="#handleStarHover" onMouseExited="#resetStars" pickOnBounds="true" preserveRatio="true" />
-          <ImageView fx:id="star3" fitHeight="44.0" fitWidth="35.0" onMouseClicked="#handleStarClick" onMouseEntered="#handleStarHover" onMouseExited="#resetStars" pickOnBounds="true" preserveRatio="true" />
-          <ImageView fx:id="star4" fitHeight="44.0" fitWidth="35.0" onMouseClicked="#handleStarClick" onMouseEntered="#handleStarHover" onMouseExited="#resetStars" pickOnBounds="true" preserveRatio="true" />
-          <ImageView fx:id="star5" fitHeight="44.0" fitWidth="35.0" onMouseClicked="#handleStarClick" onMouseEntered="#handleStarHover" onMouseExited="#resetStars" pickOnBounds="true" preserveRatio="true" />
-      </children></HBox>
-   <Button fx:id="watchLater" layoutX="1352.0" layoutY="737.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="135.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: white;" text="Watch Later" textFill="WHITE">
-      <font>
-         <Font size="14.0" />
-      </font>
-   </Button>
-   <Label layoutX="1025.0" layoutY="233.0" prefHeight="36.0" prefWidth="80.0" text="Director:" textFill="GREY">
-      <font>
-         <Font size="20.0" />
-      </font>
-   </Label>
-   <Label fx:id="Director" layoutX="1105.0" layoutY="233.0" prefHeight="36.0" prefWidth="283.0" textFill="WHITE">
-      <font>
-         <Font size="20.0" />
-      </font>
-   </Label>
-   <Label layoutX="1032.0" layoutY="318.0" text="Cast:" textFill="GREY">
-      <font>
-         <Font size="20.0" />
-      </font>
-   </Label>
-   <Label fx:id="Cast" layoutX="1084.0" layoutY="309.0" prefHeight="78.0" prefWidth="283.0" textFill="WHITE" wrapText="true">
-      <font>
-         <Font size="20.0" />
-      </font>
-   </Label>
+    <Button fx:id="Watch" layoutX="1369.0" layoutY="631.0" mnemonicParsing="false" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="27.0" prefWidth="87.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;" text="Watch" textFill="WHITE">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </Button>
+    <HBox fx:id="starsRow" layoutX="1315.0" layoutY="675.0" prefHeight="44.0" prefWidth="174.0" spacing="5" styleClass="starsRow" stylesheets="@style.css">
+        <children>
+            <ImageView fx:id="star1" fitHeight="44.0" fitWidth="35.0" onMouseClicked="#handleStarClick" onMouseEntered="#handleStarHover" onMouseExited="#resetStars" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="star2" fitHeight="44.0" fitWidth="35.0" onMouseClicked="#handleStarClick" onMouseEntered="#handleStarHover" onMouseExited="#resetStars" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="star3" fitHeight="44.0" fitWidth="35.0" onMouseClicked="#handleStarClick" onMouseEntered="#handleStarHover" onMouseExited="#resetStars" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="star4" fitHeight="44.0" fitWidth="35.0" onMouseClicked="#handleStarClick" onMouseEntered="#handleStarHover" onMouseExited="#resetStars" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="star5" fitHeight="44.0" fitWidth="35.0" onMouseClicked="#handleStarClick" onMouseEntered="#handleStarHover" onMouseExited="#resetStars" pickOnBounds="true" preserveRatio="true" />
+        </children></HBox>
+    <Button fx:id="watchLater" layoutX="1352.0" layoutY="737.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="135.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: white;" text="Watch Later" textFill="WHITE">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </Button>
+    <Label layoutX="1025.0" layoutY="233.0" prefHeight="36.0" prefWidth="80.0" text="Director:" textFill="GREY">
+        <font>
+            <Font size="20.0" />
+        </font>
+    </Label>
+    <Label fx:id="Director" layoutX="1105.0" layoutY="233.0" prefHeight="36.0" prefWidth="283.0" textFill="WHITE">
+        <font>
+            <Font size="20.0" />
+        </font>
+    </Label>
+    <Label layoutX="1032.0" layoutY="318.0" text="Cast:" textFill="GREY">
+        <font>
+            <Font size="20.0" />
+        </font>
+    </Label>
+    <Label fx:id="Cast" layoutX="1080.0" layoutY="302.0" prefHeight="63.0" prefWidth="442.0" textFill="WHITE" wrapText="true">
+        <font>
+            <Font size="20.0" />
+        </font>
+    </Label>
 
 
 </Pane>

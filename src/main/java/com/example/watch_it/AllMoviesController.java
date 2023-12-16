@@ -1,4 +1,3 @@
-
 package com.example.watch_it;
 
 import javafx.application.Platform;
@@ -14,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
@@ -80,6 +80,24 @@ public class AllMoviesController {
         Parent fxml = FXMLLoader.load(getClass().getResource("Plans.fxml"));
         switchPane((ScrollPane) fxml);
     }
+    public void onMouseClickedMovie(MouseEvent act, Movie movie) throws IOException {
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("movie-view.fxml"));
+        root = loader.load();
+        stage = (Stage)((Node)act.getSource()).getScene().getWindow();
+        MovieController controller=loader.getController();
+        controller.setStage(stage);
+        controller.Admin(movie);
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));
+        controller.refreshScreen("Watch Movie "+ movie.getTitle() + "("+movie.getRelease_date().getYear()+")", movie.getTitle(),
+                movie.getTitle()+" Translated",movie.getGenres(), movie.getDescription(),
+                movie.getRunning_time(), image,movie.getDirectorName(),movie.getCastNames());
+        stage.setScene(scene);
+        stage.show();
+
+    }
     @FXML
     public void backScenes(ActionEvent event) throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("first-page.fxml")));
@@ -128,6 +146,14 @@ public class AllMoviesController {
         }
         else
             rightCol.getChildren().addAll(movieContainer);
+
+        movieContainer.setOnMouseClicked(event -> {
+            try {
+                onMouseClickedMovie(event, movie);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     private void switchPane(ScrollPane scrollPane){
@@ -154,4 +180,3 @@ public class AllMoviesController {
         this.stage = stage;
     }
 }
-

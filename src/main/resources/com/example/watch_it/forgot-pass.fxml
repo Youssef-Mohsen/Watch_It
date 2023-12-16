@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
@@ -21,60 +20,53 @@
                                 <Font name="Arial Narrow Bold" size="27.0" />
                             </font>
                         </Label>
-                        <Button fx:id="Back" layoutX="1448.0" layoutY="15.0" mnemonicParsing="false" onAction="#GoToSignIn"
-                                onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="27.0" prefWidth="56.0"
-                                style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"
-                                text="Back" textFill="WHITE"/>
+                        <Button fx:id="Back" layoutX="1448.0" layoutY="15.0" mnemonicParsing="false" onAction="#GoToSignIn" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="27.0" prefWidth="56.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;" text="Back" textFill="WHITE" />
+                        <Separator layoutX="0.0" layoutY="98.0" opacity="0.1" prefWidth="1536.0" />
                     </children>
                 </Pane>
                 <Pane prefHeight="764.0" prefWidth="1536.0" style="-fx-background-color: black;">
                     <children>
-                        <TextField fx:id="ForgotEmail" alignment="CENTER" layoutX="538.0" layoutY="275.0" prefHeight="47.0" prefWidth="460.0" promptText="Email" style="-fx-background-color: FFC107; -fx-background-radius: 50; -fx-border-radius: 50; -fx-border-color: #f8f7f7; -fx-border-width: 2;">
+                        <TextField fx:id="ForgotEmail" alignment="CENTER" layoutX="538.0" layoutY="275.0" prefHeight="47.0" prefWidth="460.0" promptText="Email" style="-fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30;">
                             <font>
                                 <Font name="Chalkboard Bold" size="20.0" />
                             </font>
                         </TextField>
-                        <TextField fx:id="ForgotTextPassword" alignment="CENTER" layoutX="538.0" layoutY="335.0" prefHeight="47.0" prefWidth="460.0" promptText="Password" style="-fx-background-color: FFC107; -fx-background-radius: 50; -fx-border-radius: 50; -fx-border-color: #f8f7f7; -fx-border-width: 2;">
+                        <TextField fx:id="ForgotTextPassword" alignment="CENTER" layoutX="538.0" layoutY="335.0" prefHeight="47.0" prefWidth="460.0" promptText="Password" style="-fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30;">
                             <font>
                                 <Font name="Chalkboard Bold" size="20.0" />
                             </font>
                         </TextField>
-                        <PasswordField fx:id="ForgotPassword" alignment="CENTER" layoutX="538.0" layoutY="335.0" prefHeight="47.0" prefWidth="460.0" promptText="Password" style="-fx-background-color: FFC107; -fx-background-radius: 50; -fx-border-radius: 50; -fx-border-width: 2; -fx-border-color: #f8f7f7;">
+                        <PasswordField fx:id="ForgotPassword" alignment="CENTER" layoutX="538.0" layoutY="335.0" prefHeight="47.0" prefWidth="460.0" promptText="Password" style="-fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30;">
                             <font>
                                 <Font name="Chalkboard Bold" size="20.0" />
                             </font>
                         </PasswordField>
-                        <TextField fx:id="CTextPassword" alignment="CENTER" layoutX="538.0" layoutY="395.0" prefHeight="47.0" prefWidth="460.0" promptText="Confirm Password" style="-fx-background-color: FFC107; -fx-background-radius: 50; -fx-border-radius: 50; -fx-border-color: #f8f7f7; -fx-border-width: 2;">
+                        <TextField fx:id="CTextPassword" alignment="CENTER" layoutX="538.0" layoutY="395.0" prefHeight="47.0" prefWidth="460.0" promptText="Confirm Password" style="-fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30;">
                             <font>
                                 <Font name="Chalkboard Bold" size="20.0" />
                             </font>
                         </TextField>
-                        <PasswordField fx:id="ForgotConfirmPassword" alignment="CENTER" layoutX="538.0" layoutY="395.0" prefHeight="47.0" prefWidth="460.0" promptText="Confirm Password" style="-fx-background-color: FFC107; -fx-background-radius: 50; -fx-border-radius: 50; -fx-border-width: 2; -fx-border-color: #f8f7f7;">
+                        <PasswordField fx:id="ForgotConfirmPassword" alignment="CENTER" layoutX="538.0" layoutY="395.0" prefHeight="47.0" prefWidth="460.0" promptText="Confirm Password" style="-fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30;">
                             <font>
                                 <Font name="Chalkboard Bold" size="20.0" />
                             </font>
                         </PasswordField>
-                        <ImageView fitHeight="82.0" fitWidth="74.0" layoutX="731.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@assets/lock.png" />
-                            </image>
-                        </ImageView>
-                        <Label layoutX="635.0" layoutY="131.0" text="Forgot Password" textFill="#f8f7f7">
+                        <Label layoutX="553.0" layoutY="105.0" text="Confirm A New Password" textFill="#f8f7f7">
                             <font>
-                                <Font name="Chalkboard Bold" size="36.0" />
+                                <Font name="System Bold" size="36.0" />
                             </font>
                         </Label>
-                        <Button layoutX="608.0" layoutY="579.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="319.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;" text="Reset Password" textFill="#f8f7f7">
+                        <Button onAction="#ChangePassword" layoutX="629.0" layoutY="578.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="278.0" style="-fx-background-color: FFC107; -fx-background-radius: 10;" text="Reset Password" textFill="black">
                             <font>
-                                <Font name="Chalkboard Bold" size="24.0" />
+                                <Font name="System Bold" size="20.0" />
                             </font>
                         </Button>
-                        <CheckBox fx:id="CheckPassword" layoutX="549.0" layoutY="459.0" mnemonicParsing="false" onAction="#The_Password_Visibility" text="Show Password" textFill="#f8f7f7">
+                        <CheckBox fx:id="CheckPassword" layoutX="549.0" layoutY="459.0" mnemonicParsing="false" onAction="#The_Password_Visibility" text="Show Password">
                             <font>
                                 <Font name="Chalkboard Bold" size="20.0" />
                             </font>
                         </CheckBox>
-                        <TextField fx:id="ForgotUserName" alignment="CENTER" layoutX="538.0" layoutY="215.0" prefHeight="47.0" prefWidth="460.0" promptText="UserName" style="-fx-background-color: FFC107; -fx-background-radius: 50; -fx-border-radius: 50; -fx-border-color: #f8f7f7; -fx-border-width: 2;">
+                        <TextField fx:id="ForgotUserName" alignment="CENTER" layoutX="538.0" layoutY="215.0" prefHeight="47.0" prefWidth="460.0" promptText="UserName" style="-fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30;">
                             <font>
                                 <Font name="Chalkboard Bold" size="20.0" />
                             </font>

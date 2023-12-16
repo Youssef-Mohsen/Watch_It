@@ -49,87 +49,85 @@ public class profilePageController implements Initializable {
     @FXML
     public void choose(MouseEvent event) throws IOException {
         String choice = Select_List.getSelectionModel().getSelectedItem();
-        if(choice.equals("Log_Out"))
-        {
-            alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.isPresent() && result.get() == buttonTypeYes)
-            {
-                //To Switch to the page first(from the task of Tasneem).
-                root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("First.fxml")));
-                stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        if(choice!=null) {
+            if (choice.equals("Log Out")) {
+                alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.isPresent() && result.get() == buttonTypeYes) {
+                    //To Switch to the page first(from the task of Tasneem).
+                    root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("first-page.fxml")));
+                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                }
+            } else if (choice.equals("Delete Account")) {
+                System.out.println("in");
+                User.Delete_User(UserName);
+                //until we manage writing as obj
+                //not working-----------
+                for (String users : Admin.users) {
+                    String[] data = users.split(",");
+                    if (data[Admin.USERNAMEINDEX].equals(UserName)) {
+                        Admin.users.remove(users);
+                    }
+                }
+
+            }
+            //tmam
+            else if (choice.equals("Edit Profile")) {
+                root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("update-page.fxml")));
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
             }
-        }
-        else if(choice.equals("Delete_Account"))
-        {
-            User.Delete_User(UserName);
-        }
-        else if(choice.equals("Edit_Profile"))
-        {
-            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Update_Profile.fxml")));
-            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        }
-        else if(choice.equals("Delete_Subscription"))
-        {
-            alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.isPresent() && result.get() == buttonTypeYes)
-            {
-                //call method delete subscription from class admin.
-            }
-        }
-        //Delete_Recorded_Movies
-        else
-        {
-            alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.isPresent() && result.get() == buttonTypeYes)
-            {
-                //call method delete recorded movie from class admin.
+            //Delete_Recorded_Movies
+            else {
+                alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.isPresent() && result.get() == buttonTypeYes) {
+                    user.watchedMovies.clear();
+                    user.Watched_Movies.clear();
+                }
             }
         }
     }
 
     // action from main page and username which entered in sign in page (user)
-    /*public void Set_Data_User(ActionEvent act ,ArrayList<User> users , String username )
+    public void Set_Data_User(ActionEvent act , String username )
     {
-        for(User user:users)
+        for(User user: User.allusers)
         {
-            if(user.getUser_Name.equals(username))
+            if(user.getUser_Name().equals(username))
             {
-                firstname.setText(user.getFirst_Name);
-                secondname.setText(user.getLast_Name);
-                id.setText(user.getUser_ID);
-                plan.setText(user.getSubscription.getPlan);
-                email.setText(user.getEmail);
+                firstname.setText(user.getFirst_Name());
+                secondname.setText(user.getLast_Name());
+                // id.setText(user.getUser_ID());   id???
+                plan.setText(user.getPlan());
+                email.setText(user.getEmail());
             }
         }
-    }*/
-    /*public void Delete_User(ArrayList<User> users , String user_name)
+    }
+    public void Delete_User(String user_name)
     {
         int index = 0 ;
-        for(User user : users) {
-            if (user.User_Name.equals(user_name)) {
-                index = users.indexOf(user);
-                users.remove(user);
+        for(User user : User.allusers) {
+            if (user.getUser_Name().equals(user_name)) {
+                index = User.allusers.indexOf(user);
+                User.allusers.remove(user);
             }
         }
-        for(int i = index ; i <= users.size() ; i++)
+        for(int i = index ; i <= User.allusers.size() ; i++)
         {
-            users.get(i).setUser_ID(i++);
+            User.allusers.get(i).setUser_ID(i++);
         }
-    }*/
+    }
 
     @FXML
     public void move(ActionEvent act)throws IOException
     {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Recorded_Movies.fxml")));
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("recorded-movies.fxml")));
         stage = (Stage)((Node)act.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -139,8 +137,7 @@ public class profilePageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-
-        Select_List.getItems().addAll("Edit_Profile" , "Log_Out" , "Delete_Account" , "Delete_Subscription" , "Delete_Recorded_Movies");
+        Select_List.getItems().addAll("Edit Profile" , "Log Out" , "Delete Account" , "Delete Watched Movies");
 
     }
     @FXML

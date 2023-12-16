@@ -6,57 +6,57 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="835.0" prefWidth="1536.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watch_it.searchViewController">
 
-    <Label layoutX="408.0" layoutY="52.0" minWidth="200.0" prefHeight="25.0" prefWidth="229.0" style="-fx-alignment: center; -fx-background-color: black; -fx-background-radius: 13;" text="Information About : " textFill="#5b4b4b">
+    <Label layoutX="578.0" layoutY="52.0" minWidth="200.0" prefHeight="25.0" prefWidth="229.0" style="-fx-alignment: center; -fx-background-color: black; -fx-background-radius: 13;" text="Information About : " textFill="#a89696">
         <font>
             <Font size="25.0" />
         </font>
     </Label>
-    <Label fx:id="data_Label" layoutX="640.0" layoutY="52.0" minHeight="36.0" minWidth="100.0" prefHeight="36.0" prefWidth="269.0" style="-fx-background-color: black; -fx-alignment: center; -fx-background-radius: 13;" textFill="#5b4b4b">
+    <Label fx:id="data_Label" layoutX="808.0" layoutY="52.0" minHeight="36.0" minWidth="70.0" prefHeight="36.0" prefWidth="163.0" style="-fx-background-color: black; -fx-alignment: center; -fx-background-radius: 13;" textFill="#5b4b4b">
         <font>
             <Font size="25.0" />
         </font>
     </Label>
-    <Label layoutX="254.0" layoutY="197.0" style="-fx-alignment: center; -fx-background-color: black;" text="Name : " textFill="#a89696">
+    <Label layoutX="429.0" layoutY="206.0" style="-fx-alignment: center; -fx-background-color: black;" text="Name : " textFill="#a89696">
         <font>
             <Font size="22.0" />
         </font>
     </Label>
-    <Label fx:id="Name_Label" layoutX="377.0" layoutY="190.0" text="Toka Karam" textFill="#d4d4d4">
+    <Label fx:id="Name_Label" layoutX="509.0" layoutY="206.0" text="Toka Karam" textFill="#d4d4d4">
         <font>
             <Font size="22.0" />
         </font>
     </Label>
-    <Label layoutX="690.0" layoutY="197.0" text="Age : " textFill="#a89696">
+    <Label layoutX="908.0" layoutY="206.0" text="Age : " textFill="#a89696">
         <font>
             <Font size="22.0" />
         </font>
     </Label>
-    <Label fx:id="Age_Label" layoutX="832.0" layoutY="197.0" minWidth="50.0" text="34" textFill="#d4d4d4">
+    <Label fx:id="Age_Label" layoutX="980.0" layoutY="206.0" minWidth="50.0" text="34" textFill="#d4d4d4">
         <font>
             <Font size="22.0" />
         </font>
     </Label>
-    <Label layoutX="674.0" layoutY="299.0" text="Gender : " textFill="#a89696">
+    <Label layoutX="892.0" layoutY="355.0" text="Gender : " textFill="#a89696">
         <font>
             <Font size="22.0" />
         </font>
     </Label>
-    <Label fx:id="Gender_Label" layoutX="822.0" layoutY="308.0" text="Female" textFill="#d4d4d4">
+    <Label fx:id="Gender_Label" layoutX="995.0" layoutY="355.0" text="Female" textFill="#d4d4d4">
         <font>
             <Font size="22.0" />
         </font>
     </Label>
-    <Label layoutX="254.0" layoutY="308.0" text="Nationality : " textFill="#a89696">
+    <Label layoutX="405.0" layoutY="355.0" text="Nationality : " textFill="#a89696">
         <font>
             <Font size="22.0" />
         </font>
     </Label>
-    <Label fx:id="Nation_Label" layoutX="408.0" layoutY="308.0" text="Egyption" textFill="#d4d4d4">
+    <Label fx:id="Nation_Label" layoutX="535.0" layoutY="355.0" text="Egyption" textFill="#d4d4d4">
         <font>
             <Font size="22.0" />
         </font>
     </Label>
-    <Label layoutX="558.0" layoutY="395.0" minWidth="100.0" style="-fx-background-color: black; -fx-background-radius: 13; -fx-alignment: center;" text="Movies" textFill="#5b4b4b">
+    <Label layoutX="693.0" layoutY="431.0" minWidth="100.0" style="-fx-background-color: black; -fx-background-radius: 13; -fx-alignment: center;" text="Movies" textFill="#a89696">
         <font>
             <Font size="25.0" />
         </font>
@@ -71,5 +71,5 @@
         <HBox fx:id="Movies" />
     </ScrollPane>
     <HBox prefHeight="50" />
-   <Button fx:id="Back" layoutX="1423.0" layoutY="25.0" mnemonicParsing="false" onAction="#backScenes" prefHeight="27.0" prefWidth="63.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: white;" text="Back" textFill="WHITE" />
+    <Button fx:id="Back" layoutX="1423.0" layoutY="25.0" mnemonicParsing="false" onAction="#backScenes" prefHeight="27.0" prefWidth="63.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: white;" text="Back" textFill="WHITE" />
 </AnchorPane>

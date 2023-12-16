@@ -67,7 +67,7 @@ public class SignIn
         alert.setHeaderText(null);
         alert.showAndWait();
     }
-    /***Sign IN***/
+    /**Sign IN**/
     @FXML
     public void SignIN(ActionEvent act) throws IOException {
         String username = UserName.getText();

@@ -19,6 +19,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class WatchRecord {
     private Parent root;
@@ -34,11 +36,12 @@ public class WatchRecord {
     private Button Back;
 
 
-    MovieController movieController;
     public void initializeItems() {
+        Collections.sort(watchedMovies, Comparator.comparingInt(Movie::getUserRate).reversed());
         for (Movie movie : watchedMovies) {
             addToGUI(movie);
         }
+
     }
 
 
@@ -81,17 +84,19 @@ public class WatchRecord {
         FXMLLoader loader=new FXMLLoader(getClass().getResource("movie-view.fxml"));
         Parent root = loader.load();
         stage = (Stage)((Node)act.getSource()).getScene().getWindow();
-        movieController=loader.getController();
-        movieController.setStage(stage);
-        movieController.disableButtons();
-        movieController.disableWatch();
-        movieController.watchMovie(movie);
-        movieController.page5=1;
+        MovieController controller=loader.getController();
+        controller.setStage(stage);
+        controller.disableButtons();
+        controller.disableWatch();
+        controller.setMovie(movie);
+        controller.watchMovie(movie);
+        controller.page5=1;
+        controller.setStars();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
         Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));
-        movieController.refreshScreen("Watch Movie "+ movie.getTitle() + "("+movie.getRelease_date().getYear()+")", movie.getTitle(),
+        controller.refreshScreen("Watch Movie "+ movie.getTitle() + "("+movie.getRelease_date().getYear()+")", movie.getTitle(),
                 movie.getTitle()+" Translated",movie.getGenres(), movie.getDescription(),
                 movie.getRunning_time(), image,MainPageController.movie5.getDirectorName(),MainPageController.movie5.getCastNames());
         stage.setScene(scene);
@@ -103,11 +108,11 @@ public class WatchRecord {
     }
     public void backScenes(ActionEvent event) throws IOException {
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("main-page.fxml"));
-            root = loader.load();
-            MainPageController controller = loader.getController();
-            controller.setStage(stage);
-      
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("main-page.fxml"));
+        root = loader.load();
+        MainPageController controller = loader.getController();
+        controller.setStage(stage);
+
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("Movie");
@@ -129,13 +134,13 @@ public class WatchRecord {
                 " -fx-border-color: white;" +
                 " -fx-border-radius: 25;"));
     }
-  /*  public void setMovieDetails(Movie movie){
-        if(this.movie!=null) {
-            this.movie = movie;
-            System.out.println(this.movie.getTitle());
-            System.out.println(this.movie.getPoster_path());
-        }
-    }*/
+    /*  public void setMovieDetails(Movie movie){
+          if(this.movie!=null) {
+              this.movie = movie;
+              System.out.println(this.movie.getTitle());
+              System.out.println(this.movie.getPoster_path());
+          }
+      }*/
     public void setStage(Stage stage) {
         this.stage = stage;
     }

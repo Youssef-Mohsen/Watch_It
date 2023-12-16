@@ -109,9 +109,11 @@ public class RecordedMoviesController {
         stage = (Stage)((Node)act.getSource()).getScene().getWindow();
         MovieController controller=loader.getController();
         controller.setStage(stage);
+        controller.disableButtons();
+        controller.setMovie(movie1);
         controller.watchMovie(movie1);
         controller.page5=-1;
-        controller.disableButtons();
+        controller.setStars();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -163,5 +165,5 @@ public class RecordedMoviesController {
         if(this.movie2!=null) {
             this.movie2 = movie;
         }*/
-    }
+}
 

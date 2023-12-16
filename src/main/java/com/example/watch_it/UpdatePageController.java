@@ -83,8 +83,12 @@ public class UpdatePageController {
     }
     public void Back_To_Profile(ActionEvent act) throws IOException
     {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Profile.fxml")));
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("profile-page.fxml"));
+        root = loader.load();
         stage = (Stage)((Node)act.getSource()).getScene().getWindow();
+        profilePageController controller=loader.getController();
+        controller.setStage(stage);
+        controller.setdata();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
