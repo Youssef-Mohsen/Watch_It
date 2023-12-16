@@ -123,7 +123,9 @@ public  class MainPageController {
             addToGUI(movie);
         }
         for (Movie movie : moviesRecent) {
-            addToGUI2(movie);
+            if(movie.getRelease_date().getYear()>2018) {
+                addToGUI2(movie);
+            }
         }
         for (Movie movie : moviesTopRated) {
             addToGUI3(movie);
