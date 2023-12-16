@@ -70,7 +70,6 @@ public class AllUsersController implements Initializable {
         batbot.setFitHeight(120);
         batbot.setFitWidth(118);
 
-
         VBox userDetailsBox = new VBox();
 
         userDetailsBox.getChildren().addAll(batbot,nameLabel,  view) ;

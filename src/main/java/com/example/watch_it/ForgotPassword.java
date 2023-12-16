@@ -65,30 +65,35 @@ public class ForgotPassword {
         alert.setContentText(message);
         alert.showAndWait();
     }
-    /*@FXML
-    public void  ChangePassword()
-    {
+    @FXML
+    public void  ChangePassword(ActionEvent event) throws IOException {
         String username = ForgotUserName.getText();
-        while(Admin.existsInFile(username))
-        {
-            showErrorAlert("Incorrect UserName", "UserName Is InCorrect , Try again!");
-            ForgotUserName.clear();
-        }
         String email = ForgotEmail.getText();
-        while(Admin.getSpecificCellForUser(username,Admin.EmailIndex).equals(email))
-        {
-            showErrorAlert("Incorrect Email", "Email Is InCorrect , Try again!");
-            ForgotEmail.clear();
-        }
         String password = ForgotPassword.getText();
         String confirmpassword = ForgotConfirmPassword.getText();
-        while(!password.equals(confirmpassword))
-        {
-            showErrorAlert("Invalid", "Confirm Password Does not match, Try again!");
-            ForgotConfirmPassword.clear();
+
+        if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirmpassword.isEmpty()) {
+            showErrorAlert("Invalid Data", "Enter All Your Data");
         }
-        showAlert("Password has been changed Successful!");
-    }*/
+        else if (!User.Userexist(username)) {
+            showErrorAlert("Invalid Data", "Username Is Incorrect, Try again!");
+            ForgotUserName.clear();
+        }
+        else {
+            if (!(User.GetUser(username).getEmail().equals(email))) {
+                showErrorAlert("Invalid Data", "Email Is Incorrect, Try again!");
+                ForgotEmail.clear();
+                return;
+            }
+            if (!password.equals(confirmpassword)) {
+                showErrorAlert("Invalid Data", "Confirm Password Does not match, Try again!");
+                ForgotConfirmPassword.clear();
+                return;
+            }
+            showAlert("Password has been changed Successful!");
+            GoToSignIn(event);
+        }
+    }
     @FXML
     public void GoToSignIn(ActionEvent event) throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("sign-in.fxml")));
@@ -117,13 +122,13 @@ public class ForgotPassword {
             ForgotConfirmPassword.setText(CTextPassword.getText());
             CTextPassword.setVisible(false);
             ForgotConfirmPassword.setVisible(true);
- }
-}
+        }
+    }
     public void onMouseEntered() {
         Back.setOnMouseEntered(event -> Back.setStyle("-fx-background-color: #FFC107; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
     }
 
     public void onMouseExit() {
-        Back.setOnMouseExited(event -> Back.setStyle("-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
+        Back.setOnMouseExited(event -> Back.setStyle("-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
     }
 }

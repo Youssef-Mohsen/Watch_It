@@ -240,12 +240,15 @@ public class Admin {
         return getMonth(recuiredMonth);
     }
     //******************************************************************
-    static void getUserMovieLists(String user, ArrayList<String> watched_movies, ArrayList<String> toBeWatched_movies){
+    static void getUserMovieLists(User user){
+        ArrayList<String> watched_movies = new ArrayList<String>();
+        ArrayList<String> toBeWatched_movies = new ArrayList<String>();
         boolean toBeWatched = false;
         boolean watched = false;
         int watchedCounter = -1;
         int toBeWatchedCounter = 0;
-        String[] eachLine = user.split(",");
+        String allData = existsInFile(user.getUser_Name());
+        String[] eachLine = allData.split(",");
         for (String data:eachLine) {
             if(data.equals("watched"))
                 watched = true;
@@ -262,35 +265,69 @@ public class Admin {
                 toBeWatched_movies.add(data);
             if (toBeWatched)
                 toBeWatchedCounter = 1;
-            User.toWatchMovies.addAll(toBeWatched_movies);
-            User.watchedMovies.addAll(watched_movies);
+            System.out.println("watched" + watched_movies);
+            System.out.println("to be watched" + toBeWatched_movies);
+            user.watchedMovies.addAll(watched_movies);
+            user.toWatchMovies.addAll(toBeWatched_movies);
+
         }
     }
-    //as objects-------------------
-    static void getUserMovieLists(User user){
 
+    static void getUserMovieLists(String user, ArrayList<String> watched_movies, ArrayList<String> toBeWatched_movies){
+        boolean toBeWatched = false;
+        boolean watched = false;
+        int watchedCounter = -1;
+        int toBeWatchedCounter = 0;
+        String[] eachLine = user.split(",");
+        for (String data:eachLine) {
+            if(data.equals("watched"))
+                watched = true;
+            if(data.equals("to be watched")) {
+                watched = false;
+                toBeWatched = true;
+            }
+            if(watched) {
+                watchedCounter++;
+                if(watchedCounter != 0 && watchedCounter%2!=0)
+                    watched_movies.add(data);
+            }
+            if(toBeWatched && toBeWatchedCounter == 1)
+                toBeWatched_movies.add(data);
+            if (toBeWatched && toBeWatchedCounter == 0)
+                toBeWatchedCounter = 1;
+        }
+    }
+
+
+
+    //as objects-------------------
+    static void getUserMovieLists_obj(User user){
+
+/*
         String userData = existsInFile(user.getUser_Name());
         ArrayList<String> watched = new ArrayList<String>();
         ArrayList<String> toWatch = new ArrayList<String>();
+*/
 
-        getUserMovieLists(userData,watched,toWatch);
+        getUserMovieLists(user);
         ArrayList<Movie> toWatchList = new ArrayList<Movie>();
-        for(String movie: toWatch){
+        for(String movie: user.toWatchMovies){
             toWatchList.add(getOneMovie(movie));
         }
         ArrayList<UserWatchRecord> watched_movies = new ArrayList<UserWatchRecord>();
         Movie movie = new Movie();
         int rate = -1;
-        for(int i=0; i<watched.size(); i++){
+        for(int i=0; i<user.watchedMovies.size(); i++){
             if(i%2 == 0){
-                movie  = getOneMovie(watched.get(i));
-                rate = Integer.parseInt(watched.get(i+1));
+                movie  = getOneMovie(user.watchedMovies.get(i));
+                rate = Integer.parseInt(user.watchedMovies.get(i+1));
                 UserWatchRecord u = new UserWatchRecord(movie,rate);
                 watched_movies.add(u);
+
             }
         }
-        User.Movies_For_Later.addAll(toWatchList);
-        User.Watched_Movies.addAll(watched_movies);
+        user.Movies_For_Later.addAll(toWatchList);
+        user.Watched_Movies.addAll(watched_movies);
     }
     static UserWatchRecord getWatchedMovie(String title, int rate){
         UserWatchRecord movie = new UserWatchRecord();
@@ -332,15 +369,11 @@ public class Admin {
         castAndGenres(movieString,cast,genres);
         movie.setCastNames(cast);
         movie.setGenre(genres);
-      /*  ArrayList<Cast> movieCast = new ArrayList<Cast>();
-        System.out.println(cast);*/
-        /*for (String castString: cast){
-            String[] data = castString.split(",");
-            String name= "";
-            name = name.concat(data[1].concat(" ").concat(data[2]));
-            movieCast.add(getCast(name));
+        ArrayList<Cast> movieCast = new ArrayList<Cast>();
+        for (String castString: cast){
+            movieCast.add(getCast(castString));
         }
-        movie.setCast(movieCast);*/
+        movie.setCast(movieCast);
         return movie;
     }
     static Movie getOneMovie (String title){
@@ -465,7 +498,7 @@ public class Admin {
         ArrayList<User> userArrayList = new ArrayList<User>();
         for(int i=0; i<users.size(); i++){
             String[] data =users.get(i).split(",");
-            User user = new User(data[USERNAMEINDEX], data[LASTNAMEINDEX],data[FIRSTNAMEINDEX],data[EMAILINDEX],data[PASSWORDINDEX],data[PROFILEPICINDEX], data[PLANINDEX]);
+            User user = new User(User.allusers.size()+1,data[USERNAMEINDEX], data[LASTNAMEINDEX],data[FIRSTNAMEINDEX],data[EMAILINDEX],data[PASSWORDINDEX],data[PROFILEPICINDEX], data[PLANINDEX] , data[STARTDATEINDEX]);
             userArrayList.add(user);
         }
         getUsersInEachPlan();

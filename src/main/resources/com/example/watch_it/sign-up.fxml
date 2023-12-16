@@ -1,159 +1,170 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="864.0" maxWidth="1536.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="864.0" prefWidth="1536.0" style="-fx-background-color: black; -fx-border-color: FFC107; -fx-border-width: 3;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watch_it.SignUp">
+<AnchorPane maxHeight="864.0" maxWidth="1536.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="864.0" prefWidth="1536.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watch_it.SignUp">
     <children>
         <VBox alignment="CENTER" maxHeight="864.0" maxWidth="1536.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="864.0" prefWidth="1536.0" style="-fx-background-color: black;">
             <children>
                 <Pane prefHeight="100.0" prefWidth="1536.0" style="-fx-background-color: black;">
                     <children>
-                        <Label alignment="CENTER" layoutX="42.0" layoutY="23.0" prefHeight="43.0" prefWidth="143.0" style="-fx-background-color: FFC107; -fx-background-radius: 20; " text="Watch" textFill="WHITE">
+                        <Label alignment="CENTER" layoutX="46.0" layoutY="21.0" prefHeight="43.0" prefWidth="119.0" style="-fx-background-color: FFC107; -fx-background-radius: 20; " text="Watch" textFill="WHITE">
                             <font>
                                 <Font name="Arial Narrow Bold" size="27.0" />
                             </font>
                         </Label>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="158.0" layoutY="23.0" prefHeight="43.0" prefWidth="68.0" style="-fx-background-color: black; -fx-background-radius: 25;" text="IT" textFill="WHITE">
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="148.0" layoutY="21.0" prefHeight="43.0" prefWidth="68.0" style="-fx-background-color: black; -fx-background-radius: 25;" text="IT" textFill="WHITE">
                             <font>
                                 <Font name="Arial Narrow Bold" size="27.0" />
                             </font>
                         </Label>
                         <Button fx:id="Back" layoutX="1448.0" layoutY="15.0" mnemonicParsing="false" onAction="#GoToSignIn" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="27.0" prefWidth="56.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;" text="Back" textFill="WHITE" />
+                        <Separator layoutX="0.0" layoutY="98.0" opacity="0.1" prefWidth="1536.0" />
+
                     </children>
                 </Pane>
-                <Pane prefHeight="764.0" prefWidth="1536.0" style="-fx-background-color: black;">
+                <HBox prefHeight="757.0" prefWidth="1536.0" style="-fx-background-color: black;">
                     <children>
-                        <HBox layoutY="152.0" prefHeight="204.0" prefWidth="1318.0" spacing="70.0">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="862.0" prefWidth="992.0" style="-fx-background-color: black;">
                             <children>
-                                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+                                <TextField fx:id="CreateUserName" alignment="CENTER" layoutX="266.0" layoutY="162.0" prefHeight="47.0" prefWidth="460.0" promptText="Username" style="-fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30;">
+                                    <font>
+                                        <Font name="Chalkboard Bold" size="20.0" />
+                                    </font>
+                                </TextField>
+                                <TextField fx:id="FisrtName" alignment="CENTER" layoutX="266.0" layoutY="275.0" prefHeight="47.0" prefWidth="460.0" promptText="First Name" style="-fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30;">
+                                    <font>
+                                        <Font name="Chalkboard Bold" size="20.0" />
+                                    </font>
+                                </TextField>
+                                <TextField fx:id="LastName" alignment="CENTER" layoutX="266.0" layoutY="331.0" prefHeight="47.0" prefWidth="460.0" promptText="Last Name" style="-fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30;">
+                                    <font>
+                                        <Font name="Chalkboard Bold" size="20.0" />
+                                    </font>
+                                </TextField>
+                                <TextField fx:id="Email" alignment="CENTER" layoutX="266.0" layoutY="219.0" prefHeight="47.0" prefWidth="460.0" promptText="Email" style="-fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30;">
+                                    <font>
+                                        <Font name="Chalkboard Bold" size="20.0" />
+                                    </font>
+                                </TextField>
+                                <TextField fx:id="TextPassword" alignment="CENTER" layoutX="266.0" layoutY="391.0" prefHeight="47.0" prefWidth="460.0" promptText="Password" style="-fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30;">
+                                    <font>
+                                        <Font name="Chalkboard Bold" size="20.0" />
+                                    </font>
+                                </TextField>
+                                <PasswordField fx:id="CreatePassword" alignment="CENTER" layoutX="266.0" layoutY="391.0" prefHeight="47.0" prefWidth="460.0" promptText="Password" style="-fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30;">
+                                    <font>
+                                        <Font name="Chalkboard Bold" size="20.0" />
+                                    </font>
+                                </PasswordField>
+                                <TextField fx:id="CTextPassword" alignment="CENTER" layoutX="266.0" layoutY="452.0" prefHeight="47.0" prefWidth="460.0" promptText="Confirm Password" style="-fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30;">
+                                    <font>
+                                        <Font name="Chalkboard Bold" size="20.0" />
+                                    </font>
+                                </TextField>
+                                <PasswordField fx:id="CreateConfirmPassword" alignment="CENTER" layoutX="266.0" layoutY="452.0" prefHeight="47.0" prefWidth="460.0" promptText="Confirm Password" style="-fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30;">
+                                    <font>
+                                        <Font name="Chalkboard Bold" size="20.0" />
+                                    </font>
+                                </PasswordField>
+                                <Label layoutX="311.0" layoutY="68.0" text="Create A New Account" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="36.0" />
+                                    </font>
+                                </Label>
+                                <CheckBox fx:id="CheckBox" layoutX="286.0" layoutY="522.0" mnemonicParsing="false" onAction="#The_Password_Visibility" prefHeight="27.0" prefWidth="180.0" text="Show Password">
+                                    <font>
+                                        <Font size="20.0" />
+                                    </font>
+                                </CheckBox>
+                                <Button alignment="CENTER" layoutX="393.0" layoutY="603.0" mnemonicParsing="false" onAction="#SignUP" prefHeight="39.0" prefWidth="206.0" style="-fx-background-color: FFC107; -fx-background-radius: 10;" text="Create" textAlignment="CENTER" textFill="black">
+                                    <font>
+                                        <Font name="System bold" size="20.0" />
+                                    </font>
+                                </Button>
+
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="758.0" prefWidth="663.0" style="-fx-background-color: black;">
+                            <children>
+                                <Label layoutX="128.0" layoutY="68.0" text="Choose Your Avatar!" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="36.0" />
+                                    </font>
+                                </Label>
+                                <VBox layoutX="306.0" layoutY="176.0" prefHeight="568.0" prefWidth="186.0">
                                     <children>
-                                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                                            <Image url="@assets/batbot-01.png" />
-                                        </ImageView>
-                                        <RadioButton fx:id="button1" mnemonicParsing="false" />
+                                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+                                            <children>
+                                                <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@assets/batbot-03.png" />
+                                                    </image>
+                                                </ImageView>
+                                                <RadioButton fx:id="button3" mnemonicParsing="false" />
+                                            </children>
+                                        </VBox>
+                                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+                                            <children>
+                                                <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@assets/batbot-05.png" />
+                                                    </image>
+                                                </ImageView>
+                                                <RadioButton fx:id="button5" mnemonicParsing="false" />
+                                            </children>
+                                        </VBox>
+                                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+                                            <children>
+                                                <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@assets/batbot-06.png" />
+                                                    </image>
+                                                </ImageView>
+                                                <RadioButton fx:id="button6" mnemonicParsing="false" />
+                                            </children>
+                                        </VBox>
                                     </children>
                                 </VBox>
-                                <VBox alignment="TOP_CENTER" layoutX="110.0" layoutY="50.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+                                <VBox layoutX="50.0" layoutY="176.0" prefHeight="568.0" prefWidth="200.0">
                                     <children>
-                                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@assets/batbot-02.png" />
-                                            </image>
-                                        </ImageView>
-                                        <RadioButton fx:id="button2" mnemonicParsing="false" />
-                                    </children>
-                                </VBox>
-                                <VBox alignment="TOP_CENTER" layoutX="316.0" layoutY="50.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
-                                    <children>
-                                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@assets/batbot-03.png" />
-                                            </image>
-                                        </ImageView>
-                                        <RadioButton fx:id="button3" mnemonicParsing="false" />
-                                    </children>
-                                </VBox>
-                                <VBox alignment="TOP_CENTER" layoutX="523.0" layoutY="50.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
-                                    <children>
-                                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@assets/batbot-04.png" />
-                                            </image>
-                                        </ImageView>
-                                        <RadioButton fx:id="button4" mnemonicParsing="false" />
-                                    </children>
-                                </VBox>
-                                <VBox alignment="TOP_CENTER" layoutX="729.0" layoutY="50.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
-                                    <children>
-                                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@assets/batbot-05.png" />
-                                            </image>
-                                        </ImageView>
-                                        <RadioButton fx:id="button5" mnemonicParsing="false" />
-                                    </children>
-                                </VBox>
-                                <VBox alignment="TOP_CENTER" layoutX="936.0" layoutY="50.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
-                                    <children>
-                                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@assets/batbot-06.png" />
-                                            </image>
-                                        </ImageView>
-                                        <RadioButton fx:id="button6" mnemonicParsing="false" />
+                                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+                                            <children>
+                                                <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@assets/batbot-04.png" />
+                                                    </image>
+                                                </ImageView>
+                                                <RadioButton fx:id="button4" mnemonicParsing="false" />
+                                            </children>
+                                        </VBox>
+                                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+                                            <children>
+                                                <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                                    <Image url="@assets/batbot-01.png" />
+                                                </ImageView>
+                                                <RadioButton fx:id="button1" mnemonicParsing="false" />
+                                            </children>
+                                        </VBox>
+                                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+                                            <children>
+                                                <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@assets/batbot-02.png" />
+                                                    </image>
+                                                </ImageView>
+                                                <RadioButton fx:id="button2" mnemonicParsing="false" />
+                                            </children>
+                                        </VBox>
                                     </children>
                                 </VBox>
                             </children>
-                            <padding>
-                                <Insets left="300.0" top="40.0" />
-                            </padding>
-                        </HBox>
-                        <ImageView fitHeight="62.0" fitWidth="68.0" layoutX="737.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@assets/adduser.png" />
-                            </image>
-                        </ImageView>
-                        <Label alignment="CENTER" layoutX="659.0" layoutY="87.0" prefHeight="44.0" prefWidth="218.0" text="Sign UP" textFill="#f8f7f7">
-                            <font>
-                                <Font size="36.0" />
-                            </font>
-                        </Label>
-                        <TextField fx:id="CreateUserName" alignment="CENTER" layoutX="271.0" layoutY="396.0" prefHeight="47.0" prefWidth="460.0" promptText="UserName" style="-fx-background-color: FFC107; -fx-background-radius: 50; -fx-border-radius: 50; -fx-border-color: #f8f7f7; -fx-border-width: 2;">
-                            <font>
-                                <Font name="Chalkboard Bold" size="20.0" />
-                            </font>
-                        </TextField>
-                        <TextField fx:id="FisrtName" alignment="CENTER" layoutX="271.0" layoutY="456.0" prefHeight="47.0" prefWidth="460.0" promptText="First Name" style="-fx-background-color: FFC107; -fx-background-radius: 50; -fx-border-radius: 50; -fx-border-color: #f8f7f7; -fx-border-width: 2;">
-                            <font>
-                                <Font name="Chalkboard Bold" size="20.0" />
-                            </font>
-                        </TextField>
-                        <TextField fx:id="LastName" alignment="CENTER" layoutX="780.0" layoutY="456.0" prefHeight="47.0" prefWidth="460.0" promptText="Last Name" style="-fx-background-color: FFC107; -fx-background-radius: 50; -fx-border-radius: 50; -fx-border-color: #f8f7f7; -fx-border-width: 2;">
-                            <font>
-                                <Font name="Chalkboard Bold" size="20.0" />
-                            </font>
-                        </TextField>
-                        <TextField fx:id="Email" alignment="CENTER" layoutX="780.0" layoutY="396.0" prefHeight="47.0" prefWidth="460.0" promptText="Email" style="-fx-background-color: FFC107; -fx-background-radius: 50; -fx-border-radius: 50; -fx-border-color: #f8f7f7; -fx-border-width: 2;">
-                            <font>
-                                <Font name="Chalkboard Bold" size="20.0" />
-                            </font>
-                        </TextField>
-                        <TextField fx:id="TextPassword" alignment="CENTER" layoutX="271.0" layoutY="516.0" prefHeight="47.0" prefWidth="460.0" promptText="Password" style="-fx-background-color: FFC107; -fx-background-radius: 50; -fx-border-radius: 50; -fx-border-color: #f8f7f7; -fx-border-width: 2;">
-                            <font>
-                                <Font name="Chalkboard Bold" size="20.0" />
-                            </font>
-                        </TextField>
-                        <PasswordField fx:id="CreatePassword" alignment="CENTER" layoutX="271.0" layoutY="516.0" prefHeight="47.0" prefWidth="460.0" promptText="Password" style="-fx-background-color: FFC107; -fx-background-radius: 50; -fx-border-radius: 50; -fx-border-width: 2; -fx-border-color: #f8f7f7;">
-                            <font>
-                                <Font name="Chalkboard Bold" size="20.0" />
-                            </font>
-                        </PasswordField>
-                        <TextField fx:id="CTextPassword" alignment="CENTER" layoutX="780.0" layoutY="516.0" prefHeight="47.0" prefWidth="460.0" promptText="Confirm Password" style="-fx-background-color: FFC107; -fx-background-radius: 50; -fx-border-radius: 50; -fx-border-color: #f8f7f7; -fx-border-width: 2;">
-                            <font>
-                                <Font name="Chalkboard Bold" size="20.0" />
-                            </font>
-                        </TextField>
-                        <PasswordField fx:id="CreateConfirmPassword" alignment="CENTER" layoutX="780.0" layoutY="516.0" prefHeight="47.0" prefWidth="460.0" promptText="Confirm Password" style="-fx-background-color: FFC107; -fx-background-radius: 50; -fx-border-radius: 50; -fx-border-width: 2; -fx-border-color: #f8f7f7;">
-                            <font>
-                                <Font name="Chalkboard Bold" size="20.0" />
-                            </font>
-                        </PasswordField>
-                        <CheckBox fx:id="CheckBox" layoutX="563.0" layoutY="593.0" mnemonicParsing="false" onAction="#The_Password_Visibility" prefHeight="27.0" prefWidth="180.0" text="Show Password" textFill="#f8f7f7">
-                            <font>
-                                <Font size="20.0" />
-                            </font>
-                        </CheckBox>
-                        <Button onAction="#SignUP" alignment="CENTER" layoutX="610.0" layoutY="663.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="319.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;" text="Create " textAlignment="CENTER" textFill="#f8f7f7">
-                            <font>
-                                <Font name="Chalkboard Bold" size="20.0" />
-                            </font>
-                        </Button>
+                        </AnchorPane>
                     </children>
-                </Pane>
+                </HBox>
             </children>
         </VBox>
     </children>

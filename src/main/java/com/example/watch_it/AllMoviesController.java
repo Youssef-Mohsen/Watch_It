@@ -1,4 +1,3 @@
-
 package com.example.watch_it;
 
 import javafx.application.Platform;
@@ -14,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
@@ -48,39 +48,10 @@ public class AllMoviesController {
     private Parent root;
 
 
-
-
-    private ArrayList<Movie> Movies = new ArrayList<Movie>();
-
-    private void getData() {
-        Movies.clear();
-        ArrayList<Movie> mov = new ArrayList<Movie>();
-
-        Movie movie3 = new Movie();
-        movie3.setTitle("Joker");
-        movie3.setPoster_path("movies/joker.jpeg");
-        Movie movie4 = new Movie();
-        movie4.setTitle("Ready Or Not");
-        movie4.setPoster_path("movies/ready or not.jpeg");
-        mov.add(movie3);
-        mov.add(movie4);
-        mov.add(movie3);
-        mov.add(movie4);
-        mov.add(movie3);
-        mov.add(movie4);
-        mov.add(movie3);
-        mov.add(movie4);
-        mov.add(movie3);
-        mov.add(movie4);
-
-        Movies.addAll(mov);
-    }
-
     @FXML
     public void initialize() {
-        getData();
-        for (int i=0 ; i<Movies.size(); i++){
-            addMovies(Movies.get(i), i);
+        for (int i=0 ; i<Movie.allmovies.size(); i++){
+            addMovies(Movie.allmovies.get(i), i);
         }
     }
 
@@ -108,6 +79,24 @@ public class AllMoviesController {
     void toPlans(ActionEvent event)throws IOException{
         Parent fxml = FXMLLoader.load(getClass().getResource("Plans.fxml"));
         switchPane((ScrollPane) fxml);
+    }
+    public void onMouseClickedMovie(MouseEvent act, Movie movie) throws IOException {
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("movie-view.fxml"));
+        root = loader.load();
+        stage = (Stage)((Node)act.getSource()).getScene().getWindow();
+        MovieController controller=loader.getController();
+        controller.setStage(stage);
+        controller.Admin(movie);
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));
+        controller.refreshScreen("Watch Movie "+ movie.getTitle() + "("+movie.getRelease_date().getYear()+")", movie.getTitle(),
+                movie.getTitle()+" Translated",movie.getGenres(), movie.getDescription(),
+                movie.getRunning_time(), image,movie.getDirectorName(),movie.getCastNames());
+        stage.setScene(scene);
+        stage.show();
+
     }
     @FXML
     public void backScenes(ActionEvent event) throws IOException {
@@ -157,6 +146,14 @@ public class AllMoviesController {
         }
         else
             rightCol.getChildren().addAll(movieContainer);
+
+        movieContainer.setOnMouseClicked(event -> {
+            try {
+                onMouseClickedMovie(event, movie);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     private void switchPane(ScrollPane scrollPane){
@@ -164,13 +161,13 @@ public class AllMoviesController {
     }
     @FXML
     private void Search(){
-
+        System.out.println(leftCol.getWidth());
         String name = searchField.getText();
         leftCol.getChildren().clear();
         middleCol1.getChildren().clear();
         middleCol2.getChildren().clear();
         rightCol.getChildren().clear();
-        for (Movie movie : Movies) {
+        for (Movie movie : Movie.allmovies) {
             if (name.equalsIgnoreCase(movie.getTitle())) {
                 addMovies(movie, 0);
             }
@@ -179,9 +176,7 @@ public class AllMoviesController {
             initialize();
         }
     }
-public void setStage(Stage stage){
-        this.stage=stage;
+    public void setStage(Stage stage){
+        this.stage = stage;
+    }
 }
-
-}
-

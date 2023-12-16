@@ -1,15 +1,16 @@
 user,nada,123456,1,nada,ayman,basic,nadaAyman@gmail.com,2023-12-06,assets/batbot-01.png,to be watched,Oppenheimer,watched,Avengers: Endgame,null,Joker,3
-user,youssef,456789,3,youssef,mohsen,premium,youssefMohsen@gmail.com,2023-10-09,assets/batbot-02.png,to be watched,Insidious: The Red Door,watched,Oppenheimer,null,The Dark Knight,3
-user,Mai,123456,1,Mai,Ezz,basic,MaiEzz@gmail.com,2023-12-06,assets/batbot-01.png,to be watched,Oppenheimer,watched,Avengers: Endgame,null,Joker,3
-user,Basmala,456789,3,Basmala,Tarek,premium,Basmala-Tarek@gmail.com,2023-10-09,assets/batbot-02.png,to be watched,Insidious: The Red Door,watched,Oppenheimer,null,The Dark Knight,3
-user,Tasneem,123456,1,Tasneem,Mohamed,basic,TasneemMohamed@gmail.com,2023-12-06,assets/batbot-01.png,to be watched,Oppenheimer,watched,Avengers: Endgame,null,Joker,3
-user,toka,456789,3,toka,karam,premium,tokaKaram@gmail.com,2023-10-09,assets/batbot-02.png,to be watched,nsidious: The Red Door,watched,Oppenheimer,null,The Dark Knight,3
-user,youssef,456789,3,youssef,ahmad,premium,youssefAhmad@gmail.com,2023-10-09,assets/batbot-02.png,to be watched,Insidious: The Red Door,watched,Oppenheimer,null,The Dark Knight,3
+user,youssef,456789,2,youssef,mohsen,premium,youssefMohsen@gmail.com,2023-10-09,assets/batbot-02.png,to be watched,Insidious: The Red Door,watched,Oppenheimer,null,The Dark Knight,3
+user,Mai,123456,3,Mai,Ezz,basic,MaiEzz@gmail.com,2023-12-06,assets/batbot-01.png,to be watched,Oppenheimer,watched,Avengers: Endgame,null,Joker,3
+user,Basmala,456789,4,Basmala,Tarek,premium,Basmala-Tarek@gmail.com,2023-10-09,assets/batbot-02.png,to be watched,Insidious: The Red Door,watched,Oppenheimer,null,The Dark Knight,3
+user,Tasneem,123456,5,Tasneem,Mohamed,basic,TasneemMohamed@gmail.com,2023-12-06,assets/batbot-01.png,to be watched,Oppenheimer,watched,Avengers: Endgame,null,Joker,3
+user,toka,456789,6,toka,karam,premium,tokaKaram@gmail.com,2023-10-09,assets/batbot-02.png,to be watched,nsidious: The Red Door,watched,Oppenheimer,null,The Dark Knight,3
+user,youssef,456789,7,youssef,ahmad,premium,youssefAhmad@gmail.com,2023-10-09,assets/batbot-02.png,to be watched,Insidious: The Red Door,watched,Oppenheimer,null,The Dark Knight,3
 cast,Patrick,Wilson,50,male,American,Columbus,Insidious: The Red Door
 cast,Rose,Byrne,44,female,Australian,Insidious: The Red Door
 cast,Joaquin,Phoenix,49,male,American,Joker
 cast,Robert,DeNiro,80,male,American,Joker
 cast,Joe,Pesci,80,male,American,Home Alone
+cast,Kate,Winslet,48,female,Titanic
 cast,Macaulay,Culkin,43,male,American,Home Alone
 cast,Daniel,Stern,66,male,American,Home Alone
 cast,Robert,DowneyJr,58,male,American,Avengers: Endgame,Sherlock Holmes,Oppenheimer
@@ -25,7 +26,9 @@ director,Christopher,Nolan,53,male,british,The Dark Knight,Oppenheimer
 director,Guy,Ritchie,55,male,british,Sherlock Holmes
 director,Anthony,Russo,53,male,American,Avengers: Endgame
 director,Chris,Columbus,65,male,Italian,Home Alone
-director,Todd,Phillips,52,male,American,Columbus,Joker
-director,Patrick,Wilson,50,male,American,Columbus,Insidious: The Red Door
+director,Todd,Phillips,52,male,American,Joker
+director,Patrick,Wilson,50,male,American,Insidious: The Red Door
+director,James,Cameron,69,male,Canadian,Titanic
+2cast,Leonardo,DiCaprio,49,male,Inception,Titanic
 admin,nada,123456
 admin,mai,123456

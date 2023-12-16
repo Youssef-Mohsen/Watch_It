@@ -179,5 +179,5 @@ public class RecordedMoviesController {
         if(this.movie2!=null) {
             this.movie2 = movie;
         }*/
-    }
+}
 

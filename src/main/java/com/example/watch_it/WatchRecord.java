@@ -108,11 +108,11 @@ public class WatchRecord {
     }
     public void backScenes(ActionEvent event) throws IOException {
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("main-page.fxml"));
-            root = loader.load();
-            MainPageController controller = loader.getController();
-            controller.setStage(stage);
-      
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("main-page.fxml"));
+        root = loader.load();
+        MainPageController controller = loader.getController();
+        controller.setStage(stage);
+
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("Movie");
@@ -134,13 +134,13 @@ public class WatchRecord {
                 " -fx-border-color: white;" +
                 " -fx-border-radius: 25;"));
     }
-  /*  public void setMovieDetails(Movie movie){
-        if(this.movie!=null) {
-            this.movie = movie;
-            System.out.println(this.movie.getTitle());
-            System.out.println(this.movie.getPoster_path());
-        }
-    }*/
+    /*  public void setMovieDetails(Movie movie){
+          if(this.movie!=null) {
+              this.movie = movie;
+              System.out.println(this.movie.getTitle());
+              System.out.println(this.movie.getPoster_path());
+          }
+      }*/
     public void setStage(Stage stage) {
         this.stage = stage;
     }
