@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="236de910-bb88-43c2-a220-e8030a7a2c95" name="Changes" comment="Update project">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movies-data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/movies-data.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/MainPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/MainPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/movie-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/movie-view.fxml" afterDir="false" />
+    <list default="true" id="236de910-bb88-43c2-a220-e8030a7a2c95" name="Changes" comment="Add Movies">
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/main-page.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/main-page.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -229,7 +225,15 @@
       <option name="project" value="LOCAL" />
       <updated>1702758128245</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Add Movies">
+      <option name="closed" value="true" />
+      <created>1702761657831</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1702761657831</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -257,7 +261,8 @@
     <MESSAGE value="Update project (Rate)" />
     <MESSAGE value="Update project (Search)" />
     <MESSAGE value="Update project" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update project" />
+    <MESSAGE value="Add Movies" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Movies" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
