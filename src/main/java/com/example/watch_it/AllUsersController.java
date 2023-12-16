@@ -1,22 +1,33 @@
 package com.example.watch_it;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 
 public class AllUsersController implements Initializable {
-
+    private Parent root;
+    private Scene scene;
+    private Stage stage;
     @FXML
     private VBox userbox1;
     @FXML
@@ -26,20 +37,12 @@ public class AllUsersController implements Initializable {
     @FXML
     private VBox userbox4;
     @FXML
-     private TextField searchBar;
-
-    @FXML
-    Image image1 = new Image(getClass().getResourceAsStream("assets/batbot-01.png"));
-    @FXML
-    Image image2 = new Image(getClass().getResourceAsStream("assets/batbot-02.png"));
-    @FXML
-    Image image3 = new Image(getClass().getResourceAsStream("assets/batbot-03.png"));
-    @FXML
-    Image image4 = new Image(getClass().getResourceAsStream("assets/batbot-04.png"));
+    private TextField searchBar;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //getUsers();
+
         getAllUsers();
     }
     private void  getAllUsers(){
@@ -47,11 +50,11 @@ public class AllUsersController implements Initializable {
         // Add labels for users from the HelloApplication.users list
         for (User user : User.allusers){
             i++;
-            addUserDetails(i, user.getUser_Name(), user.getFirst_Name(), user.getLast_Name(), user.getEmail(),user.getPassword());
+            addUserDetails(i, user);
         }
     }
 
-    private void addUserDetails(int i,String username, String fname, String lname,String email, String password) {
+    private void addUserDetails(int i,User user) {
         Button view = new Button("View");
         view.setAlignment(javafx.geometry.Pos.CENTER);
         view.setStyle("-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;");
@@ -59,57 +62,60 @@ public class AllUsersController implements Initializable {
         Font font = new Font("System Bold", 15.0);
         view.setFont(font);
 
-        Label nameLabel = new Label(username);
+        Label nameLabel = new Label(user.getUser_Name());
         nameLabel.setTextFill(Color.WHITE);
         nameLabel.setFont(Font.font("System Bold", 30.0));
-
-        ImageView batbot1 = new ImageView(image1);
-        batbot1.setFitHeight(120);
-        batbot1.setFitWidth(118);
-        ImageView batbot2 = new ImageView(image2);
-        batbot2.setFitHeight(120);
-        batbot2.setFitWidth(118);
-        ImageView batbot3 = new ImageView(image3);
-        batbot3.setFitHeight(120);
-        batbot3.setFitWidth(118);
-        ImageView batbot4 = new ImageView(image4);
-        batbot4.setFitHeight(120);
-        batbot4.setFitWidth(118);
+        Image image = new Image(getClass().getResourceAsStream(user.getProfilePath()));
+        ImageView batbot = new ImageView(image);
+        batbot.setFitHeight(120);
+        batbot.setFitWidth(118);
 
 
         VBox userDetailsBox = new VBox();
-        userDetailsBox.setSpacing(5);
 
+        userDetailsBox.getChildren().addAll(batbot,nameLabel,  view) ;
+        userDetailsBox.setSpacing(5);
+        userDetailsBox.setAlignment(Pos.CENTER);
         if (i % 4 == 1) {
-            userDetailsBox.getChildren().addAll(batbot1,nameLabel,  view) ;
-            userDetailsBox.setAlignment(Pos.CENTER);
             userbox1.getChildren().add(userDetailsBox);
             userbox1.setSpacing(50);
             VBox.setMargin(userbox1, new Insets(0, 0, 30, 0));
         }
         else if (i % 4 == 2) {
-            userDetailsBox.getChildren().addAll(batbot2, nameLabel, view);
-            userDetailsBox.setAlignment(Pos.CENTER);
             userbox2.getChildren().add(userDetailsBox);
             userbox2.setSpacing(50);
             VBox.setMargin(userbox2, new Insets(0, 0, 30, 0));
         }
         if (i % 4 == 3) {
-            userDetailsBox.getChildren().addAll( batbot3,nameLabel, view);
-            userDetailsBox.setAlignment(Pos.CENTER);
             userbox3.getChildren().add(userDetailsBox);
             userbox3.setSpacing(50);
             VBox.setMargin(userbox3, new Insets(0, 0, 30, 0));
         }
         if (i % 4 == 0) {
-            userDetailsBox.getChildren().addAll( batbot4,nameLabel, view);
-            userDetailsBox.setAlignment(Pos.CENTER);
             userbox4.getChildren().add(userDetailsBox);
             userbox4.setSpacing(50);
             VBox.setMargin(userbox4, new Insets(0, 0, 30, 0));
         }
-
+        view.setOnMouseClicked(event -> {
+            try {
+                GoToMainProfile(event, user);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
+    public void GoToMainProfile(MouseEvent event, User user) throws IOException {
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("profile-page.fxml"));
+        root = loader.load();
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        profilePageController controller=loader.getController();
+        controller.setStage(stage);
+        controller.setdatatoAdmin(user);
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
     @FXML
     void Search() {
         System.out.println("in");
@@ -120,12 +126,15 @@ public class AllUsersController implements Initializable {
         userbox4.getChildren().clear();
         for (User user : User.allusers) {
             if (username.equalsIgnoreCase(user.getUser_Name())) {
-                addUserDetails(1, user.getUser_Name(), user.getFirst_Name(), user.getLast_Name(), user.getEmail(),user.getPassword());
+                addUserDetails(1, user);
             }
         }
         if (username.isEmpty()){
             getAllUsers();
         }
     }
-}
 
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+}

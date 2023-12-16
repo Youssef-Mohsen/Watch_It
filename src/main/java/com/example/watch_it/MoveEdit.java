@@ -32,7 +32,7 @@ public class MoveEdit {
     @FXML
     private ImageView ImageEdit;
 
-
+    private Stage stage;
 
     public void setUpPromptText(String titlePrompt,String filmNamePrompt,String filmPrompt,
                                 String durationPrompt,String genrePrompt,String descriptionPrompt,Image image){
@@ -55,6 +55,9 @@ public class MoveEdit {
     }
     public void update(){
 
+    }
+    public void setStage(Stage stage){
+        this.stage = stage;
     }
 
 

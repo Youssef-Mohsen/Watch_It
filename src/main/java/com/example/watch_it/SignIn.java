@@ -83,6 +83,7 @@ public class SignIn
         if (User.Userexist(username)) {
             User user = User.GetUser(username);
 
+            assert user != null;
             if (password.equals(user.getPassword())) {
                 GoToMainPage(act, user);
             }
@@ -134,7 +135,6 @@ public class SignIn
         stage.show();
     }
     public void GoToMainPage(ActionEvent event, User user) throws IOException {
-       // Admin.getUserMovieLists(user);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("main-page.fxml"));
         Parent root = loader.load();
         MainPageController controller = loader.getController();
