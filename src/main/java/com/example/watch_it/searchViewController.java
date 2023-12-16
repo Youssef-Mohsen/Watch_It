@@ -36,7 +36,7 @@ public class searchViewController {
     private Label data_Label;
     private Stage stage;
     private Parent root;
-    public static final ArrayList<Movie> searchMovies=new ArrayList<Movie>();
+    public static ArrayList<Movie> searchMovies=new ArrayList<Movie>();
     @FXML
     public void initialize(){
         for (Movie movie:searchMovies) {

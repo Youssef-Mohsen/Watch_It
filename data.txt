@@ -1,16 +1,24 @@
 user,nada,123456,1,nada,ayman,basic,nadaAyman@gmail.com,2023-12-06,assets/batbot-01.png,to be watched,Oppenheimer,watched,Avengers: Endgame,null,Joker,3
-user,youssef,456789,2,youssef,mohsen,premium,youssefMohsen@gmail.com,2023-10-09,assets/batbot-02.png,to be watched,Insidious: The Red Door,watched,Oppenheimer,null,The Dark Knight,3
-user,Mai,123456,3,Mai,Ezz,basic,MaiEzz@gmail.com,2023-12-06,assets/batbot-01.png,to be watched,Oppenheimer,watched,Avengers: Endgame,null,Joker,3
-user,Basmala,456789,4,Basmala,Tarek,premium,Basmala-Tarek@gmail.com,2023-10-09,assets/batbot-02.png,to be watched,Insidious: The Red Door,watched,Oppenheimer,null,The Dark Knight,3
-user,Tasneem,123456,5,Tasneem,Mohamed,basic,TasneemMohamed@gmail.com,2023-12-06,assets/batbot-01.png,to be watched,Oppenheimer,watched,Avengers: Endgame,null,Joker,3
-user,toka,456789,6,toka,karam,premium,tokaKaram@gmail.com,2023-10-09,assets/batbot-02.png,to be watched,nsidious: The Red Door,watched,Oppenheimer,null,The Dark Knight,3
-user,youssef,456789,7,youssef,ahmad,premium,youssefAhmad@gmail.com,2023-10-09,assets/batbot-02.png,to be watched,Insidious: The Red Door,watched,Oppenheimer,null,The Dark Knight,3
+user,youssef,456789,3,youssef,mohsen,premium,youssefMohsen@gmail.com,2023-10-09,assets/batbot-02.png,to be watched,Insidious: The Red Door,watched,Oppenheimer,null,The Dark Knight,3
+user,mai,456789,2,mai,ezz,standard,salama@gmail.com,2023-11-15,to be watched,titanic,watched,red 3,null, red 2,3.2
+user,basmala,456789,4,basmala,tarek,basic,ismail@gmail.com,2023-09-3,to be watched,titanic,watched,red 3,null, red 2,3.2
+user,tasneem,456789,545,tasneem,mohamed,premium,hossam@gmail.com,2023-10-09,to be watched,titanic,watched,red 3,null, red 2,3.2
+user,youssef_,456789,4,youssef,ahmad,basic,ismail@gmail.com,2023-09-3,to be watched,titanic,watched,red 3,null, red 2,3.2
+user,toka,456789,4,toka,karam,standard,ismail@gmail.com,2023-09-3,to be watched,titanic,watched,red 3,null,red 2,3.2
+1,The Dark Knight,When the menace known as the Joker wreaks havoc and chaos on the people of Gotham. Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.,2008-07-23,2h:32m,Christopher Nolan,English,9,United States,565.000.000 M,2.437.724.184 B,movies/the dark knight.jpeg,cast,Christian Bale,Morgan Freeman,Cillian Murphy,genres,action,crime,drama,thriller
+2,Oppenheimer,The story of American scientist. J. Robert Oppenheimer. and his role in the development of the atomic bomb.,2023-11-21,3h,Christopher Nolan,English,8,United States,100.000.000M,2.437.724 M,movies/Oppenheimer.jpeg,cast,Robert DowneyJr,Matt Damon,Cillian Murphy,genres,drama,history,biography
+3,Sherlock Holmes,Detective Sherlock Holmes and his stalwart partner Watson engage in a battle of wits and brawn with a nemesis whose plot is a threat to all of England.,2009-12-30,2h:8m,Guy Ritchie,English,8,England,90.000.000 M,112.190.000 M,movies/Sherlock_Holmes.jpeg,cast,Robert DowneyJr,Mark Strong,Jude Law,genres,action,adventure,mystery
+4,Avengers: Endgame,After the devastating events of Avengers: Infinity War (2018). the universe is in ruins. With the help of remaining allies. the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe.,2019-04-26,3h:1m,Anthony Russo,English,8,United States,90.000.000 M,112.190.000 M,movies/endgame.jpeg,cast,Robert DowneyJr,Benedict Cumberbatch,Chris Hemsworth,genres,action,adventure,drama
+6,Home Alone,An eight-year-old troublemaker. mistakenly left home alone. must defend his home against a pair of burglars on Christmas eve.,1991-07-22,1h:43m,Chris Columbus,English,7,United Stated,90.000.000 M,112.190.000 M,movies/home alone.jpeg,cast,Macaulay Culkin,Daniel Stern,Joe Pesci,genres,comedy,family
+5,Joker,During the 1980s a failed stand-up comedian is driven insane and turns to a life of crime and chaos in Gotham City while becoming an infamous psychopathic crime figure.,2019-10-04,2h:2m,Todd Phillips,English,8,United States,100.000.000M,2.437.724 M,movies/joker.jpeg,cast,Joaquin Phoenix,Robert DeNiro,genres,crime,drama,thriller
+7,Insidious: The Red Door,The Lamberts must go deeper into The Further than ever before to put their demons to rest once and for all.,2023-07-07,1h:47m,Patrick Wilson,English,5,Unitied States,100.000.000M,2.437.724 M,movies/red_door.jpeg,cast,Patrick Wilson,Rose Byrne,genres,horror,mystery,thriller
+8,Inception,A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O. but his tragic past may doom the project and his team to disaster.,2010-07-14,2h:28m,Christopher Nolan,English,9,America,100.000.000M,2.437.724 M,movies/Inception.jpeg,cast,Cillian Murphy,Leonardo DiCaprio,genres,action,adventure,Sci-Fi
+9,Titanic,A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious ill-fated R.M.S. Titanic.,1997-12-19,3h:14m,James Cameron,English,8,America,95.000.000M,2.437.724 M,movies/titanic.jpeg,cast,Leonardo DiCaprio,Kate Winslet,genres,romance,drama
 cast,Patrick,Wilson,50,male,American,Columbus,Insidious: The Red Door
 cast,Rose,Byrne,44,female,Australian,Insidious: The Red Door
 cast,Joaquin,Phoenix,49,male,American,Joker
 cast,Robert,DeNiro,80,male,American,Joker
 cast,Joe,Pesci,80,male,American,Home Alone
-cast,Kate,Winslet,48,female,Titanic
 cast,Macaulay,Culkin,43,male,American,Home Alone
 cast,Daniel,Stern,66,male,American,Home Alone
 cast,Robert,DowneyJr,58,male,American,Avengers: Endgame,Sherlock Holmes,Oppenheimer
@@ -28,7 +36,5 @@ director,Anthony,Russo,53,male,American,Avengers: Endgame
 director,Chris,Columbus,65,male,Italian,Home Alone
 director,Todd,Phillips,52,male,American,Joker
 director,Patrick,Wilson,50,male,American,Insidious: The Red Door
-director,James,Cameron,69,male,Canadian,Titanic
-2cast,Leonardo,DiCaprio,49,male,Inception,Titanic
 admin,nada,123456
 admin,mai,123456

@@ -21,12 +21,12 @@
             <font>
                 <Font name="System Bold Italic" size="12.0" />
             </font></Text>
-        <Label layoutX="33.0" layoutY="142.0" prefHeight="34.0" prefWidth="148.0" style="-fx-background-color: #ffc107; -fx-background-radius: 50; -fx-border-radius: 50;" styleClass="text-box" stylesheets="@style.css" text="watched movies" textAlignment="CENTER" textFill="WHITE">
+        <Label layoutX="33.0" layoutY="142.0" prefHeight="34.0" prefWidth="148.0" style="-fx-background-color: #ffc107; -fx-background-radius: 50; -fx-border-radius: 50;" text="  watched movies" textAlignment="CENTER" textFill="WHITE">
             <font>
                 <Font name="System Bold Italic" size="16.0" />
             </font>
         </Label>
-        <Label layoutX="33.0" layoutY="509.0" prefHeight="34.0" prefWidth="148.0" style="-fx-background-color: #ffc107; -fx-background-radius: 50; -fx-border-radius: 50;" styleClass="text-box" stylesheets="@style.css" text="to watch list" textAlignment="CENTER" textFill="WHITE">
+        <Label alignment="CENTER" layoutX="33.0" layoutY="509.0" prefHeight="34.0" prefWidth="148.0" style="-fx-background-color: #ffc107; -fx-background-radius: 50; -fx-border-radius: 50;" text="to watch list" textAlignment="CENTER" textFill="WHITE">
             <font>
                 <Font name="System Bold Italic" size="16.0" />
             </font>

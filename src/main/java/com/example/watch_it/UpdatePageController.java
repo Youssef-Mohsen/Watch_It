@@ -115,4 +115,7 @@ public class UpdatePageController {
             Confirmpassword.setVisible(true);
         }
     }
+    public void setStage(Stage stage){
+        this.stage=stage;
+    }
 }

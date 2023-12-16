@@ -83,11 +83,11 @@ public class profilePageController implements Initializable {
                 stage.show();
             }
             //Delete_Recorded_Movies
-            else {
+            else if (choice.equals("Delete Watched Movies")) {
                 alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.isPresent() && result.get() == buttonTypeYes) {
-                    user.setWatchedMovies(null);
+                   WatchRecord.watchedMovies=new ArrayList<>();
                 }
             }
         }
@@ -137,7 +137,9 @@ public class profilePageController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         Select_List.getItems().addAll("Edit Profile" , "Log Out" , "Delete Account" , "Delete Watched Movies");
-
+        Select_List.setValue("Select");
+        onMouseEntered();
+        onMouseExit();
     }
     @FXML
     private void onMouseEntered(){

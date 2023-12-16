@@ -1,6 +1,5 @@
 package com.example.watch_it;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
@@ -9,25 +8,55 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 
 public class AddMovieController {
 
     @FXML
     public static ScrollPane secondPane;
+
     @FXML
-    private TextField castNumber;
+    private TextField BudgetField;
+
+    @FXML
+    private TextField CountryField;
+
+    @FXML
+    private TextField IMDBScoreField;
+
+    @FXML
+    private TextField LanguageField;
+
+    @FXML
+    private TextField RunningTimeField;
+
+    @FXML
+    private TextField castField;
+
+    @FXML
+    private TextField directorField;
+
+    @FXML
+    private TextField DescriptionField;
+
+    @FXML
+    private TextField genreField;
+
+    @FXML
+    private TextField nameField;
+
+    @FXML
+    private TextField posterField;
+
+    @FXML
+    private TextField releaseDateField;
+
+    @FXML
+    private TextField revenueField;
     @FXML
     private Button addButton;
-    @FXML
-    private VBox castNames;
-    private Stage stage;
     @FXML
     public void onMouseEntered(){
         addButton.setOnMouseEntered(event -> addButton.setStyle("-fx-background-color: #FFC107; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
@@ -37,32 +66,32 @@ public class AddMovieController {
         addButton.setOnMouseExited(event -> addButton.setStyle("-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
     }
     @FXML
-    private void enterCastNumber(){
-        try{
-            int numberOfCast = Integer.parseInt(castNumber.getText());
-            castNames.setVisible(true);
-            addCastName(numberOfCast);
-        }catch (NumberFormatException e){
-            e.printStackTrace();
+    private void addMovie(ActionEvent event) throws IOException {
+        String budget = BudgetField.getText();
+        String name = nameField.getText();
+        String revenue = revenueField.getText();
+        String releaseDate = releaseDateField.getText();
+        String posterPath = posterField.getText();
+        String director = directorField.getText();
+        String description = DescriptionField.getText();
+        String runningTime = RunningTimeField.getText();
+        String imdbScore = IMDBScoreField.getText();
+        String language = LanguageField.getText();
+        String country = CountryField.getText();
+        String cast = castField.getText();
+        String genre = genreField.getText();
 
+        //checking if the name of the movie already exists
+        //
+
+
+        if (budget.isEmpty() || name.isEmpty() || revenue.isEmpty() || releaseDate.isEmpty() || posterPath.isEmpty() || director.isEmpty() || description.isEmpty() || runningTime.isEmpty() || imdbScore.isEmpty() || language.isEmpty() || country.isEmpty() || cast.isEmpty() || genre.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR,"Enter All Data", ButtonType.OK );
+            alert.setTitle("");
+
+            alert.initOwner((addButton.getScene().getWindow()));
+            alert.showAndWait();
         }
-    }
-    private void addCastName(int i){
-        castNames.getChildren().removeAll();
-        for(int no = 0; no < i; no++){
 
-            HBox hBox = new HBox();
-            TextField textField = new TextField();
-            TextField textField1 = new TextField();
-            textField.setPromptText("name of cast " + (no+1));
-            textField.setAlignment(Pos.CENTER);
-            textField.setStyle("-fx-background-radius: 50;");
-
-            hBox.getChildren().addAll(textField,textField1);
-            castNames.getChildren().addAll(hBox);
-        }
-    }
-    public void setStage(Stage stage){
-        this.stage = stage;
     }
 }

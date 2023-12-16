@@ -24,11 +24,11 @@ public class Subscription {
 
         // Set the price based on the selected plan.
         if (plan == Plans.BASIC) {
-            this.price = 100;
+            this.price = 10;
         } else if (plan == Plans.STANDARD) {
-            this.price = 200;
+            this.price = 15;
         } else if (plan == Plans.PREMIUM) {
-            this.price = 300;
+            this.price = 20;
         }
 
         // Set the start date to the current date and initialize moviesWatched to 0.

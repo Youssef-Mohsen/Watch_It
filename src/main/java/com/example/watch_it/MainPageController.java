@@ -505,7 +505,7 @@ public  class MainPageController {
                 " -fx-background-color:  #565661;"));
     }
     private void setupAutoScroll() {
-        double scrollDuration = 14; // Adjust the duration of the auto-scrolling
+        double scrollDuration = 60; // Adjust the duration of the auto-scrolling
 
         // Create a timeline for the auto-scrolling animation
         autoScrollTimeline = new Timeline(
@@ -657,90 +657,6 @@ public  class MainPageController {
         stage.setScene(scene);
         stage.show();
     }
-    private void onSearch(){
-        Search.setOnMouseClicked(event -> {
-            int found=0;
-            String cast = "";
-            String director="";
-            for(Movie movie1:Movie.allmovies){
-                if(menuValue!=null) {
-                    if (movie1.getTitle().equals(searchItem.getText()) && menuValue.equals("Movie")) {
-                        movie = movie1;
-                        found = 1;
-                    }
-                    else if(movie1.getDirectorName().equals(searchItem.getText()) && menuValue.equals("Director")){
-                        director=movie1.getDirectorName();
-                        searchViewController.searchMovies.add(movie1);
-                        found=2;
-                    }
-                    else{
-                        for (String cast1 : movie1.getCastNames()) {
-                            if(searchItem.getText().equals(cast1) && menuValue.equals("Cast")){
-                                cast=cast1;
-                                found=3;
-                                searchViewController.searchMovies.add(movie1);
-                            }
-                        }
-                    }
-                }
-            }
-            int finalFound=found;
-            if(finalFound==1) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("movie-view.fxml"));
-                try {
-                    root = loader.load();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                MovieController controller = loader.getController();
-                controller.setStage(stage);
-                controller.watchMovie(movie);
-                controller.page5 = 0;
-                scene = new Scene(root);
-                Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));
-                controller.refreshScreen("Watch Movie "+ movie.getTitle() + "("+movie.getRelease_date().getYear()+")", movie.getTitle(),
-                        movie.getTitle()+" Translated",movie.getGenres(), movie.getDescription(),
-                        movie.getRunning_time(), image,movie.getDirectorName(),movie.getCastNames());
-                stage.setScene(scene);
-                stage.show();
-            }
-            else if(finalFound==2){
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("search-view.fxml"));
-                try {
-                    root = loader.load();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                searchViewController controller = loader.getController();
-                controller.setStage(stage);
-                controller.Search(director,menuValue);
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            }
-            else if(finalFound==3){
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("search-view.fxml"));
-                try {
-                    root = loader.load();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                searchViewController controller = loader.getController();
-                controller.setStage(stage);
-                controller.Search(cast,menuValue);
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            }
-            else {
-                searchItem.clear();
-            }
-        });
-
-    }
     @FXML
     private void getSearchText(ActionEvent event) throws IOException {
     }
@@ -753,6 +669,7 @@ public  class MainPageController {
             int found=0;
             String cast = "";
             String director="";
+            searchViewController.searchMovies=new ArrayList<>();
             for(Movie movie1:Movie.allmovies){
                 if(menuValue!=null) {
                     if (movie1.getTitle().equalsIgnoreCase(searchItem.getText()) && menuValue.equals("Movie")) {

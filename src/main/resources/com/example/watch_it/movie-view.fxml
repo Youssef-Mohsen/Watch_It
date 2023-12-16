@@ -13,12 +13,12 @@
             <Rectangle2D width="1000.0" />
         </viewport>
     </ImageView>
-    <Label fx:id="titleMovie" layoutX="438.0" layoutY="121.0" prefHeight="42.0" prefWidth="675.0" textFill="WHITE">
+    <Label fx:id="titleMovie" layoutX="438.0" layoutY="121.0" prefHeight="42.0" prefWidth="764.0" textFill="WHITE">
         <font>
             <Font name="Arial Black" size="28.0" />
         </font>
     </Label>
-    <Separator layoutX="436.0" layoutY="172.0" opacity="0.35" prefHeight="3.0" prefWidth="658.0" />
+    <Separator layoutX="436.0" layoutY="175.0" opacity="0.35" prefHeight="0.0" prefWidth="734.0" />
     <Label layoutX="438.0" layoutY="236.0" text="Name: " textFill="GREY">
         <font>
             <Font size="20.0" />

@@ -36,6 +36,7 @@ public class User
     private ArrayList<String> toWatchMovies = new ArrayList<>();
     // This List Access By UserWatchRecord
     static ArrayList<UserWatchRecord> Watched_Movies = new ArrayList<>();
+
     private ArrayList<String> watchedMovies = new ArrayList<>();
     public static ArrayList<User> allusers = new ArrayList<User>();
 

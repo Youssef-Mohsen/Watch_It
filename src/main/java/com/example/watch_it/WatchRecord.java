@@ -27,7 +27,7 @@ public class WatchRecord {
     private Stage stage;
     UserWatchRecord userWatchRecord;
     public boolean aBoolean;
-    public static final ArrayList<Movie> watchedMovies = new ArrayList<>();
+    public static ArrayList<Movie> watchedMovies = new ArrayList<>();
     @FXML
     private ScrollPane Scroll;
     @FXML
