@@ -58,4 +58,6 @@ public abstract class Artist {
     public void setMovies(ArrayList<String> movies) {
         Movies = movies;
     }
+    @Override
+    public abstract String toString();
 }

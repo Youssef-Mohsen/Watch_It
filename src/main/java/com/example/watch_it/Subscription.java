@@ -1,10 +1,10 @@
 package com.example.watch_it;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 // This class represents a user subscription for a streaming service.
 public class Subscription {
-
     // Enum to define the available subscription plans.
     public enum Plans {
         BASIC, STANDARD, PREMIUM
@@ -16,6 +16,7 @@ public class Subscription {
     private double price;
     private LocalDate startDate;
     private int moviesWatched;
+    public boolean subscriptionNotValid = false;
 
     // Constructor to initialize a new subscription with a user ID and plan.
     public Subscription(int user_id, Plans plan) {
@@ -34,6 +35,7 @@ public class Subscription {
         // Set the start date to the current date and initialize moviesWatched to 0.
         this.startDate = LocalDate.now();
         this.moviesWatched = 0;
+
     }
 
     // Setter methods for updating subscription information.
@@ -90,6 +92,7 @@ public class Subscription {
                 System.out.println("Movie added. Total movies watched: " + moviesWatched);
             } else {
                 System.out.println("You reached the limit of the movies. Please renew to watch more movies.");
+                subscriptionNotValid = true;
             }
         } else {
             System.out.println("Subscription expired. Please renew to watch more movies.");
@@ -117,11 +120,13 @@ public class Subscription {
     }
 
     // Private helper method to check if the subscription is still active.
-    private boolean isSubscriptionActive() {
+    public boolean isSubscriptionActive() {
         LocalDate currentDate = LocalDate.now();
         LocalDate endDate = startDate.plusDays(30);
 
         // The subscription is active if the current date is before the end date.
         return currentDate.isBefore(endDate);
     }
+
+
 }

@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class Admin {
     private String username;
-    private int password;
+    private String password;
 
     public String getUsername() {
         return username;
@@ -20,11 +20,11 @@ public class Admin {
         this.username = username;
     }
 
-    public int getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(int password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -48,7 +48,12 @@ public class Admin {
     public static ArrayList<String> directors = new ArrayList<String>();
     public static ArrayList<String> casts = new ArrayList<String>();
     public static ArrayList<String> admins = new ArrayList<String>();
+    public static ArrayList<Admin> allAdmins = new ArrayList<Admin>();
     public static ArrayList<String> users = new ArrayList<String>();
+    public Admin(String username, String password ){
+        this.password = password;
+        this.username = username;
+    }
     public static void readFile(File file) {
         ArrayList<String> arrayList = new ArrayList<String>();
         try {
@@ -86,25 +91,20 @@ public class Admin {
     public static void writeOnFile(File file){
         try {
             BufferedWriter b = new BufferedWriter(new FileWriter(file));
-            for(String index:users){
-                b.write(index);
-                b.newLine();
-            }
-            //userwatchrecord wel to watch list tt handle fe l to string func 3nd el user
-            /*for (User user : User.allusers){
+            for (User user : User.allusers){
                 b.write(user.toString());
                 b.newLine();
-            }*/
-            for(String index:casts){
-                b.write(index);
+            }
+            for (Cast cast: Cast.allCast){
+                b.write(cast.toString());
                 b.newLine();
             }
-            for(String index:directors){
-                b.write(index);
+            for (Director director: Director.allDirectors){
+                b.write(director.toString());
                 b.newLine();
             }
-            for(String index:admins){
-                b.write(index);
+            for (Admin admin: allAdmins){
+                b.write(admin.toString());
                 b.newLine();
             }
             b.close();
@@ -113,9 +113,6 @@ public class Admin {
             throw new RuntimeException(e);
         }
     }
-    //if the record exists in database >> gonna return the whole record[don't forget to split it]
-    //otherwise gonna return null [make sure to check before dealing with return val].
-
     //returned string isn't splitted
     public static String existsInFile(String username){
         boolean exist = false;
@@ -241,95 +238,56 @@ public class Admin {
     }
     //******************************************************************
     static void getUserMovieLists(User user){
-        ArrayList<String> watched_movies = new ArrayList<String>();
-        ArrayList<String> toBeWatched_movies = new ArrayList<String>();
+
         boolean toBeWatched = false;
         boolean watched = false;
-        int watchedCounter = -1;
+        int watchedCounter = 0;
         int toBeWatchedCounter = 0;
         String allData = existsInFile(user.getUser_Name());
         String[] eachLine = allData.split(",");
         for (String data:eachLine) {
-            if(data.equals("watched"))
+            if(data.equals("done"))
+                break;
+            if(data.equals("watched")) {
                 watched = true;
+                toBeWatched = false;
+            }
             if(data.equals("to be watched")) {
-                watched = false;
                 toBeWatched = true;
+                watched = false;
             }
             if(watched) {
-                if(watchedCounter != -1)
-                    watched_movies.add(data);
+                if(watchedCounter != 0) {
+                    user.watchedMovies.add(data);
+                }
                 watchedCounter++;
             }
-            if(toBeWatchedCounter == 1 && !watched)
-                toBeWatched_movies.add(data);
-            if (toBeWatched)
-                toBeWatchedCounter = 1;
-            System.out.println("watched" + watched_movies);
-            System.out.println("to be watched" + toBeWatched_movies);
-            user.watchedMovies.addAll(watched_movies);
-            user.toWatchMovies.addAll(toBeWatched_movies);
-
-        }
-    }
-
-    static void getUserMovieLists(String user, ArrayList<String> watched_movies, ArrayList<String> toBeWatched_movies){
-        boolean toBeWatched = false;
-        boolean watched = false;
-        int watchedCounter = -1;
-        int toBeWatchedCounter = 0;
-        String[] eachLine = user.split(",");
-        for (String data:eachLine) {
-            if(data.equals("watched"))
-                watched = true;
-            if(data.equals("to be watched")) {
-                watched = false;
-                toBeWatched = true;
+            if(toBeWatched && toBeWatchedCounter == 1) {
+                user.toWatchMovies.add(data);
             }
-            if(watched) {
-                watchedCounter++;
-                if(watchedCounter != 0 && watchedCounter%2!=0)
-                    watched_movies.add(data);
-            }
-            if(toBeWatched && toBeWatchedCounter == 1)
-                toBeWatched_movies.add(data);
             if (toBeWatched && toBeWatchedCounter == 0)
                 toBeWatchedCounter = 1;
         }
     }
-
-
-
     //as objects-------------------
     static void getUserMovieLists_obj(User user){
-
-/*
-        String userData = existsInFile(user.getUser_Name());
-        ArrayList<String> watched = new ArrayList<String>();
-        ArrayList<String> toWatch = new ArrayList<String>();
-*/
-
         getUserMovieLists(user);
-        ArrayList<Movie> toWatchList = new ArrayList<Movie>();
         for(String movie: user.toWatchMovies){
-            toWatchList.add(getOneMovie(movie));
+            user.Movies_For_Later.add(getOneMovie(movie));
         }
-        ArrayList<UserWatchRecord> watched_movies = new ArrayList<UserWatchRecord>();
-        Movie movie = new Movie();
-        int rate = -1;
         for(int i=0; i<user.watchedMovies.size(); i++){
             if(i%2 == 0){
-                movie  = getOneMovie(user.watchedMovies.get(i));
-                rate = Integer.parseInt(user.watchedMovies.get(i+1));
+                Movie movie;
+                movie = getOneMovie(user.watchedMovies.get(i));
+                Double rate = Double.parseDouble(user.watchedMovies.get(i+1));
                 UserWatchRecord u = new UserWatchRecord(movie,rate);
-                watched_movies.add(u);
-
+                user.Watched_Movies.add(u);
             }
         }
-        user.Movies_For_Later.addAll(toWatchList);
-        user.Watched_Movies.addAll(watched_movies);
     }
-    static UserWatchRecord getWatchedMovie(String title, int rate){
+
+
+    static UserWatchRecord getWatchedMovie(String title, Double rate){
         UserWatchRecord movie = new UserWatchRecord();
         for (String oneMovie: movies){
             String []arr = oneMovie.split(",");
@@ -397,6 +355,7 @@ public class Admin {
                 ArrayList<String> genres = new ArrayList<String>();
                 movie.setGenre(genres);
                 castAndGenres(oneMovie,cast,genres);
+                movie.setCastNames(cast);
                 ArrayList<Cast> cast_obj = new ArrayList<Cast>();
                 for(String casts: cast){
                     cast_obj.add(getCast(casts));
@@ -498,10 +457,51 @@ public class Admin {
         ArrayList<User> userArrayList = new ArrayList<User>();
         for(int i=0; i<users.size(); i++){
             String[] data =users.get(i).split(",");
-            User user = new User(User.allusers.size()+1,data[USERNAMEINDEX], data[LASTNAMEINDEX],data[FIRSTNAMEINDEX],data[EMAILINDEX],data[PASSWORDINDEX],data[PROFILEPICINDEX], data[PLANINDEX] , data[STARTDATEINDEX]);
+            Subscription.Plans plan = null;
+            double price = 0;
+            if(data[PLANINDEX].equals("basic")) {
+                plan = Subscription.Plans.BASIC;
+                price = 100;
+            }
+            if(data[PLANINDEX].equals("standard")) {
+                plan = Subscription.Plans.STANDARD;
+                price = 200;
+            }
+            if(data[PLANINDEX].equals("premium")) {
+                plan = Subscription.Plans.PREMIUM;
+                price = 300;
+            }
+            Subscription subscription = new Subscription(User.allusers.size()+1,plan);
+            System.out.println();
+            User user = new User(User.allusers.size()+1,data[USERNAMEINDEX], data[LASTNAMEINDEX],data[FIRSTNAMEINDEX],data[EMAILINDEX],data[PASSWORDINDEX],data[PROFILEPICINDEX], subscription, data[STARTDATEINDEX]);
+            getUserMovieLists_obj(user);
+            user.getSubscription().setPlan(plan);
+            user.setPlan(data[PLANINDEX]);
+            user.getSubscription().setPrice(price);
+            user.getSubscription().setStartDate(LocalDate.parse(data[STARTDATEINDEX]));
+            int moviesCounter = 0;
+            for (UserWatchRecord movie: user.Watched_Movies){
+                moviesCounter++;
+            }
+            user.getSubscription().setMoviesWatched(moviesCounter);
             userArrayList.add(user);
         }
         getUsersInEachPlan();
         return userArrayList;
+    }
+    static ArrayList<Admin> getAllAdmins(){
+        ArrayList<Admin> adminArrayList = new ArrayList<Admin>();
+        for(String oneAdmin : admins){
+            String []data = oneAdmin.split(",");
+            Admin admin = new Admin(data[USERNAMEINDEX], data[PASSWORDINDEX]);
+            adminArrayList.add(admin);
+        }
+        return adminArrayList;
+    }
+    @Override
+    public String toString(){
+        String data ="";
+        data = data.concat("admin").concat(",").concat(getUsername()).concat(",").concat(getPassword());
+        return data;
     }
 }

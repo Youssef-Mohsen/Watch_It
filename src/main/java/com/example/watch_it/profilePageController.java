@@ -3,6 +3,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -10,6 +11,10 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -24,121 +29,166 @@ public class profilePageController implements Initializable {
     private Label username;
     @FXML
     private Label email;
-
+    private String firstname;
+    private String lastname;
     @FXML
-    private Label firstname;
+    private Label fullname;
     @FXML
     private Label plan;
-
-    @FXML
-    private Label secondname;
     @FXML
     private Button Back;
     @FXML
     private ImageView profilePictue;
+    @FXML
+    private AnchorPane mainpane;
+    @FXML
+    private TextField newEmail;
+    @FXML
+    private TextField newFirstname;
+    @FXML
+    private TextField newLastname;
+    @FXML
+    private Button updateButton;
     private boolean isAdmin;
     private User user;
     String UserName ;
+    public static boolean updatePlan = false;
+    @FXML
+    private HBox watchedHbox;
+    @FXML
+    private HBox toWatchHbox;
     ButtonType buttonTypeYes = new ButtonType("Yes");
     ButtonType buttonTypeNo = new ButtonType("No");
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
     @FXML
     private ChoiceBox<String> Select_List;
-
-    //choose 3nd el onMouseClicked f akher checkbox fl fxml
     @FXML
-    public void choose(MouseEvent event) throws IOException {
-        String choice = Select_List.getSelectionModel().getSelectedItem();
-        if(choice!=null) {
-            if (choice.equals("Log Out")) {
-                alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
-                Optional<ButtonType> result = alert.showAndWait();
-                if (result.isPresent() && result.get() == buttonTypeYes) {
-                    //To Switch to the page first(from the task of Tasneem).
-                    root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("first-page.fxml")));
-                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    scene = new Scene(root);
-                    stage.setScene(scene);
-                    stage.show();
-                }
-            } else if (choice.equals("Delete Account")) {
-                System.out.println("in");
-                User.Delete_User(UserName);
-                //until we manage writing as obj
-                //not working-----------
-                for (String users : Admin.users) {
-                    String[] data = users.split(",");
-                    if (data[Admin.USERNAMEINDEX].equals(UserName)) {
-                        Admin.users.remove(users);
-                    }
-                }
-
-            }
-            //tmam
-            else if (choice.equals("Edit Profile")) {
-                root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("update-page.fxml")));
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            }
-            //Delete_Recorded_Movies
-            else {
-                alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
-                Optional<ButtonType> result = alert.showAndWait();
-                if (result.isPresent() && result.get() == buttonTypeYes) {
-                    user.watchedMovies.clear();
-                    user.Watched_Movies.clear();
-                }
-            }
-        }
-    }
-
-    // action from main page and username which entered in sign in page (user)
-    public void Set_Data_User(ActionEvent act , String username )
-    {
-        for(User user: User.allusers)
-        {
-            if(user.getUser_Name().equals(username))
-            {
-                firstname.setText(user.getFirst_Name());
-                secondname.setText(user.getLast_Name());
-                // id.setText(user.getUser_ID());   id???
-                plan.setText(user.getPlan());
-                email.setText(user.getEmail());
-            }
-        }
-    }
-    public void Delete_User(String user_name)
-    {
-        int index = 0 ;
-        for(User user : User.allusers) {
-            if (user.getUser_Name().equals(user_name)) {
-                index = User.allusers.indexOf(user);
-                User.allusers.remove(user);
-            }
-        }
-        for(int i = index ; i <= User.allusers.size() ; i++)
-        {
-            User.allusers.get(i).setUser_ID(i++);
-        }
-    }
-
-    @FXML
-    public void move(ActionEvent act)throws IOException
-    {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("recorded-movies.fxml")));
-        stage = (Stage)((Node)act.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
+    private BorderPane mainPane;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        Select_List.getItems().addAll("Edit Profile" , "Log Out" , "Delete Account" , "Delete Watched Movies");
+        Select_List.getItems().addAll("Edit Profile" , "Log Out" , "Delete Account", "Delete Movies List");
 
+        for (UserWatchRecord movie : SignIn.user5.Watched_Movies) {
+            addWatchedList(movie);
+        }
+        for (Movie movie : SignIn.user5.Movies_For_Later) {
+            addToWatchedList(movie);
+        }
+        onMouseExit();
+        onMouseEntered();
+        if (updatePlan) {
+            try {
+                toPlans();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+    @FXML
+    public void choose(MouseEvent event) throws IOException {
+
+        Select_List.setOnMouseClicked(mouseEvent -> {
+            try {
+                Select(event);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+    public void Select (MouseEvent event) throws IOException {
+        String choice = Select_List.getSelectionModel().getSelectedItem();
+        if(choice.equals("Log Out"))
+        {
+            alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == buttonTypeYes)
+            {
+                FXMLLoader loader=new FXMLLoader(getClass().getResource("first-page.fxml"));
+                root = loader.load();
+                stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                First controller=loader.getController();
+                controller.setStage(stage);
+                Scene scene = new Scene(root);
+                stage.setResizable(false);
+                stage.setX(-7);
+                stage.setY(0);
+                stage.setScene(scene);
+                stage.show();
+
+            }
+        }
+        else if(choice.equals("Delete Account"))
+        {
+            alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+            Optional<ButtonType> result = alert.showAndWait();
+            if ((result.isPresent() && result.get() == buttonTypeYes)) {
+                User.allusers.remove(SignIn.user5);
+                FXMLLoader loader=new FXMLLoader(getClass().getResource("first-page.fxml"));
+                root = loader.load();
+                stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                First controller=loader.getController();
+                controller.setStage(stage);
+                Scene scene = new Scene(root);
+                stage.setResizable(false);
+                stage.setX(-7);
+                stage.setY(0);
+                stage.setScene(scene);
+                stage.show();
+            }
+        }
+        else if(choice.equals("Edit Profile"))
+        {
+            newEmail.setVisible(true);
+            newEmail.setPromptText(this.email.getText());
+            newFirstname.setVisible(true);
+            newFirstname.setPromptText(this.firstname);
+            newLastname.setVisible(true);
+            newLastname.setPromptText(this.lastname);
+            updateButton.setVisible(true);
+            String email = newEmail.getText();
+            String fname = newFirstname.getText();
+            String lname = newLastname.getText();
+            if (!email.isEmpty()) {
+                SignIn.user5.setEmail(email);
+                this.email.setText(email);
+            }
+            if (!(fname.isEmpty() || lname.isEmpty())) {
+                SignIn.user5.setFirst_Name(fname);
+                SignIn.user5.setLast_Name(lname);
+                fullname.setText(fname + " " + lname);
+            }
+            else {
+                if (fname.isEmpty() && !lname.isEmpty()) {
+                    SignIn.user5.setLast_Name(lname);
+                    fullname.setText(this.firstname + " " + lname);
+                }
+                else if (!fname.isEmpty() && lname.isEmpty()) {
+                    SignIn.user5.setFirst_Name(fname);
+                    fullname.setText(fname + " " + this.lastname);
+                }
+            }
+            updateButton.setOnAction(event1 -> {
+                Alert alert_ = new Alert(Alert.AlertType.CONFIRMATION);
+                alert_.setContentText("Profile Updated!");
+                alert_.showAndWait();
+                try {
+                    Select( event);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        }
+        //Delete_Recorded_Movies
+        else
+        {
+            alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == buttonTypeYes)
+            {
+                SignIn.user5.Movies_For_Later.clear();
+            }
+        }
     }
     @FXML
     private void onMouseEntered(){
@@ -162,6 +212,7 @@ public class profilePageController implements Initializable {
             root = loader.load();
             MainPageController controller = loader.getController();
             controller.setStage(stage);
+            controller.setUser(SignIn.user5);
         }
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
@@ -171,19 +222,83 @@ public class profilePageController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    @FXML
-    private void goToMovieList (ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("recorded-movies.fxml"));
-        root = loader.load();
-        RecordedMoviesController controller = loader.getController();
+    private void addWatchedList(UserWatchRecord movie1){
+        VBox movieContainer = new VBox(10);
+        movieContainer.setPrefWidth(300);
+        movieContainer.setPrefHeight(200);
+        Image image = new Image(getClass().getResourceAsStream(movie1.getMovie().getPoster_path()));
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(237);
+        imageView.setFitWidth(220);
+        Label label = new Label(movie1.getMovie().getTitle());
+        label.setStyle("-fx-text-size: 20; -fx-text-fill: white;");
+        label.setOnMouseEntered(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: #FFC107;"));
+        label.setOnMouseExited(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
+        movieContainer.setAlignment(Pos.CENTER);
+        movieContainer.getChildren().addAll(imageView, label);
+        movieContainer.setOnMouseClicked(event -> {
+            try {
+                onMouseClickedVBox(event,movie1.getMovie());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        watchedHbox.getChildren().addAll(movieContainer);
+    }
+    private void addToWatchedList(Movie movie1){
+        VBox movieContainer = new VBox(10);
+        movieContainer.setPrefWidth(300);
+        movieContainer.setPrefHeight(200);
+        Image image = new Image(getClass().getResourceAsStream(movie1.getPoster_path()));
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(237);
+        imageView.setFitWidth(220);
+        Label label = new Label(movie1.getTitle());
+        label.setStyle("-fx-text-size: 20; -fx-text-fill: white;");
+        label.setOnMouseEntered(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: #FFC107;"));
+        label.setOnMouseExited(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
+        Label label1 =new Label("Rate: "+movie1.userRate);
+        label1.setStyle("-fx-text-size: 20; -fx-text-fill: white;");
+        label1.setOnMouseEntered(event -> label1.setStyle("-fx-text-size: 20; -fx-text-fill: #FFC107;"));
+        label1.setOnMouseExited(event -> label1.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
+        Image image1 = new Image(getClass().getResourceAsStream("assets/fullStar.png"));
+        ImageView imageView1 = new ImageView(image1);
+        imageView1.setFitHeight(18);
+        imageView1.setFitWidth(20);
+        HBox box =new HBox(label1,imageView1,label);
+        box.setAlignment(Pos.CENTER);
+        box.setSpacing(6);
+        movieContainer.setAlignment(Pos.CENTER);
+        movieContainer.getChildren().addAll(imageView,box);
+        movieContainer.setOnMouseClicked(event -> {
+            try {
+                onMouseClickedVBox(event,movie1);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        toWatchHbox.getChildren().addAll(movieContainer);
+    }
+    public void onMouseClickedVBox(MouseEvent act, Movie movie1) throws IOException {
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("movie-view.fxml"));
+        Parent root = loader.load();
+        stage = (Stage)((Node)act.getSource()).getScene().getWindow();
+        MovieController controller=loader.getController();
         controller.setStage(stage);
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        controller.watchMovie(movie1);
+        controller.page5=-1;
+        controller.disableButtons();
         Scene scene = new Scene(root);
-        stage.setResizable(false);
-        stage.setX(-7);
-        stage.setY(0);
         stage.setScene(scene);
         stage.show();
+
+        Image image = new Image(getClass().getResourceAsStream(movie1.getPoster_path()));
+        controller.refreshScreen("Watch Movie "+ movie1.getTitle() + "("+movie1.getRelease_date().getYear()+")", movie1.getTitle(),
+                movie1.getTitle()+" Translated",movie1.getGenres(), movie1.getDescription(),
+                movie1.getRunning_time(), image,movie1.getDirectorName(),movie1.getCastNames());
+        stage.setScene(scene);
+        stage.show();
+
     }
     public void setStage(Stage stage){
         this.stage = stage;
@@ -193,27 +308,50 @@ public class profilePageController implements Initializable {
         isAdmin = false;
         Image image = new Image(getClass().getResourceAsStream(SignIn.user5.getProfilePath()));
         profilePictue.setImage(image);
-        profilePictue.setFitHeight(200);
-        profilePictue.setFitWidth(200);
+        profilePictue.setFitHeight(100);
+        profilePictue.setFitWidth(100);
         username.setText(SignIn.user5.getUser_Name());
         email.setText(SignIn.user5.getEmail());
-        plan.setText(SignIn.user5.getPlan());
-        secondname.setText(SignIn.user5.getLast_Name());
-        firstname.setText(SignIn.user5.getFirst_Name());
+        plan.setText("Current Plan :" + " " +  SignIn.user5.getPlan().toUpperCase());
+        fullname.setText(SignIn.user5.getFirst_Name() + " " + SignIn.user5.getLast_Name());
+        firstname = SignIn.user5.getFirst_Name();
+        lastname = SignIn.user5.getLast_Name();
     }
     public void setdatatoAdmin(User user){
         isAdmin = true;
         Image image = new Image(getClass().getResourceAsStream(user.getProfilePath()));
         profilePictue.setImage(image);
-        profilePictue.setFitHeight(200);
-        profilePictue.setFitWidth(200);
+        profilePictue.setFitHeight(100);
+        profilePictue.setFitWidth(100);
         username.setText(user.getUser_Name());
         email.setText(user.getEmail());
         plan.setText(user.getPlan());
-        secondname.setText(user.getLast_Name());
-        firstname.setText(user.getFirst_Name());
+        fullname.setText(user.getFirst_Name() + " " + user.getLast_Name());
+        firstname = user.getFirst_Name();
+        lastname = user.getLast_Name();
+        setUser(SignIn.user5);
     }
     public void setUser(User user){
         this.user = user;
+
+    }
+    @FXML
+    void toMoviesrecord(){
+        switchPane(mainpane);
+    }
+    private void switchPane(AnchorPane anchorPane){
+        mainPane.setCenter(anchorPane);
+    }
+    @FXML
+    void toPlans()throws IOException{
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("recorded-movies.fxml"));
+        Parent root = loader.load();
+        switchPane((AnchorPane) root);
+        ChoosePlanController controller = loader.getController();
+        controller.setUser(SignIn.user5);
+    }
+    @FXML
+    void toMovies()throws IOException{
+        switchPane(mainpane);
     }
 }

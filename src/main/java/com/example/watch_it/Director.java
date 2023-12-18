@@ -88,4 +88,13 @@ public class Director extends Artist {
         }
 
     }
+    @Override
+    public String toString(){
+        String data = "";
+        data = data.concat("director").concat(",").concat(getFirst_Name()).concat(",").concat(getSecond_Name()).concat(",").concat(Integer.toString(getAge())).concat(",").concat(getGender()).concat(",").concat(getNationality());
+        for(String movie: getMovies()){
+            data = data.concat(",").concat(movie);
+        }
+        return data;
+    }
 }

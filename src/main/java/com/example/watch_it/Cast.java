@@ -85,4 +85,20 @@ public class Cast extends Artist{
             System.out.println(line);
         }
     }
+    @Override
+    public String toString(){
+        String data = "";
+        data = data.concat("cast");
+                data = data.concat(",");
+        data = data.concat(getFirst_Name());
+        data = data.concat(",");
+        data = data.concat(getSecond_Name());
+                data = data.concat(",").concat(Integer.toString(getAge()));
+                        data = data.concat(",").concat(getGender());
+        data = data.concat(",").concat(getNationality());
+        for(String movie: getMovies()){
+            data = data.concat(",").concat(movie);
+        }
+        return data;
+    }
 }

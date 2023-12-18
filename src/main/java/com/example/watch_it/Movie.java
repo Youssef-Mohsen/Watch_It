@@ -25,7 +25,7 @@ public class Movie {
     private String poster_path;
     private String budget;
     private String revenue;
-    private int imdb_score;
+    private float imdb_score;
     private String description;
     private float avarage_rating = 0f;
     private float total_rating = 0f;
@@ -41,7 +41,7 @@ public class Movie {
         this.cast = new ArrayList<>();
     }
 
-    public Movie(String title, LocalDate release_date, String running_time, ArrayList<String> genre, String language, String country, String poster_path, String budget, String revenue, int imdb_score,String description) {
+    public Movie(String title, LocalDate release_date, String running_time, ArrayList<String> genre, String language, String country, String poster_path, String budget, String revenue, float imdb_score,String description) {
         counter++;
         this.id = counter;
         this.title = title;
@@ -101,7 +101,7 @@ public class Movie {
         return budget;
     }
 
-    public int getImdb_score() {
+    public float getImdb_score() {
         return imdb_score;
     }
     public float getAverage_rating() {
@@ -151,7 +151,7 @@ public class Movie {
         this.revenue = revenue;
     }
 
-    public void setImdb_score(int imdb_score) {
+    public void setImdb_score(float imdb_score) {
         this.imdb_score = imdb_score;
     }
     public String getDescription() {
@@ -272,6 +272,9 @@ public class Movie {
 
     public ArrayList<String> getCastNames() {
         return castNames;
+    }
+    public void getCastNames(ArrayList<String> cast) {
+        this.castNames.addAll(cast);
     }
 
     public void setCastNames(ArrayList<String> castNames) {

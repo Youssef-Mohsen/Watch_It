@@ -35,12 +35,12 @@
                                                 <Font name="System Bold" size="36.0" />
                                             </font>
                                         </Label>
-                                        <TextField fx:id="UserName" alignment="CENTER" layoutX="262.0" layoutY="266.0" prefHeight="47.0" prefWidth="460.0" promptText="Username" style="-fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30;">
+                                            <TextField fx:id="UserName" alignment="CENTER" layoutX="262.0" layoutY="266.0" prefHeight="47.0" prefWidth="460.0" promptText="Username" style="-fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30; -fx-text-fill: white;">
                                             <font>
                                                 <Font name="Chalkboard Bold" size="20.0" />
                                             </font>
                                         </TextField>
-                                        <CheckBox fx:id="checkbox" layoutX="308.0" layoutY="392.0" mnemonicParsing="false" onAction="#The_Password_Visibility" prefHeight="26.0" prefWidth="149.0" text="Show Password">
+                                        <CheckBox fx:id="checkbox" layoutX="308.0" layoutY="392.0" mnemonicParsing="false" onAction="#The_Password_Visibility" prefHeight="26.0" prefWidth="149.0" text="Show Password" textFill="WHITE">
                                             <font>
                                                 <Font name="Chalkboard Bold" size="17.0" />
                                             </font>
@@ -50,17 +50,17 @@
                                                 <Font name="Chalkboard SE Bold" size="15.0" />
                                             </font>
                                         </Hyperlink>
-                                        <Button fx:id="SignIn" layoutX="383.0" layoutY="465.0" mnemonicParsing="false" onAction="#SignIN" prefHeight="39.0" prefWidth="206.0" style="-fx-background-color: FFC107; -fx-background-radius: 10;" text="Sign In" textFill="black">
+                                        <Button fx:id="SignIn" layoutX="383.0" layoutY="465.0" mnemonicParsing="false" onAction="#SignIN" prefHeight="39.0" prefWidth="206.0" style="-fx-background-color: FFC107; -fx-background-radius: 50;" text="Sign In" textFill="black">
                                             <font>
                                                 <Font name="System Bold" size="20.0" />
                                             </font>
                                         </Button>
-                                        <TextField fx:id="TextPassword" alignment="CENTER" layoutX="262.0" layoutY="331.0" prefHeight="47.0" prefWidth="460.0" promptText="Password" style="-fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30;">
+                                        <TextField fx:id="TextPassword" alignment="CENTER" layoutX="262.0" layoutY="331.0" prefHeight="47.0" prefWidth="460.0" promptText="Password" style="-fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30; -fx-text-fill: white;" >
                                             <font>
                                                 <Font name="Chalkboard Bold" size="20.0" />
                                             </font>
                                         </TextField>
-                                        <PasswordField fx:id="Password" alignment="CENTER" layoutX="262.0" layoutY="331.0" prefHeight="47.0" prefWidth="460.0" promptText="Password" style="-fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30;">
+                                        <PasswordField fx:id="Password" alignment="CENTER" layoutX="262.0" layoutY="331.0" prefHeight="47.0" prefWidth="460.0" promptText="Password" style="-fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30; -fx-text-fill: white;">
                                             <font>
                                                 <Font name="Chalkboard Bold" size="20.0" />
                                             </font>
@@ -85,7 +85,7 @@
                                         <Font name="System Bold" size="20.0" />
                                     </font>
                                 </Label>
-                                <Button fx:id="SignUp" layoutX="157.0" layoutY="444.0" mnemonicParsing="false" onAction="#gotosignup" prefHeight="39.0" prefWidth="206.0" style="-fx-background-color: black; -fx-background-radius: 10;" text="Sign Up" textFill="#f8f7f7">
+                                <Button fx:id="SignUp" layoutX="157.0" layoutY="444.0" mnemonicParsing="false" onAction="#gotosignup" prefHeight="39.0" prefWidth="206.0" style="-fx-background-color: black; -fx-background-radius: 50;" text="Sign Up" textFill="#f8f7f7">
                                     <font>
                                         <Font name="Chalkboard Bold" size="20.0" />
                                     </font>

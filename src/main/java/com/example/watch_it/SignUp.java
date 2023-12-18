@@ -110,9 +110,9 @@ public class SignUp {
             throw new RuntimeException(e);
         }
         ChoosePlanController controller = loader.getController();
+        controller.setUser(user);
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         controller.setStage(stage);
-        controller.setUser(user);
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

@@ -18,6 +18,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Objects;
 
 public class RecordedMoviesController {
@@ -36,6 +38,7 @@ public class RecordedMoviesController {
 
     @FXML
     public void initialize(){
+        Collections.sort(WatchRecord.watchedMovies, Comparator.comparingInt(Movie::getUserRate).reversed());
         for (Movie movie : WatchRecord.watchedMovies) {
             addWatchedList(movie);
         }
@@ -58,8 +61,19 @@ public class RecordedMoviesController {
         label.setStyle("-fx-text-size: 20; -fx-text-fill: white;");
         label.setOnMouseEntered(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: #FFC107;"));
         label.setOnMouseExited(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
+        Label label1 =new Label("Rate: "+movie1.userRate);
+        label1.setStyle("-fx-text-size: 20; -fx-text-fill: white;");
+        label1.setOnMouseEntered(event -> label1.setStyle("-fx-text-size: 20; -fx-text-fill: #FFC107;"));
+        label1.setOnMouseExited(event -> label1.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
+        Image image1 = new Image(getClass().getResourceAsStream("assets/fullStar.png"));
+        ImageView imageView1 = new ImageView(image1);
+        imageView1.setFitHeight(18);
+        imageView1.setFitWidth(20);
+        HBox box =new HBox(label1,imageView1,label);
+        box.setAlignment(Pos.CENTER);
+        box.setSpacing(6);
         movieContainer.setAlignment(Pos.CENTER);
-        movieContainer.getChildren().addAll(imageView, label);
+        movieContainer.getChildren().addAll(imageView, box);
         movieContainer.setOnMouseClicked(event -> {
             try {
                 onMouseClickedVBox(event,movie1);
@@ -108,6 +122,7 @@ public class RecordedMoviesController {
         Parent root = loader.load();
         stage = (Stage)((Node)act.getSource()).getScene().getWindow();
         MovieController controller=loader.getController();
+        controller.setUser(user);
         controller.setStage(stage);
         controller.disableButtons();
         controller.setMovie(movie1);
@@ -133,6 +148,7 @@ public class RecordedMoviesController {
         stage = (Stage)((Node)act.getSource()).getScene().getWindow();
         profilePageController controller=loader.getController();
         controller.setStage(stage);
+        controller.setUser(user);
         controller.setdata();
         scene = new Scene(root);
         stage.setScene(scene);

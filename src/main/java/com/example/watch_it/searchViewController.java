@@ -37,7 +37,8 @@ public class searchViewController {
     private Label data_Label;
     private Stage stage;
     private Parent root;
-    public static final ArrayList<Movie> searchMovies=new ArrayList<Movie>();
+    private User user;
+    public static ArrayList<Movie> searchMovies=new ArrayList<Movie>();
     @FXML
     public void initialize(){
         for (Movie movie:searchMovies) {
@@ -92,6 +93,7 @@ public class searchViewController {
         root = loader.load();
         MainPageController controller = loader.getController();
         controller.setStage(stage);
+        controller.setUser(user);
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("Movie");
@@ -104,5 +106,8 @@ public class searchViewController {
 
     public void setStage(Stage stage){
         this.stage = stage;
+    }
+    public void setUser(User user){
+        this.user = user;
     }
 }

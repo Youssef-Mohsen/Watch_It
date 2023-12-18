@@ -86,7 +86,7 @@ public class AllMoviesController {
         stage = (Stage)((Node)act.getSource()).getScene().getWindow();
         MovieController controller=loader.getController();
         controller.setStage(stage);
-        controller.Admin(movie);
+        controller.watchMovie(movie);
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

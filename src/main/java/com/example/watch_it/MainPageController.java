@@ -80,8 +80,9 @@ public  class MainPageController {
     private Movie movie;
     @FXML
     private  Label counter;
-    private User user;
+    static User user;
     public static Movie movie5;
+    public static UserWatchRecord movie5_watched;
     static int moviePage = 0;
     private final ArrayList<Movie> moviesTop = new ArrayList<>();
     private final ArrayList<Movie> moviesRecent = new ArrayList<>();
@@ -95,9 +96,6 @@ public  class MainPageController {
     HBox TopRatedMovies;
     @FXML
     private Button Back;
-
-
-
     private void getData() {
         for(Movie movie : Movie.MostViewedMovies(Movie.allmovies)){
             moviesTop.add(movie);
@@ -129,10 +127,10 @@ public  class MainPageController {
         onMouseEntered();
         onMouseExit();
         setupAutoScroll();
-       /* profile.setOnMouseClicked(event -> profileOnMouseClicked());*/
+        /* profile.setOnMouseClicked(event -> profileOnMouseClicked());*/
         labelsOnMouseClicked();
-        if(!WatchRecord.watchedMovies.isEmpty()) {
-            counter.setText(WatchRecord.watchedMovies.size() + ")");
+        if(!SignIn.user5.Watched_Movies.isEmpty()) {
+            counter.setText(SignIn.user5.getSubscription().getMoviesWatched() + ")");
         }
         else {
             counter.setText("0"+")");
@@ -365,7 +363,7 @@ public  class MainPageController {
             Comedy.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;");
             Drama.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;");
             Action.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;");
-           // All.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;");
+            // All.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;");
             Main.setStyle("-fx-background-color: black;" +
                     " -fx-background-radius: 25; " +
                     "-fx-border-color: white;" +
@@ -417,11 +415,10 @@ public  class MainPageController {
         controller.setStage(stage);
         controller.setMovie(movie2);
         controller.watchMovie(movie2);
+        controller.setUser(SignIn.user5);
         controller.page5=0;
         scene = new Scene(root);
         stage.setScene(scene);
-        stage.show();
-        movie5=movie;
         Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));
         controller.refreshScreen("Watch Movie "+ movie.getTitle() + "("+movie.getRelease_date().getYear()+")", movie.getTitle(),
                 movie.getTitle()+" Translated",movie.getGenres(), movie.getDescription(),
@@ -637,8 +634,8 @@ public  class MainPageController {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         profilePageController controller=loader.getController();
         controller.setStage(stage);
+        controller.setUser(SignIn.user5);
         controller.setdata();
-        controller.setUser(user);
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -656,7 +653,7 @@ public  class MainPageController {
     }
     public void setUser(User user){
         this.user = user;
-       // Admin.getUserMovieLists(user);
+        // Admin.getUserMovieLists(user);
     }
     private void onSearch(){
         Search.setOnMouseClicked(event -> {
@@ -697,6 +694,7 @@ public  class MainPageController {
                 MovieController controller = loader.getController();
                 controller.setStage(stage);
                 controller.watchMovie(movie);
+                controller.setUser(SignIn.user5);
                 controller.page5 = 0;
                 scene = new Scene(root);
                 Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));
@@ -716,6 +714,7 @@ public  class MainPageController {
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 searchViewController controller = loader.getController();
                 controller.setStage(stage);
+                controller.setUser(user);
                 controller.Search(director,menuValue);
                 scene = new Scene(root);
                 stage.setScene(scene);
@@ -731,6 +730,7 @@ public  class MainPageController {
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 searchViewController controller = loader.getController();
                 controller.setStage(stage);
+                controller.setUser(user);
                 controller.Search(cast,menuValue);
                 scene = new Scene(root);
                 stage.setScene(scene);
