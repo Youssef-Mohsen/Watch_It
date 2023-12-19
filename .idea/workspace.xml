@@ -4,41 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="236de910-bb88-43c2-a220-e8030a7a2c95" name="Changes" comment="view user">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_28_2023_8_11_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_28_2023_8_11_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_10_2023_6_20_PM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_10_2023_6_20_PM__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_11_2023_11_04_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_11_2023_11_04_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_11_2023_1_25_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_11_2023_1_25_AM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_11_2023_5_38_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_11_2023_5_38_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_9_2023_8_50_PM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_9_2023_8_50_PM__Changes_.xml" beforeDir="false" />
+    <list default="true" id="236de910-bb88-43c2-a220-e8030a7a2c95" name="Changes" comment="editing user and saving their data">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_11_2023_11_04_PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_11_2023_11_04_PM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_11_2023_5_38_PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_11_2023_5_38_PM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_12_2023_12_40_AM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_12_2023_12_40_AM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_12_2023_4_29_AM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_12_2023_4_29_AM__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/movies-data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/movies-data.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/Admin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/AllMoviesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/AllMoviesController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/Artist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/Artist.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/Cast.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/Cast.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/ChoosePlanController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/ChoosePlanController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/Director.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/Director.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/HelloApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/MainPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/MainPageController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/Movie.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/MovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/MovieController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/RecordedMoviesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/RecordedMoviesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/SignIn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/SignIn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/SignUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/SignUp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/Subscription.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/Subscription.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/UserWatchRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/UserWatchRecord.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/WatchRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/WatchRecord.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/profilePageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/profilePageController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/searchViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/searchViewController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/admin-page.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/admin-page.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/profile-page.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/profile-page.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/sign-in.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/sign-in.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/sign-up.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/sign-up.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/main-page.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/main-page.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

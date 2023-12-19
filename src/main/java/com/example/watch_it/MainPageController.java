@@ -104,10 +104,7 @@ public  class MainPageController {
         {
             moviesRecent.add(movie);
         }
-        for(Movie movie:Movie.allmovies)
-        {
-            moviesTopRated.add(movie);
-        }
+
 
     }
 
@@ -120,7 +117,7 @@ public  class MainPageController {
         for (Movie movie : moviesRecent) {
             addToGUI2(movie);
         }
-        for (Movie movie : moviesTopRated) {
+        for (Movie movie : Movie.TopRatedMovies()) {
             addToGUI3(movie);
         }
         setUpFilter();
@@ -129,12 +126,7 @@ public  class MainPageController {
         setupAutoScroll();
         /* profile.setOnMouseClicked(event -> profileOnMouseClicked());*/
         labelsOnMouseClicked();
-        if(!SignIn.user5.Watched_Movies.isEmpty()) {
-            counter.setText(SignIn.user5.getSubscription().getMoviesWatched() + ")");
-        }
-        else {
-            counter.setText("0"+")");
-        }
+        counter.setText(SignIn.user5.getSubscription().getMoviesWatched() + ")");
         onSearch();
     }
 
@@ -144,15 +136,29 @@ public  class MainPageController {
         movieContainer.setPrefHeight(200);
         Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));
         ImageView imageView = new ImageView(image);
-        imageView.setFitHeight(237);
+        imageView.setFitHeight(245);
         imageView.setFitWidth(220);
         Label label = new Label(movie.getTitle());
         label.setStyle("-fx-text-size: 20; -fx-text-fill: white;");
         label.setOnMouseEntered(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: #FFC107;"));
         label.setOnMouseExited(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
+        Label label1 =new Label();
+        if(movie.getImdb_score() == -1)
+            label1.setText("Rate: "+"0.0");
+        else
+            label1.setText("Rate: "+ movie.getImdb_score());
+        label1.setStyle("-fx-text-size: 20; -fx-text-fill: white;");
+        label1.setOnMouseEntered(event -> label1.setStyle("-fx-text-size: 20; -fx-text-fill: #FFC107;"));
+        label1.setOnMouseExited(event -> label1.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
+        Image image1 = new Image(getClass().getResourceAsStream("assets/fullStar.png"));
+        ImageView imageView1 = new ImageView(image1);
+        imageView1.setFitHeight(18);
+        imageView1.setFitWidth(20);
+        HBox box =new HBox(label1,imageView1,label);
+        box.setAlignment(Pos.CENTER);
+        box.setSpacing(6);
         movieContainer.setAlignment(Pos.CENTER);
-        movieContainer.getChildren().addAll(imageView, label);
-
+        movieContainer.getChildren().addAll(imageView, box);
         movieContainer.setOnMouseClicked(event -> {
             try {
                 onMouseClickedVBox(event,movie);
@@ -170,14 +176,29 @@ public  class MainPageController {
         movieContainer.setPrefHeight(200);
         Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));
         ImageView imageView = new ImageView(image);
-        imageView.setFitHeight(237);
+        imageView.setFitHeight(245);
         imageView.setFitWidth(220);
         Label label = new Label(movie.getTitle());
         label.setStyle("-fx-text-size: 20; -fx-text-fill: white;");
         label.setOnMouseEntered(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: #FFC107;"));
         label.setOnMouseExited(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
+        Label label1 =new Label();
+        if(movie.getImdb_score() == -1)
+            label1.setText("Rate: "+"0.0");
+        else
+            label1.setText("Rate: "+ movie.getImdb_score());
+        label1.setStyle("-fx-text-size: 20; -fx-text-fill: white;");
+        label1.setOnMouseEntered(event -> label1.setStyle("-fx-text-size: 20; -fx-text-fill: #FFC107;"));
+        label1.setOnMouseExited(event -> label1.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
+        Image image1 = new Image(getClass().getResourceAsStream("assets/fullStar.png"));
+        ImageView imageView1 = new ImageView(image1);
+        imageView1.setFitHeight(18);
+        imageView1.setFitWidth(20);
+        HBox box =new HBox(label1,imageView1,label);
+        box.setAlignment(Pos.CENTER);
+        box.setSpacing(6);
         movieContainer.setAlignment(Pos.CENTER);
-        movieContainer.getChildren().addAll(imageView, label);
+        movieContainer.getChildren().addAll(imageView, box);
         movieContainer.setOnMouseClicked(event -> {
             try {
                 onMouseClickedVBox(event,movie);
@@ -194,15 +215,29 @@ public  class MainPageController {
         movieContainer.setPrefHeight(200);
         Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));
         ImageView imageView = new ImageView(image);
-        imageView.setFitHeight(237);
+        imageView.setFitHeight(245);
         imageView.setFitWidth(220);
         Label label = new Label(movie.getTitle());
         label.setStyle("-fx-text-size: 20; -fx-text-fill: white;");
         label.setOnMouseEntered(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: #FFC107;"));
         label.setOnMouseExited(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
+        Label label1 =new Label();
+        if(movie.getAverage_rating() == -1)
+            label1.setText("Rate: "+"0.0");
+        else
+            label1.setText("Rate: "+ movie.getAverage_rating());
+        label1.setStyle("-fx-text-size: 20; -fx-text-fill: white;");
+        label1.setOnMouseEntered(event -> label1.setStyle("-fx-text-size: 20; -fx-text-fill: #FFC107;"));
+        label1.setOnMouseExited(event -> label1.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
+        Image image1 = new Image(getClass().getResourceAsStream("assets/fullStar.png"));
+        ImageView imageView1 = new ImageView(image1);
+        imageView1.setFitHeight(18);
+        imageView1.setFitWidth(20);
+        HBox box =new HBox(label1,imageView1,label);
+        box.setAlignment(Pos.CENTER);
+        box.setSpacing(6);
         movieContainer.setAlignment(Pos.CENTER);
-        movieContainer.getChildren().addAll(imageView, label);
-
+        movieContainer.getChildren().addAll(imageView, box);
         movieContainer.setOnMouseClicked(event -> {
             try {
                 onMouseClickedVBox(event,movie);
@@ -499,7 +534,7 @@ public  class MainPageController {
                 " -fx-background-color:  #565661;"));
     }
     private void setupAutoScroll() {
-        double scrollDuration = 14; // Adjust the duration of the auto-scrolling
+        double scrollDuration = 35; // Adjust the duration of the auto-scrolling
 
         // Create a timeline for the auto-scrolling animation
         autoScrollTimeline = new Timeline(

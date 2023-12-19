@@ -30,22 +30,22 @@
                             <children>
                                 <Pane prefHeight="757.0" prefWidth="994.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <children>
-                                        <Label alignment="CENTER" layoutX="284.0" layoutY="177.0" prefHeight="53.0" prefWidth="417.0" text="Sign in To Your Account" textAlignment="CENTER" textFill="white">
+                                        <Label alignment="CENTER" layoutX="284.0" layoutY="177.0" prefHeight="53.0" prefWidth="417.0" text="Admin Sign in" textAlignment="CENTER" textFill="white">
                                             <font>
                                                 <Font name="System Bold" size="36.0" />
                                             </font>
                                         </Label>
-                                        <TextField fx:id="UserName" alignment="CENTER" layoutX="262.0" layoutY="266.0" prefHeight="47.0" prefWidth="460.0" promptText="Username" style="-fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30; -fx-text-fill: white;">
+                                        <TextField fx:id="UserName" alignment="CENTER" layoutX="262.0" layoutY="266.0" prefHeight="47.0" prefWidth="460.0" promptText="Username" style="-fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30;">
                                             <font>
                                                 <Font name="Chalkboard Bold" size="20.0" />
                                             </font>
                                         </TextField>
-                                        <CheckBox fx:id="checkbox" layoutX="308.0" layoutY="392.0" mnemonicParsing="false" onAction="#The_Password_Visibility" prefHeight="26.0" prefWidth="149.0" text="Show Password" textFill="WHITE">
+                                        <CheckBox fx:id="checkbox" layoutX="308.0" layoutY="392.0" mnemonicParsing="false" onAction="#The_Password_Visibility" prefHeight="26.0" prefWidth="149.0" text="Show Password">
                                             <font>
                                                 <Font name="Chalkboard Bold" size="17.0" />
                                             </font>
                                         </CheckBox>
-                                        <Button fx:id="SignIn" layoutX="383.0" layoutY="465.0" mnemonicParsing="false" onAction="#signIn" prefHeight="39.0" prefWidth="206.0" style="-fx-background-color: FFC107; -fx-background-radius: 50;" text="Sign In" textFill="black">
+                                        <Button fx:id="SignIn" layoutX="383.0" layoutY="465.0" mnemonicParsing="false" onAction="#signIn" prefHeight="39.0" prefWidth="206.0" style="-fx-background-color: FFC107; -fx-background-radius: 10;" text="Sign In" textFill="black">
                                             <font>
                                                 <Font name="System Bold" size="20.0" />
                                             </font>
@@ -55,7 +55,7 @@
                                                 <Font name="Chalkboard Bold" size="20.0" />
                                             </font>
                                         </TextField>
-                                        <PasswordField fx:id="password" alignment="CENTER" layoutX="262.0" layoutY="331.0" prefHeight="47.0" prefWidth="460.0" promptText="Password" style="-fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30; -fx-text-fill: white;">
+                                        <PasswordField fx:id="password" alignment="CENTER" layoutX="262.0" layoutY="331.0" prefHeight="47.0" prefWidth="460.0" promptText="Password" style="-fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30;">
                                             <font>
                                                 <Font name="Chalkboard Bold" size="20.0" />
                                             </font>

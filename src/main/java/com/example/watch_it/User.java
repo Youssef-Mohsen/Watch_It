@@ -226,6 +226,13 @@ public class User
         }
         return null;
     }
+    public boolean movieExist(Movie movie){
+        boolean exist = false;
+        for (UserWatchRecord u: Watched_Movies)
+            if(u.getMovie().equals(movie))
+                return  true;
+            return exist;
+    }
     @Override
     public String toString(){
         String data ="";
@@ -233,8 +240,8 @@ public class User
         data = data.concat(",").concat(getFirst_Name()).concat(",").concat(getLast_Name()).concat(",").concat(getPlan()).concat(",").concat(getEmail()).concat(",").concat(getSubscription().getStartDate().toString()).concat(",").concat(getProfilePath()).concat(",");
 
         data = data.concat("to be watched").concat(",");
-        for (String toWatchMovie : toWatchMovies) {
-            data = data.concat(toWatchMovie).concat(",");
+        for (Movie toWatchMovie : Movies_For_Later) {
+            data = data.concat(toWatchMovie.getTitle()).concat(",");
         }
         data = data.concat("watched").concat(",");
         for (UserWatchRecord watchedMovie : Watched_Movies) {

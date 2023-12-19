@@ -2,33 +2,12 @@ package com.example.watch_it;
 import java.io.*;
 import java.time.Month;
 import java.time.Period;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.*;
 import java.time.LocalDate;
-import java.util.Map;
 
 public class Admin {
     private String username;
     private String password;
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    //counters gonna be pairs ,key for the enum class value for repentance -- javafx???
     public static int basicPlanCounter;
     public static int standardPlanCounter;
     public static int premiumPlanCounter;
@@ -43,16 +22,32 @@ public class Admin {
     static final short EMAILINDEX = 7;
     static final short IDINDEX = 3;
     private static short STARTDATEINDEX = 8;
+    public static ArrayList<Admin> allAdmins = new ArrayList<Admin>();
 
     public static ArrayList<String> movies = new ArrayList<String>();
     public static ArrayList<String> directors = new ArrayList<String>();
     public static ArrayList<String> casts = new ArrayList<String>();
     public static ArrayList<String> admins = new ArrayList<String>();
-    public static ArrayList<Admin> allAdmins = new ArrayList<Admin>();
     public static ArrayList<String> users = new ArrayList<String>();
     public Admin(String username, String password ){
         this.password = password;
         this.username = username;
+    }
+    public Admin(){
+        this.username = null;
+        this.password = null;
+    }
+    public String getUsername() {
+        return username;
+    }
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
     }
     public static void readFile(File file) {
         ArrayList<String> arrayList = new ArrayList<String>();
@@ -95,7 +90,7 @@ public class Admin {
                 b.write(user.toString());
                 b.newLine();
             }
-            for (Cast cast: Cast.allCast){
+            for (Artist cast: Cast.allCast){
                 b.write(cast.toString());
                 b.newLine();
             }
@@ -126,10 +121,6 @@ public class Admin {
         return null;
     }
     //record to be deleted is not splitted
-    public static void deleteOneRecord(ArrayList<String> arrayList, String record){
-        arrayList.remove(record);
-    }
-
     //working just fine ^^^
     static Subscription.Plans getMostSubscripedPlan(){
         Subscription.Plans plan = null;
@@ -160,7 +151,6 @@ public class Admin {
                 premiumPlanCounter++;
         }
     }
-
     //assuming all dates are valid and users still subscribed.
     public static int getMonth(Month month){
         return switch (month) {
@@ -195,7 +185,6 @@ public class Admin {
             default -> null;
         };
     }
-
     static Month monthWithMostRevenue(){
         Month month = null;
         int [] monthsRevenue = new int[MONTHSNUMBER];
@@ -273,40 +262,29 @@ public class Admin {
     static void getUserMovieLists_obj(User user){
         getUserMovieLists(user);
         for(String movie: user.toWatchMovies){
-            user.Movies_For_Later.add(getOneMovie(movie));
+            user.Movies_For_Later.add(getUnkownMovie(movie));
         }
         for(int i=0; i<user.watchedMovies.size(); i++){
             if(i%2 == 0){
                 Movie movie;
-                movie = getOneMovie(user.watchedMovies.get(i));
+                movie = getUnkownMovie(user.watchedMovies.get(i));
                 Double rate = Double.parseDouble(user.watchedMovies.get(i+1));
                 UserWatchRecord u = new UserWatchRecord(movie,rate);
                 user.Watched_Movies.add(u);
             }
         }
     }
-
-
-    static UserWatchRecord getWatchedMovie(String title, Double rate){
-        UserWatchRecord movie = new UserWatchRecord();
-        for (String oneMovie: movies){
-            String []arr = oneMovie.split(",");
-            if(arr[1].equals(title))
-            {
-                movie.setMovie(getOneMovie_(oneMovie));
-                movie.setRating(rate);
-            }
-        }
-        return movie;
-    }
+    //returning every movie as obj in the DB.
     static ArrayList<Movie> getMoviesObjs(){
         ArrayList<Movie> arrayList = new ArrayList<Movie>();
         for(String s: movies){
-            arrayList.add(getOneMovie_(s));
+            arrayList.add(getOneMovie(s));
         }
         return arrayList;
     }
-    static Movie getOneMovie_(String movieString){
+    //returning one movie obj based on a string containing all data.
+    static Movie getOneMovie(String movieString){
+
         Movie movie = new Movie();
         String[] arr = movieString.split(",");
         movie.setTitle(arr[1]);
@@ -322,6 +300,8 @@ public class Admin {
         movie.setPoster_path(arr[11]);
         movie.setDirector(getDirector(arr[5]));
         movie.setDirectorName(arr[5]);
+        movie.setAvarage_rating(Double.parseDouble(arr[12]));
+        movie.setViews(Integer.parseInt(arr[13]));
         ArrayList<String> cast = new ArrayList<String>();
         ArrayList<String> genres = new ArrayList<String>();
         castAndGenres(movieString,cast,genres);
@@ -334,7 +314,8 @@ public class Admin {
         movie.setCast(movieCast);
         return movie;
     }
-    static Movie getOneMovie (String title){
+    //returning one move obj based on its title.
+    static Movie getUnkownMovie(String title){
         Movie movie = new Movie();
         for (String oneMovie : movies) {
             String[] arr = oneMovie.split(",");
@@ -351,6 +332,8 @@ public class Admin {
                 movie.setRevenue(arr[10]);
                 movie.setPoster_path(arr[11]);
                 movie.setDirector(getDirector(arr[5]));
+                movie.setTotalRating(Double.parseDouble(arr[12]));
+                movie.setViews(Integer.parseInt(arr[13]));
                 ArrayList<String> cast = new ArrayList<String>();
                 ArrayList<String> genres = new ArrayList<String>();
                 movie.setGenre(genres);
@@ -365,6 +348,7 @@ public class Admin {
         }
         return movie;
     }
+    //returning strings with the names of the cast and genres in the movie.
     public static void castAndGenres(String Movie, ArrayList<String> cast_, ArrayList<String> genres){
         //cast first then genres
         boolean cast = false;

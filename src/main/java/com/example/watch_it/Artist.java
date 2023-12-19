@@ -60,4 +60,7 @@ public abstract class Artist {
     }
     @Override
     public abstract String toString();
+    public abstract void update(int index,String movie);
+    public abstract int check (String first_name,String second_name);
+    public abstract void add(String first_name,String second_name,int age,String gender,String Nationality,ArrayList<String> movie);
 }

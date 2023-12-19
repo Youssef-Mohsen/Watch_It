@@ -174,6 +174,10 @@ public class profilePageController implements Initializable {
                 alert_.showAndWait();
                 try {
                     Select( event);
+                    updateButton.setVisible(false);
+                    newLastname.setVisible(false);
+                    newFirstname.setVisible(false);
+                    newEmail.setVisible(false);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -187,6 +191,7 @@ public class profilePageController implements Initializable {
             if (result.isPresent() && result.get() == buttonTypeYes)
             {
                 SignIn.user5.Movies_For_Later.clear();
+                toWatchHbox.getChildren().clear();
             }
         }
     }

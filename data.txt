@@ -1,11 +1,11 @@
-user,nada,123456,1,nada,ayman,basic,nadaAyman@gmail.com,2023-12-06,assets/batbot-01.png,to be watched,Oppenheimer,watched,Avengers: Endgame,5.0,Joker,1.0,done,
+user,nada,123456,1,nadod,ayman,basic,nadaAyman@gmail.com,2023-12-06,assets/batbot-01.png,to be watched,Insidious: The Red Door,watched,Avengers: Endgame,5.0,Joker,1.0,done,
 user,youssef,456789,1,youssef,mohsen,premium,youssefMohsen@gmail.com,2023-10-09,assets/batbot-02.png,to be watched,Insidious: The Red Door,watched,Oppenheimer,-1.0,The Dark Knight,3.0,done,
 user,Mai,123456,1,Mai,Ezz,basic,MaiEzz@gmail.com,2023-12-06,assets/batbot-01.png,to be watched,Oppenheimer,watched,Avengers: Endgame,-1.0,Joker,3.0,done,
 user,Basmala,456789,1,Basmala,Tarek,premium,Basmala-Tarek@gmail.com,2023-10-09,assets/batbot-02.png,to be watched,Insidious: The Red Door,watched,Oppenheimer,-1.0,The Dark Knight,3.0,done,
 user,Tasneem,123456,1,Tasneem,Mohamed,basic,TasneemMohamed@gmail.com,2023-12-06,assets/batbot-01.png,to be watched,Oppenheimer,watched,Avengers: Endgame,-1.0,Joker,3.0,done,
 user,toka,456789,1,toka,karam,premium,tokaKaram@gmail.com,2023-10-09,assets/batbot-02.png,to be watched,Insidious: The Red Door,watched,Oppenheimer,-1.0,The Dark Knight,3.0,done,
 user,youssef,456789,1,youssef,ahmad,premium,youssefAhmad@gmail.com,2023-10-09,assets/batbot-02.png,to be watched,Insidious: The Red Door,watched,Oppenheimer,-1.0,The Dark Knight,3.0,done,
-cast,Patrick,Wilson,50,male,American,Columbus,Insidious: The Red DoorS
+cast,Patrick,Wilson,50,male,American,Insidious: The Red DoorS,Columbus
 cast,Rose,Byrne,44,female,Australian,Insidious: The Red Door
 cast,Joaquin,Phoenix,49,male,American,Joker
 cast,Robert,DeNiro,80,male,American,Joker
@@ -13,24 +13,24 @@ cast,Joe,Pesci,80,male,American,Home Alone
 cast,Kate,Winslet,48,female,Titanic
 cast,Macaulay,Culkin,43,male,American,Home Alone
 cast,Daniel,Stern,66,male,American,Home Alone
-cast,Robert,DowneyJr,58,male,American,Avengers: Endgame,Sherlock Holmes,Oppenheimer
+cast,Robert,DowneyJr,58,male,American,Oppenheimer,Sherlock Holmes,Avengers: Endgame
 cast,Benedict,Cumberbatch,40,male,English,Avengers: Endgame
 cast,Chris,Hemsworth,40,male,English,Avengers: Endgame
 cast,Mark,Strong,60,male,British,Sherlock Holmes
 cast,Jude,Law,50,male,English,Sherlock Holmes
-cast,Cillian,Murphy,50,male,Irish,Oppenheimer,The Dark Knight
+cast,Cillian,Murphy,50,male,Irish,The Dark Knight,Oppenheimer
 cast,Matt,Damon,53,male,American,The Dark Knight
 cast,Christian,Bale,49,male,American,The Dark Knight
 cast,Morgan,Freeman,86,male,American,The Dark Knight
 cast,Tom,Holland,27,male,England,Spider-Man: No Way Home
-cast,Zendaya,Coleman,27,female,America,Spider-Man: No Way Home,Dune
+cast,Zendaya,Coleman,27,female,America,Dune,Spider-Man: No Way Home
 cast,Jason,Momoa,44,male,America,Aquaman and the Lost Kingdom
 cast,Ben,Affleck,51,male,America,Aquaman and the Lost Kingdom
 cast,TimothÃe,Chalamet,28,male,America,Wonka
 cast,Paul,Raymond,34,male,England,Wonka
 cast,Murray,McArthur,57,male,England,Wonka
 cast,Leonardo,DiCaprio,49,male,Inception,Titanic
-director,Christopher,Nolan,53,male,british,The Dark Knight,Oppenheimer
+director,Christopher,Nolan,53,male,british,Oppenheimer,The Dark Knight
 director,Guy,Ritchie,55,male,british,Sherlock Holmes
 director,Anthony,Russo,53,male,American,Avengers: Endgame
 director,Chris,Columbus,65,male,Italian,Home Alone

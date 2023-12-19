@@ -63,7 +63,7 @@ public class searchViewController {
         String[] arr = search_name.split(" ");
         String first = arr[0], second = arr[1];
         if(type.equals("Director")) {
-            Director d = Director.Search_director(first, second);
+            Director d = Director.search(first, second);
             data_Label.setText("Director");
             if (d == null)
                 Not_Found_Label.setText("Not Found !!!");
@@ -75,7 +75,7 @@ public class searchViewController {
             }
         }
         else if(type.equals("Cast")) {
-            Cast c = Cast.Search_Cast(first, second);
+            Artist c = Cast.search(first, second);
             data_Label.setText("Cast");
             if(c==null)
                 Not_Found_Label.setText("Not Found !!!");
