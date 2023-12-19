@@ -37,27 +37,28 @@ public class WatchRecord {
 
 
     public void initializeItems() {
-        Collections.sort(watchedMovies, Comparator.comparingInt(Movie::getUserRate).reversed());
-        for (Movie movie : watchedMovies) {
+        Collections.sort(SignIn.user5.Watched_Movies, Comparator.comparingDouble(UserWatchRecord::getRating).reversed());
+        for (UserWatchRecord movie : SignIn.user5.Watched_Movies) {
             addToGUI(movie);
         }
-
     }
-
-
-    private void addToGUI(Movie movie) {
+    private void addToGUI(UserWatchRecord movie) {
         VBox movieContainer = new VBox(10);
         movieContainer.setPrefWidth(300);
         movieContainer.setPrefHeight(200);
-        Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));
+        Image image = new Image(getClass().getResourceAsStream(movie.getMovie().getPoster_path()));
         ImageView imageView = new ImageView(image);
         imageView.setFitHeight(237);
         imageView.setFitWidth(220);
-        Label label = new Label(movie.getTitle());
+        Label label = new Label(movie.getMovie().getTitle());
         label.setStyle("-fx-text-size: 20; -fx-text-fill: white;");
         label.setOnMouseEntered(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: #FFC107;"));
         label.setOnMouseExited(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
-        Label label1 =new Label("Rate: "+movie.userRate);
+        Label label1 =new Label();
+        if(movie.getRating() == -1)
+            label1.setText("Rate: "+"0.0");
+        else
+            label1.setText("Rate: "+ movie.getRating());
         label1.setStyle("-fx-text-size: 20; -fx-text-fill: white;");
         label1.setOnMouseEntered(event -> label1.setStyle("-fx-text-size: 20; -fx-text-fill: #FFC107;"));
         label1.setOnMouseExited(event -> label1.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
@@ -80,7 +81,7 @@ public class WatchRecord {
         WatchedMovies.getChildren().addAll(movieContainer);
 
     }
-    public void onMouseClickedVBox(MouseEvent act, Movie movie) throws IOException {
+    public void onMouseClickedVBox(MouseEvent act, UserWatchRecord movie) throws IOException {
         FXMLLoader loader=new FXMLLoader(getClass().getResource("movie-view.fxml"));
         Parent root = loader.load();
         stage = (Stage)((Node)act.getSource()).getScene().getWindow();
@@ -95,10 +96,10 @@ public class WatchRecord {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));
-        controller.refreshScreen("Watch Movie "+ movie.getTitle() + "("+movie.getRelease_date().getYear()+")", movie.getTitle(),
-                movie.getTitle()+" Translated",movie.getGenres(), movie.getDescription(),
-                movie.getRunning_time(), image,MainPageController.movie5.getDirectorName(),MainPageController.movie5.getCastNames());
+        Image image = new Image(getClass().getResourceAsStream(movie.getMovie().getPoster_path()));
+        controller.refreshScreen("Watch Movie "+ movie.getMovie().getTitle() + "("+movie.getMovie().getRelease_date().getYear()+")", movie.getMovie().getTitle(),
+                movie.getMovie().getTitle()+" Translated",movie.getMovie().getGenres(), movie.getMovie().getDescription(),
+                movie.getMovie().getRunning_time(), image,movie.getMovie().getDirectorName(),movie.getMovie().getCastNames());
         stage.setScene(scene);
         stage.show();
 

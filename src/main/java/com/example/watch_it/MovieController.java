@@ -6,11 +6,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -22,6 +26,10 @@ public class MovieController {
     private Stage stage;
     @FXML
     private Label titleMovie;
+    @FXML
+    public Pane pane;
+    @FXML
+    private HBox starsRow;
     @FXML
     private Label movieName;
     @FXML
@@ -62,9 +70,15 @@ public class MovieController {
     private ImageView[] stars;
 
     private Movie movie;
+    private UserWatchRecord movie_watched;
     public int page5=0;
+    private User user;
+    double Max_Rating;
+    private boolean isAdmin = false;
+    private Parent root;
+    private Scene scene;
 
-    int Max_Rating;
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
     // Other fields and methods...
 
     // Method to update the text of the first label
@@ -80,6 +94,9 @@ public class MovieController {
         watchMovie(movie);
         onMouseEntered();
         onMouseExit();
+        alert.setTitle("");
+        alert.setHeaderText(null);
+        alert.setContentText("You Reached Your Limit");
     }
     public void disableButtons(){
         watchLater.setDisable(true);
@@ -94,18 +111,19 @@ public class MovieController {
                 ImageView clickedStar2 = (ImageView) event1.getSource();
                 int rating2 = Integer.parseInt(clickedStar2.getId().substring(4)); // Extract the rating from the star's ID
                 stars[finalI1].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/fullStar.png"))));
-                    for (int j = 0; j < rating2 + (4 - rating2); j++) {
-                        int finalJ = j;
-                        stars[j].setOnMouseExited(event2 ->
-                                stars[finalJ].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/fullStar.png")))));
-                    }
-                    for (int h = rating2 + (4 - rating2); h > rating2; h--) {
-                        int finalJ = h;
-                        stars[h].setOnMouseExited(event2 ->
-                                stars[finalJ].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/emptyStar.png")))));
-                    }
-                 Max_Rating=rating2;
+                for (int j = 0; j < rating2 + (4 - rating2); j++) {
+                    int finalJ = j;
+                    stars[j].setOnMouseExited(event2 ->
+                            stars[finalJ].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/fullStar.png")))));
+                }
+                for (int h = rating2 + (4 - rating2); h > rating2; h--) {
+                    int finalJ = h;
+                    stars[h].setOnMouseExited(event2 ->
+                            stars[finalJ].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/emptyStar.png")))));
+                }
+                Max_Rating=rating2;
                 movie.userRate=rating2;
+
                 for (int p = movie.userRate+(4-movie.userRate); p >= movie.userRate; p--){
                     int finalJ = p;
                     stars[finalJ].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/emptyStar.png"))));
@@ -117,7 +135,7 @@ public class MovieController {
                     stars[j].setOnMouseExited(event2 ->
                             stars[finalJ].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/fullStar.png")))));
                 }
-                });
+            });
 
         }
         // You can perform additional actions here, such as saving the rating to a database.
@@ -130,17 +148,17 @@ public class MovieController {
         int rating = Integer.parseInt(hoveredStar.getId().substring(4)); // Extract the rating from the star's ID
         // Highlight stars
 
-            for (int i = 0; i < rating; i++) {
-                stars[i].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/fullStar.png"))));
-            }
+        for (int i = 0; i < rating; i++) {
+            stars[i].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/fullStar.png"))));
+        }
 
     }
 
     @FXML
     private void resetStars() {
-            for (ImageView star : stars) {
-                star.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/emptyStar.png"))));
-            }
+        for (ImageView star : stars) {
+            star.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/emptyStar.png"))));
+        }
 
     }
     public void refreshScreen(String filmTitle, String newMovieName, String newFilm, ArrayList<String> filmGenre,
@@ -168,53 +186,151 @@ public class MovieController {
         Watch.setOnMouseClicked(event -> Watch.setDisable(true));
     }
     public void watchMovie(Movie movie){
-        if(WatchRecord.watchedMovies.contains(movie)){
+        if(SignIn.user5.Watched_Movies.contains(movie)){
             watchLater.setDisable(true);
         }
-        if(RecordedMoviesController.toWatchMovies.contains(movie)){
+        if(SignIn.user5.Movies_For_Later.contains(movie)){
             watchLater.setDisable(true);
         }
-            Watch.setOnMouseClicked(event -> {
-                watchLater.setDisable(true);
-                movie.userRate=Max_Rating;
-                for(int c=0;c<Movie.allmovies.size();c++)
-                {
-                    if(movie.getTitle()==Movie.allmovies.get(c).getTitle())
-                    {
-                        Movie.allmovies.get(c).inc_views();
+        Watch.setOnMouseClicked(event -> {
+            watchLater.setDisable(true);
+            UserWatchRecord u = new UserWatchRecord(movie,0.0);
+            user.getSubscription().setMoviesWatched(user.getSubscription().getMoviesWatched()+1);
+            if (!WatchRecord.watchedMovies.contains(movie)) {
+                if(user.getPlan().equals("basic") && SignIn.user5.Movies_For_Later.size()<5) {
+                    SignIn.user5.Watched_Movies.add(u);
+                    if (SignIn.user5.Movies_For_Later.contains(movie)) {
+                        SignIn.user5.Movies_For_Later.remove(movie);
                     }
                 }
-                if(!WatchRecord.watchedMovies.contains(movie)) {
-                    WatchRecord.watchedMovies.add(movie);
-                    if(RecordedMoviesController.toWatchMovies.contains(movie)) {
-                        RecordedMoviesController.toWatchMovies.remove(movie);
+                else if(user.getPlan().equals("standard") && WatchRecord.watchedMovies.size()<10){
+
+                    SignIn.user5.Watched_Movies.add(u);
+                    if (SignIn.user5.toWatchMovies.contains(movie)) {
+                        SignIn.user5.toWatchMovies.remove(movie);
+                    }
+
+                }
+                else if(user.getPlan().equals("premium") && WatchRecord.watchedMovies.size()<30){
+
+                    SignIn.user5.Watched_Movies.add(u);
+                    if ( SignIn.user5.toWatchMovies.contains(movie)) {
+                        SignIn.user5.toWatchMovies.remove(movie);
                     }
                 }
+                else {
+                    alert.showAndWait();
+                }
+            }
 
-
-
-                Watch.setDisable(true);
-            });
+            Watch.setDisable(true);
+        });
         watchLater.setOnMouseClicked(event -> {
             MainPageController.movie5=movie;
-            if(RecordedMoviesController.toWatchMovies.contains(movie)) {
-                System.out.println("That Movie here");
-            }
-            else {
-                RecordedMoviesController.toWatchMovies.add(movie);
+            if(!SignIn.user5.Movies_For_Later.contains(movie)) {
+                SignIn.user5.Movies_For_Later.add(movie);
             }
             watchLater.setDisable(true);
         });
 
     }
+    public void watchMovie(UserWatchRecord movie){
+        if(SignIn.user5.Watched_Movies.contains(movie)){
+            watchLater.setDisable(true);
+        }
+        if(SignIn.user5.Movies_For_Later.contains(movie.getMovie())){
+            watchLater.setDisable(true);
+        }
+        Watch.setOnMouseClicked(event -> {
+            watchLater.setDisable(true);
+            movie.setRating(Max_Rating);
+            SignIn.user5.getSubscription().setMoviesWatched(SignIn.user5.getSubscription().getMoviesWatched()+1);
+            if (!SignIn.user5.Watched_Movies.contains(movie)) {
+                if( SignIn.user5.getPlan().equals("basic") && SignIn.user5.Watched_Movies.size()<5) {
+                    SignIn.user5.Watched_Movies.add(movie);
+                    if (SignIn.user5.Movies_For_Later.contains(movie.getMovie())) {
+                        SignIn.user5.Movies_For_Later.remove(movie.getMovie());
+                    }
+                }
+                else if( SignIn.user5.getPlan().equals("standard") &&SignIn.user5.Watched_Movies.size()<10){
+                    SignIn.user5.Watched_Movies.add(movie);
+                    if ( SignIn.user5.Movies_For_Later.contains(movie.getMovie())) {
+                        SignIn.user5.Movies_For_Later.remove(movie.getMovie());
+                    }
 
+                }
+                else if( SignIn.user5.getPlan().equals("premium") && SignIn.user5.Watched_Movies.size()<30){
+
+                    SignIn.user5.Watched_Movies.add(movie);
+                    if ( SignIn.user5.Movies_For_Later.contains(movie.getMovie())) {
+                        SignIn.user5.Movies_For_Later.remove(movie.getMovie());
+                    }
+                }
+                else {
+                    alert.showAndWait();
+                }
+            }
+            Watch.setDisable(true);
+        });
+        watchLater.setOnMouseClicked(event -> {
+            MainPageController.movie5_watched=movie;
+            if(!SignIn.user5.Movies_For_Later.contains(movie.getMovie()))
+                SignIn.user5.Movies_For_Later.add(movie.getMovie());
+            watchLater.setDisable(true);
+        });
+
+    }
+    public void Admin(Movie movie){
+        isAdmin = true;
+        watchLater.setVisible(false);
+        Watch.setVisible(false);
+        starsRow.setVisible(false);
+        Button edit = new Button("Edit");
+        edit.setStyle("-fx-background-color: black;-fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;");
+        edit.setPrefWidth(73.0);
+        edit.setPrefHeight(30.0);
+        edit.setLayoutX(1443.0);
+        edit.setLayoutY(770.0);
+        edit.setTextFill(Color.WHITE);
+        pane.getChildren().add(edit);
+        edit.setOnMouseEntered(event -> edit.setStyle("-fx-background-color: #FFC107; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
+        edit.setOnMouseExited(event -> edit.setStyle("-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
+        edit.setOnMouseClicked(event -> {
+            try {
+                ToEditMovie(event, movie);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+    private void ToEditMovie(MouseEvent event, Movie movie) throws IOException {
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("movie-edit.fxml"));
+        root = loader.load();
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        MoveEdit controller=loader.getController();
+        controller.setStage(stage);
+        controller.setUpPromptText(movie);
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        stage.setScene(scene);
+        stage.show();
+    }
     public void backScenes(ActionEvent event) throws IOException {
         Parent root = null;
+
+        if (isAdmin) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("all-movies.fxml"));
+            root = loader.load();
+            AllMoviesController controller = loader.getController();
+            controller.setStage(stage);
+        }
         if(page5==0) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("main-page.fxml"));
-             root = loader.load();
+            root = loader.load();
             MainPageController controller = loader.getController();
             controller.setStage(stage);
+            controller.setUser(SignIn.user5);
         }
         else if(page5==1){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("watch-record.fxml"));
@@ -224,11 +340,13 @@ public class MovieController {
             controller.initializeItems();
         }
         else {
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("recorded-movies.fxml"));
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("profile-page.fxml"));
             root = loader.load();
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            RecordedMoviesController controller=loader.getController();
+            profilePageController controller=loader.getController();
             controller.setStage(stage);
+            controller.setdata();
+            controller.setUser(SignIn.user5);
         }
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
@@ -277,6 +395,12 @@ public class MovieController {
     }
     public void setMovie(Movie movie){
         this.movie=movie;
+    }
+    public void setMovie(UserWatchRecord movie){
+        this.movie_watched=movie;
+    }
+    public void setUser(User user){
+        this.user = user;
     }
 
 }

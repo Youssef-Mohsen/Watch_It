@@ -13,34 +13,18 @@ public class User
     private Subscription subscription;
     private String profilePath;
     private String plan;
+    private LocalDate startDate;
     String AllData;
 
-    public ArrayList<String> getToWatchMovies() {
-        return toWatchMovies;
-    }
-
-    public void setToWatchMovies(ArrayList<String> toWatchMovies) {
-        this.toWatchMovies = toWatchMovies;
-    }
-
-    public ArrayList<String> getWatchedMovies() {
-        return watchedMovies;
-    }
-
-    public void setWatchedMovies(ArrayList<String> watchedMovies) {
-        this.watchedMovies = watchedMovies;
-    }
-
     // This List Access By User
-    static ArrayList<Movie> Movies_For_Later = new ArrayList<>();
-    private ArrayList<String> toWatchMovies = new ArrayList<>();
+    ArrayList<Movie> Movies_For_Later = new ArrayList<Movie>();
+    ArrayList<String> toWatchMovies = new ArrayList<String>();
     // This List Access By UserWatchRecord
-    static ArrayList<UserWatchRecord> Watched_Movies = new ArrayList<>();
-
-    private ArrayList<String> watchedMovies = new ArrayList<>();
+    ArrayList<UserWatchRecord> Watched_Movies = new ArrayList<UserWatchRecord>();
+    ArrayList<String> watchedMovies = new ArrayList<String>();
     public static ArrayList<User> allusers = new ArrayList<User>();
 
-    /****use it as ID to be unique(static variable) and display it in message to each user*****/
+    /**use it as ID to be unique(static variable) and display it in message to each user***/
 
     /*****as Sign Up method and the data will take in main(add)******/
     public User(String user_name, String last_Name, String first_Name, String email, String password, String profilePath, String plan)
@@ -54,7 +38,7 @@ public class User
         this.Email = email;
         this.Password = password;
     }
-    public User(int id, String user_name, String last_Name, String first_Name, String email, String password)
+    public User(int id, String user_name, String last_Name, String first_Name, String email, String password, String profilePath, String plan)
     {
         this.User_ID =id;
         this.User_Name = user_name;
@@ -62,8 +46,48 @@ public class User
         this.First_Name = first_Name;
         this.Email = email;
         this.Password = password;
+        this.profilePath = profilePath;
+        this.plan = plan;
+    }
+    public User(int id, String user_name, String last_Name, String first_Name, String email, String password, String profilePath, String plan, String stardDate)
+    {
+        this.User_ID =id;
+        this.User_Name = user_name;
+        this.Last_Name = last_Name;
+        this.First_Name = first_Name;
+        this.Email = email;
+        this.Password = password;
+        this.startDate = LocalDate.parse(stardDate);
+        this.profilePath = profilePath;
+        this.plan = plan;
+    }
+    public User(int id, String user_name, String last_Name, String first_Name, String email, String password, String profilePath, Subscription plan, String stardDate)
+    {
+        this.User_ID =id;
+        this.User_Name = user_name;
+        this.Last_Name = last_Name;
+        this.First_Name = first_Name;
+        this.Email = email;
+        this.Password = password;
+        this.startDate = LocalDate.parse(stardDate);
+        this.subscription = plan;
+        this.profilePath = profilePath;
+
+        if (plan.getPlan().equals(Subscription.Plans.BASIC))
+            setPlan("basic");
+        if (plan.getPlan().equals(Subscription.Plans.STANDARD))
+            setPlan("standard");
+        if (plan.getPlan().equals(Subscription.Plans.PREMIUM))
+            setPlan("premium");
+
+    }
+    public Subscription getSubscription() {
+        return subscription;
     }
 
+    public void setSubscription(Subscription subscription) {
+        this.subscription = subscription;
+    }
     // handle by GUI Answer the button that user click on it.
     public void UpDate_Data_User(String Answer , String info)
     {
@@ -93,7 +117,9 @@ public class User
             if(user.User_Name.equals(user_name))
             {
                 index = allusers.indexOf(user);
+                System.out.println(user_name);
                 allusers.remove(user);
+                System.out.println("done");
             }
         }
         for (int i=index; i<allusers.size(); i++){
@@ -108,7 +134,7 @@ public class User
         }
         return false;
     }
-    /*****Setters*****/
+    /***Setters***/
     public void setLast_Name(String last_Name) {
         Last_Name = last_Name;
     }
@@ -130,7 +156,7 @@ public class User
     public void Set_Password(String password) {
         Password = password;
     }
-    /*******Getters******/
+    /*****Getters****/
     public int getUser_ID() {
         return User_ID;
     }
@@ -155,12 +181,12 @@ public class User
     public String getPlan(){
         return plan;
     }
-    /****Set the data of Subscription****/
+    /**Set the data of Subscription**/
     public void Subscribe(int id , Subscription.Plans plan)
     {
         subscription = new Subscription(id , plan);
     }
-    /******define set method for plan in class Subscription******/
+    /****define set method for plan in class Subscription****/
     public void Updata_Subscription_Plan(Subscription.Plans plan)
     {
         subscription.setPlan(plan);
@@ -187,8 +213,8 @@ public class User
         // the movi that user watch it.
         Watched_Movies.add(new UserWatchRecord(id , movi));
     }
-    /***to set rate and Update it****/
-    public void Set_Rate_Racord(int index ,int rate)
+    /*to set rate and Update it**/
+    public void Set_Rate_Racord(int index ,Double rate)
     {
         // make sure the exception handling is applied in the index.
         Watched_Movies.get(index).setRating(rate);
@@ -200,41 +226,28 @@ public class User
         }
         return null;
     }
+    public boolean movieExist(Movie movie){
+        boolean exist = false;
+        for (UserWatchRecord u: Watched_Movies)
+            if(u.getMovie().equals(movie))
+                return  true;
+            return exist;
+    }
     @Override
     public String toString(){
         String data ="";
-        data = data.concat("user").concat(",").concat(this.User_Name).concat(",").concat(String.valueOf(getPassword())).concat(",").concat(String.valueOf(allusers.size()).concat(",").concat(getFirst_Name()).concat(",").concat(getLast_Name()).concat(",").concat(plan).concat(",").concat(getEmail()).concat(",").concat(LocalDate.now().toString()).concat(",").concat(profilePath));
-        String watched="";
-        String toWatch="";
-   /*     ArrayList<String> watched = new ArrayList<String>();
-        ArrayList<String> toWatch = new ArrayList<String>();*/
-        //   Admin.getUserMovieLists();
-        for(int i=0; i<watchedMovies.size(); i++){
-            watched=watched.concat("watched").concat(",");
-            if(i<watchedMovies.size()-1){
-                watched = watched.concat(watchedMovies.get(i).concat(","));
-                System.out.println("there's watched");
-            }
-            else {
-                watched = watched.concat(watchedMovies.get(i));
-            }
+        data = data.concat("user").concat(",").concat(getUser_Name()).concat(",").concat(getPassword()).concat(",").concat(Integer.toString(getUser_ID()));
+        data = data.concat(",").concat(getFirst_Name()).concat(",").concat(getLast_Name()).concat(",").concat(getPlan()).concat(",").concat(getEmail()).concat(",").concat(getSubscription().getStartDate().toString()).concat(",").concat(getProfilePath()).concat(",");
+
+        data = data.concat("to be watched").concat(",");
+        for (Movie toWatchMovie : Movies_For_Later) {
+            data = data.concat(toWatchMovie.getTitle()).concat(",");
         }
-        for(int i=0; i<toWatchMovies.size(); i++){
-            watched=watched.concat("to be watched").concat(",");
-            if(i<toWatchMovies.size()-1){
-                toWatch = toWatch.concat(toWatchMovies.get(i).concat(","));
-            }
-            else
-                toWatch = toWatch.concat(toWatchMovies.get(i));
+        data = data.concat("watched").concat(",");
+        for (UserWatchRecord watchedMovie : Watched_Movies) {
+            data = data.concat(watchedMovie.getMovie().getTitle()).concat(",").concat(String.valueOf(watchedMovie.getRating())).concat(",");
         }
-        System.out.println(watched);
-        System.out.println(toWatch);
-        if(watchedMovies.isEmpty() && toWatchMovies.isEmpty())
-            return data;
-        if((watchedMovies.isEmpty()))
-            data = data.concat(",").concat(watched);
-        else if((toWatchMovies.isEmpty()))
-            data = data.concat(",").concat(toWatch);
+        data = data.concat("done").concat(",");
         return data;
     }
 }

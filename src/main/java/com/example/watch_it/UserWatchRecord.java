@@ -6,9 +6,9 @@ public class UserWatchRecord {
     private int user_id;
     Movie movie;
     private LocalDateTime date_of_watching;
-    private int rating;
+    private Double rating;
 
-    public UserWatchRecord(int user_id, Movie movie , LocalDateTime date_of_watching, int rating)
+    public UserWatchRecord(int user_id, Movie movie , LocalDateTime date_of_watching, Double rating)
     {
         this.user_id=user_id;
         this.movie=movie;
@@ -16,7 +16,7 @@ public class UserWatchRecord {
 
         this.rating = rating;
     }
-    public UserWatchRecord( Movie movie, int rating)
+    public UserWatchRecord( Movie movie, Double rating)
     {
         this.movie=movie;
         this.rating = rating;
@@ -33,7 +33,7 @@ public class UserWatchRecord {
 
 // ********Get methods***********
 
-    public int getRating()
+    public Double getRating()
     {
         return rating;
     }
@@ -49,7 +49,7 @@ public class UserWatchRecord {
 
 //  ******* Set methods ******** 
 
-    public int setRating(int rating)
+    public Double setRating(Double rating)
     {
         this.rating=rating;
         return rating;

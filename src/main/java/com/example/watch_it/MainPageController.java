@@ -27,8 +27,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Objects;
 
 import javafx.fxml.FXML;
@@ -82,8 +80,9 @@ public  class MainPageController {
     private Movie movie;
     @FXML
     private  Label counter;
-    private User user;
+    static User user;
     public static Movie movie5;
+    public static UserWatchRecord movie5_watched;
     static int moviePage = 0;
     private final ArrayList<Movie> moviesTop = new ArrayList<>();
     private final ArrayList<Movie> moviesRecent = new ArrayList<>();
@@ -97,23 +96,16 @@ public  class MainPageController {
     HBox TopRatedMovies;
     @FXML
     private Button Back;
-
-
-
     private void getData() {
         for(Movie movie : Movie.MostViewedMovies(Movie.allmovies)){
             moviesTop.add(movie);
         }
-        Collections.sort(Movie.allmovies, Comparator.comparingInt(Movie::getYear).reversed());
         for(Movie movie:Movie.allmovies)
         {
             moviesRecent.add(movie);
         }
-        Collections.sort(Movie.allmovies, Comparator.comparingDouble(Movie::getUserRate).reversed());
-        for(Movie movie:Movie.allmovies)
-        {
-            moviesTopRated.add(movie);
-        }
+
+
     }
 
     @FXML
@@ -123,25 +115,18 @@ public  class MainPageController {
             addToGUI(movie);
         }
         for (Movie movie : moviesRecent) {
-            if(movie.getRelease_date().getYear()>2018) {
-                addToGUI2(movie);
-            }
+            addToGUI2(movie);
         }
-        for (Movie movie : moviesTopRated) {
+        for (Movie movie : Movie.TopRatedMovies()) {
             addToGUI3(movie);
         }
         setUpFilter();
         onMouseEntered();
         onMouseExit();
         setupAutoScroll();
-       /* profile.setOnMouseClicked(event -> profileOnMouseClicked());*/
+        /* profile.setOnMouseClicked(event -> profileOnMouseClicked());*/
         labelsOnMouseClicked();
-        if(!WatchRecord.watchedMovies.isEmpty()) {
-            counter.setText(WatchRecord.watchedMovies.size() + ")");
-        }
-        else {
-            counter.setText("0"+")");
-        }
+        counter.setText(SignIn.user5.getSubscription().getMoviesWatched() + ")");
         onSearch();
     }
 
@@ -151,15 +136,29 @@ public  class MainPageController {
         movieContainer.setPrefHeight(200);
         Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));
         ImageView imageView = new ImageView(image);
-        imageView.setFitHeight(237);
+        imageView.setFitHeight(245);
         imageView.setFitWidth(220);
         Label label = new Label(movie.getTitle());
         label.setStyle("-fx-text-size: 20; -fx-text-fill: white;");
         label.setOnMouseEntered(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: #FFC107;"));
         label.setOnMouseExited(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
+        Label label1 =new Label();
+        if(movie.getImdb_score() == -1)
+            label1.setText("Rate: "+"0.0");
+        else
+            label1.setText("Rate: "+ movie.getImdb_score());
+        label1.setStyle("-fx-text-size: 20; -fx-text-fill: white;");
+        label1.setOnMouseEntered(event -> label1.setStyle("-fx-text-size: 20; -fx-text-fill: #FFC107;"));
+        label1.setOnMouseExited(event -> label1.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
+        Image image1 = new Image(getClass().getResourceAsStream("assets/fullStar.png"));
+        ImageView imageView1 = new ImageView(image1);
+        imageView1.setFitHeight(18);
+        imageView1.setFitWidth(20);
+        HBox box =new HBox(label1,imageView1,label);
+        box.setAlignment(Pos.CENTER);
+        box.setSpacing(6);
         movieContainer.setAlignment(Pos.CENTER);
-        movieContainer.getChildren().addAll(imageView, label);
-
+        movieContainer.getChildren().addAll(imageView, box);
         movieContainer.setOnMouseClicked(event -> {
             try {
                 onMouseClickedVBox(event,movie);
@@ -177,14 +176,29 @@ public  class MainPageController {
         movieContainer.setPrefHeight(200);
         Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));
         ImageView imageView = new ImageView(image);
-        imageView.setFitHeight(237);
+        imageView.setFitHeight(245);
         imageView.setFitWidth(220);
         Label label = new Label(movie.getTitle());
         label.setStyle("-fx-text-size: 20; -fx-text-fill: white;");
         label.setOnMouseEntered(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: #FFC107;"));
         label.setOnMouseExited(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
+        Label label1 =new Label();
+        if(movie.getImdb_score() == -1)
+            label1.setText("Rate: "+"0.0");
+        else
+            label1.setText("Rate: "+ movie.getImdb_score());
+        label1.setStyle("-fx-text-size: 20; -fx-text-fill: white;");
+        label1.setOnMouseEntered(event -> label1.setStyle("-fx-text-size: 20; -fx-text-fill: #FFC107;"));
+        label1.setOnMouseExited(event -> label1.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
+        Image image1 = new Image(getClass().getResourceAsStream("assets/fullStar.png"));
+        ImageView imageView1 = new ImageView(image1);
+        imageView1.setFitHeight(18);
+        imageView1.setFitWidth(20);
+        HBox box =new HBox(label1,imageView1,label);
+        box.setAlignment(Pos.CENTER);
+        box.setSpacing(6);
         movieContainer.setAlignment(Pos.CENTER);
-        movieContainer.getChildren().addAll(imageView, label);
+        movieContainer.getChildren().addAll(imageView, box);
         movieContainer.setOnMouseClicked(event -> {
             try {
                 onMouseClickedVBox(event,movie);
@@ -201,15 +215,29 @@ public  class MainPageController {
         movieContainer.setPrefHeight(200);
         Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));
         ImageView imageView = new ImageView(image);
-        imageView.setFitHeight(237);
+        imageView.setFitHeight(245);
         imageView.setFitWidth(220);
         Label label = new Label(movie.getTitle());
         label.setStyle("-fx-text-size: 20; -fx-text-fill: white;");
         label.setOnMouseEntered(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: #FFC107;"));
         label.setOnMouseExited(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
+        Label label1 =new Label();
+        if(movie.getAverage_rating() == -1)
+            label1.setText("Rate: "+"0.0");
+        else
+            label1.setText("Rate: "+ movie.getAverage_rating());
+        label1.setStyle("-fx-text-size: 20; -fx-text-fill: white;");
+        label1.setOnMouseEntered(event -> label1.setStyle("-fx-text-size: 20; -fx-text-fill: #FFC107;"));
+        label1.setOnMouseExited(event -> label1.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
+        Image image1 = new Image(getClass().getResourceAsStream("assets/fullStar.png"));
+        ImageView imageView1 = new ImageView(image1);
+        imageView1.setFitHeight(18);
+        imageView1.setFitWidth(20);
+        HBox box =new HBox(label1,imageView1,label);
+        box.setAlignment(Pos.CENTER);
+        box.setSpacing(6);
         movieContainer.setAlignment(Pos.CENTER);
-        movieContainer.getChildren().addAll(imageView, label);
-
+        movieContainer.getChildren().addAll(imageView, box);
         movieContainer.setOnMouseClicked(event -> {
             try {
                 onMouseClickedVBox(event,movie);
@@ -370,7 +398,7 @@ public  class MainPageController {
             Comedy.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;");
             Drama.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;");
             Action.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;");
-           // All.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;");
+            // All.setStyle("-fx-background-radius: 25; -fx-background-color:  #565661;");
             Main.setStyle("-fx-background-color: black;" +
                     " -fx-background-radius: 25; " +
                     "-fx-border-color: white;" +
@@ -418,15 +446,14 @@ public  class MainPageController {
         root = loader.load();
         stage = (Stage)((Node)act.getSource()).getScene().getWindow();
         MovieController controller=loader.getController();
+        Movie movie2=new Movie(movie.getTitle(),movie.getRelease_date(),movie.getRunning_time(),movie.getGenres(),movie.getLanguage(),movie.getCountry(),movie.getPoster_path(),movie.getBudget(),"50",movie.getImdb_score(),movie.getDescription());
         controller.setStage(stage);
-        controller.setMovie(movie);
-        controller.watchMovie(movie);
+        controller.setMovie(movie2);
+        controller.watchMovie(movie2);
+        controller.setUser(SignIn.user5);
         controller.page5=0;
-        controller.setStars();
         scene = new Scene(root);
         stage.setScene(scene);
-        stage.show();
-        movie5=movie;
         Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));
         controller.refreshScreen("Watch Movie "+ movie.getTitle() + "("+movie.getRelease_date().getYear()+")", movie.getTitle(),
                 movie.getTitle()+" Translated",movie.getGenres(), movie.getDescription(),
@@ -507,7 +534,7 @@ public  class MainPageController {
                 " -fx-background-color:  #565661;"));
     }
     private void setupAutoScroll() {
-        double scrollDuration = 60; // Adjust the duration of the auto-scrolling
+        double scrollDuration = 35; // Adjust the duration of the auto-scrolling
 
         // Create a timeline for the auto-scrolling animation
         autoScrollTimeline = new Timeline(
@@ -642,8 +669,8 @@ public  class MainPageController {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         profilePageController controller=loader.getController();
         controller.setStage(stage);
+        controller.setUser(SignIn.user5);
         controller.setdata();
-        controller.setUser(user);
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -659,19 +686,15 @@ public  class MainPageController {
         stage.setScene(scene);
         stage.show();
     }
-    @FXML
-    private void getSearchText(ActionEvent event) throws IOException {
-    }
     public void setUser(User user){
         this.user = user;
-       // Admin.getUserMovieLists(user);
+        // Admin.getUserMovieLists(user);
     }
     private void onSearch(){
         Search.setOnMouseClicked(event -> {
             int found=0;
             String cast = "";
             String director="";
-            searchViewController.searchMovies=new ArrayList<>();
             for(Movie movie1:Movie.allmovies){
                 if(menuValue!=null) {
                     if (movie1.getTitle().equalsIgnoreCase(searchItem.getText()) && menuValue.equals("Movie")) {
@@ -706,6 +729,7 @@ public  class MainPageController {
                 MovieController controller = loader.getController();
                 controller.setStage(stage);
                 controller.watchMovie(movie);
+                controller.setUser(SignIn.user5);
                 controller.page5 = 0;
                 scene = new Scene(root);
                 Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));
@@ -725,6 +749,7 @@ public  class MainPageController {
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 searchViewController controller = loader.getController();
                 controller.setStage(stage);
+                controller.setUser(user);
                 controller.Search(director,menuValue);
                 scene = new Scene(root);
                 stage.setScene(scene);
@@ -740,6 +765,7 @@ public  class MainPageController {
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 searchViewController controller = loader.getController();
                 controller.setStage(stage);
+                controller.setUser(user);
                 controller.Search(cast,menuValue);
                 scene = new Scene(root);
                 stage.setScene(scene);

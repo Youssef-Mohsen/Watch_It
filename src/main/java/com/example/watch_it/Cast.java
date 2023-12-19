@@ -6,7 +6,8 @@ import java.util.ArrayList;
 public class Cast extends Artist{
     static ArrayList<Cast> allCast = new ArrayList<Cast>();
 
-    public void Add_Cast(String first_name,String second_name,int age,String gender,String Nationality,ArrayList<String> movie){
+    @Override
+    public void add(String first_name,String second_name,int age,String gender,String Nationality,ArrayList<String> movie){
         Cast c=new Cast();
         c.setFirst_Name(first_name);
         c.setSecond_Name(second_name);
@@ -14,7 +15,7 @@ public class Cast extends Artist{
         c.setGender(gender);
         c.setNationality(Nationality);
         c.setMovies(movie);
-//      Admin.cast.add(c); static array from admin class
+        allCast.add(c);
     }
     public static void Read_file(ArrayList<String> s){
         for (String i:s) {
@@ -32,11 +33,12 @@ public class Cast extends Artist{
         }
 
     }
-    public void Update_cast( int index,int num,String movie){
+    @Override
+    public void update( int index, String movie){
 
-//        Admin.cast.get(index).Movies.add(movie);
+        allCast.get(index).Movies.add(movie);
     }
-    public static Cast  Search_Cast(String first_name,String second_name) {
+    public static Cast search(String first_name,String second_name) {
         for (Cast m : allCast) {
 
             if (m.getFirst_Name().equals(first_name) && m.getSecond_Name().equals(second_name)) {
@@ -45,7 +47,8 @@ public class Cast extends Artist{
         }
         return null;
     }
-    public int  Check(String first_name,String second_name) {
+    @Override
+    public int  check(String first_name,String second_name) {
         for (int i=0;i<allCast.size();i++) {
 
             if (allCast.get(i).getFirst_Name().equals(first_name) && allCast.get(i).getSecond_Name().equals(second_name)) {
@@ -84,5 +87,21 @@ public class Cast extends Artist{
             arrayList.add(line);
             System.out.println(line);
         }
+    }
+    @Override
+    public String toString(){
+        String data = "";
+        data = data.concat("cast");
+                data = data.concat(",");
+        data = data.concat(getFirst_Name());
+        data = data.concat(",");
+        data = data.concat(getSecond_Name());
+                data = data.concat(",").concat(Integer.toString(getAge()));
+                        data = data.concat(",").concat(getGender());
+        data = data.concat(",").concat(getNationality());
+        for(String movie: getMovies()){
+            data = data.concat(",").concat(movie);
+        }
+        return data;
     }
 }

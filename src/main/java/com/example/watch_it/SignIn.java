@@ -28,6 +28,7 @@ public class SignIn
 
     @FXML
     private Button SignIn;
+    public static User user5;
 
     @FXML
     private TextField TextPassword;
@@ -41,7 +42,7 @@ public class SignIn
     private AlertType alertType;
     private int try_Password = 1;
     private int try_Username = 1;
-    public static User user5;
+
     @FXML
 
     private void showAlert(String message) {
@@ -82,10 +83,16 @@ public class SignIn
         // To Check the username exist in data.
         if (User.Userexist(username)) {
             User user = User.GetUser(username);
-
-            assert user != null;
-            if (password.equals(user.getPassword())) {
-                GoToMainPage(act, user);
+            if (password.equals(user.getPassword()) || TextPassword.getText().equals(user.getPassword())) {
+                user5 = user;
+                if (user.getSubscription().isSubscriptionActive())
+                    GoToMainPage(act, user);
+                else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setContentText("Subscription expired. Please renew to Login.");
+                    alert.showAndWait();
+                    GoToChoosePlan(act);
+                }
             }
             else {
                 if (try_Password == 3) {
@@ -146,7 +153,6 @@ public class SignIn
         stage.setResizable(false);
         stage.setX(-7);
         stage.setY(0);
-        user5=user;
         stage.setScene(scene);
         stage.show();
     }
@@ -165,6 +171,25 @@ public class SignIn
             TextPassword.setVisible(false);
             Password.setVisible(true);
         }
+    }
+    public void GoToChoosePlan(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("choose-plan.fxml"));
+        Parent root;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        ChoosePlanController controller = loader.getController();
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        controller.setStage(stage);
+        controller.subscriptionEnded = true;
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        stage.setX(-7);
+        stage.setY(0);
+
     }
     public void onMouseEntered() {
         Back.setOnMouseEntered(event -> Back.setStyle("-fx-background-color: #FFC107; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));

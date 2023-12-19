@@ -30,19 +30,20 @@ public class searchViewController {
     private Label Gender_Label;
     @FXML
     private Label Nation_Label;
+    private Label Movies_Label;
     @FXML
     private Label Not_Found_Label;
     @FXML
     private Label data_Label;
     private Stage stage;
     private Parent root;
+    private User user;
     public static ArrayList<Movie> searchMovies=new ArrayList<Movie>();
     @FXML
     public void initialize(){
         for (Movie movie:searchMovies) {
             add_movie(movie);
         }
-        Movies.setSpacing(20);
     }
 
     private void add_movie(Movie movie){
@@ -62,7 +63,7 @@ public class searchViewController {
         String[] arr = search_name.split(" ");
         String first = arr[0], second = arr[1];
         if(type.equals("Director")) {
-            Director d = Director.Search_director(first, second);
+            Director d = Director.search(first, second);
             data_Label.setText("Director");
             if (d == null)
                 Not_Found_Label.setText("Not Found !!!");
@@ -74,7 +75,7 @@ public class searchViewController {
             }
         }
         else if(type.equals("Cast")) {
-            Cast c = Cast.Search_Cast(first, second);
+            Artist c = Cast.search(first, second);
             data_Label.setText("Cast");
             if(c==null)
                 Not_Found_Label.setText("Not Found !!!");
@@ -92,6 +93,7 @@ public class searchViewController {
         root = loader.load();
         MainPageController controller = loader.getController();
         controller.setStage(stage);
+        controller.setUser(user);
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("Movie");
@@ -104,5 +106,8 @@ public class searchViewController {
 
     public void setStage(Stage stage){
         this.stage = stage;
+    }
+    public void setUser(User user){
+        this.user = user;
     }
 }

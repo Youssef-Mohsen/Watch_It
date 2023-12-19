@@ -35,7 +35,7 @@
                                                 <Font name="System Bold" size="36.0" />
                                             </font>
                                         </Label>
-                                        <TextField fx:id="UserName" alignment="CENTER" layoutX="262.0" layoutY="266.0" prefHeight="47.0" prefWidth="460.0" promptText="Username" style="-fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30; -fx-text-fill: white;">
+                                            <TextField fx:id="UserName" alignment="CENTER" layoutX="262.0" layoutY="266.0" prefHeight="47.0" prefWidth="460.0" promptText="Username" style="-fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30; -fx-text-fill: white;">
                                             <font>
                                                 <Font name="Chalkboard Bold" size="20.0" />
                                             </font>
@@ -55,7 +55,7 @@
                                                 <Font name="System Bold" size="20.0" />
                                             </font>
                                         </Button>
-                                        <TextField fx:id="TextPassword" alignment="CENTER" layoutX="262.0" layoutY="331.0" prefHeight="47.0" prefWidth="460.0" promptText="Password" style="-fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30;">
+                                        <TextField fx:id="TextPassword" alignment="CENTER" layoutX="262.0" layoutY="331.0" prefHeight="47.0" prefWidth="460.0" promptText="Password" style="-fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30; -fx-text-fill: white;" >
                                             <font>
                                                 <Font name="Chalkboard Bold" size="20.0" />
                                             </font>

@@ -21,7 +21,8 @@ public class Director extends Artist {
         }
     }
 
-    public void Add_Director( String first_name,String second_name,int age,String gender,String Nationality,int num,ArrayList<String> movie){
+    @Override
+    public void add( String first_name,String second_name,int age,String gender,String Nationality,ArrayList<String> movie){
         Director d=new Director();
         d.setFirst_Name(first_name);
         d.setSecond_Name(second_name);
@@ -29,14 +30,15 @@ public class Director extends Artist {
         d.setGender(gender);
         d.setNationality(Nationality);
         d.setMovies(movie);
-        // Admin.directors.add(d);
+        allDirectors.add(d);
     }
-    public void Update_Director(int index,String movie){
+    @Override
+    public void update(int index,String movie){
 
         allDirectors.get(index).Movies.add(movie);
     }
 
-    public static Director  Search_director(String first_name,String second_name) {
+    public static Director search(String first_name,String second_name) {
         for (Director m : allDirectors) {
 
             if (m.getFirst_Name().equals(first_name) && m.getSecond_Name().equals(second_name)) {
@@ -47,7 +49,8 @@ public class Director extends Artist {
         }
         return null;
     }
-    public int  Check(String first_name,String second_name) {
+    @Override
+    public int check (String first_name,String second_name) {
         for (int i=0;i<allDirectors.size();i++) {
 
             if (allDirectors.get(i).getFirst_Name().equals(first_name) && allDirectors.get(i).getSecond_Name().equals(second_name)) {
@@ -87,5 +90,14 @@ public class Director extends Artist {
 
         }
 
+    }
+    @Override
+    public String toString(){
+        String data = "";
+        data = data.concat("director").concat(",").concat(getFirst_Name()).concat(",").concat(getSecond_Name()).concat(",").concat(Integer.toString(getAge())).concat(",").concat(getGender()).concat(",").concat(getNationality());
+        for(String movie: getMovies()){
+            data = data.concat(",").concat(movie);
+        }
+        return data;
     }
 }

@@ -1,61 +1,41 @@
-user,nada,123456,1,nada,ayman,basic,nadaAyman@gmail.com,2023-12-06,assets/batbot-01.png,to be watched,Oppenheimer,watched,Avengers: Endgame,null,Joker,3
-user,youssef,456789,3,youssef,mohsen,premium,youssefMohsen@gmail.com,2023-10-09,assets/batbot-02.png,to be watched,Insidious: The Red Door,watched,Oppenheimer,null,The Dark Knight,3
-user,mai,456789,2,mai,ezz,standard,salama@gmail.com,2023-11-15,to be watched,titanic,watched,red 3,null, red 2,3.2
-user,basmala,456789,4,basmala,tarek,basic,ismail@gmail.com,2023-09-3,to be watched,titanic,watched,red 3,null, red 2,3.2
-user,tasneem,456789,545,tasneem,mohamed,premium,hossam@gmail.com,2023-10-09,to be watched,titanic,watched,red 3,null, red 2,3.2
-user,youssef_,456789,4,youssef,ahmad,basic,ismail@gmail.com,2023-09-3,to be watched,titanic,watched,red 3,null, red 2,3.2
-user,toka,456789,4,toka,karam,standard,ismail@gmail.com,2023-09-3,to be watched,titanic,watched,red 3,null,red 2,3.2
-1,The Dark Knight,When the menace known as the Joker wreaks havoc and chaos on the people of Gotham. Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.,2008-07-23,2h:32m,Christopher Nolan,English,9,United States,565.000.000 M,2.437.724.184 B,movies/the dark knight.jpeg,cast,Christian Bale,Morgan Freeman,Cillian Murphy,genres,action,crime,drama,thriller
-2,Oppenheimer,The story of American scientist. J. Robert Oppenheimer. and his role in the development of the atomic bomb.,2023-11-21,3h,Christopher Nolan,English,8,United States,100.000.000M,2.437.724 M,movies/Oppenheimer.jpeg,cast,Robert DowneyJr,Matt Damon,Cillian Murphy,genres,drama,history,biography
-3,Sherlock Holmes,Detective Sherlock Holmes and his stalwart partner Watson engage in a battle of wits and brawn with a nemesis whose plot is a threat to all of England.,2009-12-30,2h:8m,Guy Ritchie,English,8,England,90.000.000 M,112.190.000 M,movies/Sherlock_Holmes.jpeg,cast,Robert DowneyJr,Mark Strong,Jude Law,genres,action,adventure,mystery
-4,Avengers: Endgame,After the devastating events of Avengers: Infinity War (2018). the universe is in ruins. With the help of remaining allies. the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe.,2019-04-26,3h:1m,Anthony Russo,English,8,United States,90.000.000 M,112.190.000 M,movies/endgame.jpeg,cast,Robert DowneyJr,Benedict Cumberbatch,Chris Hemsworth,genres,action,adventure,drama
-6,Home Alone,An eight-year-old troublemaker. mistakenly left home alone. must defend his home against a pair of burglars on Christmas eve.,1991-07-22,1h:43m,Chris Columbus,English,7,United Stated,90.000.000 M,112.190.000 M,movies/home alone.jpeg,cast,Macaulay Culkin,Daniel Stern,Joe Pesci,genres,comedy,family
-5,Joker,During the 1980s a failed stand-up comedian is driven insane and turns to a life of crime and chaos in Gotham City while becoming an infamous psychopathic crime figure.,2019-10-04,2h:2m,Todd Phillips,English,8,United States,100.000.000M,2.437.724 M,movies/joker.jpeg,cast,Joaquin Phoenix,Robert DeNiro,genres,crime,drama,thriller
-7,Insidious: The Red Door,The Lamberts must go deeper into The Further than ever before to put their demons to rest once and for all.,2023-07-07,1h:47m,Patrick Wilson,English,5,Unitied States,100.000.000M,2.437.724 M,movies/red_door.jpeg,cast,Patrick Wilson,Rose Byrne,genres,horror,mystery,thriller
-8,Inception,A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O. but his tragic past may doom the project and his team to disaster.,2010-07-14,2h:28m,Christopher Nolan,English,9,America,100.000.000M,2.437.724 M,movies/Inception.jpeg,cast,Cillian Murphy,Leonardo DiCaprio,genres,action,adventure,Sci-Fi
-9,Titanic,A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious ill-fated R.M.S. Titanic.,1997-12-19,3h:14m,James Cameron,English,8,America,95.000.000M,2.437.724 M,movies/titanic.jpeg,cast,Leonardo DiCaprio,Kate Winslet,genres,romance,drama
-10,Spider-Man: No Way Home,With Spider-Man's identity now revealed. Peter asks Doctor Strange for help. When a spell goes wrong. dangerous foes from other worlds start to appear. forcing Peter to discover what it truly means to be Spider-Man.,2021-12-15,2h:28m,Jon Watts,English,9,America,95.000.000M,2.437.724 M,movies/No_Way_Home.jpg,cast,Tom Holland,Zendaya,Benedict Cumberbatch,genres,action,adventure,fantasy,Sci-Fi
-11,Aquaman and the Lost Kingdom,Aquaman balances his duties as king and as a member of the Justice League. all while planning a wedding. Black Manta is on the hunt for Atlantean tech to help rebuild his armor. Orm plots to escape his Atlantean prison.,2023-12-20,2h:4m,James Wan,English,6,America,95.000.000M,2.437.724 M,movies/Aquaman.jpg,cast,Jason Momoa,Patrick Wilson,Ben Affleck,genres,action,adventure,fantasy,Sci-Fi
-12,Wonka,With dreams of opening a shop in a city renowned for its chocolate. a young and poor Willy Wonka discovers that the industry is run by a cartel of greedy chocolatiers.,2023-11-28,1h:56m,Paul King,English,8,America,95.000.000M,2.437.724 M,movies/Wonka.jpg,cast,Timothée Chalamet,Paul G. Raymond,Murray McArthur,genres,adventure,comedy,family,fantasy,musical
-13,Black Widow,Natasha Romanoff confronts her past as a spy and must deal with the aftermath of Captain America: Civil War. Pursued by a force that will stop at nothing to bring her down. Natasha seeks to unravel a conspiracy tied to her past.,2021-07-09,2h:13m,Cate Shortland,English,8,United States,200.000.000 M,378.454.000 M,movies/black widow.jpeg,cast,Scarlett Johansson,Florence Pugh,David Harbour,genres,action,adventure,Sci-Fi
-14,Interstellar,In a future Earth facing environmental collapse. a team of astronauts embarks on a perilous journey through a wormhole near Saturn to find a new habitable planet for humanity. The film explores the complexities of space travel. time dilation. and the enduring power of love.,2014-11-05,2h:49m,Christopher Nolan,English,9,United States,165.000.000 M,677.471.339 M,movies/Interstellar.jpeg,cast,Matthew McConaughey,Anne Hathaway,Jessica Chastain,genres,adventure,drama,Sci-Fi
-15,Ready or Not,Grace. a young bride. is excited to join her new husband's wealthy and eccentric family. However. her wedding night takes a dark turn when she is forced to participate in a deadly game of hide-and-seek. As the night unfolds. Grace must navigate the dangerous game and survive until dawn.,2019-08-21,1h:35m,Tyler Gillett,English,7,United States,6.000.000 M,57.548.572 M,movies/ready or not.jpeg,cast,Samara Weaving,Adam Brody,Mark O'Brien,genres,horror,mystery,thriller
-16,The Prestige, In the world of 19th-century magic. two magicians. Robert Angier and Alfred Borden. engage in a fierce rivalry that spans decades. Their quest for the ultimate illusion leads them to make sacrifices that blur the line between reality and deception.,2006-10-17,2h:10m,Christopher Nolan,English,8,United United Kingdom,40.000.000 M,109.676.311 M,movies/The_Prestige.jpg,cast,Hugh Jackman,Christian Bale,Scarlett Johansson,genres,drama,mystery,Sci-Fi
-17,Blade Runner 2049,In a dystopian future. Officer K. a "Blade Runner" tasked with eliminating rogue replicants. uncovers a long-buried secret that has the potential to plunge society into chaos. His quest leads him to Rick Deckard. a former Blade Runner. and unravels mysteries that question the nature of humanity.,2017-10-06, 2h:44m,Denis Villeneuve,English,8,United States. Canada,150.000.000 M,260.516.380 M,movies/Bladr_Runner.jpg,cast,Ryan Gosling,Harrison Ford,Ana de Armas,genres,drama,mystery,Sci-Fi
-18,The Grand Budapest Hotel,In the fictional Republic of Zubrowka. Gustave H.. a legendary concierge at the Grand Budapest Hotel. teams up with his protégé Zero Moustafa to prove his innocence after being framed for murder. The duo embarks on a whimsical and madcap adventure involving a valuable painting and a fight for a family fortune.,2014-03-07,1h:39m,Wes Anderson,English,8,Germany,25.000.000 M,174.800.000 M,movies/The_Hotel.jpg,cast,Ralph Fiennes,Tony Revolori,Saoirse Ronan,genres,adventure,comedy,crime
-19,Dune,In the distant future. Paul Atreides. a young noble. journeys to the desert planet Arrakis. the only source of a valuable spice called "melange." As political intrigue and battles unfold. Paul must embrace his destiny and confront the mysteries of Arrakis.,2021-09-15,2h:36m,Denis Villeneuve,English,8,United States,165.000.000 M,397.376.144 M,movies/Dune.jpg,cast,Timothée Chalamet,Zendaya,Oscar Isaac,genres,adventure,drama,Sci-Fi
-20,The Matrix,A computer hacker learns about the true nature of his reality and his role in the war against the controllers of a simulated world.,1999-03-31,2h:16m,Lana and Lilly Wachowski,English,8,United States,63.000.000,465.300.000,movies/Matrix.jpeg,cast,Keanu Reeves,Laurence Fishburne,Carrie-Anne Moss,genres,action,sci-fi
-21,Gladiator,Maximus a betrayed Roman general seeks justice for the murder of his family and the wrongful execution of himself. He rises as a gladiator to challenge the corrupt Roman Empire.,2000-05-01,2h:35m,Ridley Scott,English,8,United States,103.000.000,460.500.000,movies/Gladiator.jpeg,cast,Russell Crowe,Joaquin Phoenix,Connie Nielsen,genres,action,adventure,drama
-cast,Patrick,Wilson,50,male,American,Columbus,Insidious: The Red Door
+user,nada,123456,1,nadod,ayman,basic,nadaAyman@gmail.com,2023-12-06,assets/batbot-01.png,to be watched,Insidious: The Red Door,watched,Avengers: Endgame,5.0,Joker,1.0,done,
+user,youssef,456789,1,youssef,mohsen,premium,youssefMohsen@gmail.com,2023-10-09,assets/batbot-02.png,to be watched,Insidious: The Red Door,watched,Oppenheimer,-1.0,The Dark Knight,3.0,done,
+user,Mai,123456,1,Mai,Ezz,basic,MaiEzz@gmail.com,2023-12-06,assets/batbot-01.png,to be watched,Oppenheimer,watched,Avengers: Endgame,-1.0,Joker,3.0,done,
+user,Basmala,456789,1,Basmala,Tarek,premium,Basmala-Tarek@gmail.com,2023-10-09,assets/batbot-02.png,to be watched,Insidious: The Red Door,watched,Oppenheimer,-1.0,The Dark Knight,3.0,done,
+user,Tasneem,123456,1,Tasneem,Mohamed,basic,TasneemMohamed@gmail.com,2023-12-06,assets/batbot-01.png,to be watched,Oppenheimer,watched,Avengers: Endgame,-1.0,Joker,3.0,done,
+user,toka,456789,1,toka,karam,premium,tokaKaram@gmail.com,2023-10-09,assets/batbot-02.png,to be watched,Insidious: The Red Door,watched,Oppenheimer,-1.0,The Dark Knight,3.0,done,
+user,youssef,456789,1,youssef,ahmad,premium,youssefAhmad@gmail.com,2023-10-09,assets/batbot-02.png,to be watched,Insidious: The Red Door,watched,Oppenheimer,-1.0,The Dark Knight,3.0,done,
+cast,Patrick,Wilson,50,male,American,Insidious: The Red DoorS,Columbus
 cast,Rose,Byrne,44,female,Australian,Insidious: The Red Door
 cast,Joaquin,Phoenix,49,male,American,Joker
 cast,Robert,DeNiro,80,male,American,Joker
 cast,Joe,Pesci,80,male,American,Home Alone
+cast,Kate,Winslet,48,female,Titanic
 cast,Macaulay,Culkin,43,male,American,Home Alone
 cast,Daniel,Stern,66,male,American,Home Alone
-cast,Robert,DowneyJr,58,male,American,Avengers: Endgame,Sherlock Holmes,Oppenheimer
+cast,Robert,DowneyJr,58,male,American,Oppenheimer,Sherlock Holmes,Avengers: Endgame
 cast,Benedict,Cumberbatch,40,male,English,Avengers: Endgame
 cast,Chris,Hemsworth,40,male,English,Avengers: Endgame
 cast,Mark,Strong,60,male,British,Sherlock Holmes
 cast,Jude,Law,50,male,English,Sherlock Holmes
-cast,Cillian,Murphy,50,male,Irish,Oppenheimer,The Dark Knight
+cast,Cillian,Murphy,50,male,Irish,The Dark Knight,Oppenheimer
 cast,Matt,Damon,53,male,American,The Dark Knight
 cast,Christian,Bale,49,male,American,The Dark Knight
 cast,Morgan,Freeman,86,male,American,The Dark Knight
-director,Christopher,Nolan,53,male,british,The Dark Knight,Oppenheimer
+cast,Tom,Holland,27,male,England,Spider-Man: No Way Home
+cast,Zendaya,Coleman,27,female,America,Dune,Spider-Man: No Way Home
+cast,Jason,Momoa,44,male,America,Aquaman and the Lost Kingdom
+cast,Ben,Affleck,51,male,America,Aquaman and the Lost Kingdom
+cast,TimothÃe,Chalamet,28,male,America,Wonka
+cast,Paul,Raymond,34,male,England,Wonka
+cast,Murray,McArthur,57,male,England,Wonka
+cast,Leonardo,DiCaprio,49,male,Inception,Titanic
+director,Christopher,Nolan,53,male,british,Oppenheimer,The Dark Knight
 director,Guy,Ritchie,55,male,british,Sherlock Holmes
 director,Anthony,Russo,53,male,American,Avengers: Endgame
 director,Chris,Columbus,65,male,Italian,Home Alone
 director,Todd,Phillips,52,male,American,Joker
 director,Patrick,Wilson,50,male,American,Insidious: The Red Door
-1,The Dark Knight,When the menace known as the Joker wreaks havoc and chaos on the people of Gotham. Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.,2008-07-23,2h:32m,Christopher Nolan,English,9,United States,565.000.000 M,2.437.724.184 B,movies/the dark knight.jpeg,cast,Christian Bale,Morgan Freeman,Cillian Murphy,genres,action,crime,drama,thriller
-2,Oppenheimer,The story of American scientist. J. Robert Oppenheimer. and his role in the development of the atomic bomb.,2023-11-21,3h,Christopher Nolan,English,8,United States,100.000.000M,2.437.724 M,movies/Oppenheimer.jpeg,cast,Robert DowneyJr,Matt Damon,Cillian Murphy,genres,drama,history,biography
-3,Sherlock Holmes,Detective Sherlock Holmes and his stalwart partner Watson engage in a battle of wits and brawn with a nemesis whose plot is a threat to all of England.,2009-12-30,2h:8m,Guy Ritchie,English,8,England,90.000.000 M,112.190.000 M,movies/Sherlock_Holmes.jpeg,cast,Robert DowneyJr,Mark Strong,Jude Law,genres,action,adventure,mystery
-4,Avengers: Endgame,After the devastating events of Avengers: Infinity War (2018). the universe is in ruins. With the help of remaining allies. the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe.,2019-04-26,3h:1m,Anthony Russo,English,8,United States,90.000.000 M,112.190.000 M,movies/endgame.jpeg,cast,Robert DowneyJr,Benedict Cumberbatch,Chris Hemsworth,genres,action,adventure,drama
-6,Home Alone,An eight-year-old troublemaker. mistakenly left home alone. must defend his home against a pair of burglars on Christmas eve.,1991-07-22,1h:43m,Chris Columbus,English,7,United Stated,90.000.000 M,112.190.000 M,movies/home alone.jpeg,cast,Macaulay Culkin,Daniel Stern,Joe Pesci,genres,comedy,family
-5,Joker,During the 1980s a failed stand-up comedian is driven insane and turns to a life of crime and chaos in Gotham City while becoming an infamous psychopathic crime figure.,2019-10-04,2h:2m,Todd Phillips,English,8,United States,100.000.000M,2.437.724 M,movies/joker.jpeg,cast,Joaquin Phoenix,Robert DeNiro,genres,crime,drama,thriller
-7,Insidious: The Red Door,The Lamberts must go deeper into The Further than ever before to put their demons to rest once and for all.,2023-07-07,1h:47m,Patrick Wilson,English,5,Unitied States,100.000.000M,2.437.724 M,movies/red_door.jpeg,cast,Patrick Wilson,Rose Byrne,genres,horror,mystery,thriller
-8,Inception,A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O. but his tragic past may doom the project and his team to disaster.,2010-07-14,2h:28m,Christopher Nolan,English,9,America,100.000.000M,2.437.724 M,movies/Inception.jpeg,cast,Cillian Murphy,Leonardo DiCaprio,genres,action,adventure,Sci-Fi
-9,Titanic,A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious ill-fated R.M.S. Titanic.,1997-12-19,3h:14m,James Cameron,English,8,America,95.000.000M,2.437.724 M,movies/titanic.jpeg,cast,Leonardo DiCaprio,Kate Winslet,genres,romance,drama
+director,James,Cameron,69,male,Canadian,Titanic
 admin,nada,123456
 admin,mai,123456

@@ -1,9 +1,7 @@
 package com.example.watch_it;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
+
 public class Movie {
 
     public static ArrayList<Movie> allmovies = new ArrayList<>();
@@ -15,7 +13,7 @@ public class Movie {
     private ArrayList<String> castNames;
     private static int counter = 0;
     private int id;
-    private int views = 0;
+    private int views;
     private String title;
     private LocalDate release_date;
     private String running_time;
@@ -25,12 +23,11 @@ public class Movie {
     private String poster_path;
     private String budget;
     private String revenue;
-    private int imdb_score;
+    private float imdb_score;
     private String description;
-    private float avarage_rating = 0f;
-    private float total_rating = 0f;
+    private Double avarage_rating;
+    private Double total_rating;
     private int users_rated = 0;
-
     private Director director;
     private List<Cast> cast;
     public int userRate;
@@ -41,7 +38,7 @@ public class Movie {
         this.cast = new ArrayList<>();
     }
 
-    public Movie(String title, LocalDate release_date, String running_time, ArrayList<String> genre, String language, String country, String poster_path, String budget, String revenue, int imdb_score,String description) {
+    public Movie(String title, LocalDate release_date, String running_time, ArrayList<String> genre, String language, String country, String poster_path, String budget, String revenue, float imdb_score,String description) {
         counter++;
         this.id = counter;
         this.title = title;
@@ -101,16 +98,14 @@ public class Movie {
         return budget;
     }
 
-    public int getImdb_score() {
+    public float getImdb_score() {
         return imdb_score;
     }
-    public float getAverage_rating() {
-        return avarage_rating;
-    }
+    public Double getAverage_rating() {
+        return avarage_rating;}
     public Director getDirector() {
         return director;
     }
-
 
     public void setId(int id) {
         this.id = id;
@@ -151,8 +146,16 @@ public class Movie {
         this.revenue = revenue;
     }
 
-    public void setImdb_score(int imdb_score) {
+    public void setImdb_score(float imdb_score) {
         this.imdb_score = imdb_score;
+    }
+
+    public void setViews(int views) {
+        this.views = views;
+    }
+
+    public void setAvarage_rating(Double avarage_rating){
+        this.avarage_rating = avarage_rating;
     }
     public String getDescription() {
         return description;
@@ -161,7 +164,6 @@ public class Movie {
     public void setDescription(String description) {
         this.description = description;
     }
-
     public void inc_views(){
         this.views++;
     }
@@ -179,6 +181,9 @@ public class Movie {
     public int getYear(){
         return release_date.getYear();
     }
+    public Double getTotalRating(){
+        return total_rating;
+    }
     public void addActor(Cast actor) {
         cast.add(actor);
     }
@@ -190,10 +195,11 @@ public class Movie {
     public void setDirector(Director director) {
         this.director = director;
     }
-    public void UpdateRating(float rating){
-
+    public void setTotalRating(Double total_rating){
+        this.total_rating = total_rating;
+    }
+    public void UpdateRating(Double rating){
         total_rating += rating;
-
         if (rating >= 0) {
             users_rated++;
             avarage_rating = total_rating / users_rated;
@@ -204,11 +210,9 @@ public class Movie {
                 avarage_rating = total_rating / users_rated;
             }
             else
-                avarage_rating = 0.0f;
+                avarage_rating = 0.0;
         }
-
     }
-
     public static Movie getMovie (String movie_title) {
         if (!(allmovies.isEmpty())) {
             for (Movie movie : allmovies) {
@@ -218,9 +222,9 @@ public class Movie {
         }
         return null;
     }
-    public static List<Movie> RecentMovies(List<Movie> movie) {
+    public static List<Movie> RecentMovies() {
         List<Movie> recent_movies = new ArrayList<>();
-        for (Movie m : movie) {
+        for (Movie m : allmovies) {
             LocalDate release_date = m.getRelease_date();
             if (release_date.isAfter(LocalDate.now().minusMonths(1))) {
                 recent_movies.add(m);
@@ -232,9 +236,10 @@ public class Movie {
         }
         return null;
     }
-    public static List<Movie> TopRatedMovies(List<Movie> movie) {
-        movie.sort(Comparator.comparing(Movie::getAverage_rating).reversed());
-        return movie;
+    public static ArrayList<Movie> TopRatedMovies() {
+        ArrayList<Movie> check = new ArrayList<>(allmovies);
+        check.sort(Comparator.comparingDouble(Movie::getAverage_rating).reversed());
+        return check;
     }
     public static PriorityQueue<Movie> MostViewedMovies(List<Movie> movieList) {
         // Create a PriorityQueue with a custom comparator
@@ -264,19 +269,18 @@ public class Movie {
     public String getDirectorName() {
         return directorName;
     }
-
     public void setDirectorName(String directorName) {
         this.directorName = directorName;
     }
-
     public ArrayList<String> getCastNames() {
         return castNames;
     }
-
+    public void getCastNames(ArrayList<String> cast) {
+        this.castNames.addAll(cast);
+    }
     public void setCastNames(ArrayList<String> castNames) {
         this.castNames = castNames;
     }
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -287,6 +291,12 @@ public class Movie {
         }
         Movie otherMovie = (Movie) obj;
         return title.equals(otherMovie.title);
+    }
+    @Override
+    public String toString (){
+        String data = "";
+
+        return data;
     }
 
 }

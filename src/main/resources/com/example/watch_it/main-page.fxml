@@ -197,7 +197,7 @@
                                         <Font name="System Bold" size="20.0" />
                                     </font>
                                 </Label>
-                                <ScrollPane fx:id="Scroll1" prefHeight="280.0" prefWidth="1260.0" style="-fx-background-color: transparent; -fx-background-insets:0;" styleClass="scrollPane" stylesheets="@style.css" vbarPolicy="NEVER">
+                                <ScrollPane fx:id="Scroll1" prefHeight="295.0" prefWidth="1260.0" style="-fx-background-color: transparent; -fx-background-insets:0;" styleClass="scrollPane" stylesheets="@style.css" vbarPolicy="NEVER">
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="182.0" prefWidth="915.0" />
                                     <HBox fx:id="TopMovies" spacing="20" styleClass="HBox" stylesheets="@style.css" />
                                 </ScrollPane>
@@ -207,7 +207,7 @@
                                         <Font name="System Bold" size="20.0" />
                                     </font>
                                 </Label>
-                                <ScrollPane fx:id="Scroll2" prefHeight="280.0" prefWidth="1260.0" style="-fx-background-color: transparent; -fx-background-insets:0;" styleClass="scrollPane" stylesheets="@style.css" vbarPolicy="NEVER">
+                                <ScrollPane fx:id="Scroll2" prefHeight="295.0" prefWidth="1260.0" style="-fx-background-color: transparent; -fx-background-insets:0;" styleClass="scrollPane" stylesheets="@style.css" vbarPolicy="NEVER">
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="182.0" prefWidth="915.0" />
                                     <HBox fx:id="RecentMovies" spacing="20" styleClass="HBox" stylesheets="@style.css" />
                                 </ScrollPane>
@@ -216,7 +216,7 @@
                                         <Font name="System Bold" size="20.0" />
                                     </font>
                                 </Label>
-                                <ScrollPane fx:id="Scroll3" prefHeight="280.0" prefWidth="1260.0" style="-fx-background-color: transparent; -fx-background-insets:0;" styleClass="scrollPane" stylesheets="@style.css" vbarPolicy="NEVER">
+                                <ScrollPane fx:id="Scroll3" prefHeight="295.0" prefWidth="1260.0" style="-fx-background-color: transparent; -fx-background-insets:0;" styleClass="scrollPane" stylesheets="@style.css" vbarPolicy="NEVER">
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="182.0" prefWidth="915.0" />
                                     <HBox fx:id="TopRatedMovies" spacing="20" styleClass="HBox" stylesheets="@style.css" />
                                 </ScrollPane>

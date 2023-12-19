@@ -122,6 +122,7 @@ public class RecordedMoviesController {
         Parent root = loader.load();
         stage = (Stage)((Node)act.getSource()).getScene().getWindow();
         MovieController controller=loader.getController();
+        controller.setUser(user);
         controller.setStage(stage);
         controller.disableButtons();
         controller.setMovie(movie1);
@@ -147,6 +148,7 @@ public class RecordedMoviesController {
         stage = (Stage)((Node)act.getSource()).getScene().getWindow();
         profilePageController controller=loader.getController();
         controller.setStage(stage);
+        controller.setUser(user);
         controller.setdata();
         scene = new Scene(root);
         stage.setScene(scene);

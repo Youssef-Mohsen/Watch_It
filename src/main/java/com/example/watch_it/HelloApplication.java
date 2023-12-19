@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class HelloApplication extends Application {
     @Override
@@ -16,11 +17,12 @@ public class HelloApplication extends Application {
         File movieFile = new File("movies-data.txt");
         Admin.readFile(file);;
         Admin.readMovies(movieFile);
+        User.allusers.addAll(Admin.getAllUsers());
+        Director.allDirectors.addAll(Admin.getAllDirectors());
+        Cast.allCast.addAll(Admin.getAllCast());
+        Admin.allAdmins.addAll(Admin.getAllAdmins());
         Movie.allmovies.addAll(Admin.getMoviesObjs());
         Movie.getDiffGenres();
-        Director.allDirectors.addAll(Admin.getAllDirectors());
-        User.allusers.addAll(Admin.getAllUsers());
-        Cast.allCast.addAll(Admin.getAllCast());
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("first-page.fxml"));
         Parent root;
@@ -37,11 +39,13 @@ public class HelloApplication extends Application {
         stage.setX(-7);
         stage.setY(0);
         stage.setScene(scene);
+        stage.setOnCloseRequest(windowEvent -> {
+            Admin.writeOnFile(file);
+        });
         stage.show();
+
     }
-
     public static void main(String[] args) {
-
         launch();
     }
 }

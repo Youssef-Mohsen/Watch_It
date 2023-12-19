@@ -9,9 +9,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class ChoosePlanController {
@@ -33,9 +35,13 @@ public class ChoosePlanController {
     private Scene scene;
     static Button selectedButton = new Button();
     Stage stage;
+    private String newPlan;
     private User user;
+    private Subscription.Plans newSubscription;
+    public static boolean subscriptionEnded = false;
     public void setUser(User user) {
         this.user = user;
+
     }
 
     @FXML
@@ -43,6 +49,7 @@ public class ChoosePlanController {
         basic.setStyle("-fx-border-color: #090909; -fx-background-color: #090909; -fx-background-radius: 30; -fx-border-radius: 30;");
         standard.setStyle("-fx-border-color: #090909; -fx-background-color: #090909; -fx-background-radius: 30; -fx-border-radius: 30;");
         premium.setStyle("-fx-border-color: #090909; -fx-background-color: #090909; -fx-background-radius: 30; -fx-border-radius: 30;");
+
     }
     @FXML
     private void Basic() {
@@ -66,49 +73,85 @@ public class ChoosePlanController {
         selectedButton = premium;
     }
     @FXML
-    private void Pay() {
+    private void Pay(ActionEvent event) throws IOException {
         String cardnumber = cardNumber.getText();
         String cardholdername = cardHolderName.getText();
         String mmyy = MMyy.getText();
         String cvv = Cvv.getText();
+
         if (cardnumber.isEmpty() || cardholdername.isEmpty() || mmyy.isEmpty() || cvv.isEmpty() || selectedButton == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText(null);
             alert.setContentText("Enter All Data");
             alert.showAndWait();
+            return;
+        }
+
+        if (selectedButton.equals(basic)) {
+            newSubscription = Subscription.Plans.BASIC;
+            newPlan = "basic";
+        } else if (selectedButton.equals(standard)) {
+            newSubscription = Subscription.Plans.STANDARD;
+            newPlan = "standard";
+        } else if (selectedButton.equals(premium)) {
+            newSubscription = Subscription.Plans.PREMIUM;
+            newPlan = "premium";
+        }
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("");
+        alert.setHeaderText(null);
+
+        if (profilePageController.updatePlan) {
+            SignIn.user5.setPlan(newPlan);
+            SignIn.user5.Updata_Subscription_Plan(newSubscription);
+            SignIn.user5.getSubscription().updateSubscription(newSubscription);
+            SignIn.user5.getSubscription().subscriptionNotValid = false;
+            alert.setContentText("Subscription Updated");
+            profilePageController.updatePlan = false;
+            toMoviesrecord(event);
         }
         else {
-            User.allusers.add(user);
-            if (selectedButton.equals(basic)) {
-                user.Subscribe(user.getUser_ID(),  Subscription.Plans.BASIC);
-                user.Updata_Subscription_Plan(Subscription.Plans.BASIC);
-                user.setPlan("basic");
+            if (subscriptionEnded) {
+                SignIn.user5.Updata_Subscription_Plan(newSubscription);
+                SignIn.user5.setPlan(newPlan);
+                subscriptionEnded = false;
+                alert.setContentText("Subscription Updated, Login to your Account");
+            } else {
+                User.allusers.add(user);
+                user.Subscribe(user.getUser_ID(), newSubscription);
+                Admin.users.add(user.toString());
+                alert.setContentText("Sign Up Completed, Login to your Account");
+                user.Updata_Subscription_Plan(newSubscription);
+                user.setPlan(newPlan);
             }
-            else if (selectedButton.equals(standard)){
-                user.Subscribe(user.getUser_ID(),  Subscription.Plans.STANDARD);
-                user.Updata_Subscription_Plan(Subscription.Plans.STANDARD);
-                user.setPlan("standard");
-            }
-            else if (selectedButton.equals(premium)){
-                user.Subscribe(user.getUser_ID(),  Subscription.Plans.PREMIUM);
-                user.Updata_Subscription_Plan(Subscription.Plans.PREMIUM);
-                user.setPlan("premium");
-            }
-            Admin.users.add(user.toString());
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("");
-            alert.setHeaderText(null);
-            alert.setContentText("Sign Up is completed Successful!");
             alert.showAndWait();
+            GoToSignIn(event);
         }
     }
     @FXML
+    public void GoToSignIn(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("sign-in.fxml")));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    @FXML
     private void goBack (ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("sign-up.fxml"));
-        root = loader.load();
-        SignUp controller = loader.getController();
-        controller.setStage(stage);
+        if (profilePageController.updatePlan) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("main-page.fxml"));
+            root = loader.load();
+            MainPageController controller = loader.getController();
+            controller.setStage(stage);
+        }
+        else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("sign-up.fxml"));
+            root = loader.load();
+            SignUp controller = loader.getController();
+            controller.setStage(stage);
+        }
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setTitle("Movie");
@@ -118,7 +161,24 @@ public class ChoosePlanController {
         stage.setScene(scene);
         stage.show();
     }
+    @FXML
+    void toMoviesrecord(ActionEvent event)throws IOException{
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("profile-page.fxml"));
+        Parent root = loader.load();
+        profilePageController controller = loader.getController();
+        controller.toMoviesrecord();
+        controller.setUser(SignIn.user5);
+        controller.setdata();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setResizable(false);
+        stage.setX(-7);
+        stage.setY(0);
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public void setStage (Stage stage) {
-        this.stage = this.stage;
+        this.stage = stage;
     }
 }
