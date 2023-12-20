@@ -30,7 +30,7 @@ public class Movie {
     private int users_rated = 0;
     private Director director;
     private List<Cast> cast;
-    public int userRate;
+
     public Movie(){
         counter++;
         this.id = counter;
@@ -175,9 +175,7 @@ public class Movie {
     public List<Cast> getCast() {
         return cast;
     }
-    public int getUserRate(){
-        return userRate;
-    }
+
     public int getYear(){
         return release_date.getYear();
     }

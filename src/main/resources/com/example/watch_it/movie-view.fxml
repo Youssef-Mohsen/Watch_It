@@ -107,11 +107,11 @@
     </Button>
     <HBox fx:id="starsRow" layoutX="1315.0" layoutY="675.0" prefHeight="44.0" prefWidth="174.0" spacing="5" styleClass="starsRow" stylesheets="@style.css">
         <children>
-            <ImageView fx:id="star1" fitHeight="44.0" fitWidth="35.0" onMouseClicked="#handleStarClick" onMouseEntered="#handleStarHover" onMouseExited="#resetStars" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="star2" fitHeight="44.0" fitWidth="35.0" onMouseClicked="#handleStarClick" onMouseEntered="#handleStarHover" onMouseExited="#resetStars" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="star3" fitHeight="44.0" fitWidth="35.0" onMouseClicked="#handleStarClick" onMouseEntered="#handleStarHover" onMouseExited="#resetStars" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="star4" fitHeight="44.0" fitWidth="35.0" onMouseClicked="#handleStarClick" onMouseEntered="#handleStarHover" onMouseExited="#resetStars" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="star5" fitHeight="44.0" fitWidth="35.0" onMouseClicked="#handleStarClick" onMouseEntered="#handleStarHover" onMouseExited="#resetStars" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="star1" fitHeight="44.0" fitWidth="35.0" onMouseClicked="#handleStarClick"  pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="star2" fitHeight="44.0" fitWidth="35.0" onMouseClicked="#handleStarClick"  pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="star3" fitHeight="44.0" fitWidth="35.0" onMouseClicked="#handleStarClick"   pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="star4" fitHeight="44.0" fitWidth="35.0" onMouseClicked="#handleStarClick"  pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="star5" fitHeight="44.0" fitWidth="35.0" onMouseClicked="#handleStarClick"  pickOnBounds="true" preserveRatio="true" />
         </children></HBox>
     <Button fx:id="watchLater" layoutX="1352.0" layoutY="737.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="135.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: white;" text="Watch Later" textFill="WHITE">
         <font>

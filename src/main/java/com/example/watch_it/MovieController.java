@@ -70,7 +70,7 @@ public class MovieController {
     private ImageView[] stars;
 
     private Movie movie;
-    private UserWatchRecord movie_watched;
+    static UserWatchRecord movie_watched;
     public int page5=0;
     private User user;
     double Max_Rating;
@@ -90,8 +90,6 @@ public class MovieController {
         for (ImageView star : stars) {
             star.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/emptyStar.png"))));
         }
-
-        watchMovie(movie);
         onMouseEntered();
         onMouseExit();
         alert.setTitle("");
@@ -101,8 +99,8 @@ public class MovieController {
     public void disableButtons(){
         watchLater.setDisable(true);
     }
-    @FXML
-    private boolean handleStarClick(MouseEvent event) {
+
+    public void handleStarClick(MouseEvent event) {
         ImageView clickedStar = (ImageView) event.getSource();
         int rating = Integer.parseInt(clickedStar.getId().substring(4)); // Extract the rating from the star's ID
         for (int i = 0; i < rating; i++) {
@@ -111,51 +109,50 @@ public class MovieController {
                 ImageView clickedStar2 = (ImageView) event1.getSource();
                 int rating2 = Integer.parseInt(clickedStar2.getId().substring(4)); // Extract the rating from the star's ID
                 stars[finalI1].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/fullStar.png"))));
-                for (int j = 0; j < rating2 + (4 - rating2); j++) {
-                    int finalJ = j;
-                    stars[j].setOnMouseExited(event2 ->
-                            stars[finalJ].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/fullStar.png")))));
-                }
-                for (int h = rating2 + (4 - rating2); h > rating2; h--) {
-                    int finalJ = h;
-                    stars[h].setOnMouseExited(event2 ->
-                            stars[finalJ].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/emptyStar.png")))));
-                }
                 Max_Rating=rating2;
-                movie.userRate=rating2;
-
-                for (int p = movie.userRate+(4-movie.userRate); p >= movie.userRate; p--){
-                    int finalJ = p;
-                    stars[finalJ].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/emptyStar.png"))));
-                    stars[p].setOnMouseExited(event2 ->
-                            stars[finalJ].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/emptyStar.png")))));
+                if(movie_watched!=null) {
+                    movie_watched.setRating(Max_Rating);
                 }
-                for (int j = 0; j <  movie.userRate; j++) {
+
+              /*  for (double p = movie_watched.getRating()+(4- movie_watched.getRating()); p >=  movie_watched.getRating(); p--){
+                    double finalJ = p;
+                    stars[(int) finalJ].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/emptyStar.png"))));
+                    stars[(int) p].setOnMouseExited(event2 ->
+                            stars[(int) finalJ].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/emptyStar.png")))));
+                }
+                for (int j = 0; j <   movie_watched.getRating(); j++) {
                     int finalJ = j;
                     stars[j].setOnMouseExited(event2 ->
                             stars[finalJ].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/fullStar.png")))));
+                }*/
+                for(int k=0;k< Max_Rating;k++){
+                    stars[k].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/fullStar.png"))));
+                }
+                for(double l = Max_Rating; l<5;l++){
+                    stars[(int) l].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/emptyStar.png"))));
                 }
             });
 
         }
         // You can perform additional actions here, such as saving the rating to a database.
-        return false;
     }
 
-    @FXML
-    private void handleStarHover(MouseEvent event) {
-        ImageView hoveredStar = (ImageView) event.getSource();
-        int rating = Integer.parseInt(hoveredStar.getId().substring(4)); // Extract the rating from the star's ID
-        // Highlight stars
+    public void handleStarHover(MouseEvent event) {
+        for(int i=0;i<5;i++) {
+            stars[i].setOnMouseEntered(event1 -> {
+                ImageView hoveredStar = (ImageView) event.getSource();
+                int rating = Integer.parseInt(hoveredStar.getId().substring(4)); // Extract the rating from the star's ID
+                // Highlight stars
 
-        for (int i = 0; i < rating; i++) {
-            stars[i].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/fullStar.png"))));
+                for (int j = 0; j < rating; j++) {
+                    stars[j].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/fullStar.png"))));
+                }
+            });
         }
-
     }
 
     @FXML
-    private void resetStars() {
+    public void resetStars() {
         for (ImageView star : stars) {
             star.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/emptyStar.png"))));
         }
@@ -185,45 +182,47 @@ public class MovieController {
     public void disableWatch(){
         Watch.setOnMouseClicked(event -> Watch.setDisable(true));
     }
-    public void watchMovie(Movie movie){
-        if(SignIn.user5.Watched_Movies.contains(movie)){
-            watchLater.setDisable(true);
+    public void watchMovie(Movie movie1){
+        for (UserWatchRecord userWatchRecord:SignIn.user5.Watched_Movies){
+            if(userWatchRecord.getMovie().equals(movie)){
+                watchLater.setDisable(true);
+            }
         }
         if(SignIn.user5.Movies_For_Later.contains(movie)){
             watchLater.setDisable(true);
         }
         Watch.setOnMouseClicked(event -> {
+            boolean exists=false;
             watchLater.setDisable(true);
-            UserWatchRecord u = new UserWatchRecord(movie,0.0);
-            user.getSubscription().setMoviesWatched(user.getSubscription().getMoviesWatched()+1);
-            if (!WatchRecord.watchedMovies.contains(movie)) {
-                if(user.getPlan().equals("basic") && SignIn.user5.Movies_For_Later.size()<5) {
-                    SignIn.user5.Watched_Movies.add(u);
-                    if (SignIn.user5.Movies_For_Later.contains(movie)) {
-                        SignIn.user5.Movies_For_Later.remove(movie);
-                    }
-                }
-                else if(user.getPlan().equals("standard") && WatchRecord.watchedMovies.size()<10){
-
-                    SignIn.user5.Watched_Movies.add(u);
-                    if (SignIn.user5.toWatchMovies.contains(movie)) {
-                        SignIn.user5.toWatchMovies.remove(movie);
-                    }
-
-                }
-                else if(user.getPlan().equals("premium") && WatchRecord.watchedMovies.size()<30){
-
-                    SignIn.user5.Watched_Movies.add(u);
-                    if ( SignIn.user5.toWatchMovies.contains(movie)) {
-                        SignIn.user5.toWatchMovies.remove(movie);
-                    }
-                }
-                else {
-                    alert.showAndWait();
+            Watch.setDisable(true);
+            movie_watched = new UserWatchRecord(movie,Max_Rating);
+            SignIn.user5.getSubscription().setMoviesWatched(SignIn.user5.getSubscription().getMoviesWatched()+1);
+            for (UserWatchRecord userWatchRecord:SignIn.user5.Watched_Movies){
+                if(userWatchRecord.getMovie().equals(movie)){
+                    exists=true;
                 }
             }
+                    if(!exists) {
+                        if (SignIn.user5.getPlan().equals("basic") && SignIn.user5.Watched_Movies.size() < 5) {
+                            SignIn.user5.Watched_Movies.add(movie_watched);
+                            SignIn.user5.Movies_For_Later.remove(movie);
+                        } else if (SignIn.user5.getPlan().equals("standard") && SignIn.user5.Watched_Movies.size() < 10) {
 
-            Watch.setDisable(true);
+                            SignIn.user5.Watched_Movies.add(movie_watched);
+                            if (SignIn.user5.Movies_For_Later.contains(movie)) {
+                                SignIn.user5.Movies_For_Later.remove(movie);
+                            }
+
+                        } else if (SignIn.user5.getPlan().equals("premium") && SignIn.user5.Watched_Movies.size() < 30) {
+
+                            SignIn.user5.Watched_Movies.add(movie_watched);
+                            if (SignIn.user5.Movies_For_Later.contains(movie)) {
+                                SignIn.user5.Movies_For_Later.remove(movie);
+                            }
+                        } else {
+                            alert.showAndWait();
+                        }
+                    }
         });
         watchLater.setOnMouseClicked(event -> {
             MainPageController.movie5=movie;
@@ -234,52 +233,7 @@ public class MovieController {
         });
 
     }
-    public void watchMovie(UserWatchRecord movie){
-        if(SignIn.user5.Watched_Movies.contains(movie)){
-            watchLater.setDisable(true);
-        }
-        if(SignIn.user5.Movies_For_Later.contains(movie.getMovie())){
-            watchLater.setDisable(true);
-        }
-        Watch.setOnMouseClicked(event -> {
-            watchLater.setDisable(true);
-            movie.setRating(Max_Rating);
-            SignIn.user5.getSubscription().setMoviesWatched(SignIn.user5.getSubscription().getMoviesWatched()+1);
-            if (!SignIn.user5.Watched_Movies.contains(movie)) {
-                if( SignIn.user5.getPlan().equals("basic") && SignIn.user5.Watched_Movies.size()<5) {
-                    SignIn.user5.Watched_Movies.add(movie);
-                    if (SignIn.user5.Movies_For_Later.contains(movie.getMovie())) {
-                        SignIn.user5.Movies_For_Later.remove(movie.getMovie());
-                    }
-                }
-                else if( SignIn.user5.getPlan().equals("standard") &&SignIn.user5.Watched_Movies.size()<10){
-                    SignIn.user5.Watched_Movies.add(movie);
-                    if ( SignIn.user5.Movies_For_Later.contains(movie.getMovie())) {
-                        SignIn.user5.Movies_For_Later.remove(movie.getMovie());
-                    }
 
-                }
-                else if( SignIn.user5.getPlan().equals("premium") && SignIn.user5.Watched_Movies.size()<30){
-
-                    SignIn.user5.Watched_Movies.add(movie);
-                    if ( SignIn.user5.Movies_For_Later.contains(movie.getMovie())) {
-                        SignIn.user5.Movies_For_Later.remove(movie.getMovie());
-                    }
-                }
-                else {
-                    alert.showAndWait();
-                }
-            }
-            Watch.setDisable(true);
-        });
-        watchLater.setOnMouseClicked(event -> {
-            MainPageController.movie5_watched=movie;
-            if(!SignIn.user5.Movies_For_Later.contains(movie.getMovie()))
-                SignIn.user5.Movies_For_Later.add(movie.getMovie());
-            watchLater.setDisable(true);
-        });
-
-    }
     public void Admin(Movie movie){
         isAdmin = true;
         watchLater.setVisible(false);
@@ -357,24 +311,23 @@ public class MovieController {
         stage.setScene(scene);
         stage.show();
     }
-    public void setStars(){
+    public void setStars(UserWatchRecord userWatchRecord){
 
-        if(movie!=null || WatchRecord.watchedMovies.contains(movie)) {
-            for (int i = 0; i < movie.userRate; i++) {
+            for (int i = 0; i < userWatchRecord.getRating(); i++) {
                 stars[i].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/fullStar.png"))));
             }
-            for (int j = 0; j < movie.userRate; j++){
+            for (int j = 0; j <  userWatchRecord.getRating(); j++){
                 int finalJ = j;
                 stars[j].setOnMouseExited(event2 ->
                         stars[finalJ].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/fullStar.png")))));
             }
-            for (int h = movie.userRate; h > movie.userRate+(5-movie.userRate); h++){
-                int finalJ = h;
-                stars[h].setOnMouseExited(event2 ->
-                        stars[finalJ].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/emptyStar.png")))));
+            for (double h =  userWatchRecord.getRating(); h >  userWatchRecord.getRating()+(5- userWatchRecord.getRating()); h++){
+                double finalJ = h;
+                stars[(int) h].setOnMouseExited(event2 ->
+                        stars[(int) finalJ].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/emptyStar.png")))));
             }
 
-        }
+
     }
     public void onMouseEntered() {
         Back.setOnMouseEntered(event -> Back.setStyle("-fx-background-color: #FFC107; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));

@@ -77,11 +77,12 @@ public  class MainPageController {
     public static String menuValue;
     @FXML
     private TextField searchItem;
+    public static Movie movie5;
     private Movie movie;
     @FXML
     private  Label counter;
     static User user;
-    public static Movie movie5;
+
     public static UserWatchRecord movie5_watched;
     static int moviePage = 0;
     private final ArrayList<Movie> moviesTop = new ArrayList<>();
@@ -126,8 +127,9 @@ public  class MainPageController {
         setupAutoScroll();
         /* profile.setOnMouseClicked(event -> profileOnMouseClicked());*/
         labelsOnMouseClicked();
-        counter.setText(SignIn.user5.getSubscription().getMoviesWatched() + ")");
+        counter.setText(SignIn.user5.Watched_Movies.size() + ")");
         onSearch();
+
     }
 
     private void addToGUI(Movie movie) {
@@ -167,7 +169,7 @@ public  class MainPageController {
             }
         });
         TopMovies.getChildren().addAll(movieContainer);
-        watchRecords.setOnMouseClicked(event -> onMouseClicked(movie));
+        watchRecords.setOnMouseClicked(event -> onMouseClicked(stage));
     }
 
     private void addToGUI2(Movie movie) {
@@ -268,7 +270,7 @@ public  class MainPageController {
                 " -fx-border-color: white;" +
                 " -fx-border-radius: 25;"));
     }
-    public void onMouseClicked(Movie movie) {
+    public void onMouseClicked(Stage stage1) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("watch-record.fxml"));
         Parent root;
         try {
@@ -277,16 +279,16 @@ public  class MainPageController {
             throw new RuntimeException(e);
         }
         WatchRecord controller = loader.getController();
-        controller.setStage(stage);
+        controller.setStage(stage1);
         controller.initializeItems();
         controller.aBoolean=true;
         Scene scene = new Scene(root);
-        stage.setTitle("Movie");
-        stage.setResizable(false);
-        stage.setX(-7);
-        stage.setY(0);
-        stage.setScene(scene);
-        stage.show();
+        stage1.setTitle("Movie");
+        stage1.setResizable(false);
+        stage1.setX(-7);
+        stage1.setY(0);
+        stage1.setScene(scene);
+        stage1.show();
     }
     public void labelsOnMouseClicked(){
         Action.setOnMouseClicked(event -> {
@@ -443,21 +445,26 @@ public  class MainPageController {
     }
     public void onMouseClickedVBox(MouseEvent act,Movie movie) throws IOException {
         FXMLLoader loader=new FXMLLoader(getClass().getResource("movie-view.fxml"));
-        root = loader.load();
+        Parent root = loader.load();
         stage = (Stage)((Node)act.getSource()).getScene().getWindow();
         MovieController controller=loader.getController();
-        Movie movie2=new Movie(movie.getTitle(),movie.getRelease_date(),movie.getRunning_time(),movie.getGenres(),movie.getLanguage(),movie.getCountry(),movie.getPoster_path(),movie.getBudget(),"50",movie.getImdb_score(),movie.getDescription());
         controller.setStage(stage);
-        controller.setMovie(movie2);
-        controller.watchMovie(movie2);
-        controller.setUser(SignIn.user5);
+        controller.setMovie(movie);
+        controller.watchMovie(movie);
         controller.page5=0;
+        for(UserWatchRecord userWatchRecord1:SignIn.user5.Watched_Movies){
+            if(userWatchRecord1.getMovie().equals(movie)){
+                controller.setStars(userWatchRecord1);
+            }
+        }
         scene = new Scene(root);
         stage.setScene(scene);
+
         Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));
         controller.refreshScreen("Watch Movie "+ movie.getTitle() + "("+movie.getRelease_date().getYear()+")", movie.getTitle(),
                 movie.getTitle()+" Translated",movie.getGenres(), movie.getDescription(),
                 movie.getRunning_time(), image,movie.getDirectorName(),movie.getCastNames());
+
         stage.setScene(scene);
         stage.show();
 
@@ -695,6 +702,7 @@ public  class MainPageController {
             int found=0;
             String cast = "";
             String director="";
+            searchViewController.searchMovies=new ArrayList<>();
             for(Movie movie1:Movie.allmovies){
                 if(menuValue!=null) {
                     if (movie1.getTitle().equalsIgnoreCase(searchItem.getText()) && menuValue.equals("Movie")) {
