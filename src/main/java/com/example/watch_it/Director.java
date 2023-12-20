@@ -8,7 +8,7 @@ public class Director extends Artist {
     public void Read_File(ArrayList<String>s,ArrayList<Director> directors){
         for (String i:s) {
             String[]row=i.split(",");
-            Director d=new Director();
+            Artist d=new Director();
             d.setFirst_Name(row[0]);
             d.setSecond_Name(row[1]);
             d.setAge(Integer.parseInt(row[2]));
@@ -17,20 +17,20 @@ public class Director extends Artist {
             for(int j=5;j<row.length;j++){
                 d.Movies.add(row[j]);
             }
-            directors.add(d);
+            directors.add((Director) d);
         }
     }
 
     @Override
     public void add( String first_name,String second_name,int age,String gender,String Nationality,ArrayList<String> movie){
-        Director d=new Director();
+        Artist d=new Director();
         d.setFirst_Name(first_name);
         d.setSecond_Name(second_name);
         d.setAge(age);
         d.setGender(gender);
         d.setNationality(Nationality);
         d.setMovies(movie);
-        allDirectors.add(d);
+        allDirectors.add((Director) d);
     }
     @Override
     public void update(int index,String movie){
@@ -45,7 +45,6 @@ public class Director extends Artist {
 
                 return m;
             }
-
         }
         return null;
     }

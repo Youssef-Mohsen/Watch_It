@@ -8,19 +8,19 @@ public class Cast extends Artist{
 
     @Override
     public void add(String first_name,String second_name,int age,String gender,String Nationality,ArrayList<String> movie){
-        Cast c=new Cast();
+        Artist c=new Cast();
         c.setFirst_Name(first_name);
         c.setSecond_Name(second_name);
         c.setAge(age);
         c.setGender(gender);
         c.setNationality(Nationality);
         c.setMovies(movie);
-        allCast.add(c);
+        allCast.add((Cast) c);
     }
     public static void Read_file(ArrayList<String> s){
         for (String i:s) {
             String[]row=i.split(",");
-            Cast c=new Cast();
+            Artist c=new Cast();
             c.setFirst_Name(row[0]);
             c.setSecond_Name(row[1]);
             c.setAge(Integer.parseInt(row[2]));

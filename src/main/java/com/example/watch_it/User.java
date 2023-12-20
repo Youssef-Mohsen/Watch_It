@@ -242,7 +242,10 @@ public class User
     public String toString(){
         String data ="";
         data = data.concat("user").concat(",").concat(getUser_Name()).concat(",").concat(getPassword()).concat(",").concat(Integer.toString(getUser_ID()));
-        data = data.concat(",").concat(getFirst_Name()).concat(",").concat(getLast_Name()).concat(",").concat(getPlan()).concat(",").concat(getEmail()).concat(",").concat(getSubscription().getStartDate().toString()).concat(",").concat(getProfilePath()).concat(",");
+        data = data.concat(",").concat(getFirst_Name()).concat(",");
+        data = data.concat(getLast_Name()).concat(",").concat(getPlan()).concat(",");
+        data = data.concat(getEmail()).concat(",").concat(getSubscription().getStartDate().toString());
+        data = data.concat(",").concat(getProfilePath()).concat(",");
 
         data = data.concat("to be watched").concat(",");
         for (Movie toWatchMovie : Movies_For_Later) {

@@ -4,30 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="236de910-bb88-43c2-a220-e8030a7a2c95" name="Changes" comment="editing user and saving their data">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/AddCastController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/add-cast.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="236de910-bb88-43c2-a220-e8030a7a2c95" name="Changes" comment="average rating">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/movies-data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/movies-data.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pngs/Amazing_SpiderMan.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/AddMovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/AddMovieController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/Admin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/AllMoviesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/AllMoviesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/Cast.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/Cast.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/ChoosePlanController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/ChoosePlanController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/FilterPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/FilterPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/Director.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/Director.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/First.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/First.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/MainPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/MainPageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/Movie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/MovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/MovieController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/MovieEditController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/MovieEditController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/SignIn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/SignIn.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/profilePageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/profilePageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/add-movies.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/add-movies.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/search-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/search-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -233,7 +218,15 @@
       <option name="project" value="LOCAL" />
       <updated>1702601842654</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="average rating">
+      <option name="closed" value="true" />
+      <created>1703078027442</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1703078027442</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -259,7 +252,8 @@
     <MESSAGE value="Update project finally....." />
     <MESSAGE value="Update icons" />
     <MESSAGE value="view user" />
-    <option name="LAST_COMMIT_MESSAGE" value="view user" />
+    <MESSAGE value="average rating" />
+    <option name="LAST_COMMIT_MESSAGE" value="average rating" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
