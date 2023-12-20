@@ -1,41 +1,105 @@
-user,nada,123456,1,nadod,ayman,basic,nadaAyman@gmail.com,2023-12-06,assets/batbot-01.png,to be watched,Insidious: The Red Door,watched,Avengers: Endgame,5.0,Joker,1.0,done,
-user,youssef,456789,1,youssef,mohsen,premium,youssefMohsen@gmail.com,2023-10-09,assets/batbot-02.png,to be watched,Insidious: The Red Door,watched,Oppenheimer,-1.0,The Dark Knight,3.0,done,
+user,nada,123456,1,Nada,Ayman,basic,nadaAyman@gmail.com,2023-12-06,assets/batbot-01.png,to be watched,Oppenheimer,The Dark Knight,watched,Joker,5.0,Avengers: Endgame,2.0,Sherlock Holmes,5.0,done,
+user,youssef,456789,1,youssef,mohsen,premium,youssefMohsen@gmail.com,2023-12-20,assets/batbot-02.png,to be watched,Insidious: The Red Door,watched,done,
 user,Mai,123456,1,Mai,Ezz,basic,MaiEzz@gmail.com,2023-12-06,assets/batbot-01.png,to be watched,Oppenheimer,watched,Avengers: Endgame,-1.0,Joker,3.0,done,
 user,Basmala,456789,1,Basmala,Tarek,premium,Basmala-Tarek@gmail.com,2023-10-09,assets/batbot-02.png,to be watched,Insidious: The Red Door,watched,Oppenheimer,-1.0,The Dark Knight,3.0,done,
 user,Tasneem,123456,1,Tasneem,Mohamed,basic,TasneemMohamed@gmail.com,2023-12-06,assets/batbot-01.png,to be watched,Oppenheimer,watched,Avengers: Endgame,-1.0,Joker,3.0,done,
 user,toka,456789,1,toka,karam,premium,tokaKaram@gmail.com,2023-10-09,assets/batbot-02.png,to be watched,Insidious: The Red Door,watched,Oppenheimer,-1.0,The Dark Knight,3.0,done,
-user,youssef,456789,1,youssef,ahmad,premium,youssefAhmad@gmail.com,2023-10-09,assets/batbot-02.png,to be watched,Insidious: The Red Door,watched,Oppenheimer,-1.0,The Dark Knight,3.0,done,
-cast,Patrick,Wilson,50,male,American,Insidious: The Red DoorS,Columbus
+user,youssef,456789,1,youssef,ahmad,premium,youssefAhmad@gmail.com,2023-10-09,assets/batbot-02.png,to be watched,Insidious: The Red Door,watched,done,
+cast,Patrick,Wilson,50,male,American,Columbus,Insidious: The Red DoorS
 cast,Rose,Byrne,44,female,Australian,Insidious: The Red Door
-cast,Joaquin,Phoenix,49,male,American,Joker
+cast,Joaquin,Phoenix,49,male,American,Gladiator,Joker
 cast,Robert,DeNiro,80,male,American,Joker
 cast,Joe,Pesci,80,male,American,Home Alone
 cast,Kate,Winslet,48,female,Titanic
 cast,Macaulay,Culkin,43,male,American,Home Alone
 cast,Daniel,Stern,66,male,American,Home Alone
-cast,Robert,DowneyJr,58,male,American,Oppenheimer,Sherlock Holmes,Avengers: Endgame
+cast,Robert,DowneyJr,58,male,American,Avengers: Endgame,Sherlock Holmes,Oppenheimer
 cast,Benedict,Cumberbatch,40,male,English,Avengers: Endgame
 cast,Chris,Hemsworth,40,male,English,Avengers: Endgame
 cast,Mark,Strong,60,male,British,Sherlock Holmes
 cast,Jude,Law,50,male,English,Sherlock Holmes
-cast,Cillian,Murphy,50,male,Irish,The Dark Knight,Oppenheimer
+cast,Cillian,Murphy,50,male,Irish,Oppenheimer,The Dark Knight
 cast,Matt,Damon,53,male,American,The Dark Knight
-cast,Christian,Bale,49,male,American,The Dark Knight
-cast,Morgan,Freeman,86,male,American,The Dark Knight
+cast,Christian,Bale,49,male,American,The Prestige,The Dark Knight
+cast,Morgan,Freeman,86,male,American,The Shawshank Redemption,The Dark Knight
 cast,Tom,Holland,27,male,England,Spider-Man: No Way Home
-cast,Zendaya,Coleman,27,female,America,Dune,Spider-Man: No Way Home
+cast,Zendaya,Coleman,27,female,America,Spider-Man: No Way Home,Dune
 cast,Jason,Momoa,44,male,America,Aquaman and the Lost Kingdom
 cast,Ben,Affleck,51,male,America,Aquaman and the Lost Kingdom
-cast,TimothÃe,Chalamet,28,male,America,Wonka
+cast,TimothÃe,Chalamet,28,male,American,Dune,Wonka
 cast,Paul,Raymond,34,male,England,Wonka
 cast,Murray,McArthur,57,male,England,Wonka
-cast,Leonardo,DiCaprio,49,male,Inception,Titanic
-director,Christopher,Nolan,53,male,british,Oppenheimer,The Dark Knight
+cast,Leonardo,DiCaprio,49,male,German,The Great Gatsby,Titanic,Inception
+cast,Scarlett,Johansson,39,female,American,The Prestige,Black Widow
+cast,Florence,Pugh,27,female,English,Black Widow
+cast,David,Harbour,48,male,American,Black Widow
+cast,Matthew,McConaughey,54,American,male,Interstellar
+cast,Anne,Hathaway,41,female,American,Interstellar
+cast,Jessica,Chastain,46,female,American,Interstellar
+cast,Samara,Weaving,31,female,Australian,Ready or Not
+cast,Adam,Brody,44,male,American,Ready or Not
+cast,Mark,O'Brien,39,male,Canadian,Ready or Not
+cast,Hugh,Jackman,55,male,Australian,The Prestige
+cast,Ryan,Gosling,43,male,Canadian,Blade Runner 2049
+cast,Harrison,Ford,81,male,America,Blade Runner 2049
+cast,Ana,Armas,35,female,Cuban,Blade Runner 2049
+cast,Ralph,Fiennes,60,male,English,Schindler's List
+cast,Tony,Revolori,27,male,American,The Grand Budapest Hotel
+cast,Saoirse,Ronan,29,female,American,The Grand Budapest Hotel
+cast,Oscar,Isaac,44,male,Guatemalan,Dune
+cast,Keanu,Reeves,59,male,Canadian,The Matrix
+cast,Laurence,Fishburne,62,mamle,American,The Matrix
+cast,Carrie-Anne,Moss,56,female,Canadian,The Matrix
+cast,Russell,Crowe,59,male,American,Gladiator
+cast,Connie,Nielsen,58,female,Danish,Gladiator
+cast,Tim,Robbins,65,American,The Shawshank Redemption
+cast,Bob,Gunton,79,male,America,The Shawshank Redemption
+cast,Marlon,Brando,80,male,American,The Godfather
+cast,Al,Pacino,83,male,American,The Godfather
+cast,James,Caan,84,male,American,The Godfather
+cast,Samuel,Jackson,74,American,Pulp Fiction
+cast,Uma,Thurman,53,female,American,Pulp Fiction
+cast,John,Travolta,69,male,American,Pulp Fiction
+cast,Elijah,Wood,42,male,American,The Lord of the Rings
+cast,Ian,McKellen,84,male,English,The Lord of the Rings
+cast,Viggo,Mortensen,56,male,American,The Lord of the Rings
+cast,Jodie,Foster,61,female,American,The Silence of the Lambs
+cast,Anthony,Hopkins,85,male,English,The Silence of the Lambs
+cast,Lawrence,Bonney,80,male,American,The Silence of the Lambs
+cast,Liam,Neeson,71,male,English,Schindler's List
+cast,Ben,Kingsley,79,male,English,Schindler's List
+cast,Ralph,Fiennes,60,male,English,Schindler's List
+cast,Tom,Hanks,67,male,English,Forrest Gump
+cast,Robin,Wright,57,female,American,Forrest Gump
+cast,Gary,Sinise,68,male,American,Forrest Gump
+cast,Brad,Pitt,60,male,English,Inglourious Basterds
+cast,Diane,Kruger,47,female,German,Inglourious Basterds
+cast,Eli,Roth,51,male,American,Inglourious Basterds
+cast,Joel,Edgerton,49,male,Australina,The Great Gatsby
+cast,Carey,Mulligan,38,female,American,The Great Gatsby
+director,Christopher,Nolan,53,male,british,Inception,The Dark Knight,Oppenheimer,Interstellar,The Prestige
 director,Guy,Ritchie,55,male,british,Sherlock Holmes
 director,Anthony,Russo,53,male,American,Avengers: Endgame
 director,Chris,Columbus,65,male,Italian,Home Alone
 director,Todd,Phillips,52,male,American,Joker
 director,Patrick,Wilson,50,male,American,Insidious: The Red Door
 director,James,Cameron,69,male,Canadian,Titanic
+director,Jon,Watts,42,male,American,Spider-Man: No Way Home
+director,James,Wan,46,male,Malaysian,Aquaman and the Lost Kingdom
+director,Paul,King,45,male,England,Wonka
+director,Cate,Shortland,55,female,Australian,Black Widow
+director,Tyler,Gillett,41,male,American,Ready or Not
+director,Denis,Villeneuve,56,male,Canada,Blade Runner 2049,Dune
+director,Wes,Anderson,54,male,American,The Grand Budapest Hotel
+director,Lilly,Wachowski,56,female,American,The Matrix
+director,Ridley,Scott,86,male,American,Gladiator
+director,Frank,Darabont,64,male,France,The Shawshank Redemption
+director,Francis,Ford,84,male,American,The Godfather
+director,Quentin,Tarantino,60,male,American,Pulp Fiction,Inglourious Basterds
+director,Peter,Jackson,62,male,New Zealand,The Lord of the Rings
+director,Jonathan,Demme,79,male,American,The Silence of the Lambs
+director,Steven,Spielberg,77,male,American,Schindler's List
+director,Robert,Zemeckis,71,male,American,Forrest Gump
+director,Baz,Luhrmann,61,male,Australia,The Great Gatsby
 admin,nada,123456
 admin,mai,123456

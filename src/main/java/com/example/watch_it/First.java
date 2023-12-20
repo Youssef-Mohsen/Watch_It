@@ -1,5 +1,6 @@
 package com.example.watch_it;
 import javafx.application.Platform;
+import javafx.application.Preloader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -60,6 +61,7 @@ public class First {
     @FXML
     private void Exit(){
         Admin.writeOnFile(new File("data.txt"));
+        Admin.writeMovies(new File("movies-data.txt"));
         Platform.exit();
     }
 

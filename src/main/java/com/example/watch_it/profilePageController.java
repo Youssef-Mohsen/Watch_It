@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.*;
 
 public class profilePageController implements Initializable {
@@ -68,7 +69,7 @@ public class profilePageController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         Select_List.getItems().addAll("Edit Profile" , "Log Out" , "Delete Account", "Delete Movies List");
-
+        Select_List.setValue("Select");
         for (UserWatchRecord movie : SignIn.user5.Watched_Movies) {
             addWatchedList(movie);
         }
@@ -124,6 +125,7 @@ public class profilePageController implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
             if ((result.isPresent() && result.get() == buttonTypeYes)) {
                 User.allusers.remove(SignIn.user5);
+                //`User.Delete_User(SignIn.user5.getUser_Name());
                 FXMLLoader loader=new FXMLLoader(getClass().getResource("first-page.fxml"));
                 root = loader.load();
                 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -239,11 +241,22 @@ public class profilePageController implements Initializable {
         label.setStyle("-fx-text-size: 20; -fx-text-fill: white;");
         label.setOnMouseEntered(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: #FFC107;"));
         label.setOnMouseExited(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
+        Label label1 =new Label("Rate: "+movie1.getRating());
+        label1.setStyle("-fx-text-size: 20; -fx-text-fill: white;");
+        label1.setOnMouseEntered(event -> label1.setStyle("-fx-text-size: 20; -fx-text-fill: #FFC107;"));
+        label1.setOnMouseExited(event -> label1.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
+        Image image1 = new Image(getClass().getResourceAsStream("assets/fullStar.png"));
+        ImageView imageView1 = new ImageView(image1);
+        imageView1.setFitHeight(18);
+        imageView1.setFitWidth(20);
+        HBox box =new HBox(label1,imageView1,label);
+        box.setAlignment(Pos.CENTER);
+        box.setSpacing(6);
         movieContainer.setAlignment(Pos.CENTER);
-        movieContainer.getChildren().addAll(imageView, label);
+        movieContainer.getChildren().addAll(imageView, box);
         movieContainer.setOnMouseClicked(event -> {
             try {
-                onMouseClickedVBox(event,movie1.getMovie());
+                onMouseClickedVBox(event,movie1);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -262,19 +275,8 @@ public class profilePageController implements Initializable {
         label.setStyle("-fx-text-size: 20; -fx-text-fill: white;");
         label.setOnMouseEntered(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: #FFC107;"));
         label.setOnMouseExited(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
-        Label label1 =new Label("Rate: "+movie1.userRate);
-        label1.setStyle("-fx-text-size: 20; -fx-text-fill: white;");
-        label1.setOnMouseEntered(event -> label1.setStyle("-fx-text-size: 20; -fx-text-fill: #FFC107;"));
-        label1.setOnMouseExited(event -> label1.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
-        Image image1 = new Image(getClass().getResourceAsStream("assets/fullStar.png"));
-        ImageView imageView1 = new ImageView(image1);
-        imageView1.setFitHeight(18);
-        imageView1.setFitWidth(20);
-        HBox box =new HBox(label1,imageView1,label);
-        box.setAlignment(Pos.CENTER);
-        box.setSpacing(6);
         movieContainer.setAlignment(Pos.CENTER);
-        movieContainer.getChildren().addAll(imageView,box);
+        movieContainer.getChildren().addAll(imageView,label);
         movieContainer.setOnMouseClicked(event -> {
             try {
                 onMouseClickedVBox(event,movie1);
@@ -286,21 +288,51 @@ public class profilePageController implements Initializable {
     }
     public void onMouseClickedVBox(MouseEvent act, Movie movie1) throws IOException {
         FXMLLoader loader=new FXMLLoader(getClass().getResource("movie-view.fxml"));
-        Parent root = loader.load();
+        root = loader.load();
         stage = (Stage)((Node)act.getSource()).getScene().getWindow();
         MovieController controller=loader.getController();
         controller.setStage(stage);
+        controller.setMovie(movie1);
         controller.watchMovie(movie1);
-        controller.page5=-1;
         controller.disableButtons();
-        Scene scene = new Scene(root);
+        controller.setUser(SignIn.user5);
+        controller.page5=-1;
+
+        scene = new Scene(root);
         stage.setScene(scene);
-        stage.show();
 
         Image image = new Image(getClass().getResourceAsStream(movie1.getPoster_path()));
         controller.refreshScreen("Watch Movie "+ movie1.getTitle() + "("+movie1.getRelease_date().getYear()+")", movie1.getTitle(),
                 movie1.getTitle()+" Translated",movie1.getGenres(), movie1.getDescription(),
-                movie1.getRunning_time(), image,movie1.getDirectorName(),movie1.getCastNames());
+                movie1.getRunning_time(), image,movie1.getDirector().getFirst_Name()+" "+movie1.getDirector().getSecond_Name(),movie1.getCastNames());
+        stage.setScene(scene);
+        stage.show();
+
+    }
+    public void onMouseClickedVBox(MouseEvent act, UserWatchRecord movie1) throws IOException {
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("movie-view.fxml"));
+        root = loader.load();
+        stage = (Stage)((Node)act.getSource()).getScene().getWindow();
+        MovieController controller=loader.getController();
+        controller.setStage(stage);
+        controller.setMovie(movie1);
+        controller.watchMovie(movie1.getMovie());
+        controller.setUser(SignIn.user5);
+        controller.disableButtons();
+        controller.disableWatch();
+        controller.page5=-1;
+        for(UserWatchRecord userWatchRecord1:SignIn.user5.Watched_Movies){
+            if(userWatchRecord1.getMovie().equals(movie1.getMovie())){
+                controller.setStars(userWatchRecord1);
+            }
+        }
+        scene = new Scene(root);
+        stage.setScene(scene);
+
+        Image image = new Image(getClass().getResourceAsStream(movie1.getMovie().getPoster_path()));
+        controller.refreshScreen("Watch Movie "+ movie1.getMovie().getTitle() + "("+movie1.getMovie().getRelease_date().getYear()+")", movie1.getMovie().getTitle(),
+                movie1.getMovie().getTitle()+" Translated",movie1.getMovie().getGenres(), movie1.getMovie().getDescription(),
+                movie1.getMovie().getRunning_time(), image,movie1.getMovie().getDirector().getFirst_Name()+" "+movie1.getMovie().getDirector().getSecond_Name(),movie1.getMovie().getCastNames());
         stage.setScene(scene);
         stage.show();
 
@@ -324,6 +356,7 @@ public class profilePageController implements Initializable {
     }
     public void setdatatoAdmin(User user){
         isAdmin = true;
+        SignIn.user5 = user;
         Image image = new Image(getClass().getResourceAsStream(user.getProfilePath()));
         profilePictue.setImage(image);
         profilePictue.setFitHeight(100);

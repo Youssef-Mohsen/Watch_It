@@ -117,12 +117,10 @@ public class User
             if(user.User_Name.equals(user_name))
             {
                 index = allusers.indexOf(user);
-                System.out.println(user_name);
                 allusers.remove(user);
-                System.out.println("done");
             }
         }
-        for (int i=index; i<allusers.size(); i++){
+        for (int i=index; i<allusers.size()-1; i++){
             allusers.get(i).setUser_ID( allusers.get(i).getUser_ID() - 1);
         }
     }
@@ -191,6 +189,7 @@ public class User
     {
         subscription.setPlan(plan);
     }
+
     /*********delete will handle in Class System(Main).
      // How to handle the date of watching
      // take movie from method Choose movie Should be in main(return object of movie)
@@ -233,11 +232,20 @@ public class User
                 return  true;
             return exist;
     }
+    public UserWatchRecord getWatchedMovie(Movie movie){
+        for (UserWatchRecord u: Watched_Movies)
+            if(u.getMovie().equals(movie))
+                return u;
+        return null;
+    }
     @Override
     public String toString(){
         String data ="";
         data = data.concat("user").concat(",").concat(getUser_Name()).concat(",").concat(getPassword()).concat(",").concat(Integer.toString(getUser_ID()));
-        data = data.concat(",").concat(getFirst_Name()).concat(",").concat(getLast_Name()).concat(",").concat(getPlan()).concat(",").concat(getEmail()).concat(",").concat(getSubscription().getStartDate().toString()).concat(",").concat(getProfilePath()).concat(",");
+        data = data.concat(",").concat(getFirst_Name()).concat(",");
+        data = data.concat(getLast_Name()).concat(",").concat(getPlan()).concat(",");
+        data = data.concat(getEmail()).concat(",").concat(getSubscription().getStartDate().toString());
+        data = data.concat(",").concat(getProfilePath()).concat(",");
 
         data = data.concat("to be watched").concat(",");
         for (Movie toWatchMovie : Movies_For_Later) {

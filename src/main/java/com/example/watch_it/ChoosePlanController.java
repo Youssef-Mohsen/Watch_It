@@ -72,6 +72,7 @@ public class ChoosePlanController {
         premium.setStyle("-fx-background-color: #090909; -fx-background-radius: 30; -fx-border-radius: 30; -fx-border-color: #FFC107;");
         selectedButton = premium;
     }
+
     @FXML
     private void Pay(ActionEvent event) throws IOException {
         String cardnumber = cardNumber.getText();
@@ -116,15 +117,16 @@ public class ChoosePlanController {
             if (subscriptionEnded) {
                 SignIn.user5.Updata_Subscription_Plan(newSubscription);
                 SignIn.user5.setPlan(newPlan);
+                SignIn.user5.getSubscription().setStartDate(LocalDate.now());
                 subscriptionEnded = false;
                 alert.setContentText("Subscription Updated, Login to your Account");
-            } else {
-                User.allusers.add(user);
+            }
+            else {
                 user.Subscribe(user.getUser_ID(), newSubscription);
-                Admin.users.add(user.toString());
                 alert.setContentText("Sign Up Completed, Login to your Account");
                 user.Updata_Subscription_Plan(newSubscription);
                 user.setPlan(newPlan);
+                User.allusers.add(user);
             }
             alert.showAndWait();
             GoToSignIn(event);

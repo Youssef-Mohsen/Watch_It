@@ -82,6 +82,7 @@ public class WatchRecord {
 
     }
     public void onMouseClickedVBox(MouseEvent act, UserWatchRecord movie) throws IOException {
+        boolean exists =false;
         FXMLLoader loader=new FXMLLoader(getClass().getResource("movie-view.fxml"));
         Parent root = loader.load();
         stage = (Stage)((Node)act.getSource()).getScene().getWindow();
@@ -90,16 +91,23 @@ public class WatchRecord {
         controller.disableButtons();
         controller.disableWatch();
         controller.setMovie(movie);
-        controller.watchMovie(movie);
+        for(UserWatchRecord userWatchRecord1:SignIn.user5.Watched_Movies){
+            if(userWatchRecord1.getMovie().equals(movie.getMovie())){
+                exists=true;
+            }
+        }
+        if(!exists) {
+            controller.watchMovie(movie.getMovie());
+        }
         controller.page5=1;
-        controller.setStars();
+        controller.setStars(movie);
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
         Image image = new Image(getClass().getResourceAsStream(movie.getMovie().getPoster_path()));
         controller.refreshScreen("Watch Movie "+ movie.getMovie().getTitle() + "("+movie.getMovie().getRelease_date().getYear()+")", movie.getMovie().getTitle(),
                 movie.getMovie().getTitle()+" Translated",movie.getMovie().getGenres(), movie.getMovie().getDescription(),
-                movie.getMovie().getRunning_time(), image,movie.getMovie().getDirectorName(),movie.getMovie().getCastNames());
+                movie.getMovie().getRunning_time(), image,movie.getMovie().getDirector().getFirst_Name()+" "+movie.getMovie().getDirector().getSecond_Name(),movie.getMovie().getCastNames());
         stage.setScene(scene);
         stage.show();
 

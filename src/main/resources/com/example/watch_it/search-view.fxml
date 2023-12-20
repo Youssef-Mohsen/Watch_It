@@ -68,7 +68,7 @@
     </Label>
     <ScrollPane layoutX="118.0" layoutY="687.0" prefHeight="296.0" prefWidth="1486.0" styleClass="scrollPane2" stylesheets="@style.css" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="520.0">
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: black;" />
-        <HBox fx:id="Movies" />
+        <HBox fx:id="Movies" spacing="20" />
     </ScrollPane>
     <HBox prefHeight="50" />
     <Button fx:id="Back" layoutX="1423.0" layoutY="25.0" mnemonicParsing="false" onAction="#backScenes" prefHeight="27.0" prefWidth="63.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: white;" text="Back" textFill="WHITE" />
