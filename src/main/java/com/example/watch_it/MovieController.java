@@ -110,8 +110,10 @@ public class MovieController {
                 int rating2 = Integer.parseInt(clickedStar2.getId().substring(4)); // Extract the rating from the star's ID
                 stars[finalI1].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/fullStar.png"))));
                 Max_Rating=rating2;
-                if(movie_watched!=null) {
+                movie.UpdateRating((double)rating2);
+                if(movie_watched != null) {
                     movie_watched.setRating(Max_Rating);
+                    movie_watched.getMovie().UpdateRating(Max_Rating);
                 }
 
               /*  for (double p = movie_watched.getRating()+(4- movie_watched.getRating()); p >=  movie_watched.getRating(); p--){
@@ -206,18 +208,21 @@ public class MovieController {
                         if (SignIn.user5.getPlan().equals("basic") && SignIn.user5.Watched_Movies.size() < 5) {
                             SignIn.user5.Watched_Movies.add(movie_watched);
                             SignIn.user5.Movies_For_Later.remove(movie);
+                            movie.inc_views();
                         } else if (SignIn.user5.getPlan().equals("standard") && SignIn.user5.Watched_Movies.size() < 10) {
-
+                            movie.inc_views();
                             SignIn.user5.Watched_Movies.add(movie_watched);
                             if (SignIn.user5.Movies_For_Later.contains(movie)) {
                                 SignIn.user5.Movies_For_Later.remove(movie);
+
                             }
 
                         } else if (SignIn.user5.getPlan().equals("premium") && SignIn.user5.Watched_Movies.size() < 30) {
-
+                            movie.inc_views();
                             SignIn.user5.Watched_Movies.add(movie_watched);
                             if (SignIn.user5.Movies_For_Later.contains(movie)) {
                                 SignIn.user5.Movies_For_Later.remove(movie);
+
                             }
                         } else {
                             alert.showAndWait();
@@ -273,7 +278,7 @@ public class MovieController {
     public void backScenes(ActionEvent event) throws IOException {
         Parent root = null;
 
-        if (isAdmin) {
+        if (isAdmin || page5 == 8) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("all-movies.fxml"));
             root = loader.load();
             AllMoviesController controller = loader.getController();

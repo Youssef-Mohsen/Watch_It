@@ -50,7 +50,6 @@ public class Admin {
         this.password = password;
     }
     public static void readFile(File file) {
-        ArrayList<String> arrayList = new ArrayList<String>();
         try {
             String line = "";
             BufferedReader b = new BufferedReader(new FileReader(file));
@@ -107,6 +106,27 @@ public class Admin {
         catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+    public static void writeMovies(File file){
+        try {
+            BufferedWriter b = new BufferedWriter(new FileWriter(file));
+            for (Movie movie : Movie.allmovies){
+                b.write(movie.toString());
+                b.newLine();
+            }
+            b.close();
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public static void setData(){
+        User.allusers.addAll(Admin.getAllUsers());
+        Director.allDirectors.addAll(Admin.getAllDirectors());
+        Cast.allCast.addAll(Admin.getAllCast());
+        Admin.allAdmins.addAll(Admin.getAllAdmins());
+        Movie.allmovies.addAll(Admin.getMoviesObjs());
+        Movie.getDiffGenres();
     }
     //returned string isn't splitted
     public static String existsInFile(String username){
@@ -284,7 +304,6 @@ public class Admin {
     }
     //returning one movie obj based on a string containing all data.
     static Movie getOneMovie(String movieString){
-
         Movie movie = new Movie();
         String[] arr = movieString.split(",");
         movie.setTitle(arr[1]);
@@ -295,13 +314,14 @@ public class Admin {
         movie.setBudget(arr[9]);
         movie.setCountry(arr[8]);
         movie.setLanguage(arr[6]);
-        movie.setImdb_score(Integer.parseInt(arr[7]));
+        movie.setImdb_score(Float.parseFloat(arr[7]));
         movie.setRevenue(arr[10]);
         movie.setPoster_path(arr[11]);
         movie.setDirector(getDirector(arr[5]));
-        movie.setDirectorName(arr[5]);
         movie.setAvarage_rating(Double.parseDouble(arr[12]));
         movie.setViews(Integer.parseInt(arr[13]));
+        movie.setUsers_rated(Integer.parseInt(arr[14]));
+        movie.setTotalRating(Double.parseDouble(arr[15]));
         ArrayList<String> cast = new ArrayList<String>();
         ArrayList<String> genres = new ArrayList<String>();
         castAndGenres(movieString,cast,genres);
@@ -328,16 +348,18 @@ public class Admin {
                 movie.setBudget(arr[9]);
                 movie.setCountry(arr[8]);
                 movie.setLanguage(arr[6]);
-                movie.setImdb_score(Integer.parseInt(arr[7]));
+                movie.setImdb_score(Float.parseFloat(arr[7]));
                 movie.setRevenue(arr[10]);
                 movie.setPoster_path(arr[11]);
                 movie.setDirector(getDirector(arr[5]));
-                movie.setTotalRating(Double.parseDouble(arr[12]));
+                movie.setAvarage_rating(Double.parseDouble(arr[12]));
                 movie.setViews(Integer.parseInt(arr[13]));
+                movie.setUsers_rated(Integer.parseInt(arr[14]));
+                movie.setTotalRating(Double.parseDouble(arr[15]));
                 ArrayList<String> cast = new ArrayList<String>();
                 ArrayList<String> genres = new ArrayList<String>();
-                movie.setGenre(genres);
                 castAndGenres(oneMovie,cast,genres);
+                movie.setGenre(genres);
                 movie.setCastNames(cast);
                 ArrayList<Cast> cast_obj = new ArrayList<Cast>();
                 for(String casts: cast){

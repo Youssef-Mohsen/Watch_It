@@ -117,12 +117,10 @@ public class User
             if(user.User_Name.equals(user_name))
             {
                 index = allusers.indexOf(user);
-                System.out.println(user_name);
                 allusers.remove(user);
-                System.out.println("done");
             }
         }
-        for (int i=index; i<allusers.size(); i++){
+        for (int i=index; i<allusers.size()-1; i++){
             allusers.get(i).setUser_ID( allusers.get(i).getUser_ID() - 1);
         }
     }
@@ -191,6 +189,7 @@ public class User
     {
         subscription.setPlan(plan);
     }
+
     /*********delete will handle in Class System(Main).
      // How to handle the date of watching
      // take movie from method Choose movie Should be in main(return object of movie)
@@ -232,6 +231,12 @@ public class User
             if(u.getMovie().equals(movie))
                 return  true;
             return exist;
+    }
+    public UserWatchRecord getWatchedMovie(Movie movie){
+        for (UserWatchRecord u: Watched_Movies)
+            if(u.getMovie().equals(movie))
+                return u;
+        return null;
     }
     @Override
     public String toString(){

@@ -98,7 +98,7 @@ public  class MainPageController {
     @FXML
     private Button Back;
     private void getData() {
-        for(Movie movie : Movie.MostViewedMovies(Movie.allmovies)){
+        for(Movie movie : Movie.MostViewedMovies()){
             moviesTop.add(movie);
         }
         for(Movie movie:Movie.allmovies)
@@ -451,6 +451,9 @@ public  class MainPageController {
         controller.setStage(stage);
         controller.setMovie(movie);
         controller.watchMovie(movie);
+        UserWatchRecord u =SignIn.user5.getWatchedMovie(movie);
+        if(u != null)
+            controller.setMovie(u);
         controller.page5=0;
         for(UserWatchRecord userWatchRecord1:SignIn.user5.Watched_Movies){
             if(userWatchRecord1.getMovie().equals(movie)){
@@ -463,7 +466,7 @@ public  class MainPageController {
         Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));
         controller.refreshScreen("Watch Movie "+ movie.getTitle() + "("+movie.getRelease_date().getYear()+")", movie.getTitle(),
                 movie.getTitle()+" Translated",movie.getGenres(), movie.getDescription(),
-                movie.getRunning_time(), image,movie.getDirectorName(),movie.getCastNames());
+                movie.getRunning_time(), image,movie.getDirector().getFirst_Name()+" "+movie.getDirector().getSecond_Name(),movie.getCastNames());
 
         stage.setScene(scene);
         stage.show();
@@ -709,8 +712,8 @@ public  class MainPageController {
                         movie = movie1;
                         found = 1;
                     }
-                    else if(movie1.getDirectorName().equalsIgnoreCase(searchItem.getText()) && menuValue.equals("Director")){
-                        director=movie1.getDirectorName();
+                    else if((movie1.getDirector().getFirst_Name()+" "+movie1.getDirector().getSecond_Name()).equalsIgnoreCase(searchItem.getText()) && menuValue.equals("Director")){
+                        director=(movie1.getDirector().getFirst_Name()+" "+movie1.getDirector().getSecond_Name());
                         searchViewController.searchMovies.add(movie1);
                         found=2;
                     }
@@ -743,7 +746,7 @@ public  class MainPageController {
                 Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));
                 controller.refreshScreen("Watch Movie "+ movie.getTitle() + "("+movie.getRelease_date().getYear()+")", movie.getTitle(),
                         movie.getTitle()+" Translated",movie.getGenres(), movie.getDescription(),
-                        movie.getRunning_time(), image,movie.getDirectorName(),movie.getCastNames());
+                        movie.getRunning_time(), image,movie.getDirector().getFirst_Name()+" "+movie.getDirector().getSecond_Name(),movie.getCastNames());
                 stage.setScene(scene);
                 stage.show();
             }
@@ -784,5 +787,11 @@ public  class MainPageController {
             }
         });
 
+    }
+    public void backToMain(ActionEvent event,Parent root) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("main-page.fxml"));
+        root = loader.load();
+        MainPageController controller = loader.getController();
+        controller.setStage(stage);
     }
 }

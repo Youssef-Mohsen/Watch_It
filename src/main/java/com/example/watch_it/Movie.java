@@ -1,4 +1,5 @@
 package com.example.watch_it;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -9,7 +10,6 @@ public class Movie {
     public static ArrayList<Movie> drama = new ArrayList<>();
     public static ArrayList<Movie> horror = new ArrayList<>();
     public static ArrayList<Movie> comedy = new ArrayList<>();
-    private String directorName;
     private ArrayList<String> castNames;
     private static int counter = 0;
     private int id;
@@ -30,6 +30,7 @@ public class Movie {
     private int users_rated = 0;
     private Director director;
     private List<Cast> cast;
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     public Movie(){
         counter++;
@@ -176,6 +177,10 @@ public class Movie {
         return cast;
     }
 
+    public int getUsers_rated() {
+        return users_rated;
+    }
+
     public int getYear(){
         return release_date.getYear();
     }
@@ -189,12 +194,15 @@ public class Movie {
     public void setCast(List<Cast> cast) {
         this.cast = cast;
     }
-
     public void setDirector(Director director) {
         this.director = director;
     }
     public void setTotalRating(Double total_rating){
         this.total_rating = total_rating;
+    }
+
+    public void setUsers_rated(int users_rated) {
+        this.users_rated = users_rated;
     }
     public void UpdateRating(Double rating){
         total_rating += rating;
@@ -205,11 +213,12 @@ public class Movie {
         else {
             users_rated --;
             if (users_rated > 0) {
-                avarage_rating = total_rating / users_rated;
+                    avarage_rating = total_rating / users_rated;
             }
             else
                 avarage_rating = 0.0;
         }
+        avarage_rating = Math.round(avarage_rating * 10.0) / 10.0;
     }
     public static Movie getMovie (String movie_title) {
         if (!(allmovies.isEmpty())) {
@@ -249,7 +258,11 @@ public class Movie {
 
         return priorityQueue;
     }
-
+    public static ArrayList<Movie> MostViewedMovies() {
+        ArrayList<Movie> check = new ArrayList<>(allmovies);
+        check.sort(Comparator.comparingDouble(Movie::getViews).reversed());
+        return check;
+    }
     public static void getDiffGenres(){
 
         for(Movie eachMovie: allmovies){
@@ -264,12 +277,6 @@ public class Movie {
                     horror.add(eachMovie);
             }
         }
-    }
-    public String getDirectorName() {
-        return directorName;
-    }
-    public void setDirectorName(String directorName) {
-        this.directorName = directorName;
     }
     public ArrayList<String> getCastNames() {
         return castNames;
@@ -294,7 +301,17 @@ public class Movie {
     @Override
     public String toString (){
         String data = "";
-
+        data = data.concat(String.valueOf(getId())).concat(",").concat(getTitle()).concat(",").concat(getDescription()).concat(",").concat(getRelease_date().toString()).concat(",");
+        data = data.concat(getRunning_time()).concat(",").concat(getDirector().getFirst_Name()+" "+getDirector().getSecond_Name()).concat(",").concat(getLanguage()).concat(",");
+        data = data.concat(String.valueOf(getImdb_score())).concat(",").concat(getCountry()).concat(",").concat(getRevenue()).concat(",").concat(getBudget()).concat(",");
+        data = data.concat(getPoster_path()).concat(",").concat(String.valueOf(getAverage_rating())).concat(",").concat(String.valueOf(getViews())).concat(",");
+        data = data.concat(String.valueOf(getUsers_rated())).concat(",").concat(String.valueOf(getTotalRating()));
+        data = data.concat(",").concat("cast");
+        for (String cast: castNames)
+            data = data.concat(",").concat(cast);
+        data = data.concat(",").concat("genres");
+        for (String genre: genres)
+            data = data.concat(",").concat(genre);
         return data;
     }
 

@@ -1,4 +1,4 @@
-user,nada,123456,1,nadod,ayman,basic,nadaAyman@gmail.com,2023-12-06,assets/batbot-01.png,to be watched,Insidious: The Red Door,watched,Avengers: Endgame,5.0,Joker,1.0,done,
+user,nada,123456,1,nadod,ayman,basic,nadaAyman@gmail.com,2023-12-06,assets/batbot-01.png,to be watched,Oppenheimer,The Dark Knight,watched,Joker,5.0,Avengers: Endgame,2.0,Sherlock Holmes,0.0,done,
 user,youssef,456789,1,youssef,mohsen,premium,youssefMohsen@gmail.com,2023-10-09,assets/batbot-02.png,to be watched,Insidious: The Red Door,watched,Oppenheimer,-1.0,The Dark Knight,3.0,done,
 user,Mai,123456,1,Mai,Ezz,basic,MaiEzz@gmail.com,2023-12-06,assets/batbot-01.png,to be watched,Oppenheimer,watched,Avengers: Endgame,-1.0,Joker,3.0,done,
 user,Basmala,456789,1,Basmala,Tarek,premium,Basmala-Tarek@gmail.com,2023-10-09,assets/batbot-02.png,to be watched,Insidious: The Red Door,watched,Oppenheimer,-1.0,The Dark Knight,3.0,done,

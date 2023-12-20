@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.*;
 
 public class profilePageController implements Initializable {
@@ -124,6 +125,7 @@ public class profilePageController implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
             if ((result.isPresent() && result.get() == buttonTypeYes)) {
                 User.allusers.remove(SignIn.user5);
+                //`User.Delete_User(SignIn.user5.getUser_Name());
                 FXMLLoader loader=new FXMLLoader(getClass().getResource("first-page.fxml"));
                 root = loader.load();
                 stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -158,7 +160,7 @@ public class profilePageController implements Initializable {
                 SignIn.user5.setLast_Name(lname);
                 fullname.setText(fname + " " + lname);
             }
-            else if(choice.equals(" Delete Movies List")){
+            else {
                 if (fname.isEmpty() && !lname.isEmpty()) {
                     SignIn.user5.setLast_Name(lname);
                     fullname.setText(this.firstname + " " + lname);
@@ -354,6 +356,7 @@ public class profilePageController implements Initializable {
     }
     public void setdatatoAdmin(User user){
         isAdmin = true;
+        SignIn.user5 = user;
         Image image = new Image(getClass().getResourceAsStream(user.getProfilePath()));
         profilePictue.setImage(image);
         profilePictue.setFitHeight(100);

@@ -60,6 +60,7 @@ public class First {
     @FXML
     private void Exit(){
         Admin.writeOnFile(new File("data.txt"));
+        Admin.writeMovies(new File("movies-data.txt"));
         Platform.exit();
     }
 

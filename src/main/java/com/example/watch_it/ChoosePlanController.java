@@ -119,12 +119,12 @@ public class ChoosePlanController {
                 subscriptionEnded = false;
                 alert.setContentText("Subscription Updated, Login to your Account");
             } else {
-                User.allusers.add(user);
                 user.Subscribe(user.getUser_ID(), newSubscription);
-                Admin.users.add(user.toString());
                 alert.setContentText("Sign Up Completed, Login to your Account");
                 user.Updata_Subscription_Plan(newSubscription);
                 user.setPlan(newPlan);
+                System.out.println("signed up");
+                User.allusers.add(user);
             }
             alert.showAndWait();
             GoToSignIn(event);

@@ -86,14 +86,14 @@ public class AllMoviesController {
         stage = (Stage)((Node)act.getSource()).getScene().getWindow();
         MovieController controller=loader.getController();
         controller.setStage(stage);
-        controller.watchMovie(movie);
+        controller.Admin(movie);
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
         Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));
         controller.refreshScreen("Watch Movie "+ movie.getTitle() + "("+movie.getRelease_date().getYear()+")", movie.getTitle(),
                 movie.getTitle()+" Translated",movie.getGenres(), movie.getDescription(),
-                movie.getRunning_time(), image,movie.getDirectorName(),movie.getCastNames());
+                movie.getRunning_time(), image,movie.getDirector().getFirst_Name()+" "+movie.getDirector().getSecond_Name(),movie.getCastNames());
         stage.setScene(scene);
         stage.show();
 
@@ -155,7 +155,16 @@ public class AllMoviesController {
             }
         });
     }
+    @FXML void toAddCast(ActionEvent event, ArrayList<String> newActor) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("add-cast.fxml"));
+        root = loader.load();
+        AddCastController controller = loader.getController();
 
+        switchPane((ScrollPane) root);
+        System.out.println("in allmovies");
+        System.out.println(newActor);
+        controller.setdata(newActor);
+    }
     private void switchPane(ScrollPane scrollPane){
         mainPane.setCenter(scrollPane);
     }

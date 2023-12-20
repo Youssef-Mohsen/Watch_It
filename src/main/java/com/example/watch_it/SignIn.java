@@ -96,22 +96,22 @@ public class SignIn
             }
             else {
                 if (try_Password == 3) {
-                    showErrorAlert("Invalid Password", "Password Is InCorrect , Change Password!");
+                    showErrorAlert("Invalid Password", "Password is incorrect , Change password");
                     gotoforgorpassword(act);
                     return;
                 }
-                showErrorAlert("Sign IN Failed", "Please check if your Password is correct");
+                showErrorAlert("Sign in Failed", "Please check if your password is correct");
                 Password.clear();
                 try_Password++;
             }
         }
         else {
             if (try_Username == 3) {
-                showErrorAlert("Invalid UserName", "UserName does not exist , Create account!");
+                showErrorAlert("Invalid username", "Username does not exist , Create account!");
                 gotosignup(act);
                 return;
             }
-            showErrorAlert("Incorrect UserName", "UserName Is InCorrect , Try again!");
+            showErrorAlert("Incorrect username", "Username Is InCorrect , Try again!");
             UserName.clear();
             try_Username++;
         }

@@ -15,15 +15,9 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         File file = new File("data.txt");
         File movieFile = new File("movies-data.txt");
-        Admin.readFile(file);;
+        Admin.readFile(file);
         Admin.readMovies(movieFile);
-        User.allusers.addAll(Admin.getAllUsers());
-        Director.allDirectors.addAll(Admin.getAllDirectors());
-        Cast.allCast.addAll(Admin.getAllCast());
-        Admin.allAdmins.addAll(Admin.getAllAdmins());
-        Movie.allmovies.addAll(Admin.getMoviesObjs());
-        Movie.getDiffGenres();
-
+        Admin.setData();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("first-page.fxml"));
         Parent root;
         try {
@@ -34,13 +28,13 @@ public class HelloApplication extends Application {
         First controller = loader.getController();
         controller.setStage(stage);
         Scene scene = new Scene(root);
-        stage.setTitle("Movie");
         stage.setResizable(false);
         stage.setX(-7);
         stage.setY(0);
         stage.setScene(scene);
         stage.setOnCloseRequest(windowEvent -> {
             Admin.writeOnFile(file);
+            Admin.writeMovies(movieFile);
         });
         stage.show();
 
