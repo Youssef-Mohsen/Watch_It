@@ -110,23 +110,16 @@ public class MovieController {
                 int rating2 = Integer.parseInt(clickedStar2.getId().substring(4)); // Extract the rating from the star's ID
                 stars[finalI1].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/fullStar.png"))));
                 Max_Rating=rating2;
-                movie.UpdateRating((double)rating2);
+
+                if(movie!=null){
+                    movie.UpdateRating((double)rating2);
+                }
                 if(movie_watched != null) {
                     movie_watched.setRating(Max_Rating);
                     movie_watched.getMovie().UpdateRating(Max_Rating);
+
                 }
 
-              /*  for (double p = movie_watched.getRating()+(4- movie_watched.getRating()); p >=  movie_watched.getRating(); p--){
-                    double finalJ = p;
-                    stars[(int) finalJ].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/emptyStar.png"))));
-                    stars[(int) p].setOnMouseExited(event2 ->
-                            stars[(int) finalJ].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/emptyStar.png")))));
-                }
-                for (int j = 0; j <   movie_watched.getRating(); j++) {
-                    int finalJ = j;
-                    stars[j].setOnMouseExited(event2 ->
-                            stars[finalJ].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/fullStar.png")))));
-                }*/
                 for(int k=0;k< Max_Rating;k++){
                     stars[k].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/fullStar.png"))));
                 }
@@ -139,27 +132,6 @@ public class MovieController {
         // You can perform additional actions here, such as saving the rating to a database.
     }
 
-    public void handleStarHover(MouseEvent event) {
-        for(int i=0;i<5;i++) {
-            stars[i].setOnMouseEntered(event1 -> {
-                ImageView hoveredStar = (ImageView) event.getSource();
-                int rating = Integer.parseInt(hoveredStar.getId().substring(4)); // Extract the rating from the star's ID
-                // Highlight stars
-
-                for (int j = 0; j < rating; j++) {
-                    stars[j].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/fullStar.png"))));
-                }
-            });
-        }
-    }
-
-    @FXML
-    public void resetStars() {
-        for (ImageView star : stars) {
-            star.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/emptyStar.png"))));
-        }
-
-    }
     public void refreshScreen(String filmTitle, String newMovieName, String newFilm, ArrayList<String> filmGenre,
                               String filmDescription, String filmDuration, Image image,String director,ArrayList<String> cast) {
         String genres = "";
@@ -184,7 +156,7 @@ public class MovieController {
     public void disableWatch(){
         Watch.setOnMouseClicked(event -> Watch.setDisable(true));
     }
-    public void watchMovie(Movie movie1){
+    public void watchMovie(){
         for (UserWatchRecord userWatchRecord:SignIn.user5.Watched_Movies){
             if(userWatchRecord.getMovie().equals(movie)){
                 watchLater.setDisable(true);
@@ -321,18 +293,6 @@ public class MovieController {
             for (int i = 0; i < userWatchRecord.getRating(); i++) {
                 stars[i].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/fullStar.png"))));
             }
-            for (int j = 0; j <  userWatchRecord.getRating(); j++){
-                int finalJ = j;
-                stars[j].setOnMouseExited(event2 ->
-                        stars[finalJ].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/fullStar.png")))));
-            }
-            for (double h =  userWatchRecord.getRating(); h >  userWatchRecord.getRating()+(5- userWatchRecord.getRating()); h++){
-                double finalJ = h;
-                stars[(int) h].setOnMouseExited(event2 ->
-                        stars[(int) finalJ].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/emptyStar.png")))));
-            }
-
-
     }
     public void onMouseEntered() {
         Back.setOnMouseEntered(event -> Back.setStyle("-fx-background-color: #FFC107; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
@@ -354,7 +314,7 @@ public class MovieController {
     public void setMovie(Movie movie){
         this.movie=movie;
     }
-    public void setMovie(UserWatchRecord movie){
+    public void setUserWatchRecord(UserWatchRecord movie){
         this.movie_watched=movie;
     }
     public void setUser(User user){

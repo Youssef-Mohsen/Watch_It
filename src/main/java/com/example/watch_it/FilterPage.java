@@ -108,7 +108,7 @@ public class FilterPage {
         MovieController controller=loader.getController();
         controller.setStage(stage);
         controller.setMovie(movie);
-        controller.watchMovie(movie);
+        controller.watchMovie();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

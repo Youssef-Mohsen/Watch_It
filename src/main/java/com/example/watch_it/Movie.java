@@ -219,6 +219,9 @@ public class Movie {
                 avarage_rating = 0.0;
         }
         avarage_rating = Math.round(avarage_rating * 10.0) / 10.0;
+        if(avarage_rating>5){
+            avarage_rating=5.0;
+        }
     }
     public static Movie getMovie (String movie_title) {
         if (!(allmovies.isEmpty())) {
@@ -233,6 +236,7 @@ public class Movie {
         List<Movie> recent_movies = new ArrayList<>();
         for (Movie m : allmovies) {
             LocalDate release_date = m.getRelease_date();
+
             if (release_date.isAfter(LocalDate.now().minusMonths(1))) {
                 recent_movies.add(m);
             }

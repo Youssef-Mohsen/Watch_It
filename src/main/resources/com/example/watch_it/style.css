@@ -44,9 +44,6 @@
 .text-box {
   -fx-background-radius: 50;
   -fx-alignment: center;
-  -fx-font-size: 16px;
-  -fx-text-fill:  #ffc107;
-  -fx-text-color: white;
 }
 .scrollPane2 {
     -fx-background-color:transparent;

@@ -69,7 +69,7 @@ public class searchViewController {
                 Not_Found_Label.setText("Not Found !!!");
             else {
                 Name_Label.setText(d.getFirst_Name() + " " + d.getSecond_Name());
-                Age_Label.setText(Integer.toHexString(d.getAge()));
+                Age_Label.setText(Integer.toString(d.getAge()));
                 Gender_Label.setText(d.getGender());
                 Nation_Label.setText(d.getNationality());
             }
@@ -81,7 +81,7 @@ public class searchViewController {
                 Not_Found_Label.setText("Not Found !!!");
             else{
                 Name_Label.setText(c.getFirst_Name() + " " + c.getSecond_Name());
-                Age_Label.setText(Integer.toHexString(c.getAge()));
+                Age_Label.setText(Integer.toString(c.getAge()));
                 Gender_Label.setText(c.getGender());
                 Nation_Label.setText(c.getNationality());
             }

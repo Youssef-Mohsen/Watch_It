@@ -18,6 +18,7 @@ public class HelloApplication extends Application {
         Admin.readFile(file);
         Admin.readMovies(movieFile);
         Admin.setData();
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("first-page.fxml"));
         Parent root;
         try {

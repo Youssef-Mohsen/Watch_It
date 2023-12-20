@@ -27,6 +27,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Objects;
 
 import javafx.fxml.FXML;
@@ -99,27 +101,33 @@ public  class MainPageController {
     private Button Back;
     private void getData() {
         for(Movie movie : Movie.MostViewedMovies()){
-            moviesTop.add(movie);
+                moviesTop.add(movie);
         }
         for(Movie movie:Movie.allmovies)
         {
-            moviesRecent.add(movie);
+            if(movie.getYear()>2018) {
+                moviesRecent.add(movie);
+            }
         }
-
 
     }
 
     @FXML
     public  void initialize() {
         getData();
+        Collections.sort(moviesTop, Comparator.comparingInt(Movie::getViews).reversed());
         for (Movie movie : moviesTop) {
             addToGUI(movie);
         }
+        Collections.sort(moviesRecent, Comparator.comparingInt(Movie::getYear).reversed());
         for (Movie movie : moviesRecent) {
             addToGUI2(movie);
         }
+        Collections.sort(Movie.TopRatedMovies(), Comparator.comparingDouble(Movie::getTotalRating).reversed());
         for (Movie movie : Movie.TopRatedMovies()) {
-            addToGUI3(movie);
+            if(movie.getAverage_rating()>3.0) {
+                addToGUI3(movie);
+            }
         }
         setUpFilter();
         onMouseEntered();
@@ -145,10 +153,10 @@ public  class MainPageController {
         label.setOnMouseEntered(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: #FFC107;"));
         label.setOnMouseExited(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
         Label label1 =new Label();
-        if(movie.getImdb_score() == -1)
+        if(movie.getAverage_rating() == -1)
             label1.setText("Rate: "+"0.0");
         else
-            label1.setText("Rate: "+ movie.getImdb_score());
+            label1.setText("Rate: "+ movie.getAverage_rating());
         label1.setStyle("-fx-text-size: 20; -fx-text-fill: white;");
         label1.setOnMouseEntered(event -> label1.setStyle("-fx-text-size: 20; -fx-text-fill: #FFC107;"));
         label1.setOnMouseExited(event -> label1.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
@@ -185,10 +193,10 @@ public  class MainPageController {
         label.setOnMouseEntered(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: #FFC107;"));
         label.setOnMouseExited(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
         Label label1 =new Label();
-        if(movie.getImdb_score() == -1)
+        if(movie.getAverage_rating() == -1)
             label1.setText("Rate: "+"0.0");
         else
-            label1.setText("Rate: "+ movie.getImdb_score());
+            label1.setText("Rate: "+ movie.getAverage_rating());
         label1.setStyle("-fx-text-size: 20; -fx-text-fill: white;");
         label1.setOnMouseEntered(event -> label1.setStyle("-fx-text-size: 20; -fx-text-fill: #FFC107;"));
         label1.setOnMouseExited(event -> label1.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
@@ -450,10 +458,10 @@ public  class MainPageController {
         MovieController controller=loader.getController();
         controller.setStage(stage);
         controller.setMovie(movie);
-        controller.watchMovie(movie);
+        controller.watchMovie();
         UserWatchRecord u =SignIn.user5.getWatchedMovie(movie);
         if(u != null)
-            controller.setMovie(u);
+            controller.setUserWatchRecord(u);
         controller.page5=0;
         for(UserWatchRecord userWatchRecord1:SignIn.user5.Watched_Movies){
             if(userWatchRecord1.getMovie().equals(movie)){
@@ -739,7 +747,7 @@ public  class MainPageController {
                 stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 MovieController controller = loader.getController();
                 controller.setStage(stage);
-                controller.watchMovie(movie);
+                controller.watchMovie();
                 controller.setUser(SignIn.user5);
                 controller.page5 = 0;
                 scene = new Scene(root);

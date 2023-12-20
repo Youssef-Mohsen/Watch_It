@@ -90,14 +90,14 @@ public class WatchRecord {
         controller.setStage(stage);
         controller.disableButtons();
         controller.disableWatch();
-        controller.setMovie(movie);
+        controller.setUserWatchRecord(movie);
         for(UserWatchRecord userWatchRecord1:SignIn.user5.Watched_Movies){
             if(userWatchRecord1.getMovie().equals(movie.getMovie())){
                 exists=true;
             }
         }
         if(!exists) {
-            controller.watchMovie(movie.getMovie());
+            controller.watchMovie();
         }
         controller.page5=1;
         controller.setStars(movie);

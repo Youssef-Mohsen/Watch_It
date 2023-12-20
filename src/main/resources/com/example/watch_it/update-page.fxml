@@ -27,9 +27,9 @@
             <effect>
                 <InnerShadow />
             </effect>
-         <font>
-            <Font size="16.0" />
-         </font></PasswordField>
+            <font>
+                <Font size="16.0" />
+            </font></PasswordField>
         <Text fill="WHITE" layoutX="645.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First_Name :" wrappingWidth="123.3322531054514" AnchorPane.bottomAnchor="652.970703125" AnchorPane.leftAnchor="645.0" AnchorPane.topAnchor="212.41796875">
             <font>
                 <Font name="System Bold Italic" size="20.0" />
@@ -44,25 +44,25 @@
             <effect>
                 <InnerShadow />
             </effect>
-         <font>
-            <Font size="16.0" />
-         </font>
+            <font>
+                <Font size="16.0" />
+            </font>
         </TextField>
         <TextField fx:id="SecondName" layoutX="783.0" layoutY="288.0" prefHeight="39.0" prefWidth="342.0" style="-fx-background-color: #ffc107;">
             <effect>
                 <InnerShadow />
             </effect>
-         <font>
-            <Font size="16.0" />
-         </font>
+            <font>
+                <Font size="16.0" />
+            </font>
         </TextField>
         <TextField fx:id="Plan" layoutX="774.0" layoutY="384.0" prefHeight="39.0" prefWidth="342.0" style="-fx-background-color: #ffc107;">
             <effect>
                 <InnerShadow />
             </effect>
-         <font>
-            <Font size="16.0" />
-         </font>
+            <font>
+                <Font size="16.0" />
+            </font>
         </TextField>
         <Text fill="WHITE" layoutX="685.0" layoutY="414.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Plan :">
             <font>
@@ -93,9 +93,9 @@
             <effect>
                 <InnerShadow />
             </effect>
-         <font>
-            <Font size="16.0" />
-         </font>
+            <font>
+                <Font size="16.0" />
+            </font>
         </TextField>
         <ImageView fitHeight="25.0" fitWidth="30.0" layoutX="624.0" layoutY="471.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -130,9 +130,9 @@
             <effect>
                 <InnerShadow />
             </effect>
-         <font>
-            <Font size="16.0" />
-         </font>
+            <font>
+                <Font size="16.0" />
+            </font>
         </PasswordField>
         <Label layoutX="1411.0" layoutY="69.0" text="Back" textFill="#ffc107">
             <font>

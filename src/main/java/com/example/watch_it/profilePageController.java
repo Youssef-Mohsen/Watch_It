@@ -293,7 +293,7 @@ public class profilePageController implements Initializable {
         MovieController controller=loader.getController();
         controller.setStage(stage);
         controller.setMovie(movie1);
-        controller.watchMovie(movie1);
+        controller.watchMovie();
         controller.disableButtons();
         controller.setUser(SignIn.user5);
         controller.page5=-1;
@@ -315,8 +315,8 @@ public class profilePageController implements Initializable {
         stage = (Stage)((Node)act.getSource()).getScene().getWindow();
         MovieController controller=loader.getController();
         controller.setStage(stage);
-        controller.setMovie(movie1);
-        controller.watchMovie(movie1.getMovie());
+        controller.setUserWatchRecord(movie1);
+        controller.watchMovie();
         controller.setUser(SignIn.user5);
         controller.disableButtons();
         controller.disableWatch();
