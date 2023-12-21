@@ -110,6 +110,7 @@ public class ChoosePlanController {
             SignIn.user5.getSubscription().updateSubscription(newSubscription);
             SignIn.user5.getSubscription().subscriptionNotValid = false;
             alert.setContentText("Subscription Updated");
+            SignIn.user5.getSubscription().updatePlan = false;
             profilePageController.updatePlan = false;
             toMoviesrecord(event);
         }

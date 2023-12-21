@@ -109,6 +109,7 @@ public class AllUsersController implements Initializable {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         profilePageController controller=loader.getController();
         controller.setStage(stage);
+        controller.setUser(user);
         controller.setdatatoAdmin(user);
         scene = new Scene(root);
         stage.setScene(scene);

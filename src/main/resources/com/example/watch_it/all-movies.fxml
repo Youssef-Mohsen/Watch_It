@@ -161,7 +161,7 @@
                     <children>
                         <HBox fx:id="topHbox" alignment="CENTER" prefHeight="40.0" prefWidth="1290.0" spacing="20.0" style="-fx-background-color: black;">
                             <children>
-                                <TextField fx:id="searchField" layoutX="560.0" layoutY="0.0" onAction="#Search" prefHeight="30.0" prefWidth="459.0" promptText="Search users..." style="-fx-prompt-text-fill: #ffffff; -fx-background-radius: 30; -fx-background-color: black;">
+                                <TextField fx:id="searchField" layoutX="560.0" layoutY="0.0"  prefHeight="30.0" prefWidth="459.0" promptText="Search users..." style="-fx-text-fill: white; -fx-prompt-text-fill: #ffffff; -fx-background-radius: 30; -fx-background-color: black;">
                                     <effect>
                                         <DropShadow blurType="ONE_PASS_BOX" height="28.02" radius="12.34" width="23.34">
                                             <color>
@@ -177,7 +177,7 @@
                                     </HBox.margin>
                                 </TextField>
 
-                                <Button fx:id="searchButton" layoutX="1047.0" layoutY="0.0" style="-fx-background-color: FFC107; -fx-background-radius: 20; -fx-text-fill: #ffffff;" text="Search">
+                                <Button fx:id="searchButton" layoutX="1047.0" onAction="#Search" layoutY="0.0" style="-fx-background-color: FFC107; -fx-background-radius: 20; -fx-text-fill: #ffffff;" text="Search">
                                     <font>
                                         <Font size="14.0" />
                                     </font>

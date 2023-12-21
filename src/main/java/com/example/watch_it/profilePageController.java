@@ -360,7 +360,7 @@ public class profilePageController implements Initializable {
     }
 
     public void setdatatoAdmin(User user){
-
+        SignIn.user5 = user;
         isAdmin = true;
         for (UserWatchRecord movie : SignIn.user5.Watched_Movies) {
             addWatchedList(movie);
@@ -368,7 +368,6 @@ public class profilePageController implements Initializable {
         for (Movie movie : SignIn.user5.Movies_For_Later) {
             addToWatchedList(movie);
         }
-        SignIn.user5 = user;
         Image image = new Image(getClass().getResourceAsStream(user.getProfilePath()));
         profilePictue.setImage(image);
         profilePictue.setFitHeight(100);
@@ -394,7 +393,7 @@ public class profilePageController implements Initializable {
     }
     @FXML
     void toPlans()throws IOException{
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("recorded-movies.fxml"));
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("update-plan.fxml"));
         Parent root = loader.load();
         switchPane((AnchorPane) root);
         ChoosePlanController controller = loader.getController();

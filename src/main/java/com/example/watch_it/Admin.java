@@ -70,7 +70,6 @@ public class Admin {
         }
     }
     public static void readMovies(File file) {
-        ArrayList<String> arrayList = new ArrayList<String>();
         try {
             String line = "";
             BufferedReader b = new BufferedReader(new FileReader(file));

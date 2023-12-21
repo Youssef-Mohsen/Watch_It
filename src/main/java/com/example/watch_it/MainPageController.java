@@ -99,6 +99,8 @@ public  class MainPageController {
     @FXML
     private Button Back;
     private void getData() {
+        moviesTop.clear();
+        moviesRecent.clear();
         for(Movie movie : Movie.MostViewedMovies()){
                 moviesTop.add(movie);
         }

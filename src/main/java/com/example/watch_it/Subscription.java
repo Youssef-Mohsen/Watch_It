@@ -17,6 +17,7 @@ public class Subscription {
     private LocalDate startDate;
     private int moviesWatched;
     public boolean subscriptionNotValid = false;
+    public boolean updatePlan = false;
 
     // Constructor to initialize a new subscription with a user ID and plan.
     public Subscription(int user_id, Plans plan) {
@@ -84,18 +85,20 @@ public class Subscription {
     public void addMovie() {
         if (isSubscriptionActive()) {
             moviesWatched++;
+
             if (plan == Plans.BASIC && moviesWatched <= 5) {
-                System.out.println("Movie added. Total movies watched: " + moviesWatched);
+                if (moviesWatched == 5)
+                    updatePlan = true;
             } else if (plan == Plans.STANDARD && moviesWatched <= 10) {
-                System.out.println("Movie added. Total movies watched: " + moviesWatched);
+                if (moviesWatched == 10)
+                    updatePlan = true;
             } else if (plan == Plans.PREMIUM && moviesWatched <= 30) {
-                System.out.println("Movie added. Total movies watched: " + moviesWatched);
+                if (moviesWatched == 30)
+                    updatePlan = true;
             } else {
-                System.out.println("You reached the limit of the movies. Please renew to watch more movies.");
                 subscriptionNotValid = true;
             }
-        } else {
-            System.out.println("Subscription expired. Please renew to watch more movies.");
+
         }
     }
 

@@ -170,7 +170,6 @@ public class AllMoviesController {
     }
     @FXML
     private void Search(){
-        System.out.println(leftCol.getWidth());
         String name = searchField.getText();
         leftCol.getChildren().clear();
         middleCol1.getChildren().clear();
