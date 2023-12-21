@@ -172,15 +172,12 @@ public class Movie {
     public void addMovie (Movie movie){
         allmovies.add(movie);
     }
-
     public List<Cast> getCast() {
         return cast;
     }
-
     public int getUsers_rated() {
         return users_rated;
     }
-
     public int getYear(){
         return release_date.getYear();
     }
@@ -190,7 +187,6 @@ public class Movie {
     public void addActor(Cast actor) {
         cast.add(actor);
     }
-
     public void setCast(List<Cast> cast) {
         this.cast = cast;
     }
@@ -200,7 +196,6 @@ public class Movie {
     public void setTotalRating(Double total_rating){
         this.total_rating = total_rating;
     }
-
     public void setUsers_rated(int users_rated) {
         this.users_rated = users_rated;
     }

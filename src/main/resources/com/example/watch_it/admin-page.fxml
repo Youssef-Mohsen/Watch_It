@@ -45,7 +45,7 @@
                                                 <Font name="Chalkboard Bold" size="17.0" />
                                             </font>
                                         </CheckBox>
-                                        <Button fx:id="SignIn" layoutX="383.0" layoutY="465.0" mnemonicParsing="false" onAction="#signIn" prefHeight="39.0" prefWidth="206.0" style="-fx-background-color: FFC107; -fx-background-radius: 10;" text="Sign In" textFill="black">
+                                        <Button fx:id="SignIn" layoutX="383.0" layoutY="465.0" mnemonicParsing="false" onAction="#signIn" prefHeight="39.0" prefWidth="206.0" style="-fx-background-color: FFC107; -fx-background-radius: 50;" text="Sign In" textFill="black">
                                             <font>
                                                 <Font name="System Bold" size="20.0" />
                                             </font>

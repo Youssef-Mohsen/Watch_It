@@ -38,7 +38,7 @@
 }
 .firstImage {
   -fx-background-size: 1536 864;
-  -fx-background-image: url("assets/signIn.png");
+  -fx-background-image: url("assets/watch-it-sign-in.png");
   -fx-background-position: center center;
 }
 .text-box {

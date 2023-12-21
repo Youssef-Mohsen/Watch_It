@@ -24,6 +24,7 @@ public class AddMovieController {
 
     @FXML
     public static ScrollPane secondPane;
+
     @FXML
     private TextField BudgetField;
 
@@ -62,6 +63,7 @@ public class AddMovieController {
 
     @FXML
     private TextField revenueField;
+
     @FXML
     private Button addButton;
     Stage stage;

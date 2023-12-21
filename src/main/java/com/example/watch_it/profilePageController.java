@@ -68,14 +68,10 @@ public class profilePageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
+
         Select_List.getItems().addAll("Edit Profile" , "Log Out" , "Delete Account", "Delete Movies List");
         Select_List.setValue("Select");
-        for (UserWatchRecord movie : SignIn.user5.Watched_Movies) {
-            addWatchedList(movie);
-        }
-        for (Movie movie : SignIn.user5.Movies_For_Later) {
-            addToWatchedList(movie);
-        }
+
         onMouseExit();
         onMouseEntered();
         if (updatePlan) {
@@ -342,7 +338,14 @@ public class profilePageController implements Initializable {
     }
 
     public void setdata(){
+
         isAdmin = false;
+        for (UserWatchRecord movie : SignIn.user5.Watched_Movies) {
+            addWatchedList(movie);
+        }
+        for (Movie movie : SignIn.user5.Movies_For_Later) {
+            addToWatchedList(movie);
+        }
         Image image = new Image(getClass().getResourceAsStream(SignIn.user5.getProfilePath()));
         profilePictue.setImage(image);
         profilePictue.setFitHeight(100);
@@ -353,9 +356,18 @@ public class profilePageController implements Initializable {
         fullname.setText(SignIn.user5.getFirst_Name() + " " + SignIn.user5.getLast_Name());
         firstname = SignIn.user5.getFirst_Name();
         lastname = SignIn.user5.getLast_Name();
+
     }
+
     public void setdatatoAdmin(User user){
+
         isAdmin = true;
+        for (UserWatchRecord movie : SignIn.user5.Watched_Movies) {
+            addWatchedList(movie);
+        }
+        for (Movie movie : SignIn.user5.Movies_For_Later) {
+            addToWatchedList(movie);
+        }
         SignIn.user5 = user;
         Image image = new Image(getClass().getResourceAsStream(user.getProfilePath()));
         profilePictue.setImage(image);

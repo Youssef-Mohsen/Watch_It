@@ -117,9 +117,19 @@ public class MovieController {
                 if(movie_watched != null) {
                     movie_watched.setRating(Max_Rating);
                     movie_watched.getMovie().UpdateRating(Max_Rating);
-
                 }
 
+              /*  for (double p = movie_watched.getRating()+(4- movie_watched.getRating()); p >=  movie_watched.getRating(); p--){
+                    double finalJ = p;
+                    stars[(int) finalJ].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/emptyStar.png"))));
+                    stars[(int) p].setOnMouseExited(event2 ->
+                            stars[(int) finalJ].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/emptyStar.png")))));
+                }
+                for (int j = 0; j <   movie_watched.getRating(); j++) {
+                    int finalJ = j;
+                    stars[j].setOnMouseExited(event2 ->
+                            stars[finalJ].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/fullStar.png")))));
+                }*/
                 for(int k=0;k< Max_Rating;k++){
                     stars[k].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/fullStar.png"))));
                 }
@@ -132,6 +142,27 @@ public class MovieController {
         // You can perform additional actions here, such as saving the rating to a database.
     }
 
+    public void handleStarHover(MouseEvent event) {
+        for(int i=0;i<5;i++) {
+            stars[i].setOnMouseEntered(event1 -> {
+                ImageView hoveredStar = (ImageView) event.getSource();
+                int rating = Integer.parseInt(hoveredStar.getId().substring(4)); // Extract the rating from the star's ID
+                // Highlight stars
+
+                for (int j = 0; j < rating; j++) {
+                    stars[j].setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/fullStar.png"))));
+                }
+            });
+        }
+    }
+
+    @FXML
+    public void resetStars() {
+        for (ImageView star : stars) {
+            star.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("assets/emptyStar.png"))));
+        }
+
+    }
     public void refreshScreen(String filmTitle, String newMovieName, String newFilm, ArrayList<String> filmGenre,
                               String filmDescription, String filmDuration, Image image,String director,ArrayList<String> cast) {
         String genres = "";
@@ -249,17 +280,17 @@ public class MovieController {
     }
     public void backScenes(ActionEvent event) throws IOException {
         Parent root = null;
-
-        if (isAdmin || page5 == 8) {
+        if (isAdmin) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("all-movies.fxml"));
             root = loader.load();
             AllMoviesController controller = loader.getController();
             controller.setStage(stage);
         }
-        if(page5==0) {
+        else if(page5==0) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("main-page.fxml"));
             root = loader.load();
             MainPageController controller = loader.getController();
+            controller.setUser(user);
             controller.setStage(stage);
             controller.setUser(SignIn.user5);
         }

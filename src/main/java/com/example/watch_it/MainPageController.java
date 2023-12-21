@@ -84,7 +84,6 @@ public  class MainPageController {
     @FXML
     private  Label counter;
     static User user;
-
     public static UserWatchRecord movie5_watched;
     static int moviePage = 0;
     private final ArrayList<Movie> moviesTop = new ArrayList<>();

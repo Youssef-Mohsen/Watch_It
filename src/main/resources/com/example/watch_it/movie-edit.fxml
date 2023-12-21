@@ -34,7 +34,7 @@
             <Font name="System Bold" size="25.0" />
         </font>
     </Label>
-    <Button fx:id="Back" layoutX="1448.0" layoutY="15.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="56.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;" text="Back" textFill="WHITE" />
+    <Button fx:id="Back" onAction="#backScenes" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" layoutX="1448.0" layoutY="15.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="56.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;" text="Back" textFill="WHITE" />
     <Label alignment="CENTER" layoutX="57.0" layoutY="28.0" prefHeight="43.0" prefWidth="119.0" style="-fx-background-color: #FFC107; -fx-background-radius: 20;" text="Watch" textFill="WHITE">
         <font>
             <Font name="Arial Narrow Bold" size="27.0" />
@@ -70,7 +70,7 @@
             <Font name="Arial Black" size="28.0" />
         </font>
     </Label>
-    <Button layoutX="1443.0" layoutY="770.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="73.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;" text="Update" textFill="WHITE" />
+    <Button onAction="#Update" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" fx:id="update" layoutX="1443.0" layoutY="770.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="73.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;" text="Update" textFill="WHITE" />
 
 
 </Pane>
