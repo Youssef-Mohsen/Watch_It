@@ -484,6 +484,7 @@ public class Admin {
             user.setPlan(data[PLANINDEX]);
             user.getSubscription().setPrice(price);
             user.getSubscription().setStartDate(LocalDate.parse(data[STARTDATEINDEX]));
+            user.getSubscription().setUpdatePlan(Boolean.parseBoolean(data[10]));
             int moviesCounter = 0;
             for (UserWatchRecord movie: user.Watched_Movies){
                 moviesCounter++;

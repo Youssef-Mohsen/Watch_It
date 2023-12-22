@@ -43,13 +43,17 @@ public class AllMoviesController {
     TextField searchField;
     @FXML
     private Button Back;
+    @FXML
+    private Button addCastButton;
     private Stage stage;
     private Scene scene;
     private Parent root;
-
-
+    static boolean enteredData = false;
+    static boolean addMovie = false;
     @FXML
     public void initialize() {
+        if(enteredData)
+            addCastButton.setDisable(false);
         for (int i=0 ; i<Movie.allmovies.size(); i++){
             addMovies(Movie.allmovies.get(i), i);
         }
@@ -60,25 +64,30 @@ public class AllMoviesController {
 
         Parent fxml = FXMLLoader.load(getClass().getResource("add-movies.fxml"));
         mainPane.setCenter(fxml);
+        addCastButton.setVisible(true);
     }
 
     @FXML void toMovies(ActionEvent event){
         switchPane(mainScroll);
+        addCastButton.setVisible(false);
     }
 
     @FXML void toAllUsers(ActionEvent event) throws IOException {
         Parent fxml = FXMLLoader.load(getClass().getResource("all-users.fxml"));
         switchPane((ScrollPane) fxml);
+        addCastButton.setVisible(false);
 
     }
     @FXML void toAddUser(ActionEvent event) throws IOException {
         Parent fxml = FXMLLoader.load(getClass().getResource("add-users.fxml"));
         switchPane((ScrollPane) fxml);
+        addCastButton.setVisible(false);
     }
     @FXML
     void toPlans(ActionEvent event)throws IOException{
         Parent fxml = FXMLLoader.load(getClass().getResource("Plans.fxml"));
         switchPane((ScrollPane) fxml);
+        addCastButton.setVisible(false);
     }
     public void onMouseClickedMovie(MouseEvent act, Movie movie) throws IOException {
         FXMLLoader loader=new FXMLLoader(getClass().getResource("movie-view.fxml"));
@@ -107,14 +116,13 @@ public class AllMoviesController {
         stage.show();
     }
     @FXML
-    private void onMouseEntered(){
+     void onMouseEntered(){
         Back.setOnMouseEntered(event -> Back.setStyle("-fx-background-color: #FFC107; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
     }
     @FXML
-    private void onMouseExit(){
+     void onMouseExit(){
         Back.setOnMouseExited(event -> Back.setStyle("-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
     }
-
     private void addMovies(Movie movie, int i){
         VBox movieContainer = new VBox(10);
         movieContainer.setStyle("-fx-background-radius:40;");
@@ -155,17 +163,20 @@ public class AllMoviesController {
             }
         });
     }
-    @FXML void toAddCast(ActionEvent event, ArrayList<String> newActor) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("add-cast.fxml"));
-        root = loader.load();
-        AddCastController controller = loader.getController();
-
-        switchPane((ScrollPane) root);
-        System.out.println("in allmovies");
-        System.out.println(newActor);
-        controller.setdata(newActor);
+    @FXML
+    void toAddCast(ActionEvent event) throws IOException {
+        if(enteredData)
+        {
+            System.out.println("in  to add movies");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("add-cast.fxml"));
+            root = loader.load();
+            AddCastController controller = loader.getController();
+            controller.setdata(AddMovieController.newActor);
+            switchPane((ScrollPane) root);
+            addCastButton.setText("Add");
+        }
     }
-    private void switchPane(ScrollPane scrollPane){
+    public void switchPane(ScrollPane scrollPane){
         mainPane.setCenter(scrollPane);
     }
     @FXML

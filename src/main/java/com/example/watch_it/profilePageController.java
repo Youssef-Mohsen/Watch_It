@@ -52,8 +52,6 @@ public class profilePageController implements Initializable {
     private Button updateButton;
     private boolean isAdmin;
     private User user;
-    String UserName ;
-    public static boolean updatePlan = false;
     @FXML
     private HBox watchedHbox;
     @FXML
@@ -74,7 +72,8 @@ public class profilePageController implements Initializable {
 
         onMouseExit();
         onMouseEntered();
-        if (updatePlan) {
+
+        if (SignIn.user5.getSubscription().getUpdatePlan()) {
             try {
                 toPlans();
             } catch (IOException e) {
@@ -83,7 +82,7 @@ public class profilePageController implements Initializable {
         }
     }
     @FXML
-    public void choose(MouseEvent event) throws IOException {
+    public void choose(MouseEvent event)  {
 
         Select_List.setOnMouseClicked(mouseEvent -> {
             try {
@@ -392,7 +391,7 @@ public class profilePageController implements Initializable {
         mainPane.setCenter(anchorPane);
     }
     @FXML
-    void toPlans()throws IOException{
+    private void toPlans()throws IOException{
         FXMLLoader loader=new FXMLLoader(getClass().getResource("update-plan.fxml"));
         Parent root = loader.load();
         switchPane((AnchorPane) root);

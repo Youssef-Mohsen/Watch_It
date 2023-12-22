@@ -245,7 +245,7 @@ public class User
         data = data.concat(",").concat(getFirst_Name()).concat(",");
         data = data.concat(getLast_Name()).concat(",").concat(getPlan()).concat(",");
         data = data.concat(getEmail()).concat(",").concat(getSubscription().getStartDate().toString());
-        data = data.concat(",").concat(getProfilePath()).concat(",");
+        data = data.concat(",").concat(getProfilePath()).concat(",").concat(String.valueOf(getSubscription().getUpdatePlan())).concat(",");
 
         data = data.concat("to be watched").concat(",");
         for (Movie toWatchMovie : Movies_For_Later) {

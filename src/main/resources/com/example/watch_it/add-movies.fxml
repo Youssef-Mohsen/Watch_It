@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<ScrollPane fx:id="secondPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="864.0" prefWidth="1336.0" styleClass="scrollPane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watch_it.AddMovieController">
+<?import javafx.scene.control.Button?>
+<ScrollPane fx:id="secondPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="784.0" prefWidth="1318.0" styleClass="scrollPane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watch_it.AddMovieController">
    <content>
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="864.0" prefWidth="1318.0">
          <children>
@@ -39,17 +44,17 @@
                               <Font size="24.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="LanguageField" prefHeight="50.0" prefWidth="558.0" promptText="Language" style="-fx-background-color: black; -fx-background-radius: 10; -fx-border-color: grey; -fx-border-radius: 10;" styleClass="text-box">
+                        <TextField fx:id="LanguageField" alignment="TOP_LEFT" prefHeight="50.0" prefWidth="558.0" promptText="Language" style="-fx-background-color: black; -fx-background-radius: 10; -fx-border-color: grey; -fx-border-radius: 10;">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="CountryField" prefHeight="50.0" prefWidth="558.0" promptText="Country" style="-fx-background-color: black; -fx-background-radius: 10; -fx-border-color: grey; -fx-border-radius: 10;" styleClass="text-box">
+                        <TextField fx:id="CountryField" prefHeight="50.0" prefWidth="558.0" promptText="Country" style="-fx-background-color: black; -fx-background-radius: 10; -fx-border-color: grey; -fx-border-radius: 10;">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="IMDBScoreField" prefHeight="50.0" prefWidth="558.0" promptText="IMDB Score" style="-fx-background-color: black; -fx-background-radius: 10; -fx-border-color: grey; -fx-border-radius: 10;" styleClass="text-box">
+                        <TextField fx:id="IMDBScoreField" prefHeight="50.0" prefWidth="558.0" promptText="IMDB Score" style="-fx-background-color: black; -fx-background-radius: 10; -fx-border-color: grey; -fx-border-radius: 10;">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -60,7 +65,7 @@
 
                      </children>
                      <padding>
-                        <Insets bottom="50.0" left="100.0" right="100.0" />
+                        <Insets bottom="100.0" left="100.0" right="100.0" />
                      </padding>
                   </VBox>
 
@@ -113,10 +118,13 @@
                         <Insets />
                      </HBox.margin>
                      <padding>
-                        <Insets bottom="60.0" right="160.0" />
+                        <Insets bottom="80.0" right="160.0" />
                      </padding>
                   </VBox>
                </children>
+               <HBox.margin>
+                  <Insets bottom="60" />
+               </HBox.margin>
             </HBox>
          </children></AnchorPane>
    </content>

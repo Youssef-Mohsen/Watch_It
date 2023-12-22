@@ -44,6 +44,10 @@ public class Subscription {
         this.user_id = user_id;
     }
 
+    public void setUpdatePlan(boolean updatePlan) {
+        this.updatePlan = updatePlan;
+    }
+
     public void setPlan(Plans plan) {
         this.plan = plan;
     }
@@ -77,6 +81,9 @@ public class Subscription {
         return startDate;
     }
 
+    public boolean getUpdatePlan() {
+        return updatePlan;
+    }
     public int getMoviesWatched() {
         return moviesWatched;
     }
@@ -97,6 +104,7 @@ public class Subscription {
                     updatePlan = true;
             } else {
                 subscriptionNotValid = true;
+                updatePlan = true;
             }
 
         }
@@ -114,7 +122,6 @@ public class Subscription {
         }
         this.startDate = LocalDate.now();
         this.moviesWatched = 0;
-        System.out.println("Subscription updated successfully.");
     }
 
     // Method to delete the subscription plan.

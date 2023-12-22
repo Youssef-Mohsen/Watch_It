@@ -28,17 +28,19 @@ public class AddCastController {
     private TextField ageText;
     private Separator separator;
     private int castNumber;
+    public static boolean inAddCast = false;
     ArrayList<String> castName = new ArrayList();
 
     public void setdata(ArrayList<String> newActor) {
-        System.out.println("in Add cast");
+        System.out.println(AddMovieController.AddedMovie.getTitle());
+        System.out.println(AddMovieController.AddedMovie.getDescription());
         System.out.println(newActor);
         this.castName = newActor;
         this.castNumber = castName.size();
         initialize();
     }
     void initialize(){
-        System.out.println("in Add cast2");
+        inAddCast = true;
         for (int i = 1; i <= castNumber; i++) {
             System.out.println("in");
             actorName = new Label(castName.get(i-1));

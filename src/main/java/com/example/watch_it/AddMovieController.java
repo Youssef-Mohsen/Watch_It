@@ -23,49 +23,51 @@ import java.util.Arrays;
 public class AddMovieController {
 
     @FXML
-    public static ScrollPane secondPane;
+    public ScrollPane secondPane;
 
     @FXML
-    private TextField BudgetField;
+    TextField BudgetField;
 
     @FXML
-    private TextField CountryField;
+    TextField CountryField;
 
     @FXML
-    private TextField IMDBScoreField;
+    TextField IMDBScoreField;
 
     @FXML
-    private TextField LanguageField;
+    TextField LanguageField;
 
     @FXML
-    private TextField RunningTimeField;
+    TextField RunningTimeField;
 
     @FXML
-    private TextField castField;
+    TextField castField;
 
     @FXML
-    private TextField directorField;
+    TextField directorField;
 
     @FXML
-    private TextField discreptionField;
+    TextField discreptionField;
 
     @FXML
-    private TextField genreField;
+    TextField genreField;
 
     @FXML
-    private TextField nameField;
+    TextField nameField;
 
     @FXML
-    private TextField posterField;
+    TextField posterField;
 
     @FXML
-    private TextField realeaseDateField;
+    TextField realeaseDateField;
 
     @FXML
-    private TextField revenueField;
+    TextField revenueField;
 
     @FXML
     private Button addButton;
+    static ArrayList<String> newActor = new ArrayList<>();
+    static  Movie AddedMovie;
     Stage stage;
     Parent root;
     @FXML
@@ -77,7 +79,7 @@ public class AddMovieController {
         addButton.setOnMouseExited(event -> addButton.setStyle("-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
     }
     @FXML
-    private void addMovie(ActionEvent event) throws IOException {
+    private void addMovie (ActionEvent event) throws IOException {
         String name = nameField.getText();
         String budget = BudgetField.getText();
         String revenue = revenueField.getText();
@@ -102,42 +104,45 @@ public class AddMovieController {
             alert.showAndWait();
             return;
         }
+
         String[] actor = cast.split(",");
         ArrayList<String> castarray = new ArrayList<>(Arrays.asList(actor));
+        System.out.println(castarray);
 
         String[] genre = genres.split(",");
         ArrayList<String> genrearray = new ArrayList<>(Arrays.asList(genre));
 
-       /* Movie movie = new Movie(name, LocalDate.parse(releasedate), runningtime, genrearray, language, country, poster, budget, revenue, Integer.parseInt(imdbscore), discreption);
-        Movie.allmovies.add(movie);
-       */
-
-        ArrayList<String> newActor = new ArrayList<>();
+        Movie movie = new Movie(name, LocalDate.parse(releasedate), runningtime, genrearray, language, country, poster, budget, revenue, Float.parseFloat(imdbscore), discreption);
+        AddedMovie = movie;
         for (String newactor : castarray) {
             String[] a = newactor.split(" ");
 
             if (Cast.search(a[0], a[1]) == null)
                 newActor.add(newactor);
+            System.out.println(newactor + " new in add");
         }
 
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("");
+        alert.setHeaderText(null);
 
         if (newActor.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("");
-            alert.setHeaderText(null);
             alert.setContentText("Movie Added");
             alert.showAndWait();
-            return;
+        }else{
+            alert.setContentText("Movie Added, please continue to add cast data");
+            alert.showAndWait();
+            AllMoviesController.enteredData = true;
+          //  toAddCast(event);
         }
 
-        toAddCast(event, newActor);
     }
-
-    void toAddCast (ActionEvent event, ArrayList<String> newActor) throws IOException {
+    void toAddCast (ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("all-movies.fxml"));
         root = loader.load();
         AllMoviesController controller = loader.getController();
-        controller.toAddCast(event, newActor);
+        controller.toAddCast(event);
+
     }
 
 }

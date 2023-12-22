@@ -40,6 +40,15 @@
                         onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="27.0" prefWidth="56.0"
                         style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"
                         text="EXIT" textFill="WHITE"/>
+
+                <Button fx:id="addCastButton" alignment="CENTER" layoutX="400.0" layoutY="20.0" mnemonicParsing="false" onAction="#toAddCast" onMouseEntered="#onMouseEntered" visible="false" onMouseExited="#onMouseExit" prefHeight="39.0" prefWidth="206.0" style="-fx-background-color: FFC107; -fx-background-radius: 10;" text="Continue" textAlignment="CENTER" textFill="black">
+                    <font>
+                        <Font name="System bold" size="20.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets left="300.0" />
+                    </VBox.margin>
+                </Button>
             </children>
         </Pane>
     </top>

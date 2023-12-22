@@ -104,14 +104,15 @@ public class ChoosePlanController {
         alert.setTitle("");
         alert.setHeaderText(null);
 
-        if (profilePageController.updatePlan) {
+        if (SignIn.user5.getSubscription().getUpdatePlan()) {
             SignIn.user5.setPlan(newPlan);
             SignIn.user5.Updata_Subscription_Plan(newSubscription);
             SignIn.user5.getSubscription().updateSubscription(newSubscription);
             SignIn.user5.getSubscription().subscriptionNotValid = false;
+            SignIn.user5.getSubscription().updatePlan = false;
             alert.setContentText("Subscription Updated");
             SignIn.user5.getSubscription().updatePlan = false;
-            profilePageController.updatePlan = false;
+            SignIn.user5.getSubscription().setUpdatePlan(false) ;
             toMoviesrecord(event);
         }
         else {
@@ -143,7 +144,7 @@ public class ChoosePlanController {
     }
     @FXML
     private void goBack (ActionEvent event) throws IOException {
-        if (profilePageController.updatePlan) {
+        if (SignIn.user5.getSubscription().getUpdatePlan()) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("main-page.fxml"));
             root = loader.load();
             MainPageController controller = loader.getController();

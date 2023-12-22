@@ -204,7 +204,7 @@ public class MovieController {
         Watch.setOnMouseClicked(event -> {
             SignIn.user5.getSubscription().addMovie();
             if (SignIn.user5.getSubscription().updatePlan)
-                profilePageController.updatePlan = true;
+                SignIn.user5.getSubscription().setUpdatePlan(true);
 
             if (SignIn.user5.getSubscription().subscriptionNotValid) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
