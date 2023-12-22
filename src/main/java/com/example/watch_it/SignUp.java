@@ -10,6 +10,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 public class SignUp {
     private Stage stage;
@@ -58,6 +61,10 @@ public class SignUp {
     RadioButton button6;
     private String profilepath;
     ToggleGroup group = new ToggleGroup();
+    private static final String EMAIL_PATTERN =
+            "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+    private static final Pattern pattern = Pattern.compile(EMAIL_PATTERN);
     @FXML
     private void initialize(){
         button1.setToggleGroup(group);
@@ -92,7 +99,10 @@ public class SignUp {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
+    private boolean emailValidation(String email){
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
     @FXML
     public void GoToSignIn(ActionEvent event) throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("sign-in.fxml")));
@@ -130,18 +140,7 @@ public class SignUp {
         String confirmpassword = CreateConfirmPassword.getText();
         RadioButton selectedbutton = (RadioButton) group.getSelectedToggle();
 
-        if (selectedbutton.equals(button1))
-            profilepath = "assets/batbot-01.png";
-        else if (selectedbutton.equals(button2))
-            profilepath = "assets/batbot-02.png";
-        else if (selectedbutton.equals(button3))
-            profilepath = "assets/batbot-03.png";
-        else if (selectedbutton.equals(button4))
-            profilepath = "assets/batbot-04.png";
-        else if (selectedbutton.equals(button5))
-            profilepath = "assets/batbot-05.png";
-        else if (selectedbutton.equals(button6))
-            profilepath = "assets/batbot-06.png";
+
 
         if (username.isEmpty() || firstname.isEmpty() || lastname.isEmpty() || password.isEmpty() || email.isEmpty() || confirmpassword.isEmpty() || selectedbutton == null){
             showErrorAlert("Invalid", "Enter All Data");
@@ -156,10 +155,33 @@ public class SignUp {
             showErrorAlert("Invalid", "UserName Is already exist , Try again!");
             CreateUserName.clear();
         }
+        else if(!emailValidation(Email.getText())){
+            showErrorAlert("Invalid", "Wrong Email Format");
+        }
+        else if(CreateUserName.getText().length()<4 || CreatePassword.getText().length()<4){
+            showErrorAlert("Invalid", "Must Insert At Least 4 Characters In Username or Password");
+        }
         else {
             User user = new User(username, lastname, firstname, email, password, profilepath, null);
             GoToChoosePlan(event, user);
         }
+        try {
+            if (selectedbutton.equals(button1))
+                profilepath = "assets/batbot-01.png";
+            else if (selectedbutton.equals(button2))
+                profilepath = "assets/batbot-02.png";
+            else if (selectedbutton.equals(button3))
+                profilepath = "assets/batbot-03.png";
+            else if (selectedbutton.equals(button4))
+                profilepath = "assets/batbot-04.png";
+            else if (selectedbutton.equals(button5))
+                profilepath = "assets/batbot-05.png";
+            else if (selectedbutton.equals(button6))
+                profilepath = "assets/batbot-06.png";
+        }catch (NullPointerException e){
+            System.out.println("Error: "+e);
+        }
+
     }
     @FXML
     public void The_Password_Visibility(ActionEvent act)

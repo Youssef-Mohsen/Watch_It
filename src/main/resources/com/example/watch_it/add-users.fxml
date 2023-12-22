@@ -13,143 +13,140 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane hbarPolicy="NEVER" fx:id="secondPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="784.0" prefWidth="1318.0" style="-fx-background-color: black;" styleClass="scrollPane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watch_it.AddUsersController">
-    <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="764.0" prefWidth="1318.0">
-            <children>
-                <VBox layoutX="559.0" layoutY="8.8" prefHeight="735.0" prefWidth="1318.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="9.0">
-                    <children>
-                        <Label prefHeight="45.0" prefWidth="291.0" text="Enter User Data" textAlignment="CENTER" textFill="#ffc107">
-                            <font>
-                                <Font size="40.0" />
-                            </font>
-                            <VBox.margin>
-                                <Insets left="100.0" />
-                            </VBox.margin>
-                        </Label>
-                        <HBox prefHeight="246.0" prefWidth="1318.0" spacing="70.0">
-                            <children>
-                                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
-                                    <children>
-                                        <ImageView fitHeight="140.0" fitWidth="168.0" pickOnBounds="true" preserveRatio="true">
-                                            <Image url="@assets/batbot-01.png" />
-                                        </ImageView>
-                                        <RadioButton fx:id="button1" mnemonicParsing="false" />
-                                    </children>
-                                </VBox>
-                                <VBox alignment="TOP_CENTER" layoutX="110.0" layoutY="50.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
-                                    <children>
-                                        <ImageView fitHeight="140.0" fitWidth="168.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@assets/batbot-02.png" />
-                                            </image>
-                                        </ImageView>
-                                        <RadioButton fx:id="button2" mnemonicParsing="false" />
-                                    </children>
-                                </VBox>
-                                <VBox alignment="TOP_CENTER" layoutX="316.0" layoutY="50.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
-                                    <children>
-                                        <ImageView fitHeight="140.0" fitWidth="168.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@assets/batbot-03.png" />
-                                            </image>
-                                        </ImageView>
-                                        <RadioButton fx:id="button3" mnemonicParsing="false" />
-                                    </children>
-                                </VBox>
-                                <VBox alignment="TOP_CENTER" layoutX="523.0" layoutY="50.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
-                                    <children>
-                                        <ImageView fitHeight="140.0" fitWidth="168.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@assets/batbot-04.png" />
-                                            </image>
-                                        </ImageView>
-                                        <RadioButton fx:id="button4" mnemonicParsing="false" />
-                                    </children>
-                                </VBox>
-                                <VBox alignment="TOP_CENTER" layoutX="729.0" layoutY="50.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
-                                    <children>
-                                        <ImageView fitHeight="140.0" fitWidth="168.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@assets/batbot-05.png" />
-                                            </image>
-                                        </ImageView>
-                                        <RadioButton fx:id="button5" mnemonicParsing="false" />
-                                    </children>
-                                </VBox>
-                                <VBox alignment="TOP_CENTER" layoutX="936.0" layoutY="50.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
-                                    <children>
-                                        <ImageView fitHeight="140.0" fitWidth="168.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@assets/batbot-06.png" />
-                                            </image>
-                                        </ImageView>
-                                        <RadioButton fx:id="button6" mnemonicParsing="false" />
-                                    </children>
-                                </VBox>
-                            </children>
-                            <padding>
-                                <Insets left="100.0" top="40.0" />
-                            </padding>
-                        </HBox>
-
-
-
-
-                        <HBox prefHeight="434.0" prefWidth="1318.0">
-                            <children>
-                                <VBox alignment="TOP_CENTER" prefHeight="482.0" prefWidth="660.0" spacing="50.0" style="-fx-background-color: black;">
-                                    <children>
-                                        <TextField fx:id="usernameField" prefHeight="50.0" prefWidth="558.0" promptText="Username" style="-fx-background-radius: 30 30 30 30;" styleClass="text-box">
-                                            <font>
-                                                <Font size="24.0" />
-                                            </font>
-                                        </TextField>
-                                        <TextField fx:id="emailField" prefHeight="50.0" prefWidth="558.0" promptText="Email" style="-fx-background-radius: 30 30 30 30;" styleClass="text-box">
-                                            <font>
-                                                <Font size="24.0" />
-                                            </font>
-                                        </TextField>
-                                        <TextField fx:id="passwordField" prefHeight="50.0" prefWidth="558.0" promptText="Password" style="-fx-background-radius: 30 30 30 30;" styleClass="text-box">
-                                            <font>
-                                                <Font size="24.0" />
-                                            </font>
-                                        </TextField>
-                                    </children>
-                                    <padding>
-                                        <Insets bottom="60.0" left="50.0" right="50.0" />
-                                    </padding>
-                                </VBox>
-                                <VBox alignment="TOP_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="653.0" spacing="50.0" style="-fx-background-color: black;">
-                                    <children>
-                                        <TextField fx:id="fnameField" prefHeight="50.0" prefWidth="558.0" promptText="First Name" style="-fx-background-radius: 30 30 30 30;" styleClass="text-box">
-                                            <font>
-                                                <Font size="24.0" />
-                                            </font>
-                                        </TextField>
-                                        <TextField fx:id="lnameField" prefHeight="50.0" prefWidth="558.0" promptText="Last Name" style="-fx-background-radius: 30 30 30 30;" styleClass="text-box">
-                                            <font>
-                                                <Font size="24.0" />
-                                            </font>
-                                        </TextField>
-                                        <TextField fx:id="planField" prefHeight="50.0" prefWidth="558.0" promptText="Plan" style="-fx-background-radius: 30;" styleClass="text-box">
-                                            <font>
-                                                <Font size="24.0" />
-                                            </font>
-                                        </TextField>
-                                        <Button fx:id="addButton" alignment="CENTER" onAction="#Adduser" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="24.0" prefWidth="68.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;" text="Add" textFill="WHITE">
-                                            <font>
-                                                <Font name="System Bold" size="15.0" />
-                                            </font></Button>
-                                    </children>
-                                    <padding>
-                                        <Insets bottom="60.0" left="50.0" right="50.0" />
-                                    </padding>
-                                </VBox>
-                            </children>
-                        </HBox>
-                    </children>
+<ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="784.0" prefWidth="1318.0" style="-fx-background-color: black;"
+            styleClass="scrollPane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watch_it.AddUsersController">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="764.0" prefWidth="1318.0">
+        <VBox layoutX="559.0" layoutY="8.8" prefHeight="735.0" prefWidth="1318.0"
+              style="-fx-background-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+              AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="9.0">
+            <Label prefHeight="45.0" prefWidth="291.0" text="Enter User Data" textAlignment="CENTER"
+                   textFill="#ffc107">
+                <font>
+                    <Font size="40.0"/>
+                </font>
+                <VBox.margin>
+                    <Insets left="100.0"/>
+                </VBox.margin>
+            </Label>
+            <HBox prefHeight="246.0" prefWidth="1318.0" spacing="70.0">
+                <padding>
+                    <Insets left="100.0" top="40.0"/>
+                </padding>
+                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+                    <ImageView fitHeight="140.0" fitWidth="168.0" pickOnBounds="true"
+                               preserveRatio="true">
+                        <Image url="@assets/batbot-01.png"/>
+                    </ImageView>
+                    <RadioButton fx:id="button1" mnemonicParsing="false"/>
                 </VBox>
-            </children></AnchorPane>
-    </content>
+                <VBox alignment="TOP_CENTER" layoutX="110.0" layoutY="50.0" prefHeight="200.0"
+                      prefWidth="100.0" spacing="20.0">
+                    <ImageView fitHeight="140.0" fitWidth="168.0" pickOnBounds="true"
+                               preserveRatio="true">
+                        <Image url="@assets/batbot-02.png"/>
+                    </ImageView>
+                    <RadioButton fx:id="button2" mnemonicParsing="false"/>
+                </VBox>
+                <VBox alignment="TOP_CENTER" layoutX="316.0" layoutY="50.0" prefHeight="200.0"
+                      prefWidth="100.0" spacing="20.0">
+                    <ImageView fitHeight="140.0" fitWidth="168.0" pickOnBounds="true"
+                               preserveRatio="true">
+                        <Image url="@assets/batbot-03.png"/>
+                    </ImageView>
+                    <RadioButton fx:id="button3" mnemonicParsing="false"/>
+                </VBox>
+                <VBox alignment="TOP_CENTER" layoutX="523.0" layoutY="50.0" prefHeight="200.0"
+                      prefWidth="100.0" spacing="20.0">
+                    <ImageView fitHeight="140.0" fitWidth="168.0" pickOnBounds="true"
+                               preserveRatio="true">
+                        <Image url="@assets/batbot-04.png"/>
+                    </ImageView>
+                    <RadioButton fx:id="button4" mnemonicParsing="false"/>
+                </VBox>
+                <VBox alignment="TOP_CENTER" layoutX="729.0" layoutY="50.0" prefHeight="200.0"
+                      prefWidth="100.0" spacing="20.0">
+                    <ImageView fitHeight="140.0" fitWidth="168.0" pickOnBounds="true"
+                               preserveRatio="true">
+                        <Image url="@assets/batbot-05.png"/>
+                    </ImageView>
+                    <RadioButton fx:id="button5" mnemonicParsing="false"/>
+                </VBox>
+                <VBox alignment="TOP_CENTER" layoutX="936.0" layoutY="50.0" prefHeight="200.0"
+                      prefWidth="100.0" spacing="20.0">
+                    <ImageView fitHeight="140.0" fitWidth="168.0" pickOnBounds="true"
+                               preserveRatio="true">
+                        <Image url="@assets/batbot-06.png"/>
+                    </ImageView>
+                    <RadioButton fx:id="button6" mnemonicParsing="false"/>
+                </VBox>
+            </HBox>
+
+
+            <HBox prefHeight="434.0" prefWidth="1318.0">
+                <VBox alignment="TOP_CENTER" prefHeight="482.0" prefWidth="660.0" spacing="50.0"
+                      style="-fx-background-color: black;">
+                    <padding>
+                        <Insets bottom="60.0" left="50.0" right="50.0"/>
+                    </padding>
+                    <TextField fx:id="usernameField" prefHeight="50.0" prefWidth="558.0"
+                               promptText="Username" style="-fx-background-radius: 30 30 30 30;"
+                               styleClass="text-box">
+                        <font>
+                            <Font size="24.0"/>
+                        </font>
+                    </TextField>
+                    <TextField fx:id="emailField" prefHeight="50.0" prefWidth="558.0" promptText="Email"
+                               style="-fx-background-radius: 30 30 30 30;" styleClass="text-box">
+                        <font>
+                            <Font size="24.0"/>
+                        </font>
+                    </TextField>
+                    <TextField fx:id="passwordField" prefHeight="50.0" prefWidth="558.0"
+                               promptText="Password" style="-fx-background-radius: 30 30 30 30;"
+                               styleClass="text-box">
+                        <font>
+                            <Font size="24.0"/>
+                        </font>
+                    </TextField>
+                </VBox>
+                <VBox alignment="TOP_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="200.0"
+                      prefWidth="653.0" spacing="50.0" style="-fx-background-color: black;">
+                    <padding>
+                        <Insets bottom="60.0" left="50.0" right="50.0"/>
+                    </padding>
+                    <TextField fx:id="fNameField" prefHeight="50.0" prefWidth="558.0"
+                               promptText="First Name" style="-fx-background-radius: 30 30 30 30;"
+                               styleClass="text-box">
+                        <font>
+                            <Font size="24.0"/>
+                        </font>
+                    </TextField>
+                    <TextField fx:id="lNameField" prefHeight="50.0" prefWidth="558.0"
+                               promptText="Last Name" style="-fx-background-radius: 30 30 30 30;"
+                               styleClass="text-box">
+                        <font>
+                            <Font size="24.0"/>
+                        </font>
+                    </TextField>
+                    <TextField fx:id="planField" prefHeight="50.0" prefWidth="558.0" promptText="Plan"
+                               style="-fx-background-radius: 30;" styleClass="text-box">
+                        <font>
+                            <Font size="24.0"/>
+                        </font>
+                    </TextField>
+                    <Button fx:id="addButton" alignment="CENTER" onAction="#Adduser"
+                            onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit"
+                            prefHeight="24.0" prefWidth="68.0"
+                            style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"
+                            text="Add" textFill="WHITE">
+                        <font>
+                            <Font name="System Bold" size="15.0"/>
+                        </font>
+                    </Button>
+                </VBox>
+            </HBox>
+        </VBox>
+    </AnchorPane>
 </ScrollPane>

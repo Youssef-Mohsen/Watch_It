@@ -1,20 +1,13 @@
 package com.example.watch_it;
-import javafx.application.Application;
+
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -47,7 +40,7 @@ public class AddMovieController {
     TextField directorField;
 
     @FXML
-    TextField discreptionField;
+    TextField descriptionField;
 
     @FXML
     TextField genreField;
@@ -59,7 +52,7 @@ public class AddMovieController {
     TextField posterField;
 
     @FXML
-    TextField realeaseDateField;
+    TextField releaseDateField;
 
     @FXML
     TextField revenueField;
@@ -68,7 +61,7 @@ public class AddMovieController {
     private Button addButton;
     static ArrayList<String> newActor = new ArrayList<>();
     static  Movie AddedMovie;
-    Stage stage;
+
     Parent root;
     @FXML
     public void onMouseEntered(){
@@ -83,20 +76,20 @@ public class AddMovieController {
         String name = nameField.getText();
         String budget = BudgetField.getText();
         String revenue = revenueField.getText();
-        String releasedate = realeaseDateField.getText();
+        String releaseDate = releaseDateField.getText();
         String poster = posterField.getText();
         String genres = genreField.getText();
         String country = CountryField.getText();
-        String discreption = discreptionField.getText();
+        String description = descriptionField.getText();
         String director = directorField.getText();
-        String runningtime = RunningTimeField.getText();
+        String runningTime = RunningTimeField.getText();
         String cast = castField.getText();
         String language = LanguageField.getText();
-        String imdbscore = IMDBScoreField.getText();
+        String imdbScore = IMDBScoreField.getText();
 
-        if (name.isEmpty() || budget.isEmpty() || revenue.isEmpty() || releasedate.isEmpty() ||
-                poster.isEmpty() || genres.isEmpty() || country.isEmpty() || discreption.isEmpty() ||
-                director.isEmpty() || runningtime.isEmpty() || cast.isEmpty() || language.isEmpty() || imdbscore.isEmpty()) {
+        if (name.isEmpty() || budget.isEmpty() || revenue.isEmpty() || releaseDate.isEmpty() ||
+                poster.isEmpty() || genres.isEmpty() || country.isEmpty() || description.isEmpty() ||
+                director.isEmpty() || runningTime.isEmpty() || cast.isEmpty() || language.isEmpty() || imdbScore.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText(null);
@@ -106,20 +99,19 @@ public class AddMovieController {
         }
 
         String[] actor = cast.split(",");
-        ArrayList<String> castarray = new ArrayList<>(Arrays.asList(actor));
-        System.out.println(castarray);
+        ArrayList<String> castArray = new ArrayList<>(Arrays.asList(actor));
+        System.out.println(castArray);
 
         String[] genre = genres.split(",");
-        ArrayList<String> genrearray = new ArrayList<>(Arrays.asList(genre));
+        ArrayList<String> genreArray = new ArrayList<>(Arrays.asList(genre));
 
-        Movie movie = new Movie(name, LocalDate.parse(releasedate), runningtime, genrearray, language, country, poster, budget, revenue, Float.parseFloat(imdbscore), discreption);
-        AddedMovie = movie;
-        for (String newactor : castarray) {
-            String[] a = newactor.split(" ");
+        AddedMovie = new Movie(name, LocalDate.parse(releaseDate), runningTime, genreArray, language, country, poster, budget, revenue, Float.parseFloat(imdbScore), description);//
+        for (String newActor1 : castArray) {
+            String[] a = newActor1.split(" ");
 
             if (Cast.search(a[0], a[1]) == null)
-                newActor.add(newactor);
-            System.out.println(newactor + " new in add");
+                newActor.add(newActor1);
+            System.out.println(newActor1 + " new in add");
         }
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -133,7 +125,7 @@ public class AddMovieController {
             alert.setContentText("Movie Added, please continue to add cast data");
             alert.showAndWait();
             AllMoviesController.enteredData = true;
-          //  toAddCast(event);
+           toAddCast(event);
         }
 
     }

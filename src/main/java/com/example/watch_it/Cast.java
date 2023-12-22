@@ -47,16 +47,7 @@ public class Cast extends Artist{
         }
         return null;
     }
-    @Override
-    public int  check(String first_name,String second_name) {
-        for (int i=0;i<allCast.size();i++) {
 
-            if (allCast.get(i).getFirst_Name().equals(first_name) && allCast.get(i).getSecond_Name().equals(second_name)) {
-                return i;
-            }
-        }
-        return -1;
-    }
     public void Delete(String first_name,String second_name)
     {
         for (Cast c:allCast) {

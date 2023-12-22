@@ -72,12 +72,13 @@ public class profilePageController implements Initializable {
 
         onMouseExit();
         onMouseEntered();
-
-        if (SignIn.user5.getSubscription().getUpdatePlan()) {
-            try {
-                toPlans();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+        if(SignIn.user5!=null) {
+            if (SignIn.user5.getSubscription().getUpdatePlan()) {
+                try {
+                    toPlans();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
     }

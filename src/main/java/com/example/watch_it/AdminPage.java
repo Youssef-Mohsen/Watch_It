@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class AdminPage
@@ -28,9 +29,8 @@ public class AdminPage
     private Button Back;
     @FXML
     private TextField UserName;
-
     @FXML
-    private TextField showedpassword;
+    private TextField showedPassword;
     @FXML
     public void Back_TO_First(ActionEvent event) throws IOException {
         root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("first-page.fxml")));
@@ -40,18 +40,18 @@ public class AdminPage
         stage.show();
     }
     @FXML
-    public void The_Password_Visibility(ActionEvent act)
+    public void The_Password_Visibility()
     {
         if(checkbox.isSelected())
         {
-            showedpassword.setText(password.getText());
-            showedpassword.setVisible(true);
+            showedPassword.setText(password.getText());
+            showedPassword.setVisible(true);
             password.setVisible(false);
         }
         else
         {
-            password.setText(showedpassword.getText());
-            showedpassword.setVisible(false);
+            password.setText(showedPassword.getText());
+            showedPassword.setVisible(false);
             password.setVisible(true);
         }
     }
@@ -71,7 +71,7 @@ public class AdminPage
         for(int i=0; i<Admin.admins.size(); i++){
             data = Admin.admins.get(i).split(",");
             if(data[Admin.USERNAMEINDEX].equals(username)){
-                System.out.println(data);
+                System.out.println(Arrays.toString(data));
                 adminExists = true;
                 break;
             }

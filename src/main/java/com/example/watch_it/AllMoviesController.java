@@ -171,7 +171,7 @@ public class AllMoviesController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("add-cast.fxml"));
             root = loader.load();
             AddCastController controller = loader.getController();
-            controller.setdata(AddMovieController.newActor);
+            controller.setData(AddMovieController.newActor);
             switchPane((ScrollPane) root);
             addCastButton.setText("Add");
         }

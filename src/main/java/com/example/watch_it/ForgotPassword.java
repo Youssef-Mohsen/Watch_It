@@ -71,16 +71,17 @@ public class ForgotPassword {
         String email = ForgotEmail.getText();
         String password = ForgotPassword.getText();
         String confirmpassword = ForgotConfirmPassword.getText();
+        User u = User.GetUser(username);
 
         if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirmpassword.isEmpty()) {
             showErrorAlert("Invalid Data", "Enter All Your Data");
         }
-        else if (!User.Userexist(username)) {
+        else if (u == null) {
             showErrorAlert("Invalid Data", "Username Is Incorrect, Try again!");
             ForgotUserName.clear();
         }
         else {
-            if (!(User.GetUser(username).getEmail().equals(email))) {
+            if (!u.getEmail().equals(email)) {
                 showErrorAlert("Invalid Data", "Email Is Incorrect, Try again!");
                 ForgotEmail.clear();
                 return;
@@ -91,6 +92,7 @@ public class ForgotPassword {
                 return;
             }
             showAlert("Password has been changed Successful!");
+            u.Set_Password(password);
             GoToSignIn(event);
         }
     }
@@ -129,6 +131,6 @@ public class ForgotPassword {
     }
 
     public void onMouseExit() {
-        Back.setOnMouseExited(event -> Back.setStyle("-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
-    }
+        Back.setOnMouseExited(event -> Back.setStyle("-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
+}
 }

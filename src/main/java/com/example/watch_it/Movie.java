@@ -1,5 +1,5 @@
 package com.example.watch_it;
-import java.text.DecimalFormat;
+
 import java.time.LocalDate;
 import java.util.*;
 
@@ -30,7 +30,7 @@ public class Movie {
     private int users_rated = 0;
     private Director director;
     private List<Cast> cast;
-    private static final DecimalFormat df = new DecimalFormat("0.00");
+
 
     public Movie(){
         counter++;
@@ -184,9 +184,6 @@ public class Movie {
     public Double getTotalRating(){
         return total_rating;
     }
-    public void addActor(Cast actor) {
-        cast.add(actor);
-    }
     public void setCast(List<Cast> cast) {
         this.cast = cast;
     }
@@ -227,35 +224,13 @@ public class Movie {
         }
         return null;
     }
-    public static List<Movie> RecentMovies() {
-        List<Movie> recent_movies = new ArrayList<>();
-        for (Movie m : allmovies) {
-            LocalDate release_date = m.getRelease_date();
 
-            if (release_date.isAfter(LocalDate.now().minusMonths(1))) {
-                recent_movies.add(m);
-            }
-        }
-        if (!(recent_movies.isEmpty())) {
-            recent_movies.sort(Comparator.comparing(Movie::getRelease_date).reversed());
-            return recent_movies;
-        }
-        return null;
-    }
     public static ArrayList<Movie> TopRatedMovies() {
         ArrayList<Movie> check = new ArrayList<>(allmovies);
         check.sort(Comparator.comparingDouble(Movie::getAverage_rating).reversed());
         return check;
     }
-    public static PriorityQueue<Movie> MostViewedMovies(List<Movie> movieList) {
-        // Create a PriorityQueue with a custom comparator
-        PriorityQueue<Movie> priorityQueue = new PriorityQueue<>(Comparator.comparing(Movie::getViews).reversed());
 
-        // Add all movies to the PriorityQueue
-        priorityQueue.addAll(movieList);
-
-        return priorityQueue;
-    }
     public static ArrayList<Movie> MostViewedMovies() {
         ArrayList<Movie> check = new ArrayList<>(allmovies);
         check.sort(Comparator.comparingDouble(Movie::getViews).reversed());
@@ -278,9 +253,6 @@ public class Movie {
     }
     public ArrayList<String> getCastNames() {
         return castNames;
-    }
-    public void getCastNames(ArrayList<String> cast) {
-        this.castNames.addAll(cast);
     }
     public void setCastNames(ArrayList<String> castNames) {
         this.castNames = castNames;

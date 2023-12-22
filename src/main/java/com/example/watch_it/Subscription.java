@@ -1,7 +1,7 @@
 package com.example.watch_it;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+
 
 // This class represents a user subscription for a streaming service.
 public class Subscription {
@@ -11,7 +11,7 @@ public class Subscription {
     }
 
     // Fields to store subscription information.
-    private int user_id;
+    private final int user_id;
     private Plans plan;
     private double price;
     private LocalDate startDate;
@@ -40,9 +40,7 @@ public class Subscription {
     }
 
     // Setter methods for updating subscription information.
-    public void setUserID(int user_id) {
-        this.user_id = user_id;
-    }
+
 
     public void setUpdatePlan(boolean updatePlan) {
         this.updatePlan = updatePlan;
@@ -65,16 +63,10 @@ public class Subscription {
     }
 
     // Getter methods to retrieve subscription information.
-    public int getUserID() {
-        return user_id;
-    }
+
 
     public Plans getPlan() {
         return plan;
-    }
-
-    public double getPrice() {
-        return price;
     }
 
     public LocalDate getStartDate() {
@@ -83,9 +75,6 @@ public class Subscription {
 
     public boolean getUpdatePlan() {
         return updatePlan;
-    }
-    public int getMoviesWatched() {
-        return moviesWatched;
     }
 
     // Method to add a movie to the subscription, considering plan limits.
@@ -124,12 +113,8 @@ public class Subscription {
         this.moviesWatched = 0;
     }
 
-    // Method to delete the subscription plan.
-    public void deleteSubscription() {
-        this.plan = null;
-    }
 
-    // Private helper method to check if the subscription is still active.
+    // check if the subscription is still active.
     public boolean isSubscriptionActive() {
         LocalDate currentDate = LocalDate.now();
         LocalDate endDate = startDate.plusDays(30);

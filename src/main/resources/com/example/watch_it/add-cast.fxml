@@ -1,35 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <?import javafx.geometry.Insets?>
 <ScrollPane hbarPolicy="NEVER" prefHeight="764.0" prefWidth="1336.0" style="-fx-background-color: black;"
-            vbarPolicy="NEVER" fx:controller="com.example.watch_it.AddCastController" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
-    <content>
-        <HBox alignment="CENTER" prefHeight="764.0" prefWidth="1290.0"  style="-fx-background-color: black;">
-            <children>
-                <VBox fx:id="mainvbox1" minHeight="0.0" minWidth="0.0" prefHeight="764.0" prefWidth="500.0" spacing="30.0" style="-fx-background-color: black;">
-                    <HBox.margin>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                    </HBox.margin>
-                    <children>
-                    </children>
-                </VBox>
-                <VBox fx:id="mainvbox2" minHeight="0.0" minWidth="0.0" prefHeight="764.0" prefWidth="500.0" spacing="30.0" style="-fx-background-color: black;">
-                    <HBox.margin>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                    </HBox.margin>
-                    <children>
-                    </children>
-                </VBox>
-            </children>
-            <padding>
-                <Insets bottom="70.0" />
-            </padding>
-        </HBox>
-    </content>
+            vbarPolicy="NEVER" fx:controller="com.example.watch_it.AddCastController"
+            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+    <HBox alignment="CENTER" prefHeight="764.0" prefWidth="1290.0" style="-fx-background-color: black;">
+        <padding>
+            <Insets bottom="70.0"/>
+        </padding>
+        <VBox fx:id="mainVbox1" minHeight="0.0" minWidth="0.0" prefHeight="764.0" prefWidth="500.0" spacing="30.0"
+              style="-fx-background-color: black;">
+            <HBox.margin>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+            </HBox.margin>
+        </VBox>
+        <VBox fx:id="mainVbox2" minHeight="0.0" minWidth="0.0" prefHeight="764.0" prefWidth="500.0" spacing="30.0"
+              style="-fx-background-color: black;">
+            <HBox.margin>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+            </HBox.margin>
+        </VBox>
+    </HBox>
 </ScrollPane>

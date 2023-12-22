@@ -4,9 +4,9 @@ import javafx.scene.control.*;
 
 public class AddUsersController {
     @FXML
-    private TextField fnameField;
+    private TextField fNameField;
     @FXML
-    private TextField lnameField;
+    private TextField lNameField;
     @FXML
     private TextField emailField;
     @FXML
@@ -15,7 +15,7 @@ public class AddUsersController {
     private TextField planField;
     @FXML
     private TextField usernameField;
-    private String profilepath;
+    private String profilePath;
     @FXML
     RadioButton button1;
     @FXML
@@ -47,12 +47,12 @@ public class AddUsersController {
     private void Adduser() {
 
         String username = usernameField.getText();
-        String fname = fnameField.getText();
-        String lname = lnameField.getText();
+        String fName = fNameField.getText();
+        String lName = lNameField.getText();
         String password = passwordField.getText();
         String email = emailField.getText();
         String plan = planField.getText();
-        RadioButton selectedbutton = (RadioButton) group.getSelectedToggle();
+        RadioButton selectedButton = (RadioButton) group.getSelectedToggle();
 
         if (User.Userexist(username))  {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -62,7 +62,7 @@ public class AddUsersController {
             alert.showAndWait();
         }
 
-        else if (username.isEmpty() || fname.isEmpty() || lname.isEmpty() || password.isEmpty() || email.isEmpty() || plan.isEmpty() || selectedbutton == null) {
+        else if (username.isEmpty() || fName.isEmpty() || lName.isEmpty() || password.isEmpty() || email.isEmpty() || plan.isEmpty() || selectedButton == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText(null);
@@ -87,21 +87,21 @@ public class AddUsersController {
                 return;
             }
 
-            if (selectedbutton.equals(button1))
-                profilepath = "assets/batbot-01.png";
-            else if (selectedbutton.equals(button2))
-                profilepath = "assets/batbot-02.png";
-            else if (selectedbutton.equals(button3))
-                profilepath = "assets/batbot-03.png";
-            else if (selectedbutton.equals(button4))
-                profilepath = "assets/batbot-04.png";
-            else if (selectedbutton.equals(button5))
-                profilepath = "assets/batbot-05.png";
-            else if (selectedbutton.equals(button6))
-                profilepath = "assets/batbot-06.png";
+            if (selectedButton.equals(button1))
+                profilePath = "assets/batbot-01.png";
+            else if (selectedButton.equals(button2))
+                profilePath = "assets/batbot-02.png";
+            else if (selectedButton.equals(button3))
+                profilePath = "assets/batbot-03.png";
+            else if (selectedButton.equals(button4))
+                profilePath = "assets/batbot-04.png";
+            else if (selectedButton.equals(button5))
+                profilePath = "assets/batbot-05.png";
+            else if (selectedButton.equals(button6))
+                profilePath = "assets/batbot-06.png";
 
 
-            User user = new User(username, lname, fname, email, password, profilepath, plan);
+            User user = new User(username, lName, fName, email, password, profilePath, plan);
             User.allusers.add(user);
             user.Subscribe(user.getUser_ID(), Plan);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

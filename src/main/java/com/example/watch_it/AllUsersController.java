@@ -1,6 +1,6 @@
 package com.example.watch_it;
 
-import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -65,7 +65,7 @@ public class AllUsersController implements Initializable {
         Label nameLabel = new Label(user.getUser_Name());
         nameLabel.setTextFill(Color.WHITE);
         nameLabel.setFont(Font.font("System Bold", 30.0));
-        Image image = new Image(getClass().getResourceAsStream(user.getProfilePath()));
+        Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(user.getProfilePath())));
         ImageView batbot = new ImageView(image);
         batbot.setFitHeight(120);
         batbot.setFitWidth(118);

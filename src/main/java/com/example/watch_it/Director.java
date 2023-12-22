@@ -48,16 +48,7 @@ public class Director extends Artist {
         }
         return null;
     }
-    @Override
-    public int check (String first_name,String second_name) {
-        for (int i=0;i<allDirectors.size();i++) {
 
-            if (allDirectors.get(i).getFirst_Name().equals(first_name) && allDirectors.get(i).getSecond_Name().equals(second_name)) {
-                return i;
-            }
-        }
-        return -1;
-    }
     public void Delete(String first_name,String second_name)
     {
         for (Director d:allDirectors) {

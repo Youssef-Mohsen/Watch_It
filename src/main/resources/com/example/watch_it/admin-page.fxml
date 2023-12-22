@@ -4,82 +4,96 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="864.0" maxWidth="1536.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="864.0" prefWidth="1536.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watch_it.AdminPage">
-    <children>
-        <VBox alignment="CENTER" maxHeight="864.0" maxWidth="1536.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="864.0" prefWidth="1536.0" style="-fx-background-color: black;">
-            <children>
-                <Pane prefHeight="100.0" prefWidth="1536.0" style="-fx-background-color: black;">
-                    <children>
-                        <Label alignment="CENTER" layoutX="46.0" layoutY="21.0" prefHeight="43.0" prefWidth="119.0" style="-fx-background-color: FFC107; -fx-background-radius: 20; " text="Watch" textFill="WHITE">
-                            <font>
-                                <Font name="Arial Narrow Bold" size="27.0" />
-                            </font>
-                        </Label>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="148.0" layoutY="21.0" prefHeight="43.0" prefWidth="68.0" style="-fx-background-color: black; -fx-background-radius: 25;" text="IT" textFill="WHITE">
-                            <font>
-                                <Font name="Arial Narrow Bold" size="27.0" />
-                            </font>
-                        </Label>
-                        <Button fx:id="Back" layoutX="1448.0" layoutY="15.0" mnemonicParsing="false" onAction="#Back_TO_First" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="27.0" prefWidth="56.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;" text="Back" textFill="WHITE" />
-                        <Separator layoutX="0.0" layoutY="98.0" opacity="0.1" prefWidth="1536.0" />
-                    </children>
+<AnchorPane maxHeight="864.0" maxWidth="1536.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="864.0"
+            prefWidth="1536.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.watch_it.AdminPage">
+    <VBox alignment="CENTER" maxHeight="864.0" maxWidth="1536.0" minHeight="-Infinity" minWidth="-Infinity"
+          prefHeight="864.0" prefWidth="1536.0" style="-fx-background-color: black;">
+        <Pane prefHeight="100.0" prefWidth="1536.0" style="-fx-background-color: black;">
+            <Label alignment="CENTER" layoutX="46.0" layoutY="21.0" prefHeight="43.0" prefWidth="119.0"
+                   style="-fx-background-color: FFC107; -fx-background-radius: 20; " text="Watch"
+                   textFill="WHITE">
+                <font>
+                    <Font name="Arial Narrow Bold" size="27.0"/>
+                </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="148.0" layoutY="21.0" prefHeight="43.0"
+                   prefWidth="68.0" style="-fx-background-color: black; -fx-background-radius: 25;" text="IT"
+                   textFill="WHITE">
+                <font>
+                    <Font name="Arial Narrow Bold" size="27.0"/>
+                </font>
+            </Label>
+            <Button fx:id="Back" layoutX="1448.0" layoutY="15.0" mnemonicParsing="false"
+                    onAction="#Back_TO_First" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit"
+                    prefHeight="27.0" prefWidth="56.0"
+                    style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"
+                    text="Back" textFill="WHITE"/>
+            <Separator layoutY="98.0" opacity="0.1" prefWidth="1536.0"/>
+        </Pane>
+        <HBox prefHeight="757.0" prefWidth="1536.0" style="-fx-background-color: black;">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="862.0" prefWidth="1092.0"
+                        style="-fx-background-color: black;">
+                <Pane prefHeight="757.0" prefWidth="994.0" AnchorPane.bottomAnchor="0.0"
+                      AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <Label alignment="CENTER" layoutX="284.0" layoutY="177.0" prefHeight="53.0"
+                           prefWidth="417.0" text="Admin Sign in" textAlignment="CENTER"
+                           textFill="white">
+                        <font>
+                            <Font name="System Bold" size="36.0"/>
+                        </font>
+                    </Label>
+                    <TextField fx:id="UserName" alignment="CENTER" layoutX="262.0" layoutY="266.0"
+                               prefHeight="47.0" prefWidth="460.0" promptText="Username"
+                               style="-fx-text-fill: white; -fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30;">
+                        <font>
+                            <Font name="Chalkboard Bold" size="20.0"/>
+                        </font>
+                    </TextField>
+                    <CheckBox fx:id="checkbox" layoutX="308.0" layoutY="392.0" mnemonicParsing="false"
+                              onAction="#The_Password_Visibility" prefHeight="26.0" prefWidth="149.0"
+                              text="Show Password" style="-fx-text-fill: white;">
+                        <font>
+                            <Font name="Chalkboard Bold" size="17.0"/>
+                        </font>
+                    </CheckBox>
+                    <Button fx:id="SignIn" layoutX="383.0" layoutY="465.0" mnemonicParsing="false"
+                            onAction="#signIn" prefHeight="39.0" prefWidth="206.0"
+                            style="-fx-background-color: FFC107; -fx-background-radius: 50;"
+                            text="Sign In" textFill="black">
+                        <font>
+                            <Font name="System Bold" size="20.0"/>
+                        </font>
+                    </Button>
+                    <TextField fx:id="showedPassword" alignment="CENTER" layoutX="262.0" layoutY="331.0"
+                               prefHeight="47.0" prefWidth="460.0" promptText="Password"
+                               style="-fx-text-fill: white; -fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30;">
+                        <font>
+                            <Font name="Chalkboard Bold" size="20.0"/>
+                        </font>
+                    </TextField>
+                    <PasswordField fx:id="password" alignment="CENTER" layoutX="262.0" layoutY="331.0"
+                                   prefHeight="47.0" prefWidth="460.0" promptText="Password"
+                                   style="-fx-text-fill: white; -fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30;">
+                        <font>
+                            <Font name="Chalkboard Bold" size="20.0"/>
+                        </font>
+                    </PasswordField>
                 </Pane>
-                <HBox prefHeight="757.0" prefWidth="1536.0" style="-fx-background-color: black;">
-                    <children>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="862.0" prefWidth="1092.0" style="-fx-background-color: black;">
-                            <children>
-                                <Pane prefHeight="757.0" prefWidth="994.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                    <children>
-                                        <Label alignment="CENTER" layoutX="284.0" layoutY="177.0" prefHeight="53.0" prefWidth="417.0" text="Admin Sign in" textAlignment="CENTER" textFill="white">
-                                            <font>
-                                                <Font name="System Bold" size="36.0" />
-                                            </font>
-                                        </Label>
-                                        <TextField fx:id="UserName" alignment="CENTER" layoutX="262.0" layoutY="266.0" prefHeight="47.0" prefWidth="460.0" promptText="Username" style="-fx-text-fill: white; -fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30;">
-                                            <font>
-                                                <Font name="Chalkboard Bold" size="20.0" />
-                                            </font>
-                                        </TextField>
-                                        <CheckBox fx:id="checkbox" layoutX="308.0" layoutY="392.0" mnemonicParsing="false" onAction="#The_Password_Visibility" prefHeight="26.0" prefWidth="149.0" text="Show Password" style="-fx-text-fill: white;">
-                                            <font>
-                                                <Font name="Chalkboard Bold" size="17.0" />
-                                            </font>
-                                        </CheckBox>
-                                        <Button fx:id="SignIn" layoutX="383.0" layoutY="465.0" mnemonicParsing="false" onAction="#signIn" prefHeight="39.0" prefWidth="206.0" style="-fx-background-color: FFC107; -fx-background-radius: 50;" text="Sign In" textFill="black">
-                                            <font>
-                                                <Font name="System Bold" size="20.0" />
-                                            </font>
-                                        </Button>
-                                        <TextField fx:id="showedpassword" alignment="CENTER" layoutX="262.0" layoutY="331.0" prefHeight="47.0" prefWidth="460.0" promptText="Password" style="-fx-text-fill: white; -fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30;">
-                                            <font>
-                                                <Font name="Chalkboard Bold" size="20.0" />
-                                            </font>
-                                        </TextField>
-                                        <PasswordField fx:id="password" alignment="CENTER" layoutX="262.0" layoutY="331.0" prefHeight="47.0" prefWidth="460.0" promptText="Password" style="-fx-text-fill: white; -fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30;">
-                                            <font>
-                                                <Font name="Chalkboard Bold" size="20.0" />
-                                            </font>
-                                        </PasswordField>
-                                    </children>
-                                </Pane>
-                            </children></AnchorPane>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="757.0" prefWidth="645.0" style="-fx-background-color: FFC107;">
-                            <children>
-                                <Label layoutX="29.0" layoutY="184.0" text="Home of WATCH IT Originals " textFill="black">
-                                    <font>
-                                        <Font name="System Bold" size="36.0" />
-                                    </font>
-                                </Label>
-                                <Label layoutX="65.0" layoutY="250.0" text="and Exclusives premieres." textFill="black">
-                                    <font>
-                                        <Font name="System Bold" size="36.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                        </AnchorPane>
-                    </children>
-                </HBox>
-            </children>
-        </VBox>
-    </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="757.0" prefWidth="645.0"
+                        style="-fx-background-color: FFC107;">
+                <Label layoutX="29.0" layoutY="184.0" text="Home of WATCH IT Originals " textFill="black">
+                    <font>
+                        <Font name="System Bold" size="36.0"/>
+                    </font>
+                </Label>
+                <Label layoutX="65.0" layoutY="250.0" text="and Exclusives premieres." textFill="black">
+                    <font>
+                        <Font name="System Bold" size="36.0"/>
+                    </font>
+                </Label>
+            </AnchorPane>
+        </HBox>
+    </VBox>
 </AnchorPane>

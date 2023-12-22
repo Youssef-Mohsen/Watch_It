@@ -14,7 +14,7 @@ public class User
     private String profilePath;
     private String plan;
     private LocalDate startDate;
-    String AllData;
+
 
     // This List Access By User
     ArrayList<Movie> Movies_For_Later = new ArrayList<Movie>();
@@ -88,42 +88,7 @@ public class User
     public void setSubscription(Subscription subscription) {
         this.subscription = subscription;
     }
-    // handle by GUI Answer the button that user click on it.
-    public void UpDate_Data_User(String Answer , String info)
-    {
-        if(Answer.equals("First Name"))
-        {
-            this.First_Name = info;
-        }
-        else if(Answer.equals("Last Name"))
-        {
-            this.Last_Name = info;
-        }
-        else if(Answer.equals("Email"))
-        {
-            this.Email = info;
-        }
-        else if(Answer.equals("Password"))
-        {
-            this.Password = info;
-        }
-    }
-    // return the index of the user who deleted to handle the Id of the reminder users.
-    public static void Delete_User(String user_name)
-    {
-        int index = 0 ;
-        for(User user : allusers)
-        {
-            if(user.User_Name.equals(user_name))
-            {
-                index = allusers.indexOf(user);
-                allusers.remove(user);
-            }
-        }
-        for (int i=index; i<allusers.size()-1; i++){
-            allusers.get(i).setUser_ID( allusers.get(i).getUser_ID() - 1);
-        }
-    }
+
     public static boolean Userexist(String user_name) {
         for (User user : allusers) {
             if (user.User_Name.equals(user_name)) {
@@ -154,6 +119,7 @@ public class User
     public void Set_Password(String password) {
         Password = password;
     }
+
     /*****Getters****/
     public int getUser_ID() {
         return User_ID;
@@ -195,29 +161,11 @@ public class User
      // take movie from method Choose movie Should be in main(return object of movie)
      //the Constraints of this part the amount of movies that allowed to user
      // add ********/
-    public void Choose_Movies_For_Later(Movie mov)
-    {
-        Movies_For_Later.add(mov);
-    }
+
     /*******take the index of the movie the User Change it and the new Movie the Want(object of movie)****/
-    public void Update_Choosen_Movie_Change(Movie mov , int index)
-    {
-        // make sure the exception handling is applied in the index.
-        Movies_For_Later.set(index , mov);
-    }
+
     /****delete movie from the list of watch later should handle in class system.*****/
-    public void Set_record(int id , Movie movi)
-    {
-        // Handle the part of Date and rate
-        // the movi that user watch it.
-        Watched_Movies.add(new UserWatchRecord(id , movi));
-    }
-    /*to set rate and Update it**/
-    public void Set_Rate_Racord(int index ,Double rate)
-    {
-        // make sure the exception handling is applied in the index.
-        Watched_Movies.get(index).setRating(rate);
-    }
+
     public static User GetUser(String user_name) {
         for (User user : allusers) {
             if (user.User_Name.equals(user_name))
@@ -225,13 +173,7 @@ public class User
         }
         return null;
     }
-    public boolean movieExist(Movie movie){
-        boolean exist = false;
-        for (UserWatchRecord u: Watched_Movies)
-            if(u.getMovie().equals(movie))
-                return  true;
-            return exist;
-    }
+
     public UserWatchRecord getWatchedMovie(Movie movie){
         for (UserWatchRecord u: Watched_Movies)
             if(u.getMovie().equals(movie))

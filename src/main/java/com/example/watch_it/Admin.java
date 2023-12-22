@@ -1,7 +1,6 @@
 package com.example.watch_it;
 import java.io.*;
 import java.time.Month;
-import java.time.Period;
 import java.util.*;
 import java.time.LocalDate;
 
@@ -20,8 +19,7 @@ public class Admin {
     static final short LASTNAMEINDEX = 5;
     static final short PROFILEPICINDEX = 9;
     static final short EMAILINDEX = 7;
-    static final short IDINDEX = 3;
-    private static short STARTDATEINDEX = 8;
+    private static final short STARTDATEINDEX = 8;
     public static ArrayList<Admin> allAdmins = new ArrayList<Admin>();
 
     public static ArrayList<String> movies = new ArrayList<String>();
@@ -55,14 +53,12 @@ public class Admin {
             BufferedReader b = new BufferedReader(new FileReader(file));
             while ((line = b.readLine()) != null) {
                 String [] row = line.split(",");
-                if(row[TYPEINDEX].equals("user"))
-                    users.add(line);
-                else if (row[TYPEINDEX].equals("cast"))
-                    casts.add(line);
-                else if(row[TYPEINDEX].equals("director"))
-                    directors.add(line);
-                else
-                    admins.add(line);
+                switch (row[TYPEINDEX]) {
+                    case "user" -> users.add(line);
+                    case "cast" -> casts.add(line);
+                    case "director" -> directors.add(line);
+                    default -> admins.add(line);
+                }
             }
             b.close();
         } catch (IOException e) {
@@ -129,7 +125,6 @@ public class Admin {
     }
     //returned string isn't splitted
     public static String existsInFile(String username){
-        boolean exist = false;
         String[] eachLine;
         for (String index: users){
             eachLine = index.split(",");
@@ -139,29 +134,13 @@ public class Admin {
         }
         return null;
     }
-    //record to be deleted is not splitted
-    //working just fine ^^^
-    static Subscription.Plans getMostSubscripedPlan(){
-        Subscription.Plans plan = null;
-        HashMap<Integer,Subscription.Plans> map = new HashMap<>();
 
-        map.put(basicPlanCounter,Subscription.Plans.BASIC);
-        map.put(standardPlanCounter,Subscription.Plans.STANDARD);
-        map.put(premiumPlanCounter,Subscription.Plans.PREMIUM);
-
-        int max = Math.max(standardPlanCounter,Math.max(basicPlanCounter,premiumPlanCounter));
-
-        plan = map.get(max);
-
-        return plan;
-    }
     static void getUsersInEachPlan(){
         basicPlanCounter = 0;
         standardPlanCounter = 0;
         premiumPlanCounter = 0;
         for (String index: users){
             String []line = index.split(",");
-            HashMap<Integer,Subscription.Plans> map = new HashMap<>();
             if(line[PLANINDEX].equals("basic"))
                 basicPlanCounter++;
             else if (line[PLANINDEX].equals("standard"))
@@ -252,30 +231,35 @@ public class Admin {
         int watchedCounter = 0;
         int toBeWatchedCounter = 0;
         String allData = existsInFile(user.getUser_Name());
-        String[] eachLine = allData.split(",");
-        for (String data:eachLine) {
-            if(data.equals("done"))
-                break;
-            if(data.equals("watched")) {
-                watched = true;
-                toBeWatched = false;
-            }
-            if(data.equals("to be watched")) {
-                toBeWatched = true;
-                watched = false;
-            }
-            if(watched) {
-                if(watchedCounter != 0) {
-                    user.watchedMovies.add(data);
+        try{
+            String[] eachLine = allData.split(",");
+            for (String data:eachLine) {
+                if(data.equals("done"))
+                    break;
+                if(data.equals("watched")) {
+                    watched = true;
+                    toBeWatched = false;
                 }
-                watchedCounter++;
+                if(data.equals("to be watched")) {
+                    toBeWatched = true;
+                    watched = false;
+                }
+                if(watched) {
+                    if(watchedCounter != 0) {
+                        user.watchedMovies.add(data);
+                    }
+                    watchedCounter++;
+                }
+                if(toBeWatched && toBeWatchedCounter == 1) {
+                    user.toWatchMovies.add(data);
+                }
+                if (toBeWatched && toBeWatchedCounter == 0)
+                    toBeWatchedCounter = 1;
             }
-            if(toBeWatched && toBeWatchedCounter == 1) {
-                user.toWatchMovies.add(data);
-            }
-            if (toBeWatched && toBeWatchedCounter == 0)
-                toBeWatchedCounter = 1;
+        }catch (NullPointerException e){
+            System.out.println("Error "+e);
         }
+
     }
     //as objects-------------------
     static void getUserMovieLists_obj(User user){
@@ -417,7 +401,7 @@ public class Admin {
                 director.setAge(Integer.parseInt(data[3]));
                 director.setGender(data[4]);
                 director.setNationality(data[5]);
-                ArrayList<String> arrayList = new ArrayList<String>();
+                ArrayList<String> arrayList = new ArrayList<>();
                 for(int i=data.length - 1; i>5; i--){
                     arrayList.add(data[i]);
                 }
@@ -427,7 +411,7 @@ public class Admin {
         return director;
     }
     static ArrayList<Cast> getAllCast(){
-        ArrayList<Cast> allcast = new ArrayList<Cast>();
+        ArrayList<Cast> allcast = new ArrayList<>();
         for(String oneCast: casts){
             String[] arr = oneCast.split(",");
             String name ="";
@@ -448,7 +432,7 @@ public class Admin {
                 eachCast.setGender(data[4]);
                 eachCast.setAge(Integer.parseInt(data[3]));
                 eachCast.setNationality(data[5]);
-                ArrayList<String> arrayList = new ArrayList<String>();
+                ArrayList<String> arrayList = new ArrayList<>();
                 for(int i=data.length - 1; i>5; i--){
                     arrayList.add(data[i]);
                 }
@@ -459,26 +443,26 @@ public class Admin {
     }
     //name on getMovies is full name >> first and last combined.
     static ArrayList<User> getAllUsers(){
-        ArrayList<User> userArrayList = new ArrayList<User>();
-        for(int i=0; i<users.size(); i++){
-            String[] data =users.get(i).split(",");
+        ArrayList<User> userArrayList = new ArrayList<>();
+        for (String s : users) {
+            String[] data = s.split(",");
             Subscription.Plans plan = null;
             double price = 0;
-            if(data[PLANINDEX].equals("basic")) {
+            if (data[PLANINDEX].equals("basic")) {
                 plan = Subscription.Plans.BASIC;
                 price = 100;
             }
-            if(data[PLANINDEX].equals("standard")) {
+            if (data[PLANINDEX].equals("standard")) {
                 plan = Subscription.Plans.STANDARD;
                 price = 200;
             }
-            if(data[PLANINDEX].equals("premium")) {
+            if (data[PLANINDEX].equals("premium")) {
                 plan = Subscription.Plans.PREMIUM;
                 price = 300;
             }
-            Subscription subscription = new Subscription(User.allusers.size()+1,plan);
+            Subscription subscription = new Subscription(User.allusers.size() + 1, plan);
             System.out.println();
-            User user = new User(User.allusers.size()+1,data[USERNAMEINDEX], data[LASTNAMEINDEX],data[FIRSTNAMEINDEX],data[EMAILINDEX],data[PASSWORDINDEX],data[PROFILEPICINDEX], subscription, data[STARTDATEINDEX]);
+            User user = new User(User.allusers.size() + 1, data[USERNAMEINDEX], data[LASTNAMEINDEX], data[FIRSTNAMEINDEX], data[EMAILINDEX], data[PASSWORDINDEX], data[PROFILEPICINDEX], subscription, data[STARTDATEINDEX]);
             getUserMovieLists_obj(user);
             user.getSubscription().setPlan(plan);
             user.setPlan(data[PLANINDEX]);
@@ -486,7 +470,7 @@ public class Admin {
             user.getSubscription().setStartDate(LocalDate.parse(data[STARTDATEINDEX]));
             user.getSubscription().setUpdatePlan(Boolean.parseBoolean(data[10]));
             int moviesCounter = 0;
-            for (UserWatchRecord movie: user.Watched_Movies){
+            for (UserWatchRecord ignored : user.Watched_Movies) {
                 moviesCounter++;
             }
             user.getSubscription().setMoviesWatched(moviesCounter);
@@ -496,7 +480,7 @@ public class Admin {
         return userArrayList;
     }
     static ArrayList<Admin> getAllAdmins(){
-        ArrayList<Admin> adminArrayList = new ArrayList<Admin>();
+        ArrayList<Admin> adminArrayList = new ArrayList<>();
         for(String oneAdmin : admins){
             String []data = oneAdmin.split(",");
             Admin admin = new Admin(data[USERNAMEINDEX], data[PASSWORDINDEX]);
