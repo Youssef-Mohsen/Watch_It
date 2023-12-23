@@ -214,6 +214,8 @@ public class MovieController {
             }
 
             movie.inc_views();
+            movie_watched = new UserWatchRecord(movie,Max_Rating);
+
             SignIn.user5.Watched_Movies.add(movie_watched);
             if (SignIn.user5.Movies_For_Later.contains(movie)) {
                 SignIn.user5.Movies_For_Later.remove(movie);
@@ -221,7 +223,6 @@ public class MovieController {
             }
             watchLater.setDisable(true);
             Watch.setDisable(true);
-            movie_watched = new UserWatchRecord(movie,Max_Rating);
 
         });
         watchLater.setOnMouseClicked(event -> {
@@ -319,9 +320,9 @@ public class MovieController {
     }
     public void setStars(UserWatchRecord userWatchRecord){
 
-            for (int i = 0; i < userWatchRecord.getRating(); i++) {
-                stars[i].setImage(fullstart_image);
-            }
+        for (int i = 0; i < userWatchRecord.getRating(); i++) {
+            stars[i].setImage(fullstart_image);
+        }
     }
     public void onMouseEntered() {
         Back.setOnMouseEntered(event -> Back.setStyle("-fx-background-color: #FFC107; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));

@@ -1,0 +1,901 @@
+Index: src/main/java/com/example/watch_it/WatchRecord.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.watch_it;\r\n\r\nimport javafx.event.ActionEvent;\r\nimport javafx.fxml.FXML;\r\nimport javafx.fxml.FXMLLoader;\r\nimport javafx.geometry.Pos;\r\nimport javafx.scene.Node;\r\nimport javafx.scene.Parent;\r\nimport javafx.scene.Scene;\r\nimport javafx.scene.control.Button;\r\nimport javafx.scene.control.Label;\r\nimport javafx.scene.control.ScrollPane;\r\nimport javafx.scene.image.Image;\r\nimport javafx.scene.image.ImageView;\r\nimport javafx.scene.input.MouseEvent;\r\nimport javafx.scene.layout.HBox;\r\nimport javafx.scene.layout.VBox;\r\nimport javafx.stage.Stage;\r\n\r\nimport java.io.IOException;\r\nimport java.util.ArrayList;\r\nimport java.util.Collections;\r\nimport java.util.Comparator;\r\n\r\npublic class WatchRecord {\r\n    private Parent root;\r\n    private Stage stage;\r\n    UserWatchRecord userWatchRecord;\r\n    public boolean aBoolean;\r\n    public static ArrayList<Movie> watchedMovies = new ArrayList<>();\r\n    @FXML\r\n    private ScrollPane Scroll;\r\n    @FXML\r\n    private HBox WatchedMovies;\r\n    @FXML\r\n    private Button Back;\r\n\r\n\r\n    public void initializeItems() {\r\n        Collections.sort(SignIn.user5.Watched_Movies, Comparator.comparingDouble(UserWatchRecord::getRating).reversed());\r\n        for (UserWatchRecord movie : SignIn.user5.Watched_Movies) {\r\n            addToGUI(movie);\r\n        }\r\n    }\r\n    private void addToGUI(UserWatchRecord movie) {\r\n        VBox movieContainer = new VBox(10);\r\n        movieContainer.setPrefWidth(300);\r\n        movieContainer.setPrefHeight(200);\r\n        Image image = new Image(getClass().getResourceAsStream(movie.getMovie().getPoster_path()));\r\n        ImageView imageView = new ImageView(image);\r\n        imageView.setFitHeight(237);\r\n        imageView.setFitWidth(220);\r\n        Label label = new Label(movie.getMovie().getTitle());\r\n        label.setStyle(\"-fx-text-size: 20; -fx-text-fill: white;\");\r\n        label.setOnMouseEntered(event -> label.setStyle(\"-fx-text-size: 20; -fx-text-fill: #FFC107;\"));\r\n        label.setOnMouseExited(event -> label.setStyle(\"-fx-text-size: 20; -fx-text-fill: white;\"));\r\n        Label label1 =new Label();\r\n        if(movie.getRating() == -1)\r\n            label1.setText(\"Rate: \"+\"0.0\");\r\n        else\r\n            label1.setText(\"Rate: \"+ movie.getRating());\r\n        label1.setStyle(\"-fx-text-size: 20; -fx-text-fill: white;\");\r\n        label1.setOnMouseEntered(event -> label1.setStyle(\"-fx-text-size: 20; -fx-text-fill: #FFC107;\"));\r\n        label1.setOnMouseExited(event -> label1.setStyle(\"-fx-text-size: 20; -fx-text-fill: white;\"));\r\n        Image image1 = new Image(getClass().getResourceAsStream(\"assets/fullStar.png\"));\r\n        ImageView imageView1 = new ImageView(image1);\r\n        imageView1.setFitHeight(18);\r\n        imageView1.setFitWidth(20);\r\n        HBox box =new HBox(label1,imageView1,label);\r\n        box.setAlignment(Pos.CENTER);\r\n        box.setSpacing(6);\r\n        movieContainer.setAlignment(Pos.CENTER);\r\n        movieContainer.getChildren().addAll(imageView,box);\r\n        movieContainer.setOnMouseClicked(event -> {\r\n            try {\r\n                onMouseClickedVBox(event,movie);\r\n            } catch (IOException e) {\r\n                throw new RuntimeException(e);\r\n            }\r\n        });\r\n        WatchedMovies.getChildren().addAll(movieContainer);\r\n\r\n    }\r\n    public void onMouseClickedVBox(MouseEvent act, UserWatchRecord movie) throws IOException {\r\n        boolean exists =false;\r\n        FXMLLoader loader=new FXMLLoader(getClass().getResource(\"movie-view.fxml\"));\r\n        Parent root = loader.load();\r\n        stage = (Stage)((Node)act.getSource()).getScene().getWindow();\r\n        MovieController controller=loader.getController();\r\n        controller.setStage(stage);\r\n        controller.disableButtons();\r\n        controller.disableWatch();\r\n        controller.setUserWatchRecord(movie);\r\n        for(UserWatchRecord userWatchRecord1:SignIn.user5.Watched_Movies){\r\n            if(userWatchRecord1.getMovie().equals(movie.getMovie())){\r\n                exists=true;\r\n            }\r\n        }\r\n        if(!exists) {\r\n            controller.watchMovie();\r\n        }\r\n        controller.page5=1;\r\n        controller.setStars(movie);\r\n        Scene scene = new Scene(root);\r\n        stage.setScene(scene);\r\n        stage.show();\r\n        Image image = new Image(getClass().getResourceAsStream(movie.getMovie().getPoster_path()));\r\n        controller.refreshScreen(\"Watch Movie \"+ movie.getMovie().getTitle() + \"(\"+movie.getMovie().getRelease_date().getYear()+\")\", movie.getMovie().getTitle(),\r\n                movie.getMovie().getTitle()+\" Translated\",movie.getMovie().getGenres(), movie.getMovie().getDescription(),\r\n                movie.getMovie().getRunning_time(), image,movie.getMovie().getDirector().getFirst_Name()+\" \"+movie.getMovie().getDirector().getSecond_Name(),movie.getMovie().getCastNames());\r\n        stage.setScene(scene);\r\n        stage.show();\r\n\r\n    }\r\n    public void setUserWatchRecord(UserWatchRecord userWatchRecord){\r\n        this.userWatchRecord=userWatchRecord;\r\n    }\r\n    public void backScenes(ActionEvent event) throws IOException {\r\n\r\n        FXMLLoader loader = new FXMLLoader(getClass().getResource(\"main-page.fxml\"));\r\n        root = loader.load();\r\n        MainPageController controller = loader.getController();\r\n        controller.setStage(stage);\r\n\r\n        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();\r\n        Scene scene = new Scene(root);\r\n        stage.setTitle(\"Movie\");\r\n        stage.setResizable(false);\r\n        stage.setX(-7);\r\n        stage.setY(0);\r\n        stage.setScene(scene);\r\n        stage.show();\r\n    }\r\n    public void onMouseEntered(){\r\n        Back.setOnMouseEntered(event -> Back.setStyle(\"-fx-background-color: #FFC107;\" +\r\n                \" -fx-background-radius: 25; \" +\r\n                \"-fx-border-color: white;\" +\r\n                \" -fx-border-radius: 25;\"));\r\n    }\r\n    public void onMouseExit(){\r\n        Back.setOnMouseExited(event -> Back.setStyle(\"-fx-background-color: black;\" +\r\n                \" -fx-background-radius: 25;\" +\r\n                \" -fx-border-color: white;\" +\r\n                \" -fx-border-radius: 25;\"));\r\n    }\r\n    /*  public void setMovieDetails(Movie movie){\r\n          if(this.movie!=null) {\r\n              this.movie = movie;\r\n              System.out.println(this.movie.getTitle());\r\n              System.out.println(this.movie.getPoster_path());\r\n          }\r\n      }*/\r\n    public void setStage(Stage stage) {\r\n        this.stage = stage;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/watch_it/WatchRecord.java b/src/main/java/com/example/watch_it/WatchRecord.java
+--- a/src/main/java/com/example/watch_it/WatchRecord.java	(revision b4ded379e12f764e21abf7e94c5e97e6e6d9b1cb)
++++ b/src/main/java/com/example/watch_it/WatchRecord.java	(date 1703286525546)
+@@ -38,6 +38,7 @@
+ 
+     public void initializeItems() {
+         Collections.sort(SignIn.user5.Watched_Movies, Comparator.comparingDouble(UserWatchRecord::getRating).reversed());
++
+         for (UserWatchRecord movie : SignIn.user5.Watched_Movies) {
+             addToGUI(movie);
+         }
+Index: src/main/java/com/example/watch_it/MovieController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.watch_it;\r\n\r\nimport javafx.event.ActionEvent;\r\nimport javafx.fxml.FXML;\r\nimport javafx.fxml.FXMLLoader;\r\nimport javafx.scene.Node;\r\nimport javafx.scene.Parent;\r\nimport javafx.scene.Scene;\r\nimport javafx.scene.control.Alert;\r\nimport javafx.scene.control.Button;\r\nimport javafx.scene.control.Label;\r\nimport javafx.scene.image.ImageView;\r\nimport javafx.scene.image.Image;\r\nimport javafx.scene.input.MouseEvent;\r\nimport javafx.scene.layout.HBox;\r\nimport javafx.scene.layout.Pane;\r\nimport javafx.scene.paint.Color;\r\nimport javafx.stage.Stage;\r\n\r\nimport java.io.IOException;\r\nimport java.util.ArrayList;\r\nimport java.util.Objects;\r\n\r\n\r\npublic class MovieController {\r\n    private Stage stage;\r\n    @FXML\r\n    private Label titleMovie;\r\n    @FXML\r\n    public Pane pane;\r\n    @FXML\r\n    private HBox starsRow;\r\n    @FXML\r\n    private Label movieName;\r\n    @FXML\r\n    private Label Film;\r\n    @FXML\r\n    private Label Genre;\r\n    @FXML\r\n    private Label duration;\r\n    @FXML\r\n    private Label description;\r\n    @FXML\r\n    private Label Director;\r\n    @FXML\r\n    private Label Cast;\r\n    @FXML\r\n    private ImageView imagePreview;\r\n    @FXML\r\n    private Button Back;\r\n    @FXML\r\n    public Button Watch;\r\n    @FXML\r\n    public Button watchLater;\r\n    @FXML\r\n    private ImageView star1;\r\n\r\n    @FXML\r\n    private ImageView star2;\r\n\r\n    @FXML\r\n    private ImageView star3;\r\n\r\n    @FXML\r\n    private ImageView star4;\r\n\r\n    @FXML\r\n    private ImageView star5;\r\n\r\n    private ImageView[] stars;\r\n\r\n    private Image fullstart_image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(\"assets/fullStar.png\")));\r\n\r\n    private Image emptystar_image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(\"assets/emptyStar.png\")));\r\n\r\n    private FXMLLoader main_page_loader = new FXMLLoader(getClass().getResource(\"main-page.fxml\"));\r\n    private Movie movie;\r\n    static UserWatchRecord movie_watched;\r\n    public int page5=0;\r\n    private User user;\r\n    double Max_Rating;\r\n    private boolean isAdmin = false;\r\n    private Parent root;\r\n    private Scene scene;\r\n\r\n    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);\r\n    // Other fields and methods...\r\n\r\n    // Method to update the text of the first label\r\n\r\n    @FXML\r\n    private void initialize() {\r\n        stars = new ImageView[]{star1, star2, star3, star4, star5};\r\n        // Set empty star images\r\n        for (ImageView star : stars) {\r\n            star.setImage(emptystar_image);\r\n        }\r\n        onMouseEntered();\r\n        onMouseExit();\r\n        alert.setTitle(\"\");\r\n        alert.setHeaderText(null);\r\n        alert.setContentText(\"You Reached Your Limit\");\r\n    }\r\n    public void disableButtons(){\r\n        watchLater.setDisable(true);\r\n    }\r\n\r\n    public void handleStarClick(MouseEvent event) {\r\n        ImageView clickedStar = (ImageView) event.getSource();\r\n        int rating = Integer.parseInt(clickedStar.getId().substring(4)); // Extract the rating from the star's ID\r\n        for (int i = 0; i < rating; i++) {\r\n            int finalI1 = i;\r\n            stars[i].setOnMouseClicked(event1 -> {\r\n                ImageView clickedStar2 = (ImageView) event1.getSource();\r\n                int rating2 = Integer.parseInt(clickedStar2.getId().substring(4)); // Extract the rating from the star's ID\r\n                stars[finalI1].setImage(fullstart_image);\r\n                Max_Rating=rating2;\r\n\r\n                if(movie!=null){\r\n                    movie.UpdateRating((double)rating2);\r\n                }\r\n                if(movie_watched != null) {\r\n                    movie_watched.setRating(Max_Rating);\r\n                    movie_watched.getMovie().UpdateRating(Max_Rating);\r\n                }\r\n\r\n              /*  for (double p = movie_watched.getRating()+(4- movie_watched.getRating()); p >=  movie_watched.getRating(); p--){\r\n                    double finalJ = p;\r\n                    stars[(int) finalJ].setImage(emptystar_image);\r\n                    stars[(int) p].setOnMouseExited(event2 ->\r\n                            stars[(int) finalJ].setImage(emptystar_image));\r\n                }\r\n                for (int j = 0; j <   movie_watched.getRating(); j++) {\r\n                    int finalJ = j;\r\n                    stars[j].setOnMouseExited(event2 ->\r\n                            stars[finalJ].setImage(fullstart_image));\r\n                }*/\r\n                for(int k=0;k< Max_Rating;k++){\r\n                    stars[k].setImage(fullstart_image);\r\n                }\r\n                for(double l = Max_Rating; l<5;l++){\r\n                    stars[(int) l].setImage(emptystar_image);\r\n                }\r\n            });\r\n\r\n        }\r\n        // You can perform additional actions here, such as saving the rating to a database.\r\n    }\r\n\r\n    public void handleStarHover(MouseEvent event) {\r\n        for(int i=0;i<5;i++) {\r\n            stars[i].setOnMouseEntered(event1 -> {\r\n                ImageView hoveredStar = (ImageView) event.getSource();\r\n                int rating = Integer.parseInt(hoveredStar.getId().substring(4)); // Extract the rating from the star's ID\r\n                // Highlight stars\r\n\r\n                for (int j = 0; j < rating; j++) {\r\n                    stars[j].setImage(fullstart_image);\r\n                }\r\n            });\r\n        }\r\n    }\r\n\r\n    @FXML\r\n    public void resetStars() {\r\n        for (ImageView star : stars) {\r\n            star.setImage(emptystar_image);\r\n        }\r\n\r\n    }\r\n    public void refreshScreen(String filmTitle, String newMovieName, String newFilm, ArrayList<String> filmGenre,\r\n                              String filmDescription, String filmDuration, Image image,String director,ArrayList<String> cast) {\r\n        String genres = \"\";\r\n        for(String genre: filmGenre){\r\n            genres = genres.concat(genre+ \" \");\r\n        }\r\n        String casts = \"\";\r\n        for (String cast1 : cast) {\r\n            casts = casts.concat(cast1 + \",\");\r\n        }\r\n        titleMovie.setText(filmTitle);\r\n        movieName.setText(newMovieName);\r\n        Film.setText(newFilm);\r\n        Genre.setText(genres);\r\n        description.setText(filmDescription);\r\n        duration.setText(filmDuration);\r\n        imagePreview.setImage(image);\r\n        Director.setText(director);\r\n        Cast.setText(casts);\r\n    }\r\n\r\n    public void disableWatch(){\r\n        Watch.setOnMouseClicked(event -> Watch.setDisable(true));\r\n    }\r\n    public void watchMovie(){\r\n        for (UserWatchRecord userWatchRecord:SignIn.user5.Watched_Movies){\r\n            if(userWatchRecord.getMovie().equals(movie)){\r\n                watchLater.setDisable(true);\r\n            }\r\n        }\r\n        if(SignIn.user5.Movies_For_Later.contains(movie)){\r\n            watchLater.setDisable(true);\r\n        }\r\n        Watch.setOnMouseClicked(event -> {\r\n            SignIn.user5.getSubscription().addMovie();\r\n            if (SignIn.user5.getSubscription().updatePlan)\r\n                SignIn.user5.getSubscription().setUpdatePlan(true);\r\n\r\n            if (SignIn.user5.getSubscription().subscriptionNotValid) {\r\n                Alert alert = new Alert(Alert.AlertType.ERROR);\r\n                alert.setContentText(\"You reached the limit of the movies. Please renew to watch more movies.\");\r\n                alert.showAndWait();\r\n                return;\r\n            }\r\n\r\n            movie.inc_views();\r\n            SignIn.user5.Watched_Movies.add(movie_watched);\r\n            if (SignIn.user5.Movies_For_Later.contains(movie)) {\r\n                SignIn.user5.Movies_For_Later.remove(movie);\r\n\r\n            }\r\n            watchLater.setDisable(true);\r\n            Watch.setDisable(true);\r\n            movie_watched = new UserWatchRecord(movie,Max_Rating);\r\n\r\n        });\r\n        watchLater.setOnMouseClicked(event -> {\r\n            if (SignIn.user5.getSubscription().subscriptionNotValid) {\r\n\r\n                Alert alert = new Alert(Alert.AlertType.ERROR);\r\n                alert.setContentText(\"You reached the limit of the movies. Please renew to watch more movies.\");\r\n                alert.showAndWait();\r\n                return;\r\n            }\r\n            MainPageController.movie5=movie;\r\n            if(!SignIn.user5.Movies_For_Later.contains(movie)) {\r\n                SignIn.user5.Movies_For_Later.add(movie);\r\n            }\r\n            watchLater.setDisable(true);\r\n        });\r\n    }\r\n\r\n    public void Admin(Movie movie){\r\n        isAdmin = true;\r\n        watchLater.setVisible(false);\r\n        Watch.setVisible(false);\r\n        starsRow.setVisible(false);\r\n        Button edit = new Button(\"Edit\");\r\n        edit.setStyle(\"-fx-background-color: black;-fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;\");\r\n        edit.setPrefWidth(73.0);\r\n        edit.setPrefHeight(30.0);\r\n        edit.setLayoutX(1443.0);\r\n        edit.setLayoutY(770.0);\r\n        edit.setTextFill(Color.WHITE);\r\n        pane.getChildren().add(edit);\r\n        edit.setOnMouseEntered(event -> edit.setStyle(\"-fx-background-color: #FFC107; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;\"));\r\n        edit.setOnMouseExited(event -> edit.setStyle(\"-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;\"));\r\n        edit.setOnMouseClicked(event -> {\r\n            try {\r\n                ToEditMovie(event, movie);\r\n            } catch (IOException e) {\r\n                throw new RuntimeException(e);\r\n            }\r\n        });\r\n    }\r\n    private void ToEditMovie(MouseEvent event, Movie movie) throws IOException {\r\n        FXMLLoader loader=new FXMLLoader(getClass().getResource(\"movie-edit.fxml\"));\r\n        root = loader.load();\r\n        stage = (Stage)((Node)event.getSource()).getScene().getWindow();\r\n        MoveEdit controller=loader.getController();\r\n        controller.setStage(stage);\r\n        controller.setUpPromptText(movie);\r\n        scene = new Scene(root);\r\n        stage.setScene(scene);\r\n        stage.show();\r\n        stage.setScene(scene);\r\n        stage.show();\r\n    }\r\n    public void backScenes(ActionEvent event) throws IOException {\r\n        Parent root = null;\r\n        if (isAdmin) {\r\n            FXMLLoader loader = new FXMLLoader(getClass().getResource(\"all-movies.fxml\"));\r\n            root = loader.load();\r\n            AllMoviesController controller = loader.getController();\r\n            controller.setStage(stage);\r\n        }\r\n        else if(page5==0) {\r\n            FXMLLoader loader = main_page_loader;\r\n            root = loader.load();\r\n            MainPageController controller = loader.getController();\r\n            controller.setUser(user);\r\n            controller.setStage(stage);\r\n            controller.setUser(SignIn.user5);\r\n        }\r\n        else if(page5==1){\r\n            FXMLLoader loader = new FXMLLoader(getClass().getResource(\"watch-record.fxml\"));\r\n            root = loader.load();\r\n            WatchRecord controller = loader.getController();\r\n            controller.setStage(stage);\r\n            controller.initializeItems();\r\n        }\r\n        else {\r\n            FXMLLoader loader=new FXMLLoader(getClass().getResource(\"profile-page.fxml\"));\r\n            root = loader.load();\r\n            stage = (Stage)((Node)event.getSource()).getScene().getWindow();\r\n            profilePageController controller=loader.getController();\r\n            controller.setStage(stage);\r\n            controller.setdata();\r\n            controller.setUser(SignIn.user5);\r\n        }\r\n        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();\r\n        Scene scene = new Scene(root);\r\n        stage.setTitle(\"Movie\");\r\n        stage.setResizable(false);\r\n        stage.setX(-7);\r\n        stage.setY(0);\r\n        stage.setScene(scene);\r\n        stage.show();\r\n    }\r\n    public void setStars(UserWatchRecord userWatchRecord){\r\n\r\n            for (int i = 0; i < userWatchRecord.getRating(); i++) {\r\n                stars[i].setImage(fullstart_image);\r\n            }\r\n    }\r\n    public void onMouseEntered() {\r\n        Back.setOnMouseEntered(event -> Back.setStyle(\"-fx-background-color: #FFC107; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;\"));\r\n        Watch.setOnMouseEntered(event -> Watch.setStyle(\"-fx-background-color: #FFC107; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;\"));\r\n        watchLater.setOnMouseEntered(event -> watchLater.setStyle(\"-fx-background-color: #FFC107; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;\"));\r\n    }\r\n\r\n    public void onMouseExit() {\r\n        Back.setOnMouseExited(event -> Back.setStyle(\"-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;\"));\r\n        Watch.setOnMouseExited(event -> Watch.setStyle(\"-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;\"));\r\n        watchLater.setOnMouseExited(event -> watchLater.setStyle(\"-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;\"));\r\n    }\r\n    //////////////////////////\r\n\r\n    //////////////////////////\r\n\r\n    public void setStage(Stage stage) {\r\n        this.stage = stage;\r\n    }\r\n    public void setMovie(Movie movie){\r\n        this.movie=movie;\r\n    }\r\n    public void setUserWatchRecord(UserWatchRecord movie){\r\n        this.movie_watched=movie;\r\n    }\r\n    public void setUser(User user){\r\n        this.user = user;\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/watch_it/MovieController.java b/src/main/java/com/example/watch_it/MovieController.java
+--- a/src/main/java/com/example/watch_it/MovieController.java	(revision b4ded379e12f764e21abf7e94c5e97e6e6d9b1cb)
++++ b/src/main/java/com/example/watch_it/MovieController.java	(date 1703286525540)
+@@ -214,6 +214,8 @@
+             }
+ 
+             movie.inc_views();
++            movie_watched = new UserWatchRecord(movie,Max_Rating);
++
+             SignIn.user5.Watched_Movies.add(movie_watched);
+             if (SignIn.user5.Movies_For_Later.contains(movie)) {
+                 SignIn.user5.Movies_For_Later.remove(movie);
+@@ -221,7 +223,6 @@
+             }
+             watchLater.setDisable(true);
+             Watch.setDisable(true);
+-            movie_watched = new UserWatchRecord(movie,Max_Rating);
+ 
+         });
+         watchLater.setOnMouseClicked(event -> {
+Index: src/main/java/com/example/watch_it/AddUsersController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.watch_it;\r\nimport javafx.fxml.FXML;\r\nimport javafx.scene.control.*;\r\n\r\npublic class AddUsersController {\r\n    @FXML\r\n    private TextField fnameField;\r\n    @FXML\r\n    private TextField lnameField;\r\n    @FXML\r\n    private TextField emailField;\r\n    @FXML\r\n    private TextField passwordField;\r\n    @FXML\r\n    private TextField planField;\r\n    @FXML\r\n    private TextField usernameField;\r\n    private String profilepath;\r\n    @FXML\r\n    RadioButton button1;\r\n    @FXML\r\n    RadioButton button2;\r\n    @FXML\r\n    RadioButton button3;\r\n    @FXML\r\n    RadioButton button4;\r\n    @FXML\r\n    RadioButton button5;\r\n    @FXML\r\n    RadioButton button6;\r\n    @FXML\r\n    private Button addButton;\r\n\r\n    ToggleGroup group = new ToggleGroup();\r\n\r\n    @FXML\r\n    private void initialize(){\r\n        button1.setToggleGroup(group);\r\n        button2.setToggleGroup(group);\r\n        button3.setToggleGroup(group);\r\n        button4.setToggleGroup(group);\r\n        button5.setToggleGroup(group);\r\n        button6.setToggleGroup(group);\r\n    }\r\n\r\n    @FXML\r\n    private void Adduser() {\r\n\r\n        String username = usernameField.getText();\r\n        String fname = fnameField.getText();\r\n        String lname = lnameField.getText();\r\n        String password = passwordField.getText();\r\n        String email = emailField.getText();\r\n        String plan = planField.getText();\r\n        RadioButton selectedbutton = (RadioButton) group.getSelectedToggle();\r\n\r\n        if (User.Userexist(username))  {\r\n            Alert alert = new Alert(Alert.AlertType.ERROR);\r\n            alert.setTitle(\"Error\");\r\n            alert.setHeaderText(null);\r\n            alert.setContentText(\"Username Already Exists\");\r\n            alert.showAndWait();\r\n        }\r\n\r\n        else if (username.isEmpty() || fname.isEmpty() || lname.isEmpty() || password.isEmpty() || email.isEmpty() || plan.isEmpty() || selectedbutton == null) {\r\n            Alert alert = new Alert(Alert.AlertType.ERROR);\r\n            alert.setTitle(\"Error\");\r\n            alert.setHeaderText(null);\r\n            alert.setContentText(\"Enter All Data\");\r\n            alert.showAndWait();\r\n        }\r\n\r\n        else {\r\n            Subscription.Plans Plan;\r\n            if (plan.equalsIgnoreCase(\"basic\"))\r\n                Plan = Subscription.Plans.BASIC;\r\n            else if (plan.equalsIgnoreCase(\"standard\"))\r\n                Plan = Subscription.Plans.STANDARD;\r\n            else if (plan.equalsIgnoreCase(\"premium\"))\r\n                Plan = Subscription.Plans.PREMIUM;\r\n            else {\r\n                Alert alert = new Alert(Alert.AlertType.ERROR);\r\n                alert.setTitle(\"Error\");\r\n                alert.setHeaderText(null);\r\n                alert.setContentText(\"Plan Doesn't Exist\");\r\n                alert.showAndWait();\r\n                return;\r\n            }\r\n\r\n            if (selectedbutton.equals(button1))\r\n                profilepath = \"assets/batbot-01.png\";\r\n            else if (selectedbutton.equals(button2))\r\n                profilepath = \"assets/batbot-02.png\";\r\n            else if (selectedbutton.equals(button3))\r\n                profilepath = \"assets/batbot-03.png\";\r\n            else if (selectedbutton.equals(button4))\r\n                profilepath = \"assets/batbot-04.png\";\r\n            else if (selectedbutton.equals(button5))\r\n                profilepath = \"assets/batbot-05.png\";\r\n            else if (selectedbutton.equals(button6))\r\n                profilepath = \"assets/batbot-06.png\";\r\n\r\n\r\n            User user = new User(username, lname, fname, email, password, profilepath, plan);\r\n            User.allusers.add(user);\r\n            user.Subscribe(user.getUser_ID(), Plan);\r\n            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);\r\n            alert.setTitle(\"\");\r\n            alert.setHeaderText(null);\r\n            alert.setContentText(\"User Added\");\r\n            alert.showAndWait();\r\n        }\r\n    }\r\n    @FXML\r\n    public  void onMouseEntered(){\r\n        addButton.setOnMouseEntered(event -> addButton.setStyle(\"-fx-background-color: #FFC107; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;\"));\r\n    }\r\n    @FXML\r\n    public  void onMouseExit(){\r\n        addButton.setOnMouseExited(event -> addButton.setStyle(\"-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;\"));\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/watch_it/AddUsersController.java b/src/main/java/com/example/watch_it/AddUsersController.java
+--- a/src/main/java/com/example/watch_it/AddUsersController.java	(revision b4ded379e12f764e21abf7e94c5e97e6e6d9b1cb)
++++ b/src/main/java/com/example/watch_it/AddUsersController.java	(date 1703282516412)
+@@ -102,8 +102,8 @@
+ 
+ 
+             User user = new User(username, lname, fname, email, password, profilepath, plan);
+-            User.allusers.add(user);
+             user.Subscribe(user.getUser_ID(), Plan);
++            User.allusers.add(user);
+             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+             alert.setTitle("");
+             alert.setHeaderText(null);
+Index: src/main/java/com/example/watch_it/User.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.watch_it;\r\nimport java.time.LocalDate;\r\nimport java.util.ArrayList;\r\n\r\npublic class User\r\n{\r\n    private int User_ID;\r\n    private final String User_Name;\r\n    private String Last_Name;\r\n    private String First_Name;\r\n    private String Email;\r\n    private String Password;\r\n    private Subscription subscription;\r\n    private String profilePath;\r\n    private String plan;\r\n    private LocalDate startDate;\r\n    String AllData;\r\n\r\n    // This List Access By User\r\n    ArrayList<Movie> Movies_For_Later = new ArrayList<Movie>();\r\n    ArrayList<String> toWatchMovies = new ArrayList<String>();\r\n    // This List Access By UserWatchRecord\r\n    ArrayList<UserWatchRecord> Watched_Movies = new ArrayList<UserWatchRecord>();\r\n    ArrayList<String> watchedMovies = new ArrayList<String>();\r\n    public static ArrayList<User> allusers = new ArrayList<User>();\r\n\r\n    /**use it as ID to be unique(static variable) and display it in message to each user***/\r\n\r\n    /*****as Sign Up method and the data will take in main(add)******/\r\n    public User(String user_name, String last_Name, String first_Name, String email, String password, String profilePath, String plan)\r\n    {\r\n        this.plan = plan;\r\n        this.profilePath = profilePath;\r\n        this.User_ID = Admin.users.size();\r\n        this.User_Name = user_name;\r\n        this.Last_Name = last_Name;\r\n        this.First_Name = first_Name;\r\n        this.Email = email;\r\n        this.Password = password;\r\n    }\r\n    public User(int id, String user_name, String last_Name, String first_Name, String email, String password, String profilePath, String plan)\r\n    {\r\n        this.User_ID =id;\r\n        this.User_Name = user_name;\r\n        this.Last_Name = last_Name;\r\n        this.First_Name = first_Name;\r\n        this.Email = email;\r\n        this.Password = password;\r\n        this.profilePath = profilePath;\r\n        this.plan = plan;\r\n    }\r\n    public User(int id, String user_name, String last_Name, String first_Name, String email, String password, String profilePath, String plan, String stardDate)\r\n    {\r\n        this.User_ID =id;\r\n        this.User_Name = user_name;\r\n        this.Last_Name = last_Name;\r\n        this.First_Name = first_Name;\r\n        this.Email = email;\r\n        this.Password = password;\r\n        this.startDate = LocalDate.parse(stardDate);\r\n        this.profilePath = profilePath;\r\n        this.plan = plan;\r\n    }\r\n    public User(int id, String user_name, String last_Name, String first_Name, String email, String password, String profilePath, Subscription plan, String stardDate)\r\n    {\r\n        this.User_ID =id;\r\n        this.User_Name = user_name;\r\n        this.Last_Name = last_Name;\r\n        this.First_Name = first_Name;\r\n        this.Email = email;\r\n        this.Password = password;\r\n        this.startDate = LocalDate.parse(stardDate);\r\n        this.subscription = plan;\r\n        this.profilePath = profilePath;\r\n\r\n        if (plan.getPlan().equals(Subscription.Plans.BASIC))\r\n            setPlan(\"basic\");\r\n        if (plan.getPlan().equals(Subscription.Plans.STANDARD))\r\n            setPlan(\"standard\");\r\n        if (plan.getPlan().equals(Subscription.Plans.PREMIUM))\r\n            setPlan(\"premium\");\r\n\r\n    }\r\n    public Subscription getSubscription() {\r\n        return subscription;\r\n    }\r\n\r\n    public void setSubscription(Subscription subscription) {\r\n        this.subscription = subscription;\r\n    }\r\n    // handle by GUI Answer the button that user click on it.\r\n    public void UpDate_Data_User(String Answer , String info)\r\n    {\r\n        if(Answer.equals(\"First Name\"))\r\n        {\r\n            this.First_Name = info;\r\n        }\r\n        else if(Answer.equals(\"Last Name\"))\r\n        {\r\n            this.Last_Name = info;\r\n        }\r\n        else if(Answer.equals(\"Email\"))\r\n        {\r\n            this.Email = info;\r\n        }\r\n        else if(Answer.equals(\"Password\"))\r\n        {\r\n            this.Password = info;\r\n        }\r\n    }\r\n    // return the index of the user who deleted to handle the Id of the reminder users.\r\n    public static void Delete_User(String user_name)\r\n    {\r\n        int index = 0 ;\r\n        for(User user : allusers)\r\n        {\r\n            if(user.User_Name.equals(user_name))\r\n            {\r\n                index = allusers.indexOf(user);\r\n                allusers.remove(user);\r\n            }\r\n        }\r\n        for (int i=index; i<allusers.size()-1; i++){\r\n            allusers.get(i).setUser_ID( allusers.get(i).getUser_ID() - 1);\r\n        }\r\n    }\r\n    public static boolean Userexist(String user_name) {\r\n        for (User user : allusers) {\r\n            if (user.User_Name.equals(user_name)) {\r\n                return true;\r\n            }\r\n        }\r\n        return false;\r\n    }\r\n    /***Setters***/\r\n    public void setLast_Name(String last_Name) {\r\n        Last_Name = last_Name;\r\n    }\r\n    public void setFirst_Name(String first_Name) {\r\n        First_Name = first_Name;\r\n    }\r\n    public void setPlan(String plan){\r\n        this.plan = plan;\r\n    }\r\n    public void setEmail(String email) {\r\n        Email = email;\r\n    }\r\n    public void setUser_ID(int user_ID){\r\n        this.User_ID = user_ID;\r\n    }\r\n    public void setProfilePath(String profilePath){\r\n        this.profilePath = profilePath;\r\n    }\r\n    public void Set_Password(String password) {\r\n        Password = password;\r\n    }\r\n    /*****Getters****/\r\n    public int getUser_ID() {\r\n        return User_ID;\r\n    }\r\n    public String getUser_Name() {\r\n        return User_Name;\r\n    }\r\n    public String getLast_Name() {\r\n        return Last_Name;\r\n    }\r\n    public String getFirst_Name() {\r\n        return First_Name;\r\n    }\r\n    public String getEmail() {\r\n        return Email;\r\n    }\r\n    public String getPassword() {\r\n        return Password;\r\n    }\r\n    public String getProfilePath(){\r\n        return profilePath;\r\n    }\r\n    public String getPlan(){\r\n        return plan;\r\n    }\r\n    /**Set the data of Subscription**/\r\n    public void Subscribe(int id , Subscription.Plans plan)\r\n    {\r\n        subscription = new Subscription(id , plan);\r\n    }\r\n    /****define set method for plan in class Subscription****/\r\n    public void Updata_Subscription_Plan(Subscription.Plans plan)\r\n    {\r\n        subscription.setPlan(plan);\r\n    }\r\n\r\n    /*********delete will handle in Class System(Main).\r\n     // How to handle the date of watching\r\n     // take movie from method Choose movie Should be in main(return object of movie)\r\n     //the Constraints of this part the amount of movies that allowed to user\r\n     // add ********/\r\n    public void Choose_Movies_For_Later(Movie mov)\r\n    {\r\n        Movies_For_Later.add(mov);\r\n    }\r\n    /*******take the index of the movie the User Change it and the new Movie the Want(object of movie)****/\r\n    public void Update_Choosen_Movie_Change(Movie mov , int index)\r\n    {\r\n        // make sure the exception handling is applied in the index.\r\n        Movies_For_Later.set(index , mov);\r\n    }\r\n    /****delete movie from the list of watch later should handle in class system.*****/\r\n    public void Set_record(int id , Movie movi)\r\n    {\r\n        // Handle the part of Date and rate\r\n        // the movi that user watch it.\r\n        Watched_Movies.add(new UserWatchRecord(id , movi));\r\n    }\r\n    /*to set rate and Update it**/\r\n    public void Set_Rate_Racord(int index ,Double rate)\r\n    {\r\n        // make sure the exception handling is applied in the index.\r\n        Watched_Movies.get(index).setRating(rate);\r\n    }\r\n    public static User GetUser(String user_name) {\r\n        for (User user : allusers) {\r\n            if (user.User_Name.equals(user_name))\r\n                return user;\r\n        }\r\n        return null;\r\n    }\r\n    public boolean movieExist(Movie movie){\r\n        boolean exist = false;\r\n        for (UserWatchRecord u: Watched_Movies)\r\n            if(u.getMovie().equals(movie))\r\n                return  true;\r\n            return exist;\r\n    }\r\n    public UserWatchRecord getWatchedMovie(Movie movie){\r\n        for (UserWatchRecord u: Watched_Movies)\r\n            if(u.getMovie().equals(movie))\r\n                return u;\r\n        return null;\r\n    }\r\n    @Override\r\n    public String toString(){\r\n        String data =\"\";\r\n        data = data.concat(\"user\").concat(\",\").concat(getUser_Name()).concat(\",\").concat(getPassword()).concat(\",\").concat(Integer.toString(getUser_ID()));\r\n        data = data.concat(\",\").concat(getFirst_Name()).concat(\",\");\r\n        data = data.concat(getLast_Name()).concat(\",\").concat(getPlan()).concat(\",\");\r\n        data = data.concat(getEmail()).concat(\",\").concat(getSubscription().getStartDate().toString());\r\n        data = data.concat(\",\").concat(getProfilePath()).concat(\",\").concat(String.valueOf(getSubscription().getUpdatePlan())).concat(\",\");\r\n\r\n        data = data.concat(\"to be watched\").concat(\",\");\r\n        for (Movie toWatchMovie : Movies_For_Later) {\r\n            data = data.concat(toWatchMovie.getTitle()).concat(\",\");\r\n        }\r\n        data = data.concat(\"watched\").concat(\",\");\r\n        for (UserWatchRecord watchedMovie : Watched_Movies) {\r\n            data = data.concat(watchedMovie.getMovie().getTitle()).concat(\",\").concat(String.valueOf(watchedMovie.getRating())).concat(\",\");\r\n        }\r\n        data = data.concat(\"done\").concat(\",\");\r\n        return data;\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/watch_it/User.java b/src/main/java/com/example/watch_it/User.java
+--- a/src/main/java/com/example/watch_it/User.java	(revision b4ded379e12f764e21abf7e94c5e97e6e6d9b1cb)
++++ b/src/main/java/com/example/watch_it/User.java	(date 1703250463789)
+@@ -142,6 +142,9 @@
+     public void setPlan(String plan){
+         this.plan = plan;
+     }
++    public void setPassword(String password) {
++        Password = password;
++    }
+     public void setEmail(String email) {
+         Email = email;
+     }
+Index: src/main/java/com/example/watch_it/AddCastController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.watch_it;\r\nimport javafx.fxml.FXML;\r\nimport javafx.geometry.Insets;\r\nimport javafx.scene.control.Label;\r\nimport javafx.scene.control.Separator;\r\nimport javafx.scene.control.TextField;\r\nimport javafx.scene.layout.HBox;\r\nimport javafx.scene.layout.VBox;\r\nimport javafx.scene.paint.Color;\r\nimport javafx.scene.text.Font;\r\nimport java.util.ArrayList;\r\n\r\npublic class AddCastController {\r\n    @FXML\r\n    private VBox mainvbox1;\r\n    @FXML\r\n    private VBox mainvbox2;\r\n    private VBox dataBox;\r\n    private HBox labels;\r\n    private VBox vbox1;\r\n    private VBox vbox2;\r\n    private Label actorName;\r\n    private Label nationalityLabel;\r\n    private Label genderLabel;\r\n    private Label ageLabel;\r\n    private TextField nationalityText;\r\n    private TextField genderText;\r\n    private TextField ageText;\r\n    private Separator separator;\r\n    private int castNumber;\r\n    public static boolean inAddCast = false;\r\n    ArrayList<String> castName = new ArrayList();\r\n\r\n    public void setdata(ArrayList<String> newActor) {\r\n        System.out.println(AddMovieController.AddedMovie.getTitle());\r\n        System.out.println(AddMovieController.AddedMovie.getDescription());\r\n        System.out.println(newActor);\r\n        this.castName = newActor;\r\n        this.castNumber = castName.size();\r\n        initialize();\r\n    }\r\n    void initialize(){\r\n        inAddCast = true;\r\n        for (int i = 1; i <= castNumber; i++) {\r\n            System.out.println(\"in\");\r\n            actorName = new Label(castName.get(i-1));\r\n            actorName.setTextFill(Color.WHITE);\r\n            actorName.setFont(new Font(\"Arial Black\", 28.0));\r\n\r\n            separator = new Separator();\r\n            separator.setOpacity(0.35);\r\n\r\n            nationalityLabel = new Label(\"Nationality:  \");\r\n            nationalityLabel.setTextFill(Color.GRAY);\r\n            nationalityLabel.setFont(new Font(20.0));\r\n            nationalityText = new TextField();\r\n            nationalityText.setPrefHeight(15);\r\n            nationalityText.setPrefWidth(220.0);\r\n            nationalityText.setStyle(\"-fx-background-color: black; -fx-background-radius: 10; -fx-border-color: grey; -fx-border-radius: 10;\");\r\n            nationalityText.setFont(new Font(20.0));\r\n\r\n\r\n            genderLabel = new Label(\"Gender:  \");\r\n            genderLabel.setTextFill(Color.GRAY);\r\n            genderLabel.setFont(new Font(20.0));\r\n            genderText = new TextField();\r\n            genderText.setPrefHeight(15);\r\n            genderText.setPrefWidth(220.0);\r\n            genderText.setStyle(\"-fx-background-color: black; -fx-background-radius: 10; -fx-border-color: grey; -fx-border-radius: 10;\");\r\n            genderText.setFont(new Font(20.0));\r\n\r\n\r\n            ageLabel = new Label(\"Age:  \");\r\n            ageLabel.setTextFill(Color.GRAY);\r\n            ageLabel.setFont(new Font(20.0));\r\n            ageText = new TextField();\r\n            ageText.setPrefHeight(15);\r\n            ageText.setPrefWidth(220.0);\r\n            ageText.setStyle(\"-fx-background-color: black; -fx-background-radius: 10; -fx-border-color: grey; -fx-border-radius: 10;\");\r\n            ageText.setFont(new Font(20.0));\r\n\r\n            vbox1 = new VBox();\r\n            vbox1.getChildren().addAll(nationalityLabel,genderLabel,ageLabel);\r\n            vbox1.setSpacing(40);\r\n\r\n            vbox2 = new VBox();\r\n            vbox2.getChildren().addAll(nationalityText,genderText,ageText);\r\n            vbox2.setSpacing(20);\r\n\r\n            labels = new HBox();\r\n            labels.getChildren().addAll(vbox1, vbox2);\r\n\r\n            dataBox = new VBox();\r\n            dataBox.setSpacing(20);\r\n            dataBox.getChildren().addAll(actorName, separator, labels);\r\n            dataBox.setMargin(separator, new Insets(0, 200, 0, 0));\r\n\r\n            if (i % 2 == 0)\r\n                mainvbox2.getChildren().add(dataBox);\r\n            else\r\n                mainvbox1.getChildren().add(dataBox);\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/watch_it/AddCastController.java b/src/main/java/com/example/watch_it/AddCastController.java
+--- a/src/main/java/com/example/watch_it/AddCastController.java	(revision b4ded379e12f764e21abf7e94c5e97e6e6d9b1cb)
++++ b/src/main/java/com/example/watch_it/AddCastController.java	(date 1703285047016)
+@@ -1,9 +1,8 @@
+ package com.example.watch_it;
++import javafx.event.ActionEvent;
+ import javafx.fxml.FXML;
+ import javafx.geometry.Insets;
+-import javafx.scene.control.Label;
+-import javafx.scene.control.Separator;
+-import javafx.scene.control.TextField;
++import javafx.scene.control.*;
+ import javafx.scene.layout.HBox;
+ import javafx.scene.layout.VBox;
+ import javafx.scene.paint.Color;
+@@ -15,22 +14,47 @@
+     private VBox mainvbox1;
+     @FXML
+     private VBox mainvbox2;
++    @FXML
++    private Button addButton;
+     private VBox dataBox;
+     private HBox labels;
+     private VBox vbox1;
+     private VBox vbox2;
+-    private Label actorName;
+-    private Label nationalityLabel;
+-    private Label genderLabel;
+-    private Label ageLabel;
+-    private TextField nationalityText;
+-    private TextField genderText;
+-    private TextField ageText;
++    private Label actorName = new Label();
++    private Label nationalityLabel = new Label();
++    private Label genderLabel = new Label();
++    private Label ageLabel  = new Label();
++    private TextField nationalityText = new TextField();
++    private TextField genderText = new TextField();
++    private TextField ageText = new TextField();
++    private Label actorName2  = new Label();
++
++    private Label nationalityLabel2 = new Label();
++
++    private Label genderLabel2 = new Label();
++    private Label ageLabel2 = new Label();
++    private TextField nationalityText2 = new TextField();
++    private TextField genderText2 = new TextField();
++    private TextField ageText2 = new TextField();
++    private Label actorName3 = new Label();
++    private Label nationalityLabel3 = new Label();
++    private Label genderLabel3 = new Label();
++    private Label ageLabel3 = new Label();
++    private TextField nationalityText3 = new TextField();
++    private TextField genderText3 = new TextField();
++    private TextField ageText3 = new TextField();
++    private Label actorName4 = new Label();
++    private Label nationalityLabel4 = new Label();
++    private Label genderLabel4 = new Label();
++    private Label ageLabel4 = new Label();
++    private TextField nationalityText4 = new TextField();
++    private TextField genderText4 = new TextField();
++    private TextField ageText4 = new TextField();
+     private Separator separator;
+     private int castNumber;
+-    public static boolean inAddCast = false;
++    public static boolean addedCast = false;
+     ArrayList<String> castName = new ArrayList();
+-
++    int g = 1;
+     public void setdata(ArrayList<String> newActor) {
+         System.out.println(AddMovieController.AddedMovie.getTitle());
+         System.out.println(AddMovieController.AddedMovie.getDescription());
+@@ -39,66 +63,229 @@
+         this.castNumber = castName.size();
+         initialize();
+     }
++    private void setNatinallity (Label label, TextField textField){
++        label.setText("Nationality:  ");
++        label.setTextFill(Color.GRAY);
++        label.setFont(new Font(20.0));
++        textField.setPrefHeight(15);
++        textField.setPrefWidth(220.0);
++        textField.setStyle("-fx-background-color: black; -fx-background-radius: 10; -fx-border-color: grey; -fx-border-radius: 10;");
++        textField.setFont(new Font(20.0));
++    }
++    private void setNameLabel (Label label, String name){
++        label.setText(name);
++        label.setTextFill(Color.WHITE);
++        label.setFont(new Font("Arial Black", 28.0));
++    }
++    private void setGender(Label label, TextField textField){
++        label.setText("Gender:  ");
++        label.setTextFill(Color.GRAY);
++        label.setFont(new Font(20.0));
++        textField.setPrefHeight(15);
++        textField.setPrefWidth(220.0);
++        textField.setStyle("-fx-background-color: black; -fx-background-radius: 10; -fx-border-color: grey; -fx-border-radius: 10;");
++        textField.setFont(new Font(20.0));
++    }
++    private void setAge(Label label, TextField textField){
++        label.setText("Age:  ");
++        label.setTextFill(Color.GRAY);
++        label.setFont(new Font(20.0));
++        textField.setPrefHeight(15);
++        textField.setPrefWidth(220.0);
++        textField.setStyle("-fx-background-color: black; -fx-background-radius: 10; -fx-border-color: grey; -fx-border-radius: 10;");
++        textField.setFont(new Font(20.0));
++    }
+     void initialize(){
+-        inAddCast = true;
+-        for (int i = 1; i <= castNumber; i++) {
+-            System.out.println("in");
+-            actorName = new Label(castName.get(i-1));
+-            actorName.setTextFill(Color.WHITE);
+-            actorName.setFont(new Font("Arial Black", 28.0));
+ 
+-            separator = new Separator();
+-            separator.setOpacity(0.35);
++        separator = new Separator();
++        separator.setOpacity(0.35);
+ 
+-            nationalityLabel = new Label("Nationality:  ");
+-            nationalityLabel.setTextFill(Color.GRAY);
+-            nationalityLabel.setFont(new Font(20.0));
+-            nationalityText = new TextField();
+-            nationalityText.setPrefHeight(15);
+-            nationalityText.setPrefWidth(220.0);
+-            nationalityText.setStyle("-fx-background-color: black; -fx-background-radius: 10; -fx-border-color: grey; -fx-border-radius: 10;");
+-            nationalityText.setFont(new Font(20.0));
+-
+-
+-            genderLabel = new Label("Gender:  ");
+-            genderLabel.setTextFill(Color.GRAY);
+-            genderLabel.setFont(new Font(20.0));
+-            genderText = new TextField();
+-            genderText.setPrefHeight(15);
+-            genderText.setPrefWidth(220.0);
+-            genderText.setStyle("-fx-background-color: black; -fx-background-radius: 10; -fx-border-color: grey; -fx-border-radius: 10;");
+-            genderText.setFont(new Font(20.0));
+-
+-
+-            ageLabel = new Label("Age:  ");
+-            ageLabel.setTextFill(Color.GRAY);
+-            ageLabel.setFont(new Font(20.0));
+-            ageText = new TextField();
+-            ageText.setPrefHeight(15);
+-            ageText.setPrefWidth(220.0);
+-            ageText.setStyle("-fx-background-color: black; -fx-background-radius: 10; -fx-border-color: grey; -fx-border-radius: 10;");
+-            ageText.setFont(new Font(20.0));
++        if(castName.size() >= 1) {
++            setNameLabel(actorName, castName.get(g - 1));
++            setNatinallity(nationalityLabel, nationalityText);
++            setGender(genderLabel, genderText);
++            setAge(ageLabel, ageText);
++            ageText.setPromptText("hiiiiii");
+ 
+             vbox1 = new VBox();
+-            vbox1.getChildren().addAll(nationalityLabel,genderLabel,ageLabel);
++            vbox1.getChildren().addAll(nationalityLabel, genderLabel, ageLabel);
+             vbox1.setSpacing(40);
+ 
+             vbox2 = new VBox();
+-            vbox2.getChildren().addAll(nationalityText,genderText,ageText);
++            vbox2.getChildren().addAll(nationalityText, genderText, ageText);
+             vbox2.setSpacing(20);
+ 
+             labels = new HBox();
+             labels.getChildren().addAll(vbox1, vbox2);
+ 
++            separator = new Separator();
++            separator.setOpacity(0.35);
++            System.out.println(ageText.getPromptText());
+             dataBox = new VBox();
+             dataBox.setSpacing(20);
+             dataBox.getChildren().addAll(actorName, separator, labels);
+             dataBox.setMargin(separator, new Insets(0, 200, 0, 0));
+ 
+-            if (i % 2 == 0)
++            if (g % 2 == 0)
++                mainvbox2.getChildren().add(dataBox);
++            else
++                mainvbox1.getChildren().add(dataBox);
++            g++;
++        }
++        if(castName.size() >= 2) {
++
++            setNameLabel(actorName2, castName.get(g - 1));
++            setNatinallity(nationalityLabel2, nationalityText2);
++            setGender(genderLabel2, genderText2);
++            setAge(ageLabel2, ageText2);
++
++            vbox1 = new VBox();
++            vbox1.getChildren().addAll(nationalityLabel2, genderLabel2, ageLabel2);
++            vbox1.setSpacing(40);
++
++            vbox2 = new VBox();
++            vbox2.getChildren().addAll(nationalityText2, genderText2, ageText2);
++            vbox2.setSpacing(20);
++
++            labels = new HBox();
++            labels.getChildren().addAll(vbox1, vbox2);
++
++            separator = new Separator();
++            separator.setOpacity(0.35);
++
++            dataBox = new VBox();
++            dataBox.setSpacing(20);
++            dataBox.getChildren().addAll(actorName2, separator, labels);
++            dataBox.setMargin(separator, new Insets(0, 200, 0, 0));
++
++            if (g % 2 == 0)
++                mainvbox2.getChildren().add(dataBox);
++            else
++                mainvbox1.getChildren().add(dataBox);
++            g++;
++        }
++        if(castName.size() >= 3) {
++            setNameLabel(actorName3, castName.get(g - 1));
++            setNatinallity(nationalityLabel3, nationalityText3);
++            setGender(genderLabel3, genderText3);
++            setAge(ageLabel3, ageText3);
++
++            vbox1 = new VBox();
++            vbox1.getChildren().addAll(nationalityLabel3, genderLabel3, ageLabel3);
++            vbox1.setSpacing(40);
++
++            vbox2 = new VBox();
++            vbox2.getChildren().addAll(nationalityText3, genderText3, ageText3);
++            vbox2.setSpacing(20);
++
++            labels = new HBox();
++            labels.getChildren().addAll(vbox1, vbox2);
++
++            separator = new Separator();
++            separator.setOpacity(0.35);
++
++            dataBox = new VBox();
++            dataBox.setSpacing(20);
++            dataBox.getChildren().addAll(actorName3, separator, labels);
++            dataBox.setMargin(separator, new Insets(0, 200, 0, 0));
++
++            if (g % 2 == 0)
++                mainvbox2.getChildren().add(dataBox);
++            else
++                mainvbox1.getChildren().add(dataBox);
++            g++;
++        }
++        if(castName.size() >= 4) {
++            setNameLabel(actorName4, castName.get(g - 1));
++            setNatinallity(nationalityLabel4, nationalityText4);
++            setGender(genderLabel4, genderText4);
++            setAge(ageLabel4, ageText4);
++
++            vbox1 = new VBox();
++            vbox1.getChildren().addAll(nationalityLabel4, genderLabel4, ageLabel4);
++            vbox1.setSpacing(40);
++
++            vbox2 = new VBox();
++            vbox2.getChildren().addAll(nationalityText4, genderText4, ageText4);
++            vbox2.setSpacing(20);
++
++            labels = new HBox();
++            labels.getChildren().addAll(vbox1, vbox2);
++
++            separator = new Separator();
++            separator.setOpacity(0.35);
++
++            dataBox = new VBox();
++            dataBox.setSpacing(20);
++            dataBox.getChildren().addAll(actorName4, separator, labels);
++            dataBox.setMargin(separator, new Insets(0, 200, 0, 0));
++
++            if (g % 2 == 0)
+                 mainvbox2.getChildren().add(dataBox);
+             else
+                 mainvbox1.getChildren().add(dataBox);
++            g++;
+         }
++        addedCast = true;
++
+     }
++    private void showAlert(String title, String message, Alert.AlertType alertType) {
++        Alert alert = new Alert(alertType,message,ButtonType.OK);
++        alert.setTitle(title);
++        alert.setHeaderText(null);
++        alert.showAndWait();
++    }
++    @FXML
++    public void addCast(ActionEvent event){
++        if(ageText.getText() == null || genderText.getText()== null || nationalityText.getText() == null || ageText2.getText() == null || genderText2.getText() ==null || nationalityText2.getText() == null)
++            showAlert("","enter all data", Alert.AlertType.ERROR);
++        else if(ageText3.getText() == null || genderText3.getText()== null || nationalityText3.getText() == null || ageText4.getText() == null || genderText4.getText() ==null || nationalityText4.getText() == null)
++            showAlert("","enter all data", Alert.AlertType.ERROR);
++
++    }
++    public void getData(){
++        System.out.println("in add data");
++        String movieName =AddMovieController.AddedMovie.getTitle();
++        ArrayList<Cast> allCast = new ArrayList<>();
++        ArrayList<String> movies = new ArrayList<>();
++        movies.add(movieName);
++        //one cast to add
++        if(g == 2){
++            String []name = castName.get(g-2).split(" ");
++            Cast cast = new Cast();
++            System.out.println(ageText.getText());
++            cast.add(name[0],name[1],Integer.parseInt(ageText.getText()),genderText.getText(),nationalityText.getText(),movies);
++            allCast.add(cast);
++        }
++        //two actors to add
++        if(g == 3){
++            String []name = castName.get(g-2).split(" ");
++            Cast cast = new Cast();
++            cast.add(name[0],name[1],Integer.parseInt(ageText2.getText()),genderText2.getText(),nationalityText2.getText(),movies);
++            allCast.add(cast);
++        }
++        //three actors to add
++        if(g == 4){
++            String []name = castName.get(g-2).split(" ");
++            Cast cast = new Cast();
++            cast.add(name[0],name[1],Integer.parseInt(ageText3.getText()),genderText3.getText(),nationalityText3.getText(),movies);
++            allCast.add(cast);
++        }
++        //one director to add
++        if(g == 5 ){
++            String []name = castName.get(g-2).split(" ");
++            Cast cast = new Cast();
++            cast.add(name[0],name[1],Integer.parseInt(ageText3.getText()),genderText3.getText(),nationalityText3.getText(),movies);
++            allCast.add(cast);
++        }
++    }
++
++    @FXML
++    public void onMouseEntered(){
++        addButton.setOnMouseEntered(event -> addButton.setStyle("-fx-background-color: #FFC107; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
++    }
++    @FXML
++    public void onMouseExit(){
++        addButton.setOnMouseExited(event -> addButton.setStyle("-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
++    }
+ }
+\ No newline at end of file
+Index: src/main/java/com/example/watch_it/ForgotPassword.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.watch_it;\r\nimport javafx.event.ActionEvent;\r\nimport javafx.fxml.FXML;\r\nimport javafx.fxml.FXMLLoader;\r\nimport javafx.scene.Node;\r\nimport javafx.scene.Parent;\r\nimport javafx.scene.Scene;\r\nimport javafx.scene.control.*;\r\nimport javafx.stage.Stage;\r\n\r\nimport java.io.IOException;\r\nimport java.util.Objects;\r\n\r\npublic class ForgotPassword {\r\n    private Stage stage;\r\n    private Scene scene;\r\n\r\n    private Parent root;\r\n\r\n    @FXML\r\n    private TextField CTextPassword;\r\n\r\n    @FXML\r\n    private CheckBox CheckPassword;\r\n\r\n    @FXML\r\n    private PasswordField ForgotConfirmPassword;\r\n\r\n    @FXML\r\n    private TextField ForgotEmail;\r\n    @FXML\r\n    private Button Back;\r\n\r\n    @FXML\r\n    private PasswordField ForgotPassword;\r\n\r\n    @FXML\r\n    private TextField ForgotTextPassword;\r\n\r\n    @FXML\r\n    private TextField ForgotUserName;\r\n    @FXML\r\n\r\n    private void showAlert(String message) {\r\n        showAlert(message, Alert.AlertType.INFORMATION);\r\n    }\r\n\r\n    @FXML\r\n    private void showErrorAlert(String title, String message) {\r\n        showAlert(title, message, Alert.AlertType.ERROR);\r\n    }\r\n    @FXML\r\n    private void showAlert(String message, Alert.AlertType alertType) {\r\n        Alert alert = new Alert(alertType);\r\n        alert.setTitle(\"Login Result\");\r\n        alert.setHeaderText(null);\r\n        alert.setContentText(message);\r\n        alert.showAndWait();\r\n    }\r\n    @FXML\r\n    private void showAlert(String title, String message, Alert.AlertType alertType) {\r\n        Alert alert = new Alert(alertType);\r\n        alert.setTitle(title);\r\n        alert.setHeaderText(null);\r\n        alert.setContentText(message);\r\n        alert.showAndWait();\r\n    }\r\n    @FXML\r\n    public void  ChangePassword(ActionEvent event) throws IOException {\r\n        String username = ForgotUserName.getText();\r\n        String email = ForgotEmail.getText();\r\n        String password = ForgotPassword.getText();\r\n        String confirmpassword = ForgotConfirmPassword.getText();\r\n\r\n        if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirmpassword.isEmpty()) {\r\n            showErrorAlert(\"Invalid Data\", \"Enter All Your Data\");\r\n        }\r\n        else if (!User.Userexist(username)) {\r\n            showErrorAlert(\"Invalid Data\", \"Username Is Incorrect, Try again!\");\r\n            ForgotUserName.clear();\r\n        }\r\n        else {\r\n            if (!(User.GetUser(username).getEmail().equals(email))) {\r\n                showErrorAlert(\"Invalid Data\", \"Email Is Incorrect, Try again!\");\r\n                ForgotEmail.clear();\r\n                return;\r\n            }\r\n            if (!password.equals(confirmpassword)) {\r\n                showErrorAlert(\"Invalid Data\", \"Confirm Password Does not match, Try again!\");\r\n                ForgotConfirmPassword.clear();\r\n                return;\r\n            }\r\n            showAlert(\"Password has been changed Successful!\");\r\n            GoToSignIn(event);\r\n        }\r\n    }\r\n    @FXML\r\n    public void GoToSignIn(ActionEvent event) throws IOException {\r\n        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(\"sign-in.fxml\")));\r\n        stage = (Stage)((Node)event.getSource()).getScene().getWindow();\r\n        scene = new Scene(root);\r\n        stage.setScene(scene);\r\n        stage.show();\r\n    }\r\n    @FXML\r\n    public void The_Password_Visibility(ActionEvent act)\r\n    {\r\n        if(CheckPassword.isSelected())\r\n        {\r\n            ForgotTextPassword.setText(ForgotPassword.getText());\r\n            CTextPassword.setText(ForgotConfirmPassword.getText());\r\n            ForgotTextPassword.setVisible(true);\r\n            ForgotPassword.setVisible(false);\r\n            CTextPassword.setVisible(true);\r\n            ForgotConfirmPassword.setVisible(false);\r\n        }\r\n        else\r\n        {\r\n            ForgotPassword.setText(ForgotTextPassword.getText());\r\n            ForgotTextPassword.setVisible(false);\r\n            ForgotPassword.setVisible(true);\r\n            ForgotConfirmPassword.setText(CTextPassword.getText());\r\n            CTextPassword.setVisible(false);\r\n            ForgotConfirmPassword.setVisible(true);\r\n        }\r\n    }\r\n    public void onMouseEntered() {\r\n        Back.setOnMouseEntered(event -> Back.setStyle(\"-fx-background-color: #FFC107; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;\"));\r\n    }\r\n\r\n    public void onMouseExit() {\r\n        Back.setOnMouseExited(event -> Back.setStyle(\"-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;\"));\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/watch_it/ForgotPassword.java b/src/main/java/com/example/watch_it/ForgotPassword.java
+--- a/src/main/java/com/example/watch_it/ForgotPassword.java	(revision b4ded379e12f764e21abf7e94c5e97e6e6d9b1cb)
++++ b/src/main/java/com/example/watch_it/ForgotPassword.java	(date 1703250380950)
+@@ -71,16 +71,17 @@
+         String email = ForgotEmail.getText();
+         String password = ForgotPassword.getText();
+         String confirmpassword = ForgotConfirmPassword.getText();
++        User u = User.GetUser(username);
+ 
+         if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirmpassword.isEmpty()) {
+             showErrorAlert("Invalid Data", "Enter All Your Data");
+         }
+-        else if (!User.Userexist(username)) {
++        else if (u == null) {
+             showErrorAlert("Invalid Data", "Username Is Incorrect, Try again!");
+             ForgotUserName.clear();
+         }
+         else {
+-            if (!(User.GetUser(username).getEmail().equals(email))) {
++            if (!u.getEmail().equals(email)) {
+                 showErrorAlert("Invalid Data", "Email Is Incorrect, Try again!");
+                 ForgotEmail.clear();
+                 return;
+@@ -91,6 +92,7 @@
+                 return;
+             }
+             showAlert("Password has been changed Successful!");
++            u.setPassword(password);
+             GoToSignIn(event);
+         }
+     }
+Index: src/main/resources/com/example/watch_it/add-cast.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<?import java.lang.*?>\r\n<?import java.util.*?>\r\n<?import javafx.scene.*?>\r\n<?import javafx.scene.control.*?>\r\n<?import javafx.scene.layout.*?>\r\n\r\n<?import javafx.geometry.Insets?>\r\n<ScrollPane hbarPolicy=\"NEVER\" prefHeight=\"764.0\" prefWidth=\"1336.0\" style=\"-fx-background-color: black;\"\r\n            vbarPolicy=\"NEVER\" fx:controller=\"com.example.watch_it.AddCastController\" xmlns=\"http://javafx.com/javafx/17.0.2-ea\" xmlns:fx=\"http://javafx.com/fxml/1\">\r\n    <content>\r\n        <HBox alignment=\"CENTER\" prefHeight=\"764.0\" prefWidth=\"1290.0\"  style=\"-fx-background-color: black;\">\r\n            <children>\r\n                <VBox fx:id=\"mainvbox1\" minHeight=\"0.0\" minWidth=\"0.0\" prefHeight=\"764.0\" prefWidth=\"500.0\" spacing=\"30.0\" style=\"-fx-background-color: black;\">\r\n                    <HBox.margin>\r\n                        <Insets bottom=\"20.0\" left=\"20.0\" right=\"20.0\" top=\"20.0\" />\r\n                    </HBox.margin>\r\n                    <children>\r\n                    </children>\r\n                </VBox>\r\n                <VBox fx:id=\"mainvbox2\" minHeight=\"0.0\" minWidth=\"0.0\" prefHeight=\"764.0\" prefWidth=\"500.0\" spacing=\"30.0\" style=\"-fx-background-color: black;\">\r\n                    <HBox.margin>\r\n                        <Insets bottom=\"20.0\" left=\"20.0\" right=\"20.0\" top=\"20.0\" />\r\n                    </HBox.margin>\r\n                    <children>\r\n                    </children>\r\n                </VBox>\r\n            </children>\r\n            <padding>\r\n                <Insets bottom=\"70.0\" />\r\n            </padding>\r\n        </HBox>\r\n    </content>\r\n</ScrollPane>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/com/example/watch_it/add-cast.fxml b/src/main/resources/com/example/watch_it/add-cast.fxml
+--- a/src/main/resources/com/example/watch_it/add-cast.fxml	(revision b4ded379e12f764e21abf7e94c5e97e6e6d9b1cb)
++++ b/src/main/resources/com/example/watch_it/add-cast.fxml	(date 1703283989530)
+@@ -7,6 +7,7 @@
+ <?import javafx.scene.layout.*?>
+ 
+ <?import javafx.geometry.Insets?>
++<?import javafx.scene.text.Font?>
+ <ScrollPane hbarPolicy="NEVER" prefHeight="764.0" prefWidth="1336.0" style="-fx-background-color: black;"
+             vbarPolicy="NEVER" fx:controller="com.example.watch_it.AddCastController" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+     <content>
+@@ -26,6 +27,14 @@
+                     <children>
+                     </children>
+                 </VBox>
++                <Button fx:id="addButton" alignment="CENTER" layoutX="290.0" layoutY="605.0" mnemonicParsing="false" onAction="#addCast" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="39.0" prefWidth="206.0" style="-fx-background-color: FFC107; -fx-background-radius: 10;" text="Add" textAlignment="CENTER" textFill="black">
++                    <font>
++                        <Font name="System bold" size="20.0" />
++                    </font>
++                    <VBox.margin>
++                        <Insets left="300.0" />
++                    </VBox.margin>
++                </Button>
+             </children>
+             <padding>
+                 <Insets bottom="70.0" />
+Index: src/main/java/com/example/watch_it/AddMovieController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.watch_it;\r\nimport javafx.application.Application;\r\nimport javafx.fxml.FXMLLoader;\r\nimport javafx.scene.Node;\r\nimport javafx.scene.Parent;\r\nimport javafx.scene.Scene;\r\nimport javafx.scene.control.Alert;\r\nimport javafx.scene.control.Button;\r\nimport javafx.scene.control.ScrollPane;\r\nimport javafx.scene.control.TextField;\r\n\r\nimport javafx.event.ActionEvent;\r\nimport javafx.fxml.FXML;\r\nimport javafx.scene.layout.AnchorPane;\r\nimport javafx.scene.layout.BorderPane;\r\nimport javafx.stage.Stage;\r\n\r\nimport java.io.IOException;\r\nimport java.time.LocalDate;\r\nimport java.util.ArrayList;\r\nimport java.util.Arrays;\r\n\r\npublic class AddMovieController {\r\n\r\n    @FXML\r\n    public ScrollPane secondPane;\r\n\r\n    @FXML\r\n    TextField BudgetField;\r\n\r\n    @FXML\r\n    TextField CountryField;\r\n\r\n    @FXML\r\n    TextField IMDBScoreField;\r\n\r\n    @FXML\r\n    TextField LanguageField;\r\n\r\n    @FXML\r\n    TextField RunningTimeField;\r\n\r\n    @FXML\r\n    TextField castField;\r\n\r\n    @FXML\r\n    TextField directorField;\r\n\r\n    @FXML\r\n    TextField discreptionField;\r\n\r\n    @FXML\r\n    TextField genreField;\r\n\r\n    @FXML\r\n    TextField nameField;\r\n\r\n    @FXML\r\n    TextField posterField;\r\n\r\n    @FXML\r\n    TextField realeaseDateField;\r\n\r\n    @FXML\r\n    TextField revenueField;\r\n\r\n    @FXML\r\n    private Button addButton;\r\n    static ArrayList<String> newActor = new ArrayList<>();\r\n    static  Movie AddedMovie;\r\n    Stage stage;\r\n    Parent root;\r\n    @FXML\r\n    public void onMouseEntered(){\r\n        addButton.setOnMouseEntered(event -> addButton.setStyle(\"-fx-background-color: #FFC107; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;\"));\r\n    }\r\n    @FXML\r\n    public void onMouseExit(){\r\n        addButton.setOnMouseExited(event -> addButton.setStyle(\"-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;\"));\r\n    }\r\n    @FXML\r\n    private void addMovie (ActionEvent event) throws IOException {\r\n        String name = nameField.getText();\r\n        String budget = BudgetField.getText();\r\n        String revenue = revenueField.getText();\r\n        String releasedate = realeaseDateField.getText();\r\n        String poster = posterField.getText();\r\n        String genres = genreField.getText();\r\n        String country = CountryField.getText();\r\n        String discreption = discreptionField.getText();\r\n        String director = directorField.getText();\r\n        String runningtime = RunningTimeField.getText();\r\n        String cast = castField.getText();\r\n        String language = LanguageField.getText();\r\n        String imdbscore = IMDBScoreField.getText();\r\n\r\n        if (name.isEmpty() || budget.isEmpty() || revenue.isEmpty() || releasedate.isEmpty() ||\r\n                poster.isEmpty() || genres.isEmpty() || country.isEmpty() || discreption.isEmpty() ||\r\n                director.isEmpty() || runningtime.isEmpty() || cast.isEmpty() || language.isEmpty() || imdbscore.isEmpty()) {\r\n            Alert alert = new Alert(Alert.AlertType.ERROR);\r\n            alert.setTitle(\"Error\");\r\n            alert.setHeaderText(null);\r\n            alert.setContentText(\"Enter All Data\");\r\n            alert.showAndWait();\r\n            return;\r\n        }\r\n\r\n        String[] actor = cast.split(\",\");\r\n        ArrayList<String> castarray = new ArrayList<>(Arrays.asList(actor));\r\n        System.out.println(castarray);\r\n\r\n        String[] genre = genres.split(\",\");\r\n        ArrayList<String> genrearray = new ArrayList<>(Arrays.asList(genre));\r\n\r\n        Movie movie = new Movie(name, LocalDate.parse(releasedate), runningtime, genrearray, language, country, poster, budget, revenue, Float.parseFloat(imdbscore), discreption);\r\n        AddedMovie = movie;\r\n        for (String newactor : castarray) {\r\n            String[] a = newactor.split(\" \");\r\n\r\n            if (Cast.search(a[0], a[1]) == null)\r\n                newActor.add(newactor);\r\n            System.out.println(newactor + \" new in add\");\r\n        }\r\n\r\n        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);\r\n        alert.setTitle(\"\");\r\n        alert.setHeaderText(null);\r\n\r\n        if (newActor.isEmpty()) {\r\n            alert.setContentText(\"Movie Added\");\r\n            alert.showAndWait();\r\n        }else{\r\n            alert.setContentText(\"Movie Added, please continue to add cast data\");\r\n            alert.showAndWait();\r\n            AllMoviesController.enteredData = true;\r\n          //  toAddCast(event);\r\n        }\r\n\r\n    }\r\n    void toAddCast (ActionEvent event) throws IOException {\r\n        FXMLLoader loader = new FXMLLoader(getClass().getResource(\"all-movies.fxml\"));\r\n        root = loader.load();\r\n        AllMoviesController controller = loader.getController();\r\n        controller.toAddCast(event);\r\n\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/watch_it/AddMovieController.java b/src/main/java/com/example/watch_it/AddMovieController.java
+--- a/src/main/java/com/example/watch_it/AddMovieController.java	(revision b4ded379e12f764e21abf7e94c5e97e6e6d9b1cb)
++++ b/src/main/java/com/example/watch_it/AddMovieController.java	(date 1703283870905)
+@@ -21,7 +21,6 @@
+ import java.util.Arrays;
+ 
+ public class AddMovieController {
+-
+     @FXML
+     public ScrollPane secondPane;
+ 
+@@ -63,13 +62,10 @@
+ 
+     @FXML
+     TextField revenueField;
+-
+     @FXML
+     private Button addButton;
+     static ArrayList<String> newActor = new ArrayList<>();
+     static  Movie AddedMovie;
+-    Stage stage;
+-    Parent root;
+     @FXML
+     public void onMouseEntered(){
+         addButton.setOnMouseEntered(event -> addButton.setStyle("-fx-background-color: #FFC107; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
+@@ -132,16 +128,8 @@
+         }else{
+             alert.setContentText("Movie Added, please continue to add cast data");
+             alert.showAndWait();
+-            AllMoviesController.enteredData = true;
+-          //  toAddCast(event);
++            AllMoviesController.enteredData = true;;
+         }
+-
+-    }
+-    void toAddCast (ActionEvent event) throws IOException {
+-        FXMLLoader loader = new FXMLLoader(getClass().getResource("all-movies.fxml"));
+-        root = loader.load();
+-        AllMoviesController controller = loader.getController();
+-        controller.toAddCast(event);
+ 
+     }
+ 
+Index: src/main/java/com/example/watch_it/AllMoviesController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.watch_it;\r\n\r\nimport javafx.application.Platform;\r\nimport javafx.event.ActionEvent;\r\nimport javafx.fxml.FXMLLoader;\r\nimport javafx.fxml.Initializable;\r\nimport javafx.geometry.Insets;\r\nimport javafx.geometry.Pos;\r\nimport javafx.scene.Node;\r\nimport javafx.scene.Parent;\r\nimport javafx.scene.Scene;\r\nimport javafx.scene.control.*;\r\nimport javafx.scene.image.Image;\r\nimport javafx.scene.image.ImageView;\r\nimport javafx.scene.input.KeyEvent;\r\nimport javafx.scene.input.MouseEvent;\r\nimport javafx.scene.layout.*;\r\nimport javafx.stage.Stage;\r\n\r\nimport javafx.fxml.FXML;\r\n\r\nimport java.io.IOException;\r\nimport java.net.URL;\r\nimport java.util.ArrayList;\r\nimport java.util.Objects;\r\nimport java.util.ResourceBundle;\r\n\r\npublic class AllMoviesController {\r\n\r\n    @FXML\r\n    private VBox leftCol;\r\n    @FXML\r\n    private  VBox rightCol;\r\n    @FXML\r\n    private  VBox middleCol1;\r\n    @FXML\r\n    private  VBox middleCol2;\r\n    @FXML\r\n    private BorderPane mainPane;\r\n    @FXML\r\n    private ScrollPane mainScroll;\r\n    @FXML\r\n    TextField searchField;\r\n    @FXML\r\n    private Button Back;\r\n    @FXML\r\n    private Button addCastButton;\r\n    private Stage stage;\r\n    private Scene scene;\r\n    private Parent root;\r\n    static boolean enteredData = false;\r\n    static boolean addMovie = false;\r\n    @FXML\r\n    public void initialize() {\r\n        if(enteredData)\r\n            addCastButton.setDisable(false);\r\n        for (int i=0 ; i<Movie.allmovies.size(); i++){\r\n            addMovies(Movie.allmovies.get(i), i);\r\n        }\r\n    }\r\n\r\n    @FXML\r\n    public void toAddMovies(ActionEvent event) throws IOException {\r\n\r\n        Parent fxml = FXMLLoader.load(getClass().getResource(\"add-movies.fxml\"));\r\n        mainPane.setCenter(fxml);\r\n        addCastButton.setVisible(true);\r\n    }\r\n\r\n    @FXML void toMovies(ActionEvent event){\r\n        switchPane(mainScroll);\r\n        addCastButton.setVisible(false);\r\n    }\r\n\r\n    @FXML void toAllUsers(ActionEvent event) throws IOException {\r\n        Parent fxml = FXMLLoader.load(getClass().getResource(\"all-users.fxml\"));\r\n        switchPane((ScrollPane) fxml);\r\n        addCastButton.setVisible(false);\r\n\r\n    }\r\n    @FXML void toAddUser(ActionEvent event) throws IOException {\r\n        Parent fxml = FXMLLoader.load(getClass().getResource(\"add-users.fxml\"));\r\n        switchPane((ScrollPane) fxml);\r\n        addCastButton.setVisible(false);\r\n    }\r\n    @FXML\r\n    void toPlans(ActionEvent event)throws IOException{\r\n        Parent fxml = FXMLLoader.load(getClass().getResource(\"Plans.fxml\"));\r\n        switchPane((ScrollPane) fxml);\r\n        addCastButton.setVisible(false);\r\n    }\r\n    public void onMouseClickedMovie(MouseEvent act, Movie movie) throws IOException {\r\n        FXMLLoader loader=new FXMLLoader(getClass().getResource(\"movie-view.fxml\"));\r\n        root = loader.load();\r\n        stage = (Stage)((Node)act.getSource()).getScene().getWindow();\r\n        MovieController controller=loader.getController();\r\n        controller.setStage(stage);\r\n        controller.Admin(movie);\r\n        scene = new Scene(root);\r\n        stage.setScene(scene);\r\n        stage.show();\r\n        Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));\r\n        controller.refreshScreen(\"Watch Movie \"+ movie.getTitle() + \"(\"+movie.getRelease_date().getYear()+\")\", movie.getTitle(),\r\n                movie.getTitle()+\" Translated\",movie.getGenres(), movie.getDescription(),\r\n                movie.getRunning_time(), image,movie.getDirector().getFirst_Name()+\" \"+movie.getDirector().getSecond_Name(),movie.getCastNames());\r\n        stage.setScene(scene);\r\n        stage.show();\r\n\r\n    }\r\n    @FXML\r\n    public void backScenes(ActionEvent event) throws IOException {\r\n        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(\"first-page.fxml\")));\r\n        stage = (Stage)((Node)event.getSource()).getScene().getWindow();\r\n        scene = new Scene(root);\r\n        stage.setScene(scene);\r\n        stage.show();\r\n    }\r\n    @FXML\r\n     void onMouseEntered(){\r\n        Back.setOnMouseEntered(event -> Back.setStyle(\"-fx-background-color: #FFC107; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;\"));\r\n    }\r\n    @FXML\r\n     void onMouseExit(){\r\n        Back.setOnMouseExited(event -> Back.setStyle(\"-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;\"));\r\n    }\r\n    private void addMovies(Movie movie, int i){\r\n        VBox movieContainer = new VBox(10);\r\n        movieContainer.setStyle(\"-fx-background-radius:40;\");\r\n\r\n        Button movieName = new Button(movie.getTitle());\r\n        movieName.setStyle(\"-fx-background-color: transparent; -fx-color:white; -fx-font-color:white; -fx-text-fill: #C2C2C2; -fx-background-radius:50;-fx-font-size: 20;\\n\" +\r\n                \"    -fx-text-fill: #C2C2C2;\");\r\n\r\n        Image image = new Image(getClass().getResourceAsStream(movie.getPoster_path()));\r\n        ImageView imageView = new ImageView(image);\r\n        imageView.setFitWidth(260);\r\n        imageView.setFitHeight(320);\r\n\r\n        //movieContainer.setStyle(\"-fx-background-color:#262626;  -fx-background-radius: 20;\");\r\n        movieContainer.setPrefWidth(320);\r\n        movieContainer.setAlignment(Pos.CENTER);\r\n        movieContainer.getChildren().addAll(imageView, movieName);\r\n        movieContainer.setPadding(new Insets(10 ,0 , 10 , 5));\r\n\r\n        //VBox.setMargin(movieContainer,new Insets(20 ,5 , 0 , 5));\r\n        int check = i %4;\r\n        if( check == 0)\r\n            leftCol.getChildren().addAll(movieContainer);\r\n        else if (check == 1) {\r\n            middleCol1.getChildren().addAll(movieContainer);\r\n        }\r\n        else if (check == 2) {\r\n            middleCol2.getChildren().addAll(movieContainer);\r\n        }\r\n        else\r\n            rightCol.getChildren().addAll(movieContainer);\r\n\r\n        movieContainer.setOnMouseClicked(event -> {\r\n            try {\r\n                onMouseClickedMovie(event, movie);\r\n            } catch (IOException e) {\r\n                throw new RuntimeException(e);\r\n            }\r\n        });\r\n    }\r\n    @FXML\r\n    void toAddCast(ActionEvent event) throws IOException {\r\n        if(enteredData)\r\n        {\r\n            System.out.println(\"in  to add movies\");\r\n            FXMLLoader loader = new FXMLLoader(getClass().getResource(\"add-cast.fxml\"));\r\n            root = loader.load();\r\n            AddCastController controller = loader.getController();\r\n            controller.setdata(AddMovieController.newActor);\r\n            switchPane((ScrollPane) root);\r\n            addCastButton.setText(\"Add\");\r\n        }\r\n    }\r\n    public void switchPane(ScrollPane scrollPane){\r\n        mainPane.setCenter(scrollPane);\r\n    }\r\n    @FXML\r\n    private void Search(){\r\n        String name = searchField.getText();\r\n        leftCol.getChildren().clear();\r\n        middleCol1.getChildren().clear();\r\n        middleCol2.getChildren().clear();\r\n        rightCol.getChildren().clear();\r\n        for (Movie movie : Movie.allmovies) {\r\n            if (name.equalsIgnoreCase(movie.getTitle())) {\r\n                addMovies(movie, 0);\r\n            }\r\n        }\r\n        if (name.isEmpty()) {\r\n            initialize();\r\n        }\r\n    }\r\n    public void setStage(Stage stage){\r\n        this.stage = stage;\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/watch_it/AllMoviesController.java b/src/main/java/com/example/watch_it/AllMoviesController.java
+--- a/src/main/java/com/example/watch_it/AllMoviesController.java	(revision b4ded379e12f764e21abf7e94c5e97e6e6d9b1cb)
++++ b/src/main/java/com/example/watch_it/AllMoviesController.java	(date 1703283965161)
+@@ -117,11 +117,11 @@
+     }
+     @FXML
+      void onMouseEntered(){
+-        Back.setOnMouseEntered(event -> Back.setStyle("-fx-background-color: #FFC107; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
++        Back.setOnMouseEntered(event -> Back.setStyle("-fx-background-color: #FFC107; -fx-background-radius: 10; -fx-border-color: white;"));
+     }
+     @FXML
+      void onMouseExit(){
+-        Back.setOnMouseExited(event -> Back.setStyle("-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
++        Back.setOnMouseExited(event -> Back.setStyle("-fx-background-color: black; -fx-background-radius: 10; -fx-border-color: white;"));
+     }
+     private void addMovies(Movie movie, int i){
+         VBox movieContainer = new VBox(10);
+@@ -165,16 +165,24 @@
+     }
+     @FXML
+     void toAddCast(ActionEvent event) throws IOException {
+-        if(enteredData)
+-        {
+-            System.out.println("in  to add movies");
+-            FXMLLoader loader = new FXMLLoader(getClass().getResource("add-cast.fxml"));
+-            root = loader.load();
+-            AddCastController controller = loader.getController();
+-            controller.setdata(AddMovieController.newActor);
++        FXMLLoader loader = new FXMLLoader(getClass().getResource("add-cast.fxml"));
++        root = loader.load();
++        AddCastController controller = loader.getController();
++        controller.setdata(AddMovieController.newActor);
++        if(enteredData)
++        {
+             switchPane((ScrollPane) root);
+             addCastButton.setText("Add");
+         }
++        if(AddCastController.addedCast){
++            controller.getData();
++            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
++            alert.setTitle("");
++            alert.setHeaderText(null);
++            alert.setContentText("Cast information added");
++            alert.showAndWait();
++            toAddMovies(event);
++        }
+     }
+     public void switchPane(ScrollPane scrollPane){
+         mainPane.setCenter(scrollPane);
+Index: src/main/java/com/example/watch_it/profilePageController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.watch_it;\r\nimport javafx.event.ActionEvent;\r\nimport javafx.fxml.FXML;\r\nimport javafx.fxml.FXMLLoader;\r\nimport javafx.fxml.Initializable;\r\nimport javafx.geometry.Pos;\r\nimport javafx.scene.Node;\r\nimport javafx.scene.Parent;\r\nimport javafx.scene.Scene;\r\nimport javafx.scene.control.*;\r\nimport javafx.scene.image.Image;\r\nimport javafx.scene.image.ImageView;\r\nimport javafx.scene.input.MouseEvent;\r\nimport javafx.scene.layout.AnchorPane;\r\nimport javafx.scene.layout.BorderPane;\r\nimport javafx.scene.layout.HBox;\r\nimport javafx.scene.layout.VBox;\r\nimport javafx.stage.Stage;\r\n\r\nimport java.io.IOException;\r\nimport java.net.URL;\r\nimport java.text.DecimalFormat;\r\nimport java.util.*;\r\n\r\npublic class profilePageController implements Initializable {\r\n    private Stage stage;\r\n    private Scene scene;\r\n    private Parent root;\r\n    @FXML\r\n    private Label username;\r\n    @FXML\r\n    private Label email;\r\n    private String firstname;\r\n    private String lastname;\r\n    @FXML\r\n    private Label fullname;\r\n    @FXML\r\n    private Label plan;\r\n    @FXML\r\n    private Button Back;\r\n    @FXML\r\n    private ImageView profilePictue;\r\n    @FXML\r\n    private AnchorPane mainpane;\r\n    @FXML\r\n    private TextField newEmail;\r\n    @FXML\r\n    private TextField newFirstname;\r\n    @FXML\r\n    private TextField newLastname;\r\n    @FXML\r\n    private Button updateButton;\r\n    private boolean isAdmin;\r\n    private User user;\r\n    @FXML\r\n    private HBox watchedHbox;\r\n    @FXML\r\n    private HBox toWatchHbox;\r\n    ButtonType buttonTypeYes = new ButtonType(\"Yes\");\r\n    ButtonType buttonTypeNo = new ButtonType(\"No\");\r\n    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);\r\n    @FXML\r\n    private ChoiceBox<String> Select_List;\r\n    @FXML\r\n    private BorderPane mainPane;\r\n    @Override\r\n    public void initialize(URL url, ResourceBundle resourceBundle)\r\n    {\r\n\r\n        Select_List.getItems().addAll(\"Edit Profile\" , \"Log Out\" , \"Delete Account\", \"Delete Movies List\");\r\n        Select_List.setValue(\"Select\");\r\n\r\n        onMouseExit();\r\n        onMouseEntered();\r\n\r\n        if (SignIn.user5.getSubscription().getUpdatePlan()) {\r\n            try {\r\n                toPlans();\r\n            } catch (IOException e) {\r\n                throw new RuntimeException(e);\r\n            }\r\n        }\r\n    }\r\n    @FXML\r\n    public void choose(MouseEvent event)  {\r\n\r\n        Select_List.setOnMouseClicked(mouseEvent -> {\r\n            try {\r\n                Select(event);\r\n            } catch (IOException e) {\r\n                throw new RuntimeException(e);\r\n            }\r\n        });\r\n    }\r\n    public void Select (MouseEvent event) throws IOException {\r\n        String choice = Select_List.getSelectionModel().getSelectedItem();\r\n        if(choice.equals(\"Log Out\"))\r\n        {\r\n            alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);\r\n            Optional<ButtonType> result = alert.showAndWait();\r\n            if (result.isPresent() && result.get() == buttonTypeYes)\r\n            {\r\n                FXMLLoader loader=new FXMLLoader(getClass().getResource(\"first-page.fxml\"));\r\n                root = loader.load();\r\n                stage = (Stage)((Node)event.getSource()).getScene().getWindow();\r\n                First controller=loader.getController();\r\n                controller.setStage(stage);\r\n                Scene scene = new Scene(root);\r\n                stage.setResizable(false);\r\n                stage.setX(-7);\r\n                stage.setY(0);\r\n                stage.setScene(scene);\r\n                stage.show();\r\n\r\n            }\r\n        }\r\n        else if(choice.equals(\"Delete Account\"))\r\n        {\r\n            alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);\r\n            Optional<ButtonType> result = alert.showAndWait();\r\n            if ((result.isPresent() && result.get() == buttonTypeYes)) {\r\n                User.allusers.remove(SignIn.user5);\r\n                //`User.Delete_User(SignIn.user5.getUser_Name());\r\n                FXMLLoader loader=new FXMLLoader(getClass().getResource(\"first-page.fxml\"));\r\n                root = loader.load();\r\n                stage = (Stage)((Node)event.getSource()).getScene().getWindow();\r\n                First controller=loader.getController();\r\n                controller.setStage(stage);\r\n                Scene scene = new Scene(root);\r\n                stage.setResizable(false);\r\n                stage.setX(-7);\r\n                stage.setY(0);\r\n                stage.setScene(scene);\r\n                stage.show();\r\n            }\r\n        }\r\n        else if(choice.equals(\"Edit Profile\"))\r\n        {\r\n            newEmail.setVisible(true);\r\n            newEmail.setPromptText(this.email.getText());\r\n            newFirstname.setVisible(true);\r\n            newFirstname.setPromptText(this.firstname);\r\n            newLastname.setVisible(true);\r\n            newLastname.setPromptText(this.lastname);\r\n            updateButton.setVisible(true);\r\n            String email = newEmail.getText();\r\n            String fname = newFirstname.getText();\r\n            String lname = newLastname.getText();\r\n            if (!email.isEmpty()) {\r\n                SignIn.user5.setEmail(email);\r\n                this.email.setText(email);\r\n            }\r\n            if (!(fname.isEmpty() || lname.isEmpty())) {\r\n                SignIn.user5.setFirst_Name(fname);\r\n                SignIn.user5.setLast_Name(lname);\r\n                fullname.setText(fname + \" \" + lname);\r\n            }\r\n            else {\r\n                if (fname.isEmpty() && !lname.isEmpty()) {\r\n                    SignIn.user5.setLast_Name(lname);\r\n                    fullname.setText(this.firstname + \" \" + lname);\r\n                }\r\n                else if (!fname.isEmpty() && lname.isEmpty()) {\r\n                    SignIn.user5.setFirst_Name(fname);\r\n                    fullname.setText(fname + \" \" + this.lastname);\r\n                }\r\n            }\r\n            updateButton.setOnAction(event1 -> {\r\n                Alert alert_ = new Alert(Alert.AlertType.CONFIRMATION);\r\n                alert_.setContentText(\"Profile Updated!\");\r\n                alert_.showAndWait();\r\n                try {\r\n                    Select( event);\r\n                    updateButton.setVisible(false);\r\n                    newLastname.setVisible(false);\r\n                    newFirstname.setVisible(false);\r\n                    newEmail.setVisible(false);\r\n                } catch (IOException e) {\r\n                    throw new RuntimeException(e);\r\n                }\r\n            });\r\n        }\r\n        //Delete_Recorded_Movies\r\n        else\r\n        {\r\n            alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);\r\n            Optional<ButtonType> result = alert.showAndWait();\r\n            if (result.isPresent() && result.get() == buttonTypeYes)\r\n            {\r\n                SignIn.user5.Movies_For_Later.clear();\r\n                toWatchHbox.getChildren().clear();\r\n            }\r\n        }\r\n    }\r\n    @FXML\r\n    private void onMouseEntered(){\r\n        Back.setOnMouseEntered(event -> Back.setStyle(\"-fx-background-color: #FFC107; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;\"));\r\n    }\r\n    @FXML\r\n    private void onMouseExit(){\r\n        Back.setOnMouseExited(event -> Back.setStyle(\"-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;\"));\r\n    }\r\n    @FXML\r\n    private void  backScenes(ActionEvent event) throws IOException {\r\n        if (isAdmin) {\r\n            FXMLLoader loader = new FXMLLoader(getClass().getResource(\"all-movies.fxml\"));\r\n            root = loader.load();\r\n            AllMoviesController controller = loader.getController();\r\n            controller.setStage(stage);\r\n            controller.toAllUsers(event);\r\n        }\r\n        else {\r\n            FXMLLoader loader = new FXMLLoader(getClass().getResource(\"main-page.fxml\"));\r\n            root = loader.load();\r\n            MainPageController controller = loader.getController();\r\n            controller.setStage(stage);\r\n            controller.setUser(SignIn.user5);\r\n        }\r\n        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();\r\n        Scene scene = new Scene(root);\r\n        stage.setResizable(false);\r\n        stage.setX(-7);\r\n        stage.setY(0);\r\n        stage.setScene(scene);\r\n        stage.show();\r\n    }\r\n    private void addWatchedList(UserWatchRecord movie1){\r\n        VBox movieContainer = new VBox(10);\r\n        movieContainer.setPrefWidth(300);\r\n        movieContainer.setPrefHeight(200);\r\n        Image image = new Image(getClass().getResourceAsStream(movie1.getMovie().getPoster_path()));\r\n        ImageView imageView = new ImageView(image);\r\n        imageView.setFitHeight(237);\r\n        imageView.setFitWidth(220);\r\n        Label label = new Label(movie1.getMovie().getTitle());\r\n        label.setStyle(\"-fx-text-size: 20; -fx-text-fill: white;\");\r\n        label.setOnMouseEntered(event -> label.setStyle(\"-fx-text-size: 20; -fx-text-fill: #FFC107;\"));\r\n        label.setOnMouseExited(event -> label.setStyle(\"-fx-text-size: 20; -fx-text-fill: white;\"));\r\n        Label label1 =new Label(\"Rate: \"+movie1.getRating());\r\n        label1.setStyle(\"-fx-text-size: 20; -fx-text-fill: white;\");\r\n        label1.setOnMouseEntered(event -> label1.setStyle(\"-fx-text-size: 20; -fx-text-fill: #FFC107;\"));\r\n        label1.setOnMouseExited(event -> label1.setStyle(\"-fx-text-size: 20; -fx-text-fill: white;\"));\r\n        Image image1 = new Image(getClass().getResourceAsStream(\"assets/fullStar.png\"));\r\n        ImageView imageView1 = new ImageView(image1);\r\n        imageView1.setFitHeight(18);\r\n        imageView1.setFitWidth(20);\r\n        HBox box =new HBox(label1,imageView1,label);\r\n        box.setAlignment(Pos.CENTER);\r\n        box.setSpacing(6);\r\n        movieContainer.setAlignment(Pos.CENTER);\r\n        movieContainer.getChildren().addAll(imageView, box);\r\n        movieContainer.setOnMouseClicked(event -> {\r\n            try {\r\n                onMouseClickedVBox(event,movie1);\r\n            } catch (IOException e) {\r\n                throw new RuntimeException(e);\r\n            }\r\n        });\r\n        watchedHbox.getChildren().addAll(movieContainer);\r\n    }\r\n    private void addToWatchedList(Movie movie1){\r\n        VBox movieContainer = new VBox(10);\r\n        movieContainer.setPrefWidth(300);\r\n        movieContainer.setPrefHeight(200);\r\n        Image image = new Image(getClass().getResourceAsStream(movie1.getPoster_path()));\r\n        ImageView imageView = new ImageView(image);\r\n        imageView.setFitHeight(237);\r\n        imageView.setFitWidth(220);\r\n        Label label = new Label(movie1.getTitle());\r\n        label.setStyle(\"-fx-text-size: 20; -fx-text-fill: white;\");\r\n        label.setOnMouseEntered(event -> label.setStyle(\"-fx-text-size: 20; -fx-text-fill: #FFC107;\"));\r\n        label.setOnMouseExited(event -> label.setStyle(\"-fx-text-size: 20; -fx-text-fill: white;\"));\r\n        movieContainer.setAlignment(Pos.CENTER);\r\n        movieContainer.getChildren().addAll(imageView,label);\r\n        movieContainer.setOnMouseClicked(event -> {\r\n            try {\r\n                onMouseClickedVBox(event,movie1);\r\n            } catch (IOException e) {\r\n                throw new RuntimeException(e);\r\n            }\r\n        });\r\n        toWatchHbox.getChildren().addAll(movieContainer);\r\n    }\r\n    public void onMouseClickedVBox(MouseEvent act, Movie movie1) throws IOException {\r\n        FXMLLoader loader=new FXMLLoader(getClass().getResource(\"movie-view.fxml\"));\r\n        root = loader.load();\r\n        stage = (Stage)((Node)act.getSource()).getScene().getWindow();\r\n        MovieController controller=loader.getController();\r\n        controller.setStage(stage);\r\n        controller.setMovie(movie1);\r\n        controller.watchMovie();\r\n        controller.disableButtons();\r\n        controller.setUser(SignIn.user5);\r\n        controller.page5=-1;\r\n\r\n        scene = new Scene(root);\r\n        stage.setScene(scene);\r\n\r\n        Image image = new Image(getClass().getResourceAsStream(movie1.getPoster_path()));\r\n        controller.refreshScreen(\"Watch Movie \"+ movie1.getTitle() + \"(\"+movie1.getRelease_date().getYear()+\")\", movie1.getTitle(),\r\n                movie1.getTitle()+\" Translated\",movie1.getGenres(), movie1.getDescription(),\r\n                movie1.getRunning_time(), image,movie1.getDirector().getFirst_Name()+\" \"+movie1.getDirector().getSecond_Name(),movie1.getCastNames());\r\n        stage.setScene(scene);\r\n        stage.show();\r\n\r\n    }\r\n    public void onMouseClickedVBox(MouseEvent act, UserWatchRecord movie1) throws IOException {\r\n        FXMLLoader loader=new FXMLLoader(getClass().getResource(\"movie-view.fxml\"));\r\n        root = loader.load();\r\n        stage = (Stage)((Node)act.getSource()).getScene().getWindow();\r\n        MovieController controller=loader.getController();\r\n        controller.setStage(stage);\r\n        controller.setUserWatchRecord(movie1);\r\n        controller.watchMovie();\r\n        controller.setUser(SignIn.user5);\r\n        controller.disableButtons();\r\n        controller.disableWatch();\r\n        controller.page5=-1;\r\n        for(UserWatchRecord userWatchRecord1:SignIn.user5.Watched_Movies){\r\n            if(userWatchRecord1.getMovie().equals(movie1.getMovie())){\r\n                controller.setStars(userWatchRecord1);\r\n            }\r\n        }\r\n        scene = new Scene(root);\r\n        stage.setScene(scene);\r\n\r\n        Image image = new Image(getClass().getResourceAsStream(movie1.getMovie().getPoster_path()));\r\n        controller.refreshScreen(\"Watch Movie \"+ movie1.getMovie().getTitle() + \"(\"+movie1.getMovie().getRelease_date().getYear()+\")\", movie1.getMovie().getTitle(),\r\n                movie1.getMovie().getTitle()+\" Translated\",movie1.getMovie().getGenres(), movie1.getMovie().getDescription(),\r\n                movie1.getMovie().getRunning_time(), image,movie1.getMovie().getDirector().getFirst_Name()+\" \"+movie1.getMovie().getDirector().getSecond_Name(),movie1.getMovie().getCastNames());\r\n        stage.setScene(scene);\r\n        stage.show();\r\n\r\n    }\r\n    public void setStage(Stage stage){\r\n        this.stage = stage;\r\n    }\r\n\r\n    public void setdata(){\r\n\r\n        isAdmin = false;\r\n        for (UserWatchRecord movie : SignIn.user5.Watched_Movies) {\r\n            addWatchedList(movie);\r\n        }\r\n        for (Movie movie : SignIn.user5.Movies_For_Later) {\r\n            addToWatchedList(movie);\r\n        }\r\n        Image image = new Image(getClass().getResourceAsStream(SignIn.user5.getProfilePath()));\r\n        profilePictue.setImage(image);\r\n        profilePictue.setFitHeight(100);\r\n        profilePictue.setFitWidth(100);\r\n        username.setText(SignIn.user5.getUser_Name());\r\n        email.setText(SignIn.user5.getEmail());\r\n        plan.setText(\"Current Plan :\" + \" \" +  SignIn.user5.getPlan().toUpperCase());\r\n        fullname.setText(SignIn.user5.getFirst_Name() + \" \" + SignIn.user5.getLast_Name());\r\n        firstname = SignIn.user5.getFirst_Name();\r\n        lastname = SignIn.user5.getLast_Name();\r\n\r\n    }\r\n\r\n    public void setdatatoAdmin(User user){\r\n        SignIn.user5 = user;\r\n        isAdmin = true;\r\n        for (UserWatchRecord movie : SignIn.user5.Watched_Movies) {\r\n            addWatchedList(movie);\r\n        }\r\n        for (Movie movie : SignIn.user5.Movies_For_Later) {\r\n            addToWatchedList(movie);\r\n        }\r\n        Image image = new Image(getClass().getResourceAsStream(user.getProfilePath()));\r\n        profilePictue.setImage(image);\r\n        profilePictue.setFitHeight(100);\r\n        profilePictue.setFitWidth(100);\r\n        username.setText(user.getUser_Name());\r\n        email.setText(user.getEmail());\r\n        plan.setText(user.getPlan());\r\n        fullname.setText(user.getFirst_Name() + \" \" + user.getLast_Name());\r\n        firstname = user.getFirst_Name();\r\n        lastname = user.getLast_Name();\r\n        setUser(SignIn.user5);\r\n    }\r\n    public void setUser(User user){\r\n        this.user = user;\r\n\r\n    }\r\n    @FXML\r\n    void toMoviesrecord(){\r\n        switchPane(mainpane);\r\n    }\r\n    private void switchPane(AnchorPane anchorPane){\r\n        mainPane.setCenter(anchorPane);\r\n    }\r\n    @FXML\r\n    private void toPlans()throws IOException{\r\n        FXMLLoader loader=new FXMLLoader(getClass().getResource(\"update-plan.fxml\"));\r\n        Parent root = loader.load();\r\n        switchPane((AnchorPane) root);\r\n        ChoosePlanController controller = loader.getController();\r\n        controller.setUser(SignIn.user5);\r\n    }\r\n    @FXML\r\n    void toMovies()throws IOException{\r\n        switchPane(mainpane);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/watch_it/profilePageController.java b/src/main/java/com/example/watch_it/profilePageController.java
+--- a/src/main/java/com/example/watch_it/profilePageController.java	(revision b4ded379e12f764e21abf7e94c5e97e6e6d9b1cb)
++++ b/src/main/java/com/example/watch_it/profilePageController.java	(date 1703286070796)
+@@ -50,7 +50,7 @@
+     private TextField newLastname;
+     @FXML
+     private Button updateButton;
+-    private boolean isAdmin;
++    private boolean isAdmin = false;
+     private User user;
+     @FXML
+     private HBox watchedHbox;
+@@ -72,12 +72,13 @@
+ 
+         onMouseExit();
+         onMouseEntered();
+-
+-        if (SignIn.user5.getSubscription().getUpdatePlan()) {
+-            try {
+-                toPlans();
+-            } catch (IOException e) {
+-                throw new RuntimeException(e);
++        if(SignIn.user5!=null) {
++            if (SignIn.user5.getSubscription().getUpdatePlan()) {
++                try {
++                    toPlans();
++                } catch (IOException e) {
++                    throw new RuntimeException(e);
++                }
+             }
+         }
+     }
+@@ -175,6 +176,7 @@
+                     newLastname.setVisible(false);
+                     newFirstname.setVisible(false);
+                     newEmail.setVisible(false);
++                    Select_List.getSelectionModel().clearSelection();
+                 } catch (IOException e) {
+                     throw new RuntimeException(e);
+                 }
+@@ -189,6 +191,7 @@
+             {
+                 SignIn.user5.Movies_For_Later.clear();
+                 toWatchHbox.getChildren().clear();
++                Select_List.getSelectionModel().clearSelection();
+             }
+         }
+     }
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"236de910-bb88-43c2-a220-e8030a7a2c95\" name=\"Changes\" comment=\"stable version 4\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/data.txt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/data.txt\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/example/watch_it/AddCastController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/example/watch_it/AddCastController.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/example/watch_it/AddMovieController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/example/watch_it/AddMovieController.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/example/watch_it/Admin.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/example/watch_it/Admin.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/example/watch_it/AllMoviesController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/example/watch_it/AllMoviesController.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/example/watch_it/ChoosePlanController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/example/watch_it/ChoosePlanController.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/example/watch_it/HelloApplication.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/example/watch_it/HelloApplication.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/example/watch_it/MovieController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/example/watch_it/MovieController.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/example/watch_it/Subscription.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/example/watch_it/Subscription.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/example/watch_it/User.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/example/watch_it/User.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/example/watch_it/profilePageController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/example/watch_it/profilePageController.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/resources/com/example/watch_it/add-movies.fxml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/resources/com/example/watch_it/add-movies.fxml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/resources/com/example/watch_it/all-movies.fxml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/resources/com/example/watch_it/all-movies.fxml\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"FxmlFile\" />\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;Nada-Hany&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">\r\n    <option name=\"selectedUrlAndAccountId\">\r\n      <UrlAndAccount>\r\n        <option name=\"accountId\" value=\"cc5d3d54-1728-462d-8317-3b96966b79fa\" />\r\n        <option name=\"url\" value=\"https://github.com/Youssef-Mohsen/Watch_It.git\" />\r\n      </UrlAndAccount>\r\n    </option>\r\n  </component>\r\n  <component name=\"HighlightingSettingsPerFile\">\r\n    <setting file=\"file://$PROJECT_DIR$/src/main/java/com/example/watch_it/WatchRecord.java\" root0=\"FORCE_HIGHLIGHTING\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 8\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2YeFVvR1cMbdmzoU0JjHSXbxBBy\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;master&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;C:/Users/Youssef Mohsen/IdeaProjects/Watch_It&quot;,\r\n    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,\r\n    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,\r\n    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.JavaFX&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\programming\\java\\Watch_It\\src\\main\\java\\com\\example\\watch_it\" />\r\n    </key>\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\Youssef Mohsen\\IdeaProjects\\Watch_It\\src\\main\\resources\\com\\example\\watch_it\\assets\" />\r\n      <recent name=\"C:\\programming\\java\\Watch_It\\src\\main\\resources\\com\\example\\watch_it\" />\r\n      <recent name=\"C:\\programming\\java\\Watch_It\\src\\main\\java\\com\\example\\watch_it\" />\r\n      <recent name=\"C:\\programming\\java\\Watch_It\\src\\main\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"HelloApplication\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.example.watch_it.HelloApplication\" />\r\n      <module name=\"Watch_IT\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.example.watch_it.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"JetRunConfigurationType\">\r\n      <module name=\"Watch_It\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"KotlinStandaloneScriptRunConfigurationType\">\r\n      <module name=\"Watch_It\" />\r\n      <option name=\"filePath\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.HelloApplication\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"236de910-bb88-43c2-a220-e8030a7a2c95\" name=\"Changes\" comment=\"\" />\r\n      <created>1700878165910</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1700878165910</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"add admin class\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1700881919077</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1700881919077</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"add cast, director and artist classes\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1701195323300</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1701195323300</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"integration\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1701195620613</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1701195620613</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"handling everything in one file\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1701306289338</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1701306289338</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"getting the month with most revenue\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1701479503607</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1701479503607</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"main class\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1701480011804</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1701480011804</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"add first page gui\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1702240257713</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1702240257714</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"reading movies\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1702329606254</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1702329606254</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"Update project finally.....\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1702482909178</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1702482909178</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"Update project finally.....\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1702483119306</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1702483119306</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00011\" summary=\"Update icons\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1702485535182</created>\r\n      <option name=\"number\" value=\"00011\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1702485535182</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00012\" summary=\"view user\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1702601842653</created>\r\n      <option name=\"number\" value=\"00012\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1702601842654</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00013\" summary=\"average rating\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1703078027442</created>\r\n      <option name=\"number\" value=\"00013\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1703078027442</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00014\" summary=\"integration\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1703100848452</created>\r\n      <option name=\"number\" value=\"00014\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00014\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1703100848453</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00015\" summary=\"edit movie\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1703119850157</created>\r\n      <option name=\"number\" value=\"00015\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00015\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1703119850157</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00016\" summary=\"stable version 4\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1703201902223</created>\r\n      <option name=\"number\" value=\"00016\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00016\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1703201902223</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"17\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"add admin class\" />\r\n    <MESSAGE value=\"add cast, director and artist classes\" />\r\n    <MESSAGE value=\"handling everything in one file\" />\r\n    <MESSAGE value=\"getting the month with most revenue\" />\r\n    <MESSAGE value=\"main class\" />\r\n    <MESSAGE value=\"add first page gui\" />\r\n    <MESSAGE value=\"reading movies\" />\r\n    <MESSAGE value=\"Update project finally.....\" />\r\n    <MESSAGE value=\"Update icons\" />\r\n    <MESSAGE value=\"view user\" />\r\n    <MESSAGE value=\"average rating\" />\r\n    <MESSAGE value=\"integration\" />\r\n    <MESSAGE value=\"edit movie\" />\r\n    <MESSAGE value=\"stable version 4\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"stable version 4\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <breakpoint enabled=\"true\" type=\"java-exception\">\r\n          <properties class=\"java.lang.OutOfMemoryError\" package=\"java.lang\" />\r\n          <option name=\"timeStamp\" value=\"1\" />\r\n        </breakpoint>\r\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\r\n          <url>file://$PROJECT_DIR$/src/main/java/com/example/watch_it/profilePageController.java</url>\r\n          <line>394</line>\r\n          <option name=\"timeStamp\" value=\"4\" />\r\n        </line-breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n  <component name=\"XSLT-Support.FileAssociations.UIState\">\r\n    <expand />\r\n    <select />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision b4ded379e12f764e21abf7e94c5e97e6e6d9b1cb)
++++ b/.idea/workspace.xml	(date 1703286525610)
+@@ -4,21 +4,20 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="236de910-bb88-43c2-a220-e8030a7a2c95" name="Changes" comment="stable version 4">
++    <list default="true" id="236de910-bb88-43c2-a220-e8030a7a2c95" name="Changes" comment="integration">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data.txt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/movies-data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/movies-data.txt" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/AddCastController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/AddCastController.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/AddMovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/AddMovieController.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/Admin.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/AddUsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/AddUsersController.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/AllMoviesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/AllMoviesController.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/ChoosePlanController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/ChoosePlanController.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/HelloApplication.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/ForgotPassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/ForgotPassword.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/MovieController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/MovieController.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/Subscription.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/Subscription.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/User.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/WatchRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/WatchRecord.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/watch_it/profilePageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/watch_it/profilePageController.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/add-movies.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/add-movies.fxml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/all-movies.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/all-movies.fxml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/add-cast.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/watch_it/add-cast.fxml" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -256,7 +255,15 @@
+       <option name="project" value="LOCAL" />
+       <updated>1703201902223</updated>
+     </task>
+-    <option name="localTasksCounter" value="17" />
++    <task id="LOCAL-00017" summary="integration">
++      <option name="closed" value="true" />
++      <created>1703216558001</created>
++      <option name="number" value="00017" />
++      <option name="presentableId" value="LOCAL-00017" />
++      <option name="project" value="LOCAL" />
++      <updated>1703216558002</updated>
++    </task>
++    <option name="localTasksCounter" value="18" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+@@ -282,10 +289,10 @@
+     <MESSAGE value="Update icons" />
+     <MESSAGE value="view user" />
+     <MESSAGE value="average rating" />
+-    <MESSAGE value="integration" />
+     <MESSAGE value="edit movie" />
+     <MESSAGE value="stable version 4" />
+-    <option name="LAST_COMMIT_MESSAGE" value="stable version 4" />
++    <MESSAGE value="integration" />
++    <option name="LAST_COMMIT_MESSAGE" value="integration" />
+   </component>
+   <component name="XDebuggerManager">
+     <breakpoint-manager>
+@@ -294,11 +301,6 @@
+           <properties class="java.lang.OutOfMemoryError" package="java.lang" />
+           <option name="timeStamp" value="1" />
+         </breakpoint>
+-        <line-breakpoint enabled="true" type="java-line">
+-          <url>file://$PROJECT_DIR$/src/main/java/com/example/watch_it/profilePageController.java</url>
+-          <line>394</line>
+-          <option name="timeStamp" value="4" />
+-        </line-breakpoint>
+       </breakpoints>
+     </breakpoint-manager>
+   </component>
+Index: data.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>user,nada,123456,1,Nada,Ayman,standard,no,2023-12-22,assets/batbot-01.png,false,to be watched,watched,Oppenheimer,3.0,Titanic,1.0,Insidious: The Red Door,0.0,The Godfather,0.0,Insidious: The Red Door,0.0,done,\r\nuser,youssef,456789,1,youssef,mohsen,premium,youssefMohsen@gmail.com,2023-12-20,assets/batbot-01.png,false,to be watched,Insidious: The Red Door,watched,Oppenheimer,4.0,done,\r\nuser,Mai,123456,1,Mai,Ezz,basic,MaiEzz@gmail.com,2023-12-06,assets/batbot-01.png,false,to be watched,Oppenheimer,watched,Avengers: Endgame,-1.0,Joker,3.0,done,\r\nuser,Basmala,456789,1,Basmala,Tarek,premium,Basmala-Tarek@gmail.com,2023-10-09,assets/batbot-02.png,false,to be watched,Insidious: The Red Door,watched,Oppenheimer,-1.0,The Dark Knight,3.0,done,\r\nuser,Tasneem,123456,1,Tasneem,Mohamed,basic,TasneemMohamed@gmail.com,2023-12-06,assets/batbot-01.png,false,to be watched,Oppenheimer,watched,Avengers: Endgame,-1.0,Joker,3.0,done,\r\nuser,toka,456789,1,toka,karam,premium,tokaKaram@gmail.com,2023-10-09,assets/batbot-02.png,false,to be watched,Insidious: The Red Door,watched,Oppenheimer,-1.0,The Dark Knight,3.0,done,\r\nuser,youssef_,456789,1,youssef,ahmad,premium,youssefAhmad@gmail.com,2023-10-09,assets/batbot-02.png,false,to be watched,Insidious: The Red Door,watched,Oppenheimer,4.0,done,\r\nuser,youssef7,0000,1,youssef,mohsen,premium,YoussefMohsen@gmail.com,2023-12-20,assets/batbot-06.png,false,to be watched,watched,Joker,5.0,The Godfather,5.0,Oppenheimer,5.0,The Matrix,4.0,Home Alone,3.0,Titanic,3.0,done,\r\ncast,Patrick,Wilson,50,male,American,Columbus,Insidious: The Red Door\r\ncast,Rose,Byrne,44,female,Australian,Insidious: The Red Door\r\ncast,Joaquin,Phoenix,49,male,American,Gladiator,Joker\r\ncast,Robert,DeNiro,80,male,American,Joker\r\ncast,Joe,Pesci,80,male,American,Home Alone\r\ncast,Kate,Winslet,48,female,Titanic\r\ncast,Macaulay,Culkin,43,male,American,Home Alone\r\ncast,Daniel,Stern,66,male,American,Home Alone\r\ncast,Robert,DowneyJr,58,male,American,Avengers: Endgame,Sherlock Holmes,Oppenheimer\r\ncast,Benedict,Cumberbatch,40,male,English,Avengers: Endgame\r\ncast,Chris,Hemsworth,40,male,English,Avengers: Endgame\r\ncast,Mark,Strong,60,male,British,Sherlock Holmes\r\ncast,Jude,Law,50,male,English,Sherlock Holmes\r\ncast,Cillian,Murphy,50,male,Irish,Oppenheimer,The Dark Knight\r\ncast,Matt,Damon,53,male,American,The Dark Knight\r\ncast,Christian,Bale,49,male,American,The Prestige,The Dark Knight\r\ncast,Morgan,Freeman,86,male,American,The Shawshank Redemption,The Dark Knight\r\ncast,Tom,Holland,27,male,England,Spider-Man: No Way Home\r\ncast,Zendaya,Coleman,27,female,America,Spider-Man: No Way Home,Dune\r\ncast,Jason,Momoa,44,male,America,Aquaman and the Lost Kingdom\r\ncast,Ben,Affleck,51,male,America,Aquaman and the Lost Kingdom\r\ncast,TimothÃe,Chalamet,28,male,American,Dune,Wonka\r\ncast,Paul,Raymond,34,male,England,Wonka\r\ncast,Murray,McArthur,57,male,England,Wonka\r\ncast,Leonardo,DiCaprio,49,male,German,The Great Gatsby,Titanic,Inception\r\ncast,Scarlett,Johansson,39,female,American,The Prestige,Black Widow\r\ncast,Florence,Pugh,27,female,English,Black Widow\r\ncast,David,Harbour,48,male,American,Black Widow\r\ncast,Matthew,McConaughey,54,American,male,Interstellar\r\ncast,Anne,Hathaway,41,female,American,Interstellar\r\ncast,Jessica,Chastain,46,female,American,Interstellar\r\ncast,Samara,Weaving,31,female,Australian,Ready or Not\r\ncast,Adam,Brody,44,male,American,Ready or Not\r\ncast,Mark,O'Brien,39,male,Canadian,Ready or Not\r\ncast,Hugh,Jackman,55,male,Australian,The Prestige\r\ncast,Ryan,Gosling,43,male,Canadian,Blade Runner 2049\r\ncast,Harrison,Ford,81,male,America,Blade Runner 2049\r\ncast,Ana,Armas,35,female,Cuban,Blade Runner 2049\r\ncast,Ralph,Fiennes,60,male,English,Schindler's List\r\ncast,Tony,Revolori,27,male,American,The Grand Budapest Hotel\r\ncast,Saoirse,Ronan,29,female,American,The Grand Budapest Hotel\r\ncast,Oscar,Isaac,44,male,Guatemalan,Dune\r\ncast,Keanu,Reeves,59,male,Canadian,The Matrix\r\ncast,Laurence,Fishburne,62,mamle,American,The Matrix\r\ncast,Carrie-Anne,Moss,56,female,Canadian,The Matrix\r\ncast,Russell,Crowe,59,male,American,Gladiator\r\ncast,Connie,Nielsen,58,female,Danish,Gladiator\r\ncast,Tim,Robbins,65,American,The Shawshank Redemption\r\ncast,Bob,Gunton,79,male,America,The Shawshank Redemption\r\ncast,Marlon,Brando,80,male,American,The Godfather\r\ncast,Al,Pacino,83,male,American,The Godfather\r\ncast,James,Caan,84,male,American,The Godfather\r\ncast,Samuel,Jackson,74,American,Pulp Fiction\r\ncast,Uma,Thurman,53,female,American,Pulp Fiction\r\ncast,John,Travolta,69,male,American,Pulp Fiction\r\ncast,Elijah,Wood,42,male,American,The Lord of the Rings\r\ncast,Ian,McKellen,84,male,English,The Lord of the Rings\r\ncast,Viggo,Mortensen,56,male,American,The Lord of the Rings\r\ncast,Jodie,Foster,61,female,American,The Silence of the Lambs\r\ncast,Anthony,Hopkins,85,male,English,The Silence of the Lambs\r\ncast,Lawrence,Bonney,80,male,American,The Silence of the Lambs\r\ncast,Liam,Neeson,71,male,English,Schindler's List\r\ncast,Ben,Kingsley,79,male,English,Schindler's List\r\ncast,Ralph,Fiennes,60,male,English,Schindler's List\r\ncast,Tom,Hanks,67,male,English,Forrest Gump\r\ncast,Robin,Wright,57,female,American,Forrest Gump\r\ncast,Gary,Sinise,68,male,American,Forrest Gump\r\ncast,Brad,Pitt,60,male,English,Inglourious Basterds\r\ncast,Diane,Kruger,47,female,German,Inglourious Basterds\r\ncast,Eli,Roth,51,male,American,Inglourious Basterds\r\ncast,Joel,Edgerton,49,male,Australina,The Great Gatsby\r\ncast,Carey,Mulligan,38,female,American,The Great Gatsby\r\ndirector,Christopher,Nolan,53,male,british,Inception,The Dark Knight,Oppenheimer,Interstellar,The Prestige\r\ndirector,Guy,Ritchie,55,male,british,Sherlock Holmes\r\ndirector,Anthony,Russo,53,male,American,Avengers: Endgame\r\ndirector,Chris,Columbus,65,male,Italian,Home Alone\r\ndirector,Todd,Phillips,52,male,American,Joker\r\ndirector,Patrick,Wilson,50,male,American,Insidious: The Red Door\r\ndirector,James,Cameron,69,male,Canadian,Titanic\r\ndirector,Jon,Watts,42,male,American,Spider-Man: No Way Home\r\ndirector,James,Wan,46,male,Malaysian,Aquaman and the Lost Kingdom\r\ndirector,Paul,King,45,male,England,Wonka\r\ndirector,Cate,Shortland,55,female,Australian,Black Widow\r\ndirector,Tyler,Gillett,41,male,American,Ready or Not\r\ndirector,Denis,Villeneuve,56,male,Canada,Blade Runner 2049,Dune\r\ndirector,Wes,Anderson,54,male,American,The Grand Budapest Hotel\r\ndirector,Lilly,Wachowski,56,female,American,The Matrix\r\ndirector,Ridley,Scott,86,male,American,Gladiator\r\ndirector,Frank,Darabont,64,male,France,The Shawshank Redemption\r\ndirector,Francis,Ford,84,male,American,The Godfather\r\ndirector,Quentin,Tarantino,60,male,American,Pulp Fiction,Inglourious Basterds\r\ndirector,Peter,Jackson,62,male,New Zealand,The Lord of the Rings\r\ndirector,Jonathan,Demme,79,male,American,The Silence of the Lambs\r\ndirector,Steven,Spielberg,77,male,American,Schindler's List\r\ndirector,Robert,Zemeckis,71,male,American,Forrest Gump\r\ndirector,Baz,Luhrmann,61,male,Australia,The Great Gatsby\r\nadmin,nada,123456\r\nadmin,mai,123456\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/data.txt b/data.txt
+--- a/data.txt	(revision b4ded379e12f764e21abf7e94c5e97e6e6d9b1cb)
++++ b/data.txt	(date 1703286549652)
+@@ -1,4 +1,4 @@
+-user,nada,123456,1,Nada,Ayman,standard,no,2023-12-22,assets/batbot-01.png,false,to be watched,watched,Oppenheimer,3.0,Titanic,1.0,Insidious: The Red Door,0.0,The Godfather,0.0,Insidious: The Red Door,0.0,done,
++user,nada,123456,1,Nada,Ayman,standard,NadaAyman@gmail.com,2023-12-22,assets/batbot-01.png,false,to be watched,watched,Oppenheimer,3.0,Titanic,1.0,Insidious: The Red Door,0.0,The Godfather,0.0,Insidious: The Red Door,0.0,done,
+ user,youssef,456789,1,youssef,mohsen,premium,youssefMohsen@gmail.com,2023-12-20,assets/batbot-01.png,false,to be watched,Insidious: The Red Door,watched,Oppenheimer,4.0,done,
+ user,Mai,123456,1,Mai,Ezz,basic,MaiEzz@gmail.com,2023-12-06,assets/batbot-01.png,false,to be watched,Oppenheimer,watched,Avengers: Endgame,-1.0,Joker,3.0,done,
+ user,Basmala,456789,1,Basmala,Tarek,premium,Basmala-Tarek@gmail.com,2023-10-09,assets/batbot-02.png,false,to be watched,Insidious: The Red Door,watched,Oppenheimer,-1.0,The Dark Knight,3.0,done,
+@@ -6,32 +6,32 @@
+ user,toka,456789,1,toka,karam,premium,tokaKaram@gmail.com,2023-10-09,assets/batbot-02.png,false,to be watched,Insidious: The Red Door,watched,Oppenheimer,-1.0,The Dark Knight,3.0,done,
+ user,youssef_,456789,1,youssef,ahmad,premium,youssefAhmad@gmail.com,2023-10-09,assets/batbot-02.png,false,to be watched,Insidious: The Red Door,watched,Oppenheimer,4.0,done,
+ user,youssef7,0000,1,youssef,mohsen,premium,YoussefMohsen@gmail.com,2023-12-20,assets/batbot-06.png,false,to be watched,watched,Joker,5.0,The Godfather,5.0,Oppenheimer,5.0,The Matrix,4.0,Home Alone,3.0,Titanic,3.0,done,
+-cast,Patrick,Wilson,50,male,American,Columbus,Insidious: The Red Door
++cast,Patrick,Wilson,50,male,American,Insidious: The Red Door,Columbus
+ cast,Rose,Byrne,44,female,Australian,Insidious: The Red Door
+-cast,Joaquin,Phoenix,49,male,American,Gladiator,Joker
++cast,Joaquin,Phoenix,49,male,American,Joker,Gladiator
+ cast,Robert,DeNiro,80,male,American,Joker
+ cast,Joe,Pesci,80,male,American,Home Alone
+ cast,Kate,Winslet,48,female,Titanic
+ cast,Macaulay,Culkin,43,male,American,Home Alone
+ cast,Daniel,Stern,66,male,American,Home Alone
+-cast,Robert,DowneyJr,58,male,American,Avengers: Endgame,Sherlock Holmes,Oppenheimer
++cast,Robert,DowneyJr,58,male,American,Oppenheimer,Sherlock Holmes,Avengers: Endgame
+ cast,Benedict,Cumberbatch,40,male,English,Avengers: Endgame
+ cast,Chris,Hemsworth,40,male,English,Avengers: Endgame
+ cast,Mark,Strong,60,male,British,Sherlock Holmes
+ cast,Jude,Law,50,male,English,Sherlock Holmes
+-cast,Cillian,Murphy,50,male,Irish,Oppenheimer,The Dark Knight
++cast,Cillian,Murphy,50,male,Irish,The Dark Knight,Oppenheimer
+ cast,Matt,Damon,53,male,American,The Dark Knight
+-cast,Christian,Bale,49,male,American,The Prestige,The Dark Knight
+-cast,Morgan,Freeman,86,male,American,The Shawshank Redemption,The Dark Knight
++cast,Christian,Bale,49,male,American,The Dark Knight,The Prestige
++cast,Morgan,Freeman,86,male,American,The Dark Knight,The Shawshank Redemption
+ cast,Tom,Holland,27,male,England,Spider-Man: No Way Home
+-cast,Zendaya,Coleman,27,female,America,Spider-Man: No Way Home,Dune
++cast,Zendaya,Coleman,27,female,America,Dune,Spider-Man: No Way Home
+ cast,Jason,Momoa,44,male,America,Aquaman and the Lost Kingdom
+ cast,Ben,Affleck,51,male,America,Aquaman and the Lost Kingdom
+-cast,TimothÃe,Chalamet,28,male,American,Dune,Wonka
++cast,TimothÃe,Chalamet,28,male,American,Wonka,Dune
+ cast,Paul,Raymond,34,male,England,Wonka
+ cast,Murray,McArthur,57,male,England,Wonka
+-cast,Leonardo,DiCaprio,49,male,German,The Great Gatsby,Titanic,Inception
+-cast,Scarlett,Johansson,39,female,American,The Prestige,Black Widow
++cast,Leonardo,DiCaprio,49,male,German,Inception,Titanic,The Great Gatsby
++cast,Scarlett,Johansson,39,female,American,Black Widow,The Prestige
+ cast,Florence,Pugh,27,female,English,Black Widow
+ cast,David,Harbour,48,male,American,Black Widow
+ cast,Matthew,McConaughey,54,American,male,Interstellar
+@@ -78,7 +78,7 @@
+ cast,Eli,Roth,51,male,American,Inglourious Basterds
+ cast,Joel,Edgerton,49,male,Australina,The Great Gatsby
+ cast,Carey,Mulligan,38,female,American,The Great Gatsby
+-director,Christopher,Nolan,53,male,british,Inception,The Dark Knight,Oppenheimer,Interstellar,The Prestige
++director,Christopher,Nolan,53,male,british,The Prestige,Interstellar,Oppenheimer,The Dark Knight,Inception
+ director,Guy,Ritchie,55,male,british,Sherlock Holmes
+ director,Anthony,Russo,53,male,American,Avengers: Endgame
+ director,Chris,Columbus,65,male,Italian,Home Alone
+@@ -90,13 +90,13 @@
+ director,Paul,King,45,male,England,Wonka
+ director,Cate,Shortland,55,female,Australian,Black Widow
+ director,Tyler,Gillett,41,male,American,Ready or Not
+-director,Denis,Villeneuve,56,male,Canada,Blade Runner 2049,Dune
++director,Denis,Villeneuve,56,male,Canada,Dune,Blade Runner 2049
+ director,Wes,Anderson,54,male,American,The Grand Budapest Hotel
+ director,Lilly,Wachowski,56,female,American,The Matrix
+ director,Ridley,Scott,86,male,American,Gladiator
+ director,Frank,Darabont,64,male,France,The Shawshank Redemption
+ director,Francis,Ford,84,male,American,The Godfather
+-director,Quentin,Tarantino,60,male,American,Pulp Fiction,Inglourious Basterds
++director,Quentin,Tarantino,60,male,American,Inglourious Basterds,Pulp Fiction
+ director,Peter,Jackson,62,male,New Zealand,The Lord of the Rings
+ director,Jonathan,Demme,79,male,American,The Silence of the Lambs
+ director,Steven,Spielberg,77,male,American,Schindler's List
+Index: movies-data.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>1,The Dark Knight,When the menace known as the Joker wreaks havoc and chaos on the people of Gotham. Batman must accept one of the greatest psychological and physical tests of his ability to fight in justice.,2008-07-23,2h:32m,Christopher Nolan,English,9.0,United States,565.000.000 M,2.437.724.184 B,movies/the dark knight.jpeg,2.5,2,1,5.0,cast,Christian Bale,Morgan Freeman,Cillian Murphy,genres,action,crime,drama,thriller\r\n2,Oppenheimer,The story of American scientist. J. Robert Oppenheimer. and his role in the development of the atomic bomb.,2023-11-21,3h,Christopher Nolan,English,8.0,United States,100.000.000M,2.437.724 M,movies/Oppenheimer.jpeg,3.5,5,10,35.0,cast,Robert DowneyJr,Matt Damon,Cillian Murphy,genres,drama,history,biography\r\n3,Sherlock Holmes,Detective Sherlock Holmes and his stalwart partner Watson engage in a battle of wits and brawn with a nemesis whose plot is a threat to all of England.,2009-12-30,2h:8m,Guy Ritchie,English,8.0,England,90.000.000 M,112.190.000 M,movies/Sherlock_Holmes.jpeg,2.5,1,1,4.0,cast,Robert DowneyJr,Mark Strong,Jude Law,genres,action,adventure,mystery\r\n4,Avengers: Endgame,After the devastating events of Avengers: Infinity War (2018). the universe is in ruins. With the help of remaining allies. the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe.,2019-04-26,3h:1m,Anthony Russo,English,8.0,United States,90.000.000 M,112.190.000 M,movies/endgame.jpeg,2.5,1,1,4.0,cast,Robert DowneyJr,Benedict Cumberbatch,Chris Hemsworth,genres,action,adventure,drama\r\n6,Home Alone,An eight-year-old troublemaker. mistakenly left home alone. must defend his home against a pair of burglars on Christmas eve.,1991-07-22,1h:43m,Chris Columbus,English,7.0,United Stated,90.000.000 M,112.190.000 M,movies/home alone.jpeg,3.0,6,6,18.0,cast,Macaulay Culkin,Daniel Stern,Joe Pesci,genres,comedy,family\r\n5,Joker,During the 1980s a failed stand-up comedian is driven insane and turns to a life of crime and chaos in Gotham City while becoming an infamous psychopathic crime figure.,2019-10-04,2h:2m,Todd Phillips,English,8.0,United States,100.000.000M,2.437.724 M,movies/joker.jpeg,3.5,1,1,5.0,cast,Joaquin Phoenix,Robert DeNiro,genres,crime,drama,thriller\r\n7,Insidious: The Red Door,The Lamberts must go deeper into The Further than ever before to put their demons to rest once and for all.,2023-07-07,1h:47m,Patrick Wilson,English,5.0,Unitied States,100.000.000M,2.437.724 M,movies/red_door.jpeg,2.5,6,1,3.0,cast,Patrick Wilson,Rose Byrne,genres,horror,mystery,thriller\r\n8,Inception,A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O. but his tragic past may doom the project and his team to disaster.,2010-07-14,2h:28m,Christopher Nolan,English,9.0,America,100.000.000M,2.437.724 M,movies/Inception.jpeg,2.5,1,1,2.0,cast,Cillian Murphy,Leonardo DiCaprio,genres,action,adventure,Sci-Fi\r\n9,Titanic,A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious ill-fated R.M.S. Titanic.,1997-12-19,3h:14m,James Cameron,English,8.0,America,95.000.000M,2.437.724 M,movies/titanic.jpeg,3.4,11,5,17.1,cast,Leonardo DiCaprio,Kate Winslet,genres,romance,drama\r\n10,Spider-Man: No Way Home,With Spider-Man's identity now revealed. Peter asks Doctor Strange for help. When a spell goes wrong. dangerous foes from other worlds start to appear. forcing Peter to discover what it truly means to be Spider-Man.,2021-12-15,2h:28m,Jon Watts,English,9.0,America,95.000.000M,2.437.724 M,movies/No_Way_Home.jpg,5.0,2,3,15.0,cast,Tom Holland,Zendaya Coleman,Benedict Cumberbatch,genres,action,adventure,fantasy,Sci-Fi\r\n12,Wonka,With dreams of opening a shop in a city renowned for its chocolate. a young and poor Willy Wonka discovers that the industry is run by a cartel of greedy chocolatiers.,2023-11-28,1h:56m,Paul King,English,8.0,America,95.000.000M,2.437.724 M,movies/Wonka.jpg,2.5,1,1,4.0,cast,Timothée Chalamet,Paul Raymond,Murray McArthur,genres,adventure,comedy,family,fantasy,musical\r\n13,Black Widow,Natasha Romanoff confronts her past as a spy and must deal with the aftermath of Captain America: Civil War. Pursued by a force that will stop at nothing to bring her down. Natasha seeks to unravel a conspiracy tied to her past.,2021-07-09,2h:13m,Cate Shortland,English,8.0,United States,200.000.000 M,378.454.000 M,movies/black widow.jpeg,2.5,1,1,3.0,cast,Scarlett Johansson,Florence Pugh,David Harbour,genres,action,adventure,Sci-Fi\r\n14,Interstellar,In a future Earth facing environmental collapse. a team of astronauts embarks on a perilous journey through a wormhole near Saturn to find a new habitable planet for humanity. The film explores the complexities of space travel. time dilation. and the enduring power of love.,2014-11-05,2h:49m,Christopher Nolan,English,9.0,United States,165.000.000 M,677.471.339 M,movies/Interstellar.jpeg,3.2,2,1,4.0,cast,Matthew McConaughey,Anne Hathaway,Jessica Chastain,genres,adventure,drama,Sci-Fi\r\n15,Ready or Not,Grace. a young bride. is excited to join her new husband's wealthy and eccentric family. However. her wedding night takes a dark turn when she is forced to participate in a deadly game of hide-and-seek. As the night unfolds. Grace must navigate the dangerous game and survive until dawn.,2019-08-21,1h:35m,Tyler Gillett,English,7.0,United States,6.000.000 M,57.548.572 M,movies/ready or not.jpeg,2.0,1,1,2.0,cast,Samara Weaving,Adam Brody,Mark O'Brien,genres,horror,mystery,thriller\r\n16,The Prestige, In the world of 19th-century magic. two magicians. Robert Angier and Alfred Borden. engage in a fierce rivalry that spans decades. Their quest for the ultimate illusion leads them to make sacrifices that blur the line between reality and deception.,2006-10-17,2h:10m,Christopher Nolan,English,8.0,United United Kingdom,40.000.000 M,109.676.311 M,movies/The_Prestige.jpg,2.5,1,1,3.0,cast,Hugh Jackman,Christian Bale,Scarlett Johansson,genres,drama,mystery,Sci-Fi\r\n17,Blade Runner 2049,In a dystopian future. Officer K. a \"Blade Runner\" tasked with eliminating rogue replicants. uncovers a long-buried secret that has the potential to plunge society into chaos. His quest leads him to Rick Deckard. a former Blade Runner. and unravels mysteries that question the nature of humanity.,2017-10-06, 2h:44m,Denis Villeneuve,English,8.0,United States. Canada,150.000.000 M,260.516.380 M,movies/Bladr_Runner.jpg,2.5,1,1,4.0,cast,Ryan Gosling,Harrison Ford,Ana Armas,genres,drama,mystery,Sci-Fi\r\n18,The Grand Budapest Hotel,In the fictional Republic of Zubrowka. Gustave H.. a legendary concierge at the Grand Budapest Hotel. teams up with his protégé Zero Moustafa to prove his innocence after being framed for murder. The duo embarks on a whimsical and madcap adventure involving a valuable painting and a fight for a family fortune.,2014-03-07,1h:39m,Wes Anderson,English,8.0,Germany,25.000.000 M,174.800.000 M,movies/The_Hotel.jpg,2.0,1,1,2.0,cast,Ralph Fiennes,Tony Revolori,Saoirse Ronan,genres,adventure,comedy,crime\r\n19,Dune,In the distant future. Paul Atreides. a young noble. journeys to the desert planet Arrakis. the only source of a valuable spice called \"melange.\" As political intrigue and battles unfold. Paul must embrace his destiny and confront the mysteries of Arrakis.,2021-09-15,2h:36m,Denis Villeneuve,English,8.0,United States,165.000.000 M,397.376.144 M,movies/Dune.jpg,3.2,1,1,4.0,cast,Timothée Chalamet,Zendaya Coleman,Oscar Isaac,genres,adventure,drama,Sci-Fi\r\n20,The Matrix,A computer hacker learns about the true nature of his reality and his role in the war against the controllers of a simulated world.,1999-03-31,2h:16m,Lilly Wachowski,English,8.0,United States,63.000.000,465.300.000,movies/Matrix.jpeg,2.5,1,1,4.0,cast,Keanu Reeves,Laurence Fishburne,Carrie-Anne Moss,genres,action,sci-fi\r\n21,Gladiator,Maximus a betrayed Roman general seeks justice for the murder of his family and the wrongful execution of himself. He rises as a gladiator to challenge the corrupt Roman Empire.,2000-05-01,2h:35m,Ridley Scott,English,8.0,United States,103.000.000,460.500.000,movies/Gladiator.jpeg,2.5,1,1,3.0,cast,Russell Crowe,Joaquin Phoenix,Connie Nielsen,genres,action,adventure,drama\r\n22,The Shawshank Redemption,Andy Dufresne a banker is sentenced to life in Shawshank State Penitentiary for the murder of his wife and her lover. Inside the prison he befriends Red an inmate known for his ability to procure contraband. Together they navigate the harsh realities of prison life and form an unlikely bond.,1994-09-23,2h:22m,Frank Darabont,English,9.0,United States,25.000.000,58.500.000,movies/The_Shawshank_Redemption.jpeg,3.2,1,1,2.0,cast,Tim Robbins,Morgan Freeman,Bob Gunton,genres,drama,crime\r\n23,The Godfather,The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.,1972-03-14,2h:55m,Francis Ford,English,9.0,United States,6.000.000,246.120.986,movies/The_Godfather.jpeg,3.8,2,1,5.0,cast,Marlon Brando,Al Pacino,James Caan,genres,crime,drama\r\n24,Pulp Fiction,The lives of two mob hitmen a boxer a gangster's wife and a pair of diner bandits intertwine in four tales of violence and redemption.,1994-10-14,2h:34m,Quentin Tarantino,English,8.0,United States,8.000.000,213.928.762,movies/Pulp_Fiction.jpeg,2.0,1,1,2.0,cast,John Travolta,Uma Thurman,Samuel Jackson,genres,crime,drama\r\n25,The Lord of the Rings,A young hobbit Frodo Baggins embarks on a perilous journey to destroy the One Ring and prevent the dark lord Sauron from conquering Middle-earth.,2001-12-10,2h:58m,Peter Jackson,English,8.0,New Zealand,93.000.000,887.457.479,movies/LOTR_Fellowship.jpeg,1.5,1,1,1.0,cast,Elijah Wood,Ian McKellen,Viggo Mortensen,genres,action,adventure,drama,fantasy\r\n26,The Silence of the Lambs,A young FBI cadet must confide in an incarcerated and manipulative killer to receive his help on catching another serial killer who skins his victims.,1991-01-30,1h:58m,Jonathan Demme,English,8.0,United States,19.000.000,272.742.922,movies/Silence_of_the_Lambs.jpeg,1.5,1,1,1.0,cast,Jodie Foster,Anthony Hopkins,Lawrence Bonney,genres,crime,drama,thriller\r\n27,Schindler's List,In German-occupied Poland during World War II Oskar Schindler gradually becomes concerned for his Jewish workforce after witnessing their persecution by the Nazis.,1993-11-30,3h:15m,Steven Spielberg,English,8.0,United States,22.000.000,321.306.305,movies/Schindlers_List.jpeg,2.5,1,1,2.0,cast,Liam Neeson,Ben Kingsley,Ralph Fiennes,genres,biography,drama,history\r\n28,Forrest Gump,A man with a low IQ witnesses and unwittingly influences several defining historical events in the 20th century United States.,1994-07-06,2h:22m,Robert Zemeckis,English,8.0,United States,55.000.000,678.226.247,movies/Forrest_Gump.jpeg,1.5,1,1,2.0,cast,Tom Hanks,Robin Wright,Gary Sinise,genres,drama,romance\r\n29,Inglourious Basterds,In Nazi-occupied France during World War II a plan to assassinate Nazi leaders by a group of Jewish U.S. soldiers coincides with a theater owner's vengeful plans for the same.,2009-05-20,2h:33m,Quentin Tarantino,English,8.0,United States,70.000.000,321.455.689,movies/Inglourious_Basterds.jpeg,2.5,1,1,2.0,cast,Brad Pitt,Diane Kruger,Eli Roth,genres,adventure,drama,war\r\n30,The Great Gatsby,A writer and wall street trader Nick finds himself drawn to the past and lifestyle of his millionaire neighbor Jay Gatsby.,2013-05-01,2h:23m,Baz Luhrmann,English,7.0,United States,105.000.000,353.641.895,movies/The_Great_Gatsby.jpeg,3.0,1,1,3.0,cast,Leonardo DiCaprio,Carey Mulligan,Joel Edgerton,genres,drama,romance\r\n11,Aquaman and the Lost Kingdom,Aquaman balances his duties as king and as a member of the Justice League. all while planning a wedding. Black Manta is on the hunt for Atlantean tech to help rebuild his armor. Orm plots to escape his Atlantean prison.,2023-12-20,2h:4m,James Wan,English,6.0,America,95.000.000M,2.437.724 M,movies/Aquaman.jpg,3.1,4,1,3.0,cast,Jason Momoa,Patrick Wilson,Ben Affleck,genres,action,adventure,fantasy,Sci-Fi\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/movies-data.txt b/movies-data.txt
+--- a/movies-data.txt	(revision b4ded379e12f764e21abf7e94c5e97e6e6d9b1cb)
++++ b/movies-data.txt	(date 1703286514032)
+@@ -1,30 +1,30 @@
+-1,The Dark Knight,When the menace known as the Joker wreaks havoc and chaos on the people of Gotham. Batman must accept one of the greatest psychological and physical tests of his ability to fight in justice.,2008-07-23,2h:32m,Christopher Nolan,English,9.0,United States,565.000.000 M,2.437.724.184 B,movies/the dark knight.jpeg,2.5,2,1,5.0,cast,Christian Bale,Morgan Freeman,Cillian Murphy,genres,action,crime,drama,thriller
+-2,Oppenheimer,The story of American scientist. J. Robert Oppenheimer. and his role in the development of the atomic bomb.,2023-11-21,3h,Christopher Nolan,English,8.0,United States,100.000.000M,2.437.724 M,movies/Oppenheimer.jpeg,3.5,5,10,35.0,cast,Robert DowneyJr,Matt Damon,Cillian Murphy,genres,drama,history,biography
+-3,Sherlock Holmes,Detective Sherlock Holmes and his stalwart partner Watson engage in a battle of wits and brawn with a nemesis whose plot is a threat to all of England.,2009-12-30,2h:8m,Guy Ritchie,English,8.0,England,90.000.000 M,112.190.000 M,movies/Sherlock_Holmes.jpeg,2.5,1,1,4.0,cast,Robert DowneyJr,Mark Strong,Jude Law,genres,action,adventure,mystery
+-4,Avengers: Endgame,After the devastating events of Avengers: Infinity War (2018). the universe is in ruins. With the help of remaining allies. the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe.,2019-04-26,3h:1m,Anthony Russo,English,8.0,United States,90.000.000 M,112.190.000 M,movies/endgame.jpeg,2.5,1,1,4.0,cast,Robert DowneyJr,Benedict Cumberbatch,Chris Hemsworth,genres,action,adventure,drama
+-6,Home Alone,An eight-year-old troublemaker. mistakenly left home alone. must defend his home against a pair of burglars on Christmas eve.,1991-07-22,1h:43m,Chris Columbus,English,7.0,United Stated,90.000.000 M,112.190.000 M,movies/home alone.jpeg,3.0,6,6,18.0,cast,Macaulay Culkin,Daniel Stern,Joe Pesci,genres,comedy,family
+-5,Joker,During the 1980s a failed stand-up comedian is driven insane and turns to a life of crime and chaos in Gotham City while becoming an infamous psychopathic crime figure.,2019-10-04,2h:2m,Todd Phillips,English,8.0,United States,100.000.000M,2.437.724 M,movies/joker.jpeg,3.5,1,1,5.0,cast,Joaquin Phoenix,Robert DeNiro,genres,crime,drama,thriller
+-7,Insidious: The Red Door,The Lamberts must go deeper into The Further than ever before to put their demons to rest once and for all.,2023-07-07,1h:47m,Patrick Wilson,English,5.0,Unitied States,100.000.000M,2.437.724 M,movies/red_door.jpeg,2.5,6,1,3.0,cast,Patrick Wilson,Rose Byrne,genres,horror,mystery,thriller
+-8,Inception,A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O. but his tragic past may doom the project and his team to disaster.,2010-07-14,2h:28m,Christopher Nolan,English,9.0,America,100.000.000M,2.437.724 M,movies/Inception.jpeg,2.5,1,1,2.0,cast,Cillian Murphy,Leonardo DiCaprio,genres,action,adventure,Sci-Fi
+-9,Titanic,A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious ill-fated R.M.S. Titanic.,1997-12-19,3h:14m,James Cameron,English,8.0,America,95.000.000M,2.437.724 M,movies/titanic.jpeg,3.4,11,5,17.1,cast,Leonardo DiCaprio,Kate Winslet,genres,romance,drama
+-10,Spider-Man: No Way Home,With Spider-Man's identity now revealed. Peter asks Doctor Strange for help. When a spell goes wrong. dangerous foes from other worlds start to appear. forcing Peter to discover what it truly means to be Spider-Man.,2021-12-15,2h:28m,Jon Watts,English,9.0,America,95.000.000M,2.437.724 M,movies/No_Way_Home.jpg,5.0,2,3,15.0,cast,Tom Holland,Zendaya Coleman,Benedict Cumberbatch,genres,action,adventure,fantasy,Sci-Fi
+-12,Wonka,With dreams of opening a shop in a city renowned for its chocolate. a young and poor Willy Wonka discovers that the industry is run by a cartel of greedy chocolatiers.,2023-11-28,1h:56m,Paul King,English,8.0,America,95.000.000M,2.437.724 M,movies/Wonka.jpg,2.5,1,1,4.0,cast,Timothée Chalamet,Paul Raymond,Murray McArthur,genres,adventure,comedy,family,fantasy,musical
+-13,Black Widow,Natasha Romanoff confronts her past as a spy and must deal with the aftermath of Captain America: Civil War. Pursued by a force that will stop at nothing to bring her down. Natasha seeks to unravel a conspiracy tied to her past.,2021-07-09,2h:13m,Cate Shortland,English,8.0,United States,200.000.000 M,378.454.000 M,movies/black widow.jpeg,2.5,1,1,3.0,cast,Scarlett Johansson,Florence Pugh,David Harbour,genres,action,adventure,Sci-Fi
+-14,Interstellar,In a future Earth facing environmental collapse. a team of astronauts embarks on a perilous journey through a wormhole near Saturn to find a new habitable planet for humanity. The film explores the complexities of space travel. time dilation. and the enduring power of love.,2014-11-05,2h:49m,Christopher Nolan,English,9.0,United States,165.000.000 M,677.471.339 M,movies/Interstellar.jpeg,3.2,2,1,4.0,cast,Matthew McConaughey,Anne Hathaway,Jessica Chastain,genres,adventure,drama,Sci-Fi
+-15,Ready or Not,Grace. a young bride. is excited to join her new husband's wealthy and eccentric family. However. her wedding night takes a dark turn when she is forced to participate in a deadly game of hide-and-seek. As the night unfolds. Grace must navigate the dangerous game and survive until dawn.,2019-08-21,1h:35m,Tyler Gillett,English,7.0,United States,6.000.000 M,57.548.572 M,movies/ready or not.jpeg,2.0,1,1,2.0,cast,Samara Weaving,Adam Brody,Mark O'Brien,genres,horror,mystery,thriller
+-16,The Prestige, In the world of 19th-century magic. two magicians. Robert Angier and Alfred Borden. engage in a fierce rivalry that spans decades. Their quest for the ultimate illusion leads them to make sacrifices that blur the line between reality and deception.,2006-10-17,2h:10m,Christopher Nolan,English,8.0,United United Kingdom,40.000.000 M,109.676.311 M,movies/The_Prestige.jpg,2.5,1,1,3.0,cast,Hugh Jackman,Christian Bale,Scarlett Johansson,genres,drama,mystery,Sci-Fi
+-17,Blade Runner 2049,In a dystopian future. Officer K. a "Blade Runner" tasked with eliminating rogue replicants. uncovers a long-buried secret that has the potential to plunge society into chaos. His quest leads him to Rick Deckard. a former Blade Runner. and unravels mysteries that question the nature of humanity.,2017-10-06, 2h:44m,Denis Villeneuve,English,8.0,United States. Canada,150.000.000 M,260.516.380 M,movies/Bladr_Runner.jpg,2.5,1,1,4.0,cast,Ryan Gosling,Harrison Ford,Ana Armas,genres,drama,mystery,Sci-Fi
+-18,The Grand Budapest Hotel,In the fictional Republic of Zubrowka. Gustave H.. a legendary concierge at the Grand Budapest Hotel. teams up with his protégé Zero Moustafa to prove his innocence after being framed for murder. The duo embarks on a whimsical and madcap adventure involving a valuable painting and a fight for a family fortune.,2014-03-07,1h:39m,Wes Anderson,English,8.0,Germany,25.000.000 M,174.800.000 M,movies/The_Hotel.jpg,2.0,1,1,2.0,cast,Ralph Fiennes,Tony Revolori,Saoirse Ronan,genres,adventure,comedy,crime
+-19,Dune,In the distant future. Paul Atreides. a young noble. journeys to the desert planet Arrakis. the only source of a valuable spice called "melange." As political intrigue and battles unfold. Paul must embrace his destiny and confront the mysteries of Arrakis.,2021-09-15,2h:36m,Denis Villeneuve,English,8.0,United States,165.000.000 M,397.376.144 M,movies/Dune.jpg,3.2,1,1,4.0,cast,Timothée Chalamet,Zendaya Coleman,Oscar Isaac,genres,adventure,drama,Sci-Fi
+-20,The Matrix,A computer hacker learns about the true nature of his reality and his role in the war against the controllers of a simulated world.,1999-03-31,2h:16m,Lilly Wachowski,English,8.0,United States,63.000.000,465.300.000,movies/Matrix.jpeg,2.5,1,1,4.0,cast,Keanu Reeves,Laurence Fishburne,Carrie-Anne Moss,genres,action,sci-fi
+-21,Gladiator,Maximus a betrayed Roman general seeks justice for the murder of his family and the wrongful execution of himself. He rises as a gladiator to challenge the corrupt Roman Empire.,2000-05-01,2h:35m,Ridley Scott,English,8.0,United States,103.000.000,460.500.000,movies/Gladiator.jpeg,2.5,1,1,3.0,cast,Russell Crowe,Joaquin Phoenix,Connie Nielsen,genres,action,adventure,drama
+-22,The Shawshank Redemption,Andy Dufresne a banker is sentenced to life in Shawshank State Penitentiary for the murder of his wife and her lover. Inside the prison he befriends Red an inmate known for his ability to procure contraband. Together they navigate the harsh realities of prison life and form an unlikely bond.,1994-09-23,2h:22m,Frank Darabont,English,9.0,United States,25.000.000,58.500.000,movies/The_Shawshank_Redemption.jpeg,3.2,1,1,2.0,cast,Tim Robbins,Morgan Freeman,Bob Gunton,genres,drama,crime
+-23,The Godfather,The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.,1972-03-14,2h:55m,Francis Ford,English,9.0,United States,6.000.000,246.120.986,movies/The_Godfather.jpeg,3.8,2,1,5.0,cast,Marlon Brando,Al Pacino,James Caan,genres,crime,drama
+-24,Pulp Fiction,The lives of two mob hitmen a boxer a gangster's wife and a pair of diner bandits intertwine in four tales of violence and redemption.,1994-10-14,2h:34m,Quentin Tarantino,English,8.0,United States,8.000.000,213.928.762,movies/Pulp_Fiction.jpeg,2.0,1,1,2.0,cast,John Travolta,Uma Thurman,Samuel Jackson,genres,crime,drama
+-25,The Lord of the Rings,A young hobbit Frodo Baggins embarks on a perilous journey to destroy the One Ring and prevent the dark lord Sauron from conquering Middle-earth.,2001-12-10,2h:58m,Peter Jackson,English,8.0,New Zealand,93.000.000,887.457.479,movies/LOTR_Fellowship.jpeg,1.5,1,1,1.0,cast,Elijah Wood,Ian McKellen,Viggo Mortensen,genres,action,adventure,drama,fantasy
+-26,The Silence of the Lambs,A young FBI cadet must confide in an incarcerated and manipulative killer to receive his help on catching another serial killer who skins his victims.,1991-01-30,1h:58m,Jonathan Demme,English,8.0,United States,19.000.000,272.742.922,movies/Silence_of_the_Lambs.jpeg,1.5,1,1,1.0,cast,Jodie Foster,Anthony Hopkins,Lawrence Bonney,genres,crime,drama,thriller
+-27,Schindler's List,In German-occupied Poland during World War II Oskar Schindler gradually becomes concerned for his Jewish workforce after witnessing their persecution by the Nazis.,1993-11-30,3h:15m,Steven Spielberg,English,8.0,United States,22.000.000,321.306.305,movies/Schindlers_List.jpeg,2.5,1,1,2.0,cast,Liam Neeson,Ben Kingsley,Ralph Fiennes,genres,biography,drama,history
+-28,Forrest Gump,A man with a low IQ witnesses and unwittingly influences several defining historical events in the 20th century United States.,1994-07-06,2h:22m,Robert Zemeckis,English,8.0,United States,55.000.000,678.226.247,movies/Forrest_Gump.jpeg,1.5,1,1,2.0,cast,Tom Hanks,Robin Wright,Gary Sinise,genres,drama,romance
+-29,Inglourious Basterds,In Nazi-occupied France during World War II a plan to assassinate Nazi leaders by a group of Jewish U.S. soldiers coincides with a theater owner's vengeful plans for the same.,2009-05-20,2h:33m,Quentin Tarantino,English,8.0,United States,70.000.000,321.455.689,movies/Inglourious_Basterds.jpeg,2.5,1,1,2.0,cast,Brad Pitt,Diane Kruger,Eli Roth,genres,adventure,drama,war
+-30,The Great Gatsby,A writer and wall street trader Nick finds himself drawn to the past and lifestyle of his millionaire neighbor Jay Gatsby.,2013-05-01,2h:23m,Baz Luhrmann,English,7.0,United States,105.000.000,353.641.895,movies/The_Great_Gatsby.jpeg,3.0,1,1,3.0,cast,Leonardo DiCaprio,Carey Mulligan,Joel Edgerton,genres,drama,romance
+-11,Aquaman and the Lost Kingdom,Aquaman balances his duties as king and as a member of the Justice League. all while planning a wedding. Black Manta is on the hunt for Atlantean tech to help rebuild his armor. Orm plots to escape his Atlantean prison.,2023-12-20,2h:4m,James Wan,English,6.0,America,95.000.000M,2.437.724 M,movies/Aquaman.jpg,3.1,4,1,3.0,cast,Jason Momoa,Patrick Wilson,Ben Affleck,genres,action,adventure,fantasy,Sci-Fi
++1,The Dark Knight,When the menace known as the Joker wreaks havoc and chaos on the people of Gotham. Batman must accept one of the greatest psychological and physical tests of his ability to fight in justice.,2008-07-23,2h:32m,Christopher Nolan,English,9.0,United States,2.437.724.184 B,565.000.000 M,movies/the dark knight.jpeg,2.5,2,1,5.0,cast,Christian Bale,Morgan Freeman,Cillian Murphy,genres,action,crime,drama,thriller
++2,Oppenheimer,The story of American scientist. J. Robert Oppenheimer. and his role in the development of the atomic bomb.,2023-11-21,3h,Christopher Nolan,English,8.0,United States,2.437.724 M,100.000.000M,movies/Oppenheimer.jpeg,3.5,6,10,35.0,cast,Robert DowneyJr,Matt Damon,Cillian Murphy,genres,drama,history,biography
++3,Sherlock Holmes,Detective Sherlock Holmes and his stalwart partner Watson engage in a battle of wits and brawn with a nemesis whose plot is a threat to all of England.,2009-12-30,2h:8m,Guy Ritchie,English,8.0,England,112.190.000 M,90.000.000 M,movies/Sherlock_Holmes.jpeg,2.5,1,1,4.0,cast,Robert DowneyJr,Mark Strong,Jude Law,genres,action,adventure,mystery
++4,Avengers: Endgame,After the devastating events of Avengers: Infinity War (2018). the universe is in ruins. With the help of remaining allies. the Avengers assemble once more in order to reverse Thanos' actions and restore balance to the universe.,2019-04-26,3h:1m,Anthony Russo,English,8.0,United States,112.190.000 M,90.000.000 M,movies/endgame.jpeg,2.5,1,1,4.0,cast,Robert DowneyJr,Benedict Cumberbatch,Chris Hemsworth,genres,action,adventure,drama
++6,Home Alone,An eight-year-old troublemaker. mistakenly left home alone. must defend his home against a pair of burglars on Christmas eve.,1991-07-22,1h:43m,Chris Columbus,English,7.0,United Stated,112.190.000 M,90.000.000 M,movies/home alone.jpeg,3.0,6,6,18.0,cast,Macaulay Culkin,Daniel Stern,Joe Pesci,genres,comedy,family
++5,Joker,During the 1980s a failed stand-up comedian is driven insane and turns to a life of crime and chaos in Gotham City while becoming an infamous psychopathic crime figure.,2019-10-04,2h:2m,Todd Phillips,English,8.0,United States,2.437.724 M,100.000.000M,movies/joker.jpeg,3.5,1,1,5.0,cast,Joaquin Phoenix,Robert DeNiro,genres,crime,drama,thriller
++7,Insidious: The Red Door,The Lamberts must go deeper into The Further than ever before to put their demons to rest once and for all.,2023-07-07,1h:47m,Patrick Wilson,English,5.0,Unitied States,2.437.724 M,100.000.000M,movies/red_door.jpeg,2.5,7,1,3.0,cast,Patrick Wilson,Rose Byrne,genres,horror,mystery,thriller
++8,Inception,A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O. but his tragic past may doom the project and his team to disaster.,2010-07-14,2h:28m,Christopher Nolan,English,9.0,America,2.437.724 M,100.000.000M,movies/Inception.jpeg,2.5,1,1,2.0,cast,Cillian Murphy,Leonardo DiCaprio,genres,action,adventure,Sci-Fi
++9,Titanic,A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious ill-fated R.M.S. Titanic.,1997-12-19,3h:14m,James Cameron,English,8.0,America,2.437.724 M,95.000.000M,movies/titanic.jpeg,3.4,11,5,17.1,cast,Leonardo DiCaprio,Kate Winslet,genres,romance,drama
++10,Spider-Man: No Way Home,With Spider-Man's identity now revealed. Peter asks Doctor Strange for help. When a spell goes wrong. dangerous foes from other worlds start to appear. forcing Peter to discover what it truly means to be Spider-Man.,2021-12-15,2h:28m,Jon Watts,English,9.0,America,2.437.724 M,95.000.000M,movies/No_Way_Home.jpg,5.0,2,3,15.0,cast,Tom Holland,Zendaya Coleman,Benedict Cumberbatch,genres,action,adventure,fantasy,Sci-Fi
++12,Wonka,With dreams of opening a shop in a city renowned for its chocolate. a young and poor Willy Wonka discovers that the industry is run by a cartel of greedy chocolatiers.,2023-11-28,1h:56m,Paul King,English,8.0,America,2.437.724 M,95.000.000M,movies/Wonka.jpg,2.5,1,1,4.0,cast,Timothée Chalamet,Paul Raymond,Murray McArthur,genres,adventure,comedy,family,fantasy,musical
++13,Black Widow,Natasha Romanoff confronts her past as a spy and must deal with the aftermath of Captain America: Civil War. Pursued by a force that will stop at nothing to bring her down. Natasha seeks to unravel a conspiracy tied to her past.,2021-07-09,2h:13m,Cate Shortland,English,8.0,United States,378.454.000 M,200.000.000 M,movies/black widow.jpeg,2.5,1,1,3.0,cast,Scarlett Johansson,Florence Pugh,David Harbour,genres,action,adventure,Sci-Fi
++14,Interstellar,In a future Earth facing environmental collapse. a team of astronauts embarks on a perilous journey through a wormhole near Saturn to find a new habitable planet for humanity. The film explores the complexities of space travel. time dilation. and the enduring power of love.,2014-11-05,2h:49m,Christopher Nolan,English,9.0,United States,677.471.339 M,165.000.000 M,movies/Interstellar.jpeg,3.2,2,1,4.0,cast,Matthew McConaughey,Anne Hathaway,Jessica Chastain,genres,adventure,drama,Sci-Fi
++15,Ready or Not,Grace. a young bride. is excited to join her new husband's wealthy and eccentric family. However. her wedding night takes a dark turn when she is forced to participate in a deadly game of hide-and-seek. As the night unfolds. Grace must navigate the dangerous game and survive until dawn.,2019-08-21,1h:35m,Tyler Gillett,English,7.0,United States,57.548.572 M,6.000.000 M,movies/ready or not.jpeg,2.0,1,1,2.0,cast,Samara Weaving,Adam Brody,Mark O'Brien,genres,horror,mystery,thriller
++16,The Prestige, In the world of 19th-century magic. two magicians. Robert Angier and Alfred Borden. engage in a fierce rivalry that spans decades. Their quest for the ultimate illusion leads them to make sacrifices that blur the line between reality and deception.,2006-10-17,2h:10m,Christopher Nolan,English,8.0,United United Kingdom,109.676.311 M,40.000.000 M,movies/The_Prestige.jpg,2.5,1,1,3.0,cast,Hugh Jackman,Christian Bale,Scarlett Johansson,genres,drama,mystery,Sci-Fi
++17,Blade Runner 2049,In a dystopian future. Officer K. a "Blade Runner" tasked with eliminating rogue replicants. uncovers a long-buried secret that has the potential to plunge society into chaos. His quest leads him to Rick Deckard. a former Blade Runner. and unravels mysteries that question the nature of humanity.,2017-10-06, 2h:44m,Denis Villeneuve,English,8.0,United States. Canada,260.516.380 M,150.000.000 M,movies/Bladr_Runner.jpg,2.5,1,1,4.0,cast,Ryan Gosling,Harrison Ford,Ana Armas,genres,drama,mystery,Sci-Fi
++18,The Grand Budapest Hotel,In the fictional Republic of Zubrowka. Gustave H.. a legendary concierge at the Grand Budapest Hotel. teams up with his protégé Zero Moustafa to prove his innocence after being framed for murder. The duo embarks on a whimsical and madcap adventure involving a valuable painting and a fight for a family fortune.,2014-03-07,1h:39m,Wes Anderson,English,8.0,Germany,174.800.000 M,25.000.000 M,movies/The_Hotel.jpg,2.0,1,1,2.0,cast,Ralph Fiennes,Tony Revolori,Saoirse Ronan,genres,adventure,comedy,crime
++19,Dune,In the distant future. Paul Atreides. a young noble. journeys to the desert planet Arrakis. the only source of a valuable spice called "melange." As political intrigue and battles unfold. Paul must embrace his destiny and confront the mysteries of Arrakis.,2021-09-15,2h:36m,Denis Villeneuve,English,8.0,United States,397.376.144 M,165.000.000 M,movies/Dune.jpg,3.2,1,1,4.0,cast,Timothée Chalamet,Zendaya Coleman,Oscar Isaac,genres,adventure,drama,Sci-Fi
++20,The Matrix,A computer hacker learns about the true nature of his reality and his role in the war against the controllers of a simulated world.,1999-03-31,2h:16m,Lilly Wachowski,English,8.0,United States,465.300.000,63.000.000,movies/Matrix.jpeg,2.5,1,1,4.0,cast,Keanu Reeves,Laurence Fishburne,Carrie-Anne Moss,genres,action,sci-fi
++21,Gladiator,Maximus a betrayed Roman general seeks justice for the murder of his family and the wrongful execution of himself. He rises as a gladiator to challenge the corrupt Roman Empire.,2000-05-01,2h:35m,Ridley Scott,English,8.0,United States,460.500.000,103.000.000,movies/Gladiator.jpeg,2.5,1,1,3.0,cast,Russell Crowe,Joaquin Phoenix,Connie Nielsen,genres,action,adventure,drama
++22,The Shawshank Redemption,Andy Dufresne a banker is sentenced to life in Shawshank State Penitentiary for the murder of his wife and her lover. Inside the prison he befriends Red an inmate known for his ability to procure contraband. Together they navigate the harsh realities of prison life and form an unlikely bond.,1994-09-23,2h:22m,Frank Darabont,English,9.0,United States,58.500.000,25.000.000,movies/The_Shawshank_Redemption.jpeg,3.2,1,1,2.0,cast,Tim Robbins,Morgan Freeman,Bob Gunton,genres,drama,crime
++23,The Godfather,The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.,1972-03-14,2h:55m,Francis Ford,English,9.0,United States,246.120.986,6.000.000,movies/The_Godfather.jpeg,3.8,2,1,5.0,cast,Marlon Brando,Al Pacino,James Caan,genres,crime,drama
++24,Pulp Fiction,The lives of two mob hitmen a boxer a gangster's wife and a pair of diner bandits intertwine in four tales of violence and redemption.,1994-10-14,2h:34m,Quentin Tarantino,English,8.0,United States,213.928.762,8.000.000,movies/Pulp_Fiction.jpeg,2.0,1,1,2.0,cast,John Travolta,Uma Thurman,Samuel Jackson,genres,crime,drama
++25,The Lord of the Rings,A young hobbit Frodo Baggins embarks on a perilous journey to destroy the One Ring and prevent the dark lord Sauron from conquering Middle-earth.,2001-12-10,2h:58m,Peter Jackson,English,8.0,New Zealand,887.457.479,93.000.000,movies/LOTR_Fellowship.jpeg,1.5,1,1,1.0,cast,Elijah Wood,Ian McKellen,Viggo Mortensen,genres,action,adventure,drama,fantasy
++26,The Silence of the Lambs,A young FBI cadet must confide in an incarcerated and manipulative killer to receive his help on catching another serial killer who skins his victims.,1991-01-30,1h:58m,Jonathan Demme,English,8.0,United States,272.742.922,19.000.000,movies/Silence_of_the_Lambs.jpeg,1.5,1,1,1.0,cast,Jodie Foster,Anthony Hopkins,Lawrence Bonney,genres,crime,drama,thriller
++27,Schindler's List,In German-occupied Poland during World War II Oskar Schindler gradually becomes concerned for his Jewish workforce after witnessing their persecution by the Nazis.,1993-11-30,3h:15m,Steven Spielberg,English,8.0,United States,321.306.305,22.000.000,movies/Schindlers_List.jpeg,2.5,1,1,2.0,cast,Liam Neeson,Ben Kingsley,Ralph Fiennes,genres,biography,drama,history
++28,Forrest Gump,A man with a low IQ witnesses and unwittingly influences several defining historical events in the 20th century United States.,1994-07-06,2h:22m,Robert Zemeckis,English,8.0,United States,678.226.247,55.000.000,movies/Forrest_Gump.jpeg,1.5,1,1,2.0,cast,Tom Hanks,Robin Wright,Gary Sinise,genres,drama,romance
++29,Inglourious Basterds,In Nazi-occupied France during World War II a plan to assassinate Nazi leaders by a group of Jewish U.S. soldiers coincides with a theater owner's vengeful plans for the same.,2009-05-20,2h:33m,Quentin Tarantino,English,8.0,United States,321.455.689,70.000.000,movies/Inglourious_Basterds.jpeg,2.5,1,1,2.0,cast,Brad Pitt,Diane Kruger,Eli Roth,genres,adventure,drama,war
++30,The Great Gatsby,A writer and wall street trader Nick finds himself drawn to the past and lifestyle of his millionaire neighbor Jay Gatsby.,2013-05-01,2h:23m,Baz Luhrmann,English,7.0,United States,353.641.895,105.000.000,movies/The_Great_Gatsby.jpeg,3.0,1,1,3.0,cast,Leonardo DiCaprio,Carey Mulligan,Joel Edgerton,genres,drama,romance
++11,Aquaman and the Lost Kingdom,Aquaman balances his duties as king and as a member of the Justice League. all while planning a wedding. Black Manta is on the hunt for Atlantean tech to help rebuild his armor. Orm plots to escape his Atlantean prison.,2023-12-20,2h:4m,James Wan,English,6.0,America,2.437.724 M,95.000.000M,movies/Aquaman.jpg,3.1,4,1,3.0,cast,Jason Momoa,Patrick Wilson,Ben Affleck,genres,action,adventure,fantasy,Sci-Fi

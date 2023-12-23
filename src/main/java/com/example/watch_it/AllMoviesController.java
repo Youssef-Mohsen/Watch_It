@@ -116,12 +116,12 @@ public class AllMoviesController {
         stage.show();
     }
     @FXML
-     void onMouseEntered(){
-        Back.setOnMouseEntered(event -> Back.setStyle("-fx-background-color: #FFC107; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
+    void onMouseEntered(){
+        Back.setOnMouseEntered(event -> Back.setStyle("-fx-background-color: #FFC107; -fx-background-radius: 10; -fx-border-color: white;"));
     }
     @FXML
-     void onMouseExit(){
-        Back.setOnMouseExited(event -> Back.setStyle("-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
+    void onMouseExit(){
+        Back.setOnMouseExited(event -> Back.setStyle("-fx-background-color: black; -fx-background-radius: 10; -fx-border-color: white;"));
     }
     private void addMovies(Movie movie, int i){
         VBox movieContainer = new VBox(10);
@@ -165,15 +165,23 @@ public class AllMoviesController {
     }
     @FXML
     void toAddCast(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("add-cast.fxml"));
+        root = loader.load();
+        AddCastController controller = loader.getController();
+        controller.setdata(AddMovieController.newActor);
         if(enteredData)
         {
-            System.out.println("in  to add movies");
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("add-cast.fxml"));
-            root = loader.load();
-            AddCastController controller = loader.getController();
-            controller.setData(AddMovieController.newActor);
             switchPane((ScrollPane) root);
             addCastButton.setText("Add");
+        }
+        if(AddCastController.addedCast){
+            controller.getData();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("");
+            alert.setHeaderText(null);
+            alert.setContentText("Cast information added");
+            alert.showAndWait();
+            toAddMovies(event);
         }
     }
     public void switchPane(ScrollPane scrollPane){

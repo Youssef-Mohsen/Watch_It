@@ -13,7 +13,7 @@
             <children>
                 <HBox fx:id="topHbox" alignment="CENTER" prefHeight="40.0" prefWidth="1290.0" spacing="20.0" style="-fx-background-color: black;">
                     <children>
-                        <TextField fx:id="searchBar" layoutX="560.0" layoutY="0.0" prefHeight="30.0" prefWidth="459.0" promptText="Search Item..." style="-fx-prompt-text-fill: #ffffff; -fx-text-fill: white; -fx-background-radius: 30; -fx-background-color: black;">
+                        <TextField fx:id="searchBar" layoutX="560.0" layoutY="0.0" prefHeight="30.0" prefWidth="459.0" promptText="Search Users..." style="-fx-prompt-text-fill: #ffffff; -fx-text-fill: white; -fx-background-radius: 30; -fx-background-color: black;">
                             <effect>
                                 <DropShadow blurType="ONE_PASS_BOX" height="28.02" radius="12.34" width="23.34">
                                     <color>

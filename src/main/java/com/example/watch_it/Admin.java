@@ -461,7 +461,6 @@ public class Admin {
                 price = 300;
             }
             Subscription subscription = new Subscription(User.allusers.size() + 1, plan);
-            System.out.println();
             User user = new User(User.allusers.size() + 1, data[USERNAMEINDEX], data[LASTNAMEINDEX], data[FIRSTNAMEINDEX], data[EMAILINDEX], data[PASSWORDINDEX], data[PROFILEPICINDEX], subscription, data[STARTDATEINDEX]);
             getUserMovieLists_obj(user);
             user.getSubscription().setPlan(plan);

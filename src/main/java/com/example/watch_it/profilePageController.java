@@ -69,6 +69,7 @@ public class profilePageController implements Initializable {
 
         Select_List.getItems().addAll("Edit Profile" , "Log Out" , "Delete Account", "Delete Movies List");
         Select_List.setValue("Select");
+        //       Select_List.setOnAction(this::choose);
 
         onMouseExit();
         onMouseEntered();
@@ -176,6 +177,7 @@ public class profilePageController implements Initializable {
                     newLastname.setVisible(false);
                     newFirstname.setVisible(false);
                     newEmail.setVisible(false);
+                    Select_List.getSelectionModel().clearSelection();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -190,6 +192,7 @@ public class profilePageController implements Initializable {
             {
                 SignIn.user5.Movies_For_Later.clear();
                 toWatchHbox.getChildren().clear();
+                Select_List.getSelectionModel().clearSelection();
             }
         }
     }
@@ -250,13 +253,15 @@ public class profilePageController implements Initializable {
         box.setSpacing(6);
         movieContainer.setAlignment(Pos.CENTER);
         movieContainer.getChildren().addAll(imageView, box);
-        movieContainer.setOnMouseClicked(event -> {
-            try {
-                onMouseClickedVBox(event,movie1);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
+        if (!isAdmin){
+            movieContainer.setOnMouseClicked(event -> {
+                try {
+                    onMouseClickedVBox(event,movie1);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        }
         watchedHbox.getChildren().addAll(movieContainer);
     }
     private void addToWatchedList(Movie movie1){
@@ -273,13 +278,15 @@ public class profilePageController implements Initializable {
         label.setOnMouseExited(event -> label.setStyle("-fx-text-size: 20; -fx-text-fill: white;"));
         movieContainer.setAlignment(Pos.CENTER);
         movieContainer.getChildren().addAll(imageView,label);
-        movieContainer.setOnMouseClicked(event -> {
-            try {
-                onMouseClickedVBox(event,movie1);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
+        if (!isAdmin){
+            movieContainer.setOnMouseClicked(event -> {
+                try {
+                    onMouseClickedVBox(event,movie1);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        }
         toWatchHbox.getChildren().addAll(movieContainer);
     }
     public void onMouseClickedVBox(MouseEvent act, Movie movie1) throws IOException {

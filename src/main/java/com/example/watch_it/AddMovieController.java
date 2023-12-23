@@ -1,20 +1,26 @@
 package com.example.watch_it;
-
+import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class AddMovieController {
-
     @FXML
     public ScrollPane secondPane;
 
@@ -40,7 +46,7 @@ public class AddMovieController {
     TextField directorField;
 
     @FXML
-    TextField descriptionField;
+    TextField discreptionField;
 
     @FXML
     TextField genreField;
@@ -56,20 +62,17 @@ public class AddMovieController {
 
     @FXML
     TextField revenueField;
-
     @FXML
     private Button addButton;
     static ArrayList<String> newActor = new ArrayList<>();
     static  Movie AddedMovie;
-
-    Parent root;
     @FXML
-    public void onMouseEntered(){
-        addButton.setOnMouseEntered(event -> addButton.setStyle("-fx-background-color: #FFC107; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
+    void onMouseEntered(){
+        addButton.setOnMouseEntered(event -> addButton.setStyle("-fx-background-color: #FFC107; -fx-background-radius: 10;"));
     }
     @FXML
-    public void onMouseExit(){
-        addButton.setOnMouseExited(event -> addButton.setStyle("-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;"));
+    void onMouseExit(){
+        addButton.setOnMouseExited(event -> addButton.setStyle("-fx-background-color: #FFC107; -fx-background-radius: 10;"));
     }
     @FXML
     private void addMovie (ActionEvent event) throws IOException {
@@ -80,16 +83,16 @@ public class AddMovieController {
         String poster = posterField.getText();
         String genres = genreField.getText();
         String country = CountryField.getText();
-        String description = descriptionField.getText();
+        String discreption = discreptionField.getText();
         String director = directorField.getText();
-        String runningTime = RunningTimeField.getText();
+        String runningtime = RunningTimeField.getText();
         String cast = castField.getText();
         String language = LanguageField.getText();
-        String imdbScore = IMDBScoreField.getText();
+        String imdbscore = IMDBScoreField.getText();
 
         if (name.isEmpty() || budget.isEmpty() || revenue.isEmpty() || releaseDate.isEmpty() ||
-                poster.isEmpty() || genres.isEmpty() || country.isEmpty() || description.isEmpty() ||
-                director.isEmpty() || runningTime.isEmpty() || cast.isEmpty() || language.isEmpty() || imdbScore.isEmpty()) {
+                poster.isEmpty() || genres.isEmpty() || country.isEmpty() || discreption.isEmpty() ||
+                director.isEmpty() || runningtime.isEmpty() || cast.isEmpty() || language.isEmpty() || imdbscore.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText(null);
@@ -99,21 +102,25 @@ public class AddMovieController {
         }
 
         String[] actor = cast.split(",");
-        ArrayList<String> castArray = new ArrayList<>(Arrays.asList(actor));
-        System.out.println(castArray);
+        ArrayList<String> castarray = new ArrayList<>(Arrays.asList(actor));
+        System.out.println(castarray);
 
         String[] genre = genres.split(",");
-        ArrayList<String> genreArray = new ArrayList<>(Arrays.asList(genre));
+        ArrayList<String> genrearray = new ArrayList<>(Arrays.asList(genre));
 
-        AddedMovie = new Movie(name, LocalDate.parse(releaseDate), runningTime, genreArray, language, country, poster, budget, revenue, Float.parseFloat(imdbScore), description);//
-        for (String newActor1 : castArray) {
-            String[] a = newActor1.split(" ");
+        Movie movie = new Movie(name, LocalDate.parse(releaseDate), runningtime, genrearray, language, country, poster, budget, revenue, Float.parseFloat(imdbscore), discreption);
+        AddedMovie = movie;
+        AddedMovie.setGenre(genrearray);
+        AddedMovie.setCastNames(castarray);
 
-            if (Cast.search(a[0], a[1]) == null)
-                newActor.add(newActor1);
-            System.out.println(newActor1 + " new in add");
+        for (String newactor : castarray) {
+            String[] a = newactor.split(" ");
+            System.out.println(newactor);
+            if (Cast.search(a[0], a[1]) == null) {
+                newActor.add(newactor);
+                System.out.println(a[0]);
+            }
         }
-
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("");
         alert.setHeaderText(null);
@@ -124,16 +131,8 @@ public class AddMovieController {
         }else{
             alert.setContentText("Movie Added, please continue to add cast data");
             alert.showAndWait();
-            AllMoviesController.enteredData = true;
-           toAddCast(event);
+            AllMoviesController.enteredData = true;;
         }
-
-    }
-    void toAddCast (ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("all-movies.fxml"));
-        root = loader.load();
-        AllMoviesController controller = loader.getController();
-        controller.toAddCast(event);
 
     }
 

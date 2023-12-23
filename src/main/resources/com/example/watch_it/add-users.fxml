@@ -116,14 +116,14 @@
                     <padding>
                         <Insets bottom="60.0" left="50.0" right="50.0"/>
                     </padding>
-                    <TextField fx:id="fNameField" prefHeight="50.0" prefWidth="558.0"
+                    <TextField fx:id="fnameField" prefHeight="50.0" prefWidth="558.0"
                                promptText="First Name" style="-fx-background-radius: 30 30 30 30;"
                                styleClass="text-box">
                         <font>
                             <Font size="24.0"/>
                         </font>
                     </TextField>
-                    <TextField fx:id="lNameField" prefHeight="50.0" prefWidth="558.0"
+                    <TextField fx:id="lnameField" prefHeight="50.0" prefWidth="558.0"
                                promptText="Last Name" style="-fx-background-radius: 30 30 30 30;"
                                styleClass="text-box">
                         <font>

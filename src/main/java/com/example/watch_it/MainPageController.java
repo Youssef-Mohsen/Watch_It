@@ -102,7 +102,7 @@ public  class MainPageController {
         moviesTop.clear();
         moviesRecent.clear();
         for(Movie movie : Movie.MostViewedMovies()){
-                moviesTop.add(movie);
+            moviesTop.add(movie);
         }
         for(Movie movie:Movie.allmovies)
         {
@@ -288,16 +288,16 @@ public  class MainPageController {
             throw new RuntimeException(e);
         }
         WatchRecord controller = loader.getController();
-        controller.setStage(stage1);
+        controller.setStage(stage);
         controller.initializeItems();
         controller.aBoolean=true;
         Scene scene = new Scene(root);
-        stage1.setTitle("Movie");
-        stage1.setResizable(false);
-        stage1.setX(-7);
-        stage1.setY(0);
-        stage1.setScene(scene);
-        stage1.show();
+        stage.setTitle("Movie");
+        stage.setResizable(false);
+        stage.setX(-7);
+        stage.setY(0);
+        stage.setScene(scene);
+        stage.show();
     }
     public void labelsOnMouseClicked(){
         Action.setOnMouseClicked(event -> {
@@ -481,7 +481,6 @@ public  class MainPageController {
         stage.show();
 
     }
-
     public void onMouseEntered() {
         onMouseEnteredLabels(Action);
         onMouseEnteredLabels(Comedy);
@@ -509,7 +508,6 @@ public  class MainPageController {
         });
 
     }
-
     public void onMouseExit() {
         // Handle mouse exit event
         onMouseExitLabels(Action);
@@ -538,16 +536,13 @@ public  class MainPageController {
         });
 
     }
-
     private void underlineLabel(Label label, boolean underline) {
         label.setUnderline(underline);
     }
-
     private void onMouseEnteredLabels(Label label) {
         label.setOnMouseEntered(event -> label.setStyle("-fx-background-radius: 25;" +
                 " -fx-background-color:  #FFC107;"));
     }
-
     private void onMouseExitLabels(Label label) {
         label.setOnMouseExited(event -> label.setStyle("-fx-background-radius: 25;" +
                 " -fx-background-color:  #565661;"));
@@ -590,7 +585,6 @@ public  class MainPageController {
     private void startAutoScroll() {
         autoScrollTimeline.play();
     }
-
     @FXML
     private void stopAutoScroll() {
         // Stop auto-scrolling when user interacts with the ScrollPane

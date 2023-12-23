@@ -104,34 +104,38 @@ public class ChoosePlanController {
         alert.setTitle("");
         alert.setHeaderText(null);
 
-        if (SignIn.user5.getSubscription().getUpdatePlan()) {
+        if (!(SignIn.user5 == null)){
             SignIn.user5.setPlan(newPlan);
             SignIn.user5.Updata_Subscription_Plan(newSubscription);
             SignIn.user5.getSubscription().updateSubscription(newSubscription);
-            SignIn.user5.getSubscription().subscriptionNotValid = false;
-            SignIn.user5.getSubscription().updatePlan = false;
-            alert.setContentText("Subscription Updated");
-            SignIn.user5.getSubscription().updatePlan = false;
-            SignIn.user5.getSubscription().setUpdatePlan(false) ;
-            toMoviesrecord(event);
-        }
-        else {
-            if (subscriptionEnded) {
-                SignIn.user5.Updata_Subscription_Plan(newSubscription);
-                SignIn.user5.setPlan(newPlan);
+
+            if (SignIn.user5.getSubscription().getUpdatePlan()) {
+
+                alert.setContentText("Subscription Updated");
+                alert.showAndWait();
+                toMoviesrecord(event);
+            }
+            else if (subscriptionEnded) {
                 SignIn.user5.getSubscription().setStartDate(LocalDate.now());
                 subscriptionEnded = false;
                 alert.setContentText("Subscription Updated, Login to your Account");
+                alert.showAndWait();
+                GoToSignIn(event);
             }
-            else {
-                user.Subscribe(user.getUser_ID(), newSubscription);
-                alert.setContentText("Sign Up Completed, Login to your Account");
-                user.Updata_Subscription_Plan(newSubscription);
-                user.setPlan(newPlan);
-                User.allusers.add(user);
-            }
+            SignIn.user5.getSubscription().subscriptionNotValid = false;
+            SignIn.user5.getSubscription().updatePlan = false;
+            SignIn.user5.getSubscription().setUpdatePlan(false) ;
+        }
+        else {
+
+            user.Subscribe(user.getUser_ID(), newSubscription);
+            alert.setContentText("Sign Up Completed, Login to your Account");
+            user.Updata_Subscription_Plan(newSubscription);
+            user.setPlan(newPlan);
+            User.allusers.add(user);
             alert.showAndWait();
             GoToSignIn(event);
+
         }
     }
     @FXML

@@ -140,6 +140,18 @@ public class SignUp {
         String confirmpassword = CreateConfirmPassword.getText();
         RadioButton selectedbutton = (RadioButton) group.getSelectedToggle();
 
+        if (selectedbutton.equals(button1))
+            profilepath = "assets/batbot-01.png";
+        else if (selectedbutton.equals(button2))
+            profilepath = "assets/batbot-02.png";
+        else if (selectedbutton.equals(button3))
+            profilepath = "assets/batbot-03.png";
+        else if (selectedbutton.equals(button4))
+            profilepath = "assets/batbot-04.png";
+        else if (selectedbutton.equals(button5))
+            profilepath = "assets/batbot-05.png";
+        else if (selectedbutton.equals(button6))
+            profilepath = "assets/batbot-06.png";
 
 
         if (username.isEmpty() || firstname.isEmpty() || lastname.isEmpty() || password.isEmpty() || email.isEmpty() || confirmpassword.isEmpty() || selectedbutton == null){
@@ -165,23 +177,6 @@ public class SignUp {
             User user = new User(username, lastname, firstname, email, password, profilepath, null);
             GoToChoosePlan(event, user);
         }
-        try {
-            if (selectedbutton.equals(button1))
-                profilepath = "assets/batbot-01.png";
-            else if (selectedbutton.equals(button2))
-                profilepath = "assets/batbot-02.png";
-            else if (selectedbutton.equals(button3))
-                profilepath = "assets/batbot-03.png";
-            else if (selectedbutton.equals(button4))
-                profilepath = "assets/batbot-04.png";
-            else if (selectedbutton.equals(button5))
-                profilepath = "assets/batbot-05.png";
-            else if (selectedbutton.equals(button6))
-                profilepath = "assets/batbot-06.png";
-        }catch (NullPointerException e){
-            System.out.println("Error: "+e);
-        }
-
     }
     @FXML
     public void The_Password_Visibility(ActionEvent act)

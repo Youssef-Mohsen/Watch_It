@@ -98,12 +98,12 @@
                   <Font size="24.0" />
                </font>
             </TextField>
-            <TextField fx:id="descriptionField" prefHeight="50.0" prefWidth="558.0" promptText="Description" style="-fx-background-color: black; -fx-background-radius: 10; -fx-border-color: grey; -fx-border-radius: 10; -fx-text-fill: white;">
+            <TextField fx:id="discreptionField" prefHeight="50.0" prefWidth="558.0" promptText="Description" style="-fx-background-color: black; -fx-background-radius: 10; -fx-border-color: grey; -fx-border-radius: 10; -fx-text-fill: white;">
                <font>
                   <Font size="24.0" />
                </font>
             </TextField>
-            <Button fx:id="addButton" alignment="CENTER" layoutX="290.0" layoutY="605.0" mnemonicParsing="false" onAction="#addMovie" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="39.0" prefWidth="206.0" style="-fx-background-color: FFC107; -fx-background-radius: 10;" text="Add" textAlignment="CENTER" textFill="black">
+            <Button fx:id="addButton" alignment="CENTER" layoutX="290.0" layoutY="605.0" mnemonicParsing="false" onAction="#addMovie" prefHeight="39.0" prefWidth="206.0" style="-fx-background-color: FFC107; -fx-background-radius: 10;" text="Add" textAlignment="CENTER" textFill="black">
                <font>
                   <Font name="System bold" size="20.0" />
                </font>

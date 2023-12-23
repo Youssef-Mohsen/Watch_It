@@ -1,27 +1,207 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
 <?import javafx.geometry.Insets?>
-<ScrollPane hbarPolicy="NEVER" prefHeight="764.0" prefWidth="1336.0" style="-fx-background-color: black;"
-            vbarPolicy="NEVER" fx:controller="com.example.watch_it.AddCastController"
-            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
-    <HBox alignment="CENTER" prefHeight="764.0" prefWidth="1290.0" style="-fx-background-color: black;">
-        <padding>
-            <Insets bottom="70.0"/>
-        </padding>
-        <VBox fx:id="mainVbox1" minHeight="0.0" minWidth="0.0" prefHeight="764.0" prefWidth="500.0" spacing="30.0"
-              style="-fx-background-color: black;">
-            <HBox.margin>
-                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-            </HBox.margin>
-        </VBox>
-        <VBox fx:id="mainVbox2" minHeight="0.0" minWidth="0.0" prefHeight="764.0" prefWidth="500.0" spacing="30.0"
-              style="-fx-background-color: black;">
-            <HBox.margin>
-                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-            </HBox.margin>
-        </VBox>
-    </HBox>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane hbarPolicy="NEVER" prefHeight="764.0" prefWidth="1336.0" style="-fx-background-color: black;" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watch_it.AddCastController">
+    <content>
+        <HBox alignment="CENTER" prefHeight="864.0" prefWidth="1318.0" spacing="50.0" style="-fx-background-color: black;">
+            <children>
+                <VBox fx:id="mainvbox1" minHeight="0.0" minWidth="0.0" prefHeight="645.0" prefWidth="500.0" spacing="20.0" style="-fx-background-color: black;">
+                    <children>
+                        <VBox alignment="CENTER" prefHeight="42.0" prefWidth="500.0" spacing="20.0">
+                            <children>
+                                <Label fx:id="actorName" textFill="WHITE">
+                                    <font>
+                                        <Font size="28.0" />
+                                    </font>
+                                </Label>
+                                <HBox prefHeight="342.0" prefWidth="500.0">
+                                    <children>
+                                        <VBox prefHeight="280.0" prefWidth="242.0" spacing="40.0">
+                                            <children>
+                                                <Label prefHeight="15.0" prefWidth="220.0" text="Nationallity" textFill="#818181">
+                                                    <font>
+                                                        <Font size="20.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label prefHeight="15.0" prefWidth="220.0" text="Gender" textFill="#818181">
+                                                    <font>
+                                                        <Font size="20.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label prefHeight="15.0" prefWidth="220.0" text="Age" textFill="#818181">
+                                                    <font>
+                                                        <Font size="20.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </VBox>
+                                        <VBox prefHeight="100.0" prefWidth="440.0" spacing="20.0">
+                                            <children>
+                                                <TextField fx:id="nationalityText" styleClass="text" stylesheets="@style.css" />
+                                                <TextField fx:id="genderText" styleClass="text" stylesheets="@style.css" />
+                                                <TextField fx:id="ageText" styleClass="text" stylesheets="@style.css" />
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                    <VBox.margin>
+                                        <Insets />
+                                    </VBox.margin>
+                                </HBox>
+                            </children>
+                            <VBox.margin>
+                                <Insets top="100.0" />
+                            </VBox.margin>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+                            <children>
+                                <Label fx:id="actorName3" textFill="WHITE">
+                                    <font>
+                                        <Font size="28.0" />
+                                    </font>
+                                </Label>
+                                <HBox prefHeight="342.0" prefWidth="500.0">
+                                    <children>
+                                        <VBox prefHeight="304.0" prefWidth="242.0" spacing="40.0">
+                                            <children>
+                                                <Label prefHeight="15.0" prefWidth="220.0" text="Nationallity" textFill="#818181">
+                                                    <font>
+                                                        <Font size="20.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label prefHeight="15.0" prefWidth="220.0" text="Gender" textFill="#818181">
+                                                    <font>
+                                                        <Font size="20.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label prefHeight="15.0" prefWidth="220.0" text="Age" textFill="#818181">
+                                                    <font>
+                                                        <Font size="20.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </VBox>
+                                        <VBox prefHeight="304.0" prefWidth="440.0" spacing="20.0">
+                                            <children>
+                                                <TextField fx:id="nationalityText3" styleClass="text" stylesheets="@style.css" />
+                                                <TextField fx:id="genderText3" styleClass="text" stylesheets="@style.css" />
+                                                <TextField fx:id="ageText3" styleClass="text" stylesheets="@style.css" />
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </children>
+                    <HBox.margin>
+                        <Insets />
+                    </HBox.margin></VBox>
+                <VBox fx:id="mainvbox2" minHeight="0.0" minWidth="0.0" prefHeight="645.0" prefWidth="440.0" spacing="20.0" style="-fx-background-color: black;">
+                    <children>
+                        <VBox alignment="CENTER" prefHeight="30.0" prefWidth="440.0" spacing="20.0">
+                            <children>
+                                <Label fx:id="actorName2" textFill="WHITE">
+                                    <font>
+                                        <Font size="28.0" />
+                                    </font>
+                                </Label>
+                                <HBox prefHeight="156.0" prefWidth="440.0">
+                                    <children>
+                                        <VBox prefHeight="179.0" prefWidth="242.0" spacing="40.0">
+                                            <children>
+                                                <Label prefHeight="15.0" prefWidth="220.0" text="Nationallity" textFill="#818181">
+                                                    <font>
+                                                        <Font size="20.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label prefHeight="15.0" prefWidth="220.0" text="Gender" textFill="#818181">
+                                                    <font>
+                                                        <Font size="20.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label prefHeight="15.0" prefWidth="220.0" text="Age" textFill="#818181">
+                                                    <font>
+                                                        <Font size="20.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </VBox>
+                                        <VBox prefHeight="198.0" prefWidth="440.0" spacing="20.0">
+                                            <children>
+                                                <TextField fx:id="nationalityText2" styleClass="text" stylesheets="@style.css" />
+                                                <TextField fx:id="genderText2" styleClass="text" stylesheets="@style.css" />
+                                                <TextField fx:id="ageText2" styleClass="text" stylesheets="@style.css" />
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                    <VBox.margin>
+                                        <Insets />
+                                    </VBox.margin>
+                                </HBox>
+                            </children>
+                            <VBox.margin>
+                                <Insets top="100.0" />
+                            </VBox.margin>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="97.0" prefWidth="440.0" spacing="20.0">
+                            <children>
+                                <Label fx:id="actorName4" textFill="WHITE">
+                                    <font>
+                                        <Font size="28.0" />
+                                    </font>
+                                </Label>
+                                <HBox prefHeight="138.0" prefWidth="440.0">
+                                    <children>
+                                        <VBox prefHeight="139.0" prefWidth="242.0" spacing="40.0">
+                                            <children>
+                                                <Label prefHeight="15.0" prefWidth="220.0" text="Nationallity" textFill="#818181">
+                                                    <font>
+                                                        <Font size="20.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label prefHeight="15.0" prefWidth="220.0" text="Gender" textFill="#818181">
+                                                    <font>
+                                                        <Font size="20.0" />
+                                                    </font>
+                                                </Label>
+                                                <Label prefHeight="15.0" prefWidth="220.0" text="Age" textFill="#818181">
+                                                    <font>
+                                                        <Font size="20.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </VBox>
+                                        <VBox prefHeight="100.0" prefWidth="440.0" spacing="20.0">
+                                            <children>
+                                                <TextField fx:id="nationalityText4" styleClass="text" stylesheets="@style.css" />
+                                                <TextField fx:id="genderText4" prefHeight="46.0" prefWidth="129.0" styleClass="text" stylesheets="@style.css" />
+                                                <TextField fx:id="ageText4" styleClass="text" stylesheets="@style.css" />
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                        <Button fx:id="addButton" mnemonicParsing="false" onAction="#addCast" prefHeight="32.0" prefWidth="130.0" style="-fx-background-color: FFC107; -fx-background-radius: 10;" text="Add">
+                            <VBox.margin>
+                                <Insets left="340.0" />
+                            </VBox.margin>
+                            <Font name="System bold" size="20.0" />
+                        </Button>
+                    </children>
+                    <HBox.margin>
+                        <Insets />
+                    </HBox.margin></VBox>
+
+            </children>
+
+        </HBox>
+    </content>
 </ScrollPane>
