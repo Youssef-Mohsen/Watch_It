@@ -288,16 +288,16 @@ public  class MainPageController {
             throw new RuntimeException(e);
         }
         WatchRecord controller = loader.getController();
-        controller.setStage(stage);
+        controller.setStage(stage1);
         controller.initializeItems();
         controller.aBoolean=true;
         Scene scene = new Scene(root);
-        stage.setTitle("Movie");
-        stage.setResizable(false);
-        stage.setX(-7);
-        stage.setY(0);
-        stage.setScene(scene);
-        stage.show();
+        stage1.setTitle("Movie");
+        stage1.setResizable(false);
+        stage1.setX(-7);
+        stage1.setY(0);
+        stage1.setScene(scene);
+        stage1.show();
     }
     public void labelsOnMouseClicked(){
         Action.setOnMouseClicked(event -> {

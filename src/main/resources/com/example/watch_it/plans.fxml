@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane fx:id="plansPane" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="784.0" prefWidth="1318.0"  styleClass="scrollPane" stylesheets="@style.css" fx:controller="com.example.watch_it.PlansController" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane fx:id="plansPane" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="784.0" prefWidth="1318.0" styleClass="scrollPane" stylesheets="@style.css" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.watch_it.PlansController">
     <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="761.0" prefWidth="1176.0">
             <children>
@@ -31,18 +31,19 @@
                         <Label fx:id="basicTotalUser" layoutX="169.0" layoutY="335.0" />
                         <Label fx:id="standardTotalUser" layoutX="575.0" layoutY="335.0" />
                         <Label fx:id="premiumtotalUser" layoutX="991.0" layoutY="335.0" />
-                        <ImageView onMouseEntered="#standardPlanActive" onMouseExited="#standardPlanInactive" fx:id="standardImage"  layoutX="470.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView onMouseEntered="#premiumPlanActive" onMouseExited="#premiumPlanInactive"  fx:id="premiumImage" layoutX="881.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView onMouseEntered="#basicPlanActive" onMouseExited="#basicPlanInactive" fx:id="basicImage" layoutX="90.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="standardImage" layoutX="470.0" layoutY="5.0" onMouseEntered="#standardPlanActive" onMouseExited="#standardPlanInactive" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="premiumImage" layoutX="881.0" layoutY="5.0" onMouseEntered="#premiumPlanActive" onMouseExited="#premiumPlanInactive" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="basicImage" layoutX="90.0" layoutY="5.0" onMouseEntered="#basicPlanActive" onMouseExited="#basicPlanInactive" pickOnBounds="true" preserveRatio="true" />
                         <Label fx:id="basicRevenue" layoutX="169.0" layoutY="450.0" />
                         <Label fx:id="standardRevenue" layoutX="565.0" layoutY="450.0" />
                         <Label fx:id="premiumRevenue" layoutX="985.0" layoutY="450.0" />
                         <Label fx:id="basicMovieNo" layoutX="169.0" layoutY="570.0" prefHeight="17.0" prefWidth="6.0" />
                         <Label fx:id="standardMovieNo" layoutX="575.0" layoutY="570.0" />
                         <Label fx:id="premiumMovieNo" layoutX="991.0" layoutY="570.0" />
-                        <Label fx:id="basicResolution" layoutX="150.0" layoutY="680.0"  />
+                        <Label fx:id="basicResolution" layoutX="150.0" layoutY="680.0" />
                         <Label fx:id="standardResolution" layoutX="545.0" layoutY="680.0" />
                         <Label fx:id="premiumResolution" layoutX="940.0" layoutY="680.0" />
+
                     </children></Pane>
             </children></AnchorPane>
     </content>

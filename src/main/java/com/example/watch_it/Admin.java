@@ -108,6 +108,7 @@ public class Admin {
             for (Movie movie : Movie.allmovies){
                 b.write(movie.toString());
                 b.newLine();
+              //  System.out.println(movie.getDirector().getFirst_Name()+" "+movie.getDirector().getSecond_Name());
             }
             b.close();
         }
@@ -199,13 +200,13 @@ public class Admin {
 
             while(differenceMonths >= 0){
                 if(plan.equals("basic")){
-                    monthsRevenue[(startMonth + differenceMonths)] += 10;
+                    monthsRevenue[(startMonth + differenceMonths) -1] += 10;
                 }
                 else if (plan.equals("standard")) {
-                    monthsRevenue[(startMonth + differenceMonths)] += 20;
+                    monthsRevenue[(startMonth + differenceMonths) - 1] += 20;
                 }
                 else{
-                    monthsRevenue[(startMonth + differenceMonths)] += 30;
+                    monthsRevenue[(startMonth + differenceMonths) - 1] += 30;
                 }
                 differenceMonths--;
             }

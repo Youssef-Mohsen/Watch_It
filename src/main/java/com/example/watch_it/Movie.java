@@ -25,8 +25,8 @@ public class Movie {
     private String revenue;
     private float imdb_score;
     private String description;
-    private Double avarage_rating;
-    private Double total_rating;
+    private Double avarage_rating = 0.0;
+    private Double total_rating = 0.0;
     private int users_rated = 0;
     private Director director;
     private List<Cast> cast;

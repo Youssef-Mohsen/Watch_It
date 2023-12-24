@@ -31,7 +31,7 @@
                                 <Font name="Chalkboard Bold" size="20.0" />
                             </font>
                         </TextField>
-                        <TextField fx:id="ForgotTextPassword" alignment="CENTER" layoutX="538.0" layoutY="335.0" prefHeight="47.0" prefWidth="460.0" promptText="Password" style="-fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30;">
+                        <TextField fx:id="ForgotTextPassword" alignment="CENTER" layoutX="538.0" layoutY="335.0" prefHeight="47.0" prefWidth="460.0" promptText="Password" style="-fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30;  -fx-text-fill: white;">
                             <font>
                                 <Font name="Chalkboard Bold" size="20.0" />
                             </font>
@@ -41,7 +41,7 @@
                                 <Font name="Chalkboard Bold" size="20.0" />
                             </font>
                         </PasswordField>
-                        <TextField fx:id="CTextPassword" alignment="CENTER" layoutX="538.0" layoutY="395.0" prefHeight="47.0" prefWidth="460.0" promptText="Confirm Password" style="-fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30;">
+                        <TextField fx:id="CTextPassword" alignment="CENTER" layoutX="538.0" layoutY="395.0" prefHeight="47.0" prefWidth="460.0" promptText="Confirm Password" style="-fx-background-color: black; -fx-border-color: grey; -fx-background-radius: 30; -fx-border-radius: 30;  -fx-text-fill: white;">
                             <font>
                                 <Font name="Chalkboard Bold" size="20.0" />
                             </font>

@@ -66,6 +66,8 @@ public class AddMovieController {
     private Button addButton;
     static ArrayList<String> newActor = new ArrayList<>();
     static  Movie AddedMovie;
+    public static String newdirector;
+
     @FXML
     void onMouseEntered(){
         addButton.setOnMouseEntered(event -> addButton.setStyle("-fx-background-color: #FFC107; -fx-background-radius: 10;"));
@@ -103,7 +105,6 @@ public class AddMovieController {
 
         String[] actor = cast.split(",");
         ArrayList<String> castarray = new ArrayList<>(Arrays.asList(actor));
-        System.out.println(castarray);
 
         String[] genre = genres.split(",");
         ArrayList<String> genrearray = new ArrayList<>(Arrays.asList(genre));
@@ -113,14 +114,24 @@ public class AddMovieController {
         AddedMovie.setGenre(genrearray);
         AddedMovie.setCastNames(castarray);
 
+        String[] a = director.split(" ");
+        if (Director.search(a[0], a[1]) == null) {
+            newdirector = director;
+        }
+        else {
+            AddedMovie.setDirector(Admin.getDirector(director));
+            Movie.allmovies.add(AddMovieController.AddedMovie);
+        }
+
+
+
         for (String newactor : castarray) {
-            String[] a = newactor.split(" ");
-            System.out.println(newactor);
-            if (Cast.search(a[0], a[1]) == null) {
+            String[] b = newactor.split(" ");
+            if (Cast.search(b[0], b[1]) == null) {
                 newActor.add(newactor);
-                System.out.println(a[0]);
             }
         }
+
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("");
         alert.setHeaderText(null);
@@ -128,6 +139,7 @@ public class AddMovieController {
         if (newActor.isEmpty()) {
             alert.setContentText("Movie Added");
             alert.showAndWait();
+
         }else{
             alert.setContentText("Movie Added, please continue to add cast data");
             alert.showAndWait();

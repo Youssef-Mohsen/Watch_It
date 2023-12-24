@@ -10,6 +10,10 @@ import javafx.scene.text.Font;
 import java.util.ArrayList;
 
 public class AddCastController {
+    public VBox buttomright;
+    public VBox topright;
+    public VBox buttomleft;
+    public VBox topleft;
     @FXML
     private VBox mainvbox1;
     @FXML
@@ -55,10 +59,56 @@ public class AddCastController {
     private int castNumber;
     public static boolean addedCast = false;
     ArrayList<String> castName = new ArrayList();
+    ArrayList<String> movies = new ArrayList<>();
     int g = 1;
+    private String movieName;
+
     public void setdata(ArrayList<String> newActor) {
         this.castName = newActor;
         this.castNumber = castName.size();
+        setvbox();
+    }
+
+    private void setvbox() {
+        switch (castNumber) {
+            case 1:
+                if (!(AddMovieController.newdirector==null)) {
+                    buttomright.setVisible(false);
+                    buttomleft.setVisible(false);
+                    actorName2.setText(AddMovieController.newdirector);
+                }
+                else
+                    topright.setVisible(false);
+                    buttomright.setVisible(false);
+                    buttomleft.setVisible(false);
+                actorName.setText(castName.get(0));
+                break;
+
+            case 2:
+                if (!(AddMovieController.newdirector==null)) {
+                    buttomright.setVisible(false);
+                    actorName3.setText(AddMovieController.newdirector);
+                }
+                else {
+                    buttomright.setVisible(false);
+                    buttomleft.setVisible(false);
+                }
+                actorName.setText(castName.get(0));
+                actorName2.setText(castName.get(1));
+                break;
+
+            default:
+                if (!(AddMovieController.newdirector==null)) {
+                    actorName4.setText(AddMovieController.newdirector);
+                }
+                else{
+                    buttomright.setVisible(false);
+                    actorName.setText(castName.get(0));
+                    actorName2.setText(castName.get(1));
+                    actorName3.setText(castName.get(2));
+                }
+        }
+
     }
 
     private void showAlert(String title, String message, Alert.AlertType alertType) {
@@ -69,7 +119,6 @@ public class AddCastController {
     }
     @FXML
     public void addCast(ActionEvent event){
-        System.out.println("in action func");
         if(ageText.getText() == null || genderText.getText()== null || nationalityText.getText() == null || ageText2.getText() == null || genderText2.getText() ==null || nationalityText2.getText() == null)
             showAlert("","enter all data", Alert.AlertType.ERROR);
         else if(ageText3.getText() == null || genderText3.getText()== null || nationalityText3.getText() == null || ageText4.getText() == null || genderText4.getText() ==null || nationalityText4.getText() == null)
@@ -79,7 +128,62 @@ public class AddCastController {
         }
 
     }
-    public void getData(){
+    @FXML
+    public void getCastData(){
+
+        movieName = AddMovieController.AddedMovie.getTitle();
+        ArrayList<Cast> allCast = new ArrayList<>();
+        movies.add(movieName);
+
+     //   System.out.println("----------------------------------");
+        switch (castNumber) {
+            case 3:
+                String []name3 = castName.get(2).split(" ");
+                Cast cast3 = new Cast();
+                cast3.add(name3[0],name3[1],Integer.parseInt(ageText3.getText()),genderText3.getText(),nationalityText3.getText(),movies);
+                allCast.add(cast3);
+
+            case 2:
+                String []name2 = castName.get(1).split(" ");
+                Cast cast2 = new Cast();
+                cast2.add(name2[0],name2[1],Integer.parseInt(ageText2.getText()),genderText2.getText(),nationalityText2.getText(),movies);
+                allCast.add(cast2);
+                System.out.println(genderText2.getText());
+            default:
+                String []name = castName.get(0).split(" ");
+                Cast cast = new Cast();
+                cast.add(name[0],name[1],Integer.parseInt(ageText.getText()),genderText.getText(),nationalityText.getText(),movies);
+                allCast.add(cast);
+                System.out.println(genderText.getText());
+        }
+        if (AddMovieController.newdirector==null)
+            showAlert("","data added", Alert.AlertType.CONFIRMATION);
+        else
+            getDirectorData();
+    }
+
+    private void getDirectorData() {
+
+        Director newDirector = new Director();
+        String []name = AddMovieController.newdirector.split(" ");
+
+        switch (castNumber) {
+            case 3:
+                newDirector.add(name[0],name[1],Integer.parseInt(ageText4.getText()),genderText4.getText(),nationalityText4.getText(),movies);
+                break;
+            case 2:
+                newDirector.add(name[0],name[1],Integer.parseInt(ageText3.getText()),genderText3.getText(),nationalityText3.getText(),movies);
+                break;
+            default:
+                newDirector.add(name[0],name[1],Integer.parseInt(ageText2.getText()),genderText2.getText(),nationalityText2.getText(),movies);
+        }
+        AddMovieController.AddedMovie.setDirector(Admin.getDirector(AddMovieController.newdirector));
+        Movie.allmovies.add(AddMovieController.AddedMovie);
+        showAlert("","data added", Alert.AlertType.CONFIRMATION);
+        System.out.println( AddMovieController.AddedMovie.getDirector().getFirst_Name());
+    }
+
+    /*public void getData(){
         System.out.println("in add data");
         String movieName =AddMovieController.AddedMovie.getTitle();
         ArrayList<Cast> allCast = new ArrayList<>();
@@ -128,7 +232,7 @@ public class AddCastController {
         AddMovieController.AddedMovie.setCast(allCast);
         Movie.allmovies.add(AddMovieController.AddedMovie);
     }
-
+*/
     @FXML
     void onMouseEntered(){
         addButton.setOnMouseEntered(event -> addButton.setStyle("-fx-background-color: #FFC107; -fx-background-radius: 10;"));

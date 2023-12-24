@@ -26,6 +26,11 @@
     <top>
         <Pane prefHeight="80.0" prefWidth="1252.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
             <children>
+                <Label visible="false" fx:id="month" layoutX="600.0" layoutY="28.0"  textFill="WHITE">
+                    <font>
+                        <Font size="25.0" />
+                    </font>
+                </Label>
                 <Label alignment="CENTER" layoutX="46.0" layoutY="21.0" prefHeight="43.0" prefWidth="119.0" style="-fx-background-color: FFC107; -fx-background-radius: 20; " text="Watch" textFill="WHITE">
                     <font>
                         <Font name="Arial Narrow Bold" size="27.0" />

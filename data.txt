@@ -1,37 +1,37 @@
-user,nada,123456,1,Nada,Ayman,basic,nadaAyman@gmail.com,2023-12-06,assets/batbot-01.png,false,to be watched,The Dark Knight,watched,Sherlock Holmes,5.0,The Godfather,4.0,Joker,2.0,Avengers: Endgame,2.0,Oppenheimer,3.0,done,
-user,youssef,456789,1,youssef,mohsen,premium,youssefMohsen@gmail.com,2023-12-20,assets/batbot-02.png,false,to be watched,Insidious: The Red Door,watched,Oppenheimer,4.0,done,
-user,Mai,123456,1,Mai,Ezz,basic,MaiEzz@gmail.com,2023-12-06,assets/batbot-01.png,false,to be watched,Oppenheimer,watched,Avengers: Endgame,-1.0,Joker,3.0,done,
+user,nada,123456,1,Nada,Ayman,standard,nadaAyman@gmail.com,2023-12-23,assets/batbot-01.png,false,to be watched,The Dark Knight,watched,Sherlock Holmes,5.0,The Godfather,5.0,Joker,5.0,Oppenheimer,4.0,Avengers: Endgame,2.0,done,
+user,Mai,123456,1,Mai,Ezz,basic,MaiEzz@gmail.com,2023-10-06,assets/batbot-01.png,false,to be watched,Oppenheimer,watched,Avengers: Endgame,-1.0,Joker,3.0,done,
 user,Basmala,456789,1,Basmala,Tarek,premium,Basmala-Tarek@gmail.com,2023-10-09,assets/batbot-02.png,false,to be watched,Insidious: The Red Door,watched,Oppenheimer,-1.0,The Dark Knight,3.0,done,
 user,Tasneem,123456,1,Tasneem,Mohamed,basic,TasneemMohamed@gmail.com,2023-12-06,assets/batbot-01.png,false,to be watched,Oppenheimer,watched,Avengers: Endgame,-1.0,Joker,3.0,done,
 user,toka,456789,1,toka,karam,premium,tokaKaram@gmail.com,2023-10-09,assets/batbot-02.png,false,to be watched,Insidious: The Red Door,watched,Oppenheimer,-1.0,The Dark Knight,3.0,done,
 user,youssef,456789,1,youssef,ahmad,premium,youssefAhmad@gmail.com,2023-10-09,assets/batbot-02.png,false,to be watched,Insidious: The Red Door,watched,Oppenheimer,4.0,done,
 user,youssef7,0258,1,youssef,mohsen,premium,YoussefMohsen@gmail.com,2023-12-20,assets/batbot-06.png,false,to be watched,watched,Joker,5.0,The Godfather,5.0,Oppenheimer,5.0,The Matrix,4.0,Home Alone,3.0,Titanic,3.0,done,
-cast,Patrick,Wilson,50,male,American,Columbus,Insidious: The Red Door
+user,Hossam,123456,1,Hossam,Shrief,premium,drHossam@gmail.com,2023-12-23,assets/batbot-02.png,false,to be watched,watched,done,
+cast,Patrick,Wilson,50,male,American,Insidious: The Red Door,Columbus
 cast,Rose,Byrne,44,female,Australian,Insidious: The Red Door
-cast,Joaquin,Phoenix,49,male,American,Gladiator,Joker
+cast,Joaquin,Phoenix,49,male,American,Joker,Gladiator
 cast,Robert,DeNiro,80,male,American,Joker
 cast,Joe,Pesci,80,male,American,Home Alone
 cast,Kate,Winslet,48,female,Titanic
 cast,Macaulay,Culkin,43,male,American,Home Alone
 cast,Daniel,Stern,66,male,American,Home Alone
-cast,Robert,DowneyJr,58,male,American,Avengers: Endgame,Sherlock Holmes,Oppenheimer
+cast,Robert,DowneyJr,58,male,American,Oppenheimer,Sherlock Holmes,Avengers: Endgame
 cast,Benedict,Cumberbatch,40,male,English,Avengers: Endgame
 cast,Chris,Hemsworth,40,male,English,Avengers: Endgame
 cast,Mark,Strong,60,male,British,Sherlock Holmes
 cast,Jude,Law,50,male,English,Sherlock Holmes
-cast,Cillian,Murphy,50,male,Irish,Oppenheimer,The Dark Knight
+cast,Cillian,Murphy,50,male,Irish,The Dark Knight,Oppenheimer
 cast,Matt,Damon,53,male,American,The Dark Knight
-cast,Christian,Bale,49,male,American,The Prestige,The Dark Knight
-cast,Morgan,Freeman,86,male,American,The Shawshank Redemption,The Dark Knight
+cast,Christian,Bale,49,male,American,The Dark Knight,The Prestige
+cast,Morgan,Freeman,86,male,American,The Dark Knight,The Shawshank Redemption
 cast,Tom,Holland,27,male,England,Spider-Man: No Way Home
-cast,Zendaya,Coleman,27,female,America,Spider-Man: No Way Home,Dune
+cast,Zendaya,Coleman,27,female,America,Dune,Spider-Man: No Way Home
 cast,Jason,Momoa,44,male,America,Aquaman and the Lost Kingdom
 cast,Ben,Affleck,51,male,America,Aquaman and the Lost Kingdom
-cast,TimothÃe,Chalamet,28,male,American,Dune,Wonka
+cast,TimothÃe,Chalamet,28,male,American,Wonka,Dune
 cast,Paul,Raymond,34,male,England,Wonka
 cast,Murray,McArthur,57,male,England,Wonka
-cast,Leonardo,DiCaprio,49,male,German,The Great Gatsby,Titanic,Inception
-cast,Scarlett,Johansson,39,female,American,The Prestige,Black Widow
+cast,Leonardo,DiCaprio,49,male,German,Inception,Titanic,The Great Gatsby
+cast,Scarlett,Johansson,39,female,American,Black Widow,The Prestige
 cast,Florence,Pugh,27,female,English,Black Widow
 cast,David,Harbour,48,male,American,Black Widow
 cast,Matthew,McConaughey,54,American,male,Interstellar
@@ -78,7 +78,7 @@ cast,Diane,Kruger,47,female,German,Inglourious Basterds
 cast,Eli,Roth,51,male,American,Inglourious Basterds
 cast,Joel,Edgerton,49,male,Australina,The Great Gatsby
 cast,Carey,Mulligan,38,female,American,The Great Gatsby
-director,Christopher,Nolan,53,male,british,Inception,The Dark Knight,Oppenheimer,Interstellar,The Prestige
+director,Christopher,Nolan,53,male,british,The Prestige,Interstellar,Oppenheimer,The Dark Knight,Inception
 director,Guy,Ritchie,55,male,british,Sherlock Holmes
 director,Anthony,Russo,53,male,American,Avengers: Endgame
 director,Chris,Columbus,65,male,Italian,Home Alone
@@ -90,17 +90,18 @@ director,James,Wan,46,male,Malaysian,Aquaman and the Lost Kingdom
 director,Paul,King,45,male,England,Wonka
 director,Cate,Shortland,55,female,Australian,Black Widow
 director,Tyler,Gillett,41,male,American,Ready or Not
-director,Denis,Villeneuve,56,male,Canada,Blade Runner 2049,Dune
+director,Denis,Villeneuve,56,male,Canada,Dune,Blade Runner 2049
 director,Wes,Anderson,54,male,American,The Grand Budapest Hotel
 director,Lilly,Wachowski,56,female,American,The Matrix
 director,Ridley,Scott,86,male,American,Gladiator
 director,Frank,Darabont,64,male,France,The Shawshank Redemption
 director,Francis,Ford,84,male,American,The Godfather
-director,Quentin,Tarantino,60,male,American,Pulp Fiction,Inglourious Basterds
+director,Quentin,Tarantino,60,male,American,Inglourious Basterds,Pulp Fiction
 director,Peter,Jackson,62,male,New Zealand,The Lord of the Rings
 director,Jonathan,Demme,79,male,American,The Silence of the Lambs
 director,Steven,Spielberg,77,male,American,Schindler's List
 director,Robert,Zemeckis,71,male,American,Forrest Gump
 director,Baz,Luhrmann,61,male,Australia,The Great Gatsby
+director,first,name,4,VGHKB,CUGVH,fchgvj
 admin,nada,123456
 admin,mai,123456

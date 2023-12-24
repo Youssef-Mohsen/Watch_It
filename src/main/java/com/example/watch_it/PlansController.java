@@ -7,6 +7,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.time.Month;
+
 
 public class PlansController {
     //----------------NOTE----------------------
@@ -55,6 +57,7 @@ public class PlansController {
     @FXML
     private Label standardPrice;
 
+
     @FXML
     private Label standardResolution;
 
@@ -85,6 +88,7 @@ public class PlansController {
         basicImage.setFitHeight(170);
         standardImage.setFitHeight(170);
         premiumImage.setFitHeight(170);
+
     }
 
     private String[] basic = {"100 EGP",String.valueOf(Admin.basicPlanCounter), String.valueOf(Admin.basicPlanCounter * 100),"5","720p","assets/basicPressed.png","assets/basicNormal.png"};

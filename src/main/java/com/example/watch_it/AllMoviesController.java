@@ -21,12 +21,15 @@ import javafx.fxml.FXML;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class AllMoviesController {
 
+    @FXML
+    private Label month;
     @FXML
     private VBox leftCol;
     @FXML
@@ -57,6 +60,8 @@ public class AllMoviesController {
         for (int i=0 ; i<Movie.allmovies.size(); i++){
             addMovies(Movie.allmovies.get(i), i);
         }
+        Month month1 =Admin.monthWithMostRevenue();
+        month.setText("Month with most revenue: "+month1.name());
     }
 
     @FXML
@@ -65,29 +70,34 @@ public class AllMoviesController {
         Parent fxml = FXMLLoader.load(getClass().getResource("add-movies.fxml"));
         mainPane.setCenter(fxml);
         addCastButton.setVisible(true);
+        month.setVisible(false);
     }
 
     @FXML void toMovies(ActionEvent event){
         switchPane(mainScroll);
         addCastButton.setVisible(false);
+        month.setVisible(false);
     }
 
     @FXML void toAllUsers(ActionEvent event) throws IOException {
         Parent fxml = FXMLLoader.load(getClass().getResource("all-users.fxml"));
         switchPane((ScrollPane) fxml);
         addCastButton.setVisible(false);
+        month.setVisible(false);
 
     }
     @FXML void toAddUser(ActionEvent event) throws IOException {
         Parent fxml = FXMLLoader.load(getClass().getResource("add-users.fxml"));
         switchPane((ScrollPane) fxml);
         addCastButton.setVisible(false);
+        month.setVisible(false);
     }
     @FXML
     void toPlans(ActionEvent event)throws IOException{
         Parent fxml = FXMLLoader.load(getClass().getResource("Plans.fxml"));
         switchPane((ScrollPane) fxml);
         addCastButton.setVisible(false);
+        month.setVisible(true);
     }
     public void onMouseClickedMovie(MouseEvent act, Movie movie) throws IOException {
         FXMLLoader loader=new FXMLLoader(getClass().getResource("movie-view.fxml"));
@@ -171,18 +181,11 @@ public class AllMoviesController {
         controller.setdata(AddMovieController.newActor);
         if(enteredData)
         {
+            addCastButton.setVisible(false);
             switchPane((ScrollPane) root);
             addCastButton.setText("Add");
         }
-        if(AddCastController.addedCast){
-            controller.getData();
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("");
-            alert.setHeaderText(null);
-            alert.setContentText("Cast information added");
-            alert.showAndWait();
-            toAddMovies(event);
-        }
+
     }
     public void switchPane(ScrollPane scrollPane){
         mainPane.setCenter(scrollPane);

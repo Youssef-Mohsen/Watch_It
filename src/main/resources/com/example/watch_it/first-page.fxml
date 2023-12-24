@@ -10,12 +10,12 @@
         <Button fx:id="exitButton" layoutX="1448.0" layoutY="15.0" mnemonicParsing="false" onAction="#Exit" onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExit" prefHeight="27.0" prefWidth="56.0" style="-fx-background-color: black; -fx-background-radius: 25; -fx-border-color: white; -fx-border-radius: 25;" text="EXIT" textFill="WHITE" />
         <Button layoutX="430.0" layoutY="630.0" mnemonicParsing="false" onAction="#UserSignIn" prefHeight="39.0" prefWidth="206.0" style="-fx-background-color: FFC107; -fx-background-radius: 50;" text="USER" textFill="black">
             <font>
-                <Font name="Chalkboard Bold" size="20.0" />
+                <Font name="System Bold" size="20.0" />
             </font>
         </Button>
         <Button layoutX="935.0" layoutY="627.0" mnemonicParsing="false" onAction="#AdminSignIn" prefHeight="39.0" prefWidth="206.0"  style="-fx-background-color: FFC107; -fx-background-radius: 50;" text="ADMIN" textFill="black">
             <font>
-                <Font name="Chalkboard Bold" size="20.0" />
+                <Font name="System Bold" size="20.0" />
             </font>
         </Button>
         <Label alignment="CENTER" layoutX="42.0" layoutY="23.0" prefHeight="43.0" prefWidth="143.0" style="-fx-background-color: FFC107; -fx-background-radius: 20; " text="Watch" textFill="WHITE">
