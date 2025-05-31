@@ -4,8 +4,18 @@
 **Watch It** is an entertainment application that allows users to explore, subscribe to, and watch a collection of movies. The system tracks user subscriptions, watch history, and movie ratings, and provides administrative insights into platform performance.
 
 ---
+## Table Of Content
+- [Features](#features)
+- [Main Entities](#main-entities)
+- [File Management](#file-management)
+- [Functionalities](#functionalities)
+- [Constraints](#constraints)
+- [Technical Requirements](#technical-requirements)
+- [Deliverables](#deliverables)
+- [Contributors](#contributors)
 
-## 📌 Features
+---
+## Features
 
 - **User Management**: Add, update, and delete users; track watch history and watchlist.
 - **Movie Catalog**: Browse and search movies by title, genre, actor, or director.
@@ -18,7 +28,7 @@
 
 ---
 
-## 🧱 Main Entities
+## Main Entities
 
 1. **User** – Tracks credentials, subscriptions, watchlist, and watch records.
 2. **Subscription** – Stores plan type, price, and start date.
@@ -29,14 +39,14 @@
 
 ---
 
-## 📁 File Management
+## File Management
 
 - Data is read from files at the beginning of the program and saved at the end.
 - Only two methods are used for file I/O: one for reading and one for writing.
 
 ---
 
-## 💻 Functionalities
+## Functionalities
 
 - CRUD operations on all entities.
 - View watchlist and watch history.
@@ -48,7 +58,7 @@
 
 ---
 
-## 🎯 Constraints
+## Constraints
 
 - Subscription validity: 30 days.
 - Movie watch limits per plan:
@@ -59,7 +69,7 @@
 
 ---
 
-## 🧰 Technical Requirements
+## Technical Requirements
 
 - Fully Object-Oriented (OOP) implementation
 - At least 8 classes
@@ -70,31 +80,23 @@
 
 ---
 
-## 📄 Deliverables
+## Deliverables
 
-- ✅ Java project with all source files and classes
-- ✅ Class diagram
-- ✅ Documentation with:
+- Java project with all source files and classes
+- Class diagram
+- Documentation with:
   - System description
   - Input/output scenarios
 
 ---
 
-## 👥 Contributors
-
-Each team member should contribute to at least one major class, GUI (if implemented), or file handling module.
-
----
-
-## 🚀 Getting Started
-
-1. Clone the repo
-2. Compile and run the main Java class
-3. Interact with the GUI or console interface (if provided)
-4. Make sure to run the project from a directory containing the data files
-
----
-
-## 🔒 License
-
-This project is for educational use only.
+## Contributors
+|                   Name                    |     Github Link   |
+| :---------------------------------------: | :--------: |
+|     Tasneem Mohamed Ahmed Mohamed      |https://github.com/Tasneem357Mohamed |
+| Bsmala Tarek kamal Khalil Elbagoury | https://github.com/Bsmalatarek |
+|      Nada Ayman Mohamed Ismail      | https://github.com/Nada-Hany |
+|          Toqa Karam Abddelmageed Madany        | https://github.com/Toka136 |
+|           Yossef Ahmed Sayed Ibrahim         | https://github.com/youssefahmed123456 |
+|       Yossef Mohssen Reda      | https://github.com/Youssef-Mohsen |
+|       Mai Ezz Eldeen Saad      |      https://github.com/Maiezz      |
